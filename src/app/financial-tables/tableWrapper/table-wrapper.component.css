@@ -1,0 +1,58 @@
+.financialInfo{
+  height: 350px;
+  min-height: 350px;
+  max-height: 350px;
+  overflow-y: scroll;
+}
+
+.sie-btn{
+  border: 1px solid #d4cdcd;
+  width: 273px;
+  padding: 5px 5px 5px 20px;
+  border-radius: 15px;
+  margin-left: 470px;
+  box-shadow: 0 0 2px 1px #9c9898;
+  margin-right: -5px;
+}
+
+.sie-btn img{
+  width: 24px;
+  height: 38px;
+}
+
+.sie-btn button{
+  background-color: #fff;
+  border-radius: 50%;
+  border:1px solid grey;
+  padding: 0px 8px;
+  margin-left: 10px;
+
+}
+
+.sie-btn button:hover, .sie-btn .active{
+  background-color: #3cd5af;
+  border-radius: 50%;
+  border: none;
+  padding: 0px 9px;
+}
+.sie-btn button.first{
+  margin-left: 5px;
+}
+
+.sie-btn button:hover, .sie-btn .active{
+  background-color: #3cd5af;
+  border-radius: 50%;
+  border: none;
+  padding: 0px 10px;
+}
+.xlsExport {
+  margin-left: 55px;
+  background-color: #f7f3f3;
+  width: 43px;
+  cursor: pointer;
+}
+
+.xlsExport img{
+  width: 57px;
+  padding: 6px 12px;
+}

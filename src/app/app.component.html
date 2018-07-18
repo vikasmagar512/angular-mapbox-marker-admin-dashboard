@@ -1,0 +1,52 @@
+
+    <nav class="navbar navbar-inverse custom noTopBottomMargin">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">
+            <img src="../assets/Sieconnect.png" class="log">
+          </a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="cust">
+            <span class="clr-w">Vendor A</span>
+          </li>
+          <li>
+            <a href="#">
+              <img src="../assets/01.png" class="img-responsive rlogo">
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img src="../assets/02.png" class="img-responsive rlogo">
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img src="../assets/03.png" class="img-responsive rlogo">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="mainContainer">
+      <app-top></app-top>
+      <div class="map-sec ">
+      <!--<img src="../assets/map-nostyle.png" class="map">-->
+      <app-ad-banner [ads]="ads" [activeComponent]="activeComponent" class="map"></app-ad-banner>
+      <div class="btn-div">
+        <button [ngClass]="(activeComponent===0)?'mar-r bttn active':'mar-r bttn'" (click)="loadComponent(0)">
+          <img src="../assets/16.png" class="r-icon ">Map</button>
+        <button [ngClass]="(activeComponent===1)?'mar-r bttn active':'mar-r bttn'" (click)="loadComponent(1)">
+          <img src="../assets/17.png" class="r-icon"> Dashboard</button>
+        <button [ngClass]="(activeComponent===2)?'bttn active':'bttn'" (click)="loadComponent(2)">
+          <img src="../assets/18.png" class="r-icon"> Details</button>
+      </div>
+    </div>
+    </div>
+
+    <app-bottom class="bottom container">
+    </app-bottom>
+
+    <!--<post-banner></post-banner>-->
+    <!--<app-ad-banner [ads]="ads"></app-ad-banner>-->
+

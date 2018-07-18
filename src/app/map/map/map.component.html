@@ -1,0 +1,30 @@
+<div class="mapDiv">
+ <!-- <p>
+    map works!
+  </p>
+-->
+  <mgl-map
+    [style]="'mapbox://styles/mapbox/streets-v9'"
+    [zoom]="[9]"
+    [center]="[-74.50, 40]"
+    (load)="map = $event"
+  >
+
+  <mgl-geojson-source
+    id="symbols-source"
+  >
+    <mgl-feature
+      *ngFor="let geometry of geometries"
+      [geometry]="geometry"
+    ></mgl-feature>
+  </mgl-geojson-source>
+
+  <mgl-geojson-source
+    id="earthquakes"
+    [data]="earthquakes"
+    [cluster]="true"
+    [clusterMaxZoom]="14"
+    [clusterRadius]="50"
+  ></mgl-geojson-source>
+  </mgl-map>
+</div>

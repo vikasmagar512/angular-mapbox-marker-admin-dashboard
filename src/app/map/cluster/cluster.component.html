@@ -1,0 +1,126 @@
+<div class="mapDiv">
+  <mgl-map
+    style="mapbox://styles/mapbox/dark-v9"
+    [zoom]="[3]"
+    [center]="[-103.59179687498357, 40.66995747013945]"
+  >
+    <!--<mgl-popup
+      [lngLat]="[-96, 37.8]"
+      [closeOnClick]="false"
+    >
+      <h1>Hello world !</h1>
+    </mgl-popup>-->
+
+   <!-- <mgl-marker
+      #myMarker
+      [lngLat]="[-77.0353, 38.8895]"
+    >
+      <div
+        [ngStyle]="{
+          'background-image': 'url(https://www.mapbox.com/mapbox-gl-js/assets/washington-monument.jpg)',
+          'background-size': 'cover',
+          width: '50px',
+          height: '50px',
+          'border-radius': '50%',
+          cursor: 'pointer'
+        }"
+      >
+      </div>
+    </mgl-marker>
+    <mgl-popup
+      [marker]="myMarker"
+    >
+      Construction on the Washington Monument began in 1848.
+    </mgl-popup>-->
+    <ng-container *ngIf="earthquakes">
+      <mgl-geojson-source
+        id="earthquakes"
+        [data]="earthquakes"
+        [cluster]="true"
+        [clusterMaxZoom]="14"
+        [clusterRadius]="50"
+      >
+      </mgl-geojson-source>
+      <mgl-layer
+        id="clusters"
+        type="circle"
+        source="earthquakes"
+        [filter]="['has', 'point_count']"
+        [paint]="{
+          'circle-color': {
+              property: 'point_count',
+              type: 'interval',
+              stops: [
+                  [0, '#51bbd6'],
+                  [100, '#f1f075'],
+                  [750, '#f28cb1']
+              ]
+          },
+          'circle-radius': {
+              property: 'point_count',
+              type: 'interval',
+              stops: [
+                  [0, 20],
+                  [100, 30],
+                  [750, 40]
+              ]
+          }
+        }"
+      >
+      </mgl-layer>
+      <mgl-layer
+        id="cluster-count"
+        type="symbol"
+        source="earthquakes"
+        [filter]="['has', 'point_count']"
+        [layout]="{
+          'text-field': '{point_count_abbreviated}',
+          'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+          'text-size': 12
+        }"
+      >
+      </mgl-layer>
+      <mgl-layer
+        id="unclustered-point"
+        type="circle"
+        source="earthquakes"
+        [filter]="['!has', 'point_count']"
+        [paint]="{
+          'circle-color': '#11b4da',
+          'circle-radius': 4,
+          'circle-stroke-width': 1,
+          'circle-stroke-color': '#fff'
+        }"
+      >
+      </mgl-layer>
+    </ng-container>
+  </mgl-map>
+</div>
+
+<!--<div class="mapDiv container">
+  <div class="mainComponent" style="height: 400px;">
+    &lt;!&ndash;<app-reusable-table></app-reusable-table>&ndash;&gt;
+    <div class="map-sec">
+      <div class="row">
+        <div class="col-md-5">
+          <div class="">
+            <img src="../../../assets/dash-1.png">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div>
+            <img src="../../../assets/dash-2.png">
+          </div>
+          <div>
+            <img src="../../../assets/dash-3.png">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div>
+            <img src="../../../assets/dash-4.png">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>-->

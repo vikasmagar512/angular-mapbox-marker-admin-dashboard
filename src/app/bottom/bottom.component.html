@@ -1,0 +1,59 @@
+
+<div class="row marginLRZero flexVertM">
+  <div class="col-md-2 mar-le flexVertM vertBox">
+    <div class="RequestType 2RequestTypeNum top cursPointer" onClick="loadTable(2)">
+      <p class="font">Product Requests</p>
+      <p class="f-p">12</p>
+    </div>
+    <div class="RequestType 1RequestTypeNum bot cursPointer" onClick="loadTable(1)">
+      <p class="font">Service Requests</p>
+      <p class="f-p">08</p>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="row flexVertM" style="display: flex;flex-direction: row;" id="customer">
+      <div class="col-md-6">
+        <div class="cust-detail">
+          <h4>Customer ABC</h4>
+          <p>1707 Orlando Central Pkwy Ste 100 Orlando, FL</p>
+
+          <h4>Customer Activity</h4>
+          <h5>12th of May 2016</h5>
+
+          <button type="button" class="btn-d" onclick="show()">Details</button>
+        </div>
+      </div>
+      <div class="col-md-6 custExtra">
+        <div><div class="message">
+          <p>
+            <img src="../../assets/22.png">Message
+            <br>Customer ABC</p>
+        </div>
+
+          <div class="cust-senti">
+            <img src="../../assets/21.png">
+            <p>Customer Sentiment</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="popup" id="popup">
+    <div class="content">
+      <p>Name-ABC</p>
+      <p>Contact-1234567789</p>
+      <p>Contact-1234567789</p>
+
+      <p class="addnum">
+        <img src="../../assets/20.png">Add Number</p>
+    </div>
+  </div>
+  <!--<div class="vl"></div>-->
+
+  <div class="col-md-6 mar-le flex" style="padding-top: 3px;">
+    <app-filter-wrapper></app-filter-wrapper>
+  </div>
+</div>

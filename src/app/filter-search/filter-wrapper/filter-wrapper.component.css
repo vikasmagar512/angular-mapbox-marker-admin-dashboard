@@ -1,0 +1,61 @@
+.filter{
+  margin-top: -18px;
+  border: 1px solid grey;
+  border-radius: 24px;
+  position: relative;
+  left: 37px;
+  display: flex;
+  padding: 5px;
+}
+
+
+.filter-tag{
+  position: relative;
+  width: 10%;
+  right: 22px;
+  display: flex;
+  margin-left: 20px;
+  border-left: 1px solid grey;
+}
+
+
+.fil{
+  margin-left: 55px;
+  transform: rotate(-90deg);
+}
+
+
+.filter-tag .caret{
+  border-top: 10px dashed;
+  border-top: 8px solid\9;
+  border-right: 8px solid transparent;
+  border-left: 8px solid transparent;
+  color: #19e8a5;
+
+  bottom: 0px;
+  /* top: 20%; */
+  margin-left: 41%;
+  transform: translate(-50%,0);
+}
+
+.f-18{
+  font-size: 18px;
+  font-weight: 600;
+}
+
+
+.f-data{
+  height: 135px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 30px;
+  margin: 0px 6px 0px 0px;
+  flex:1;
+}
+.f-data.noRightMargin{
+  margin-right: 0px;
+}
+.f-data .filterCriterias{
+  margin-top: -5px;
+  margin-left: 0px;
+}

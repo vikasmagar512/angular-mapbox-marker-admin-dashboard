@@ -1,0 +1,23 @@
+
+<div class="tableEncloser">
+  <p>header</p>
+  <button type="button" class="btn btn-primary" (click)="exporttoCSV()">Export to Excel</button>
+  <div class="table-responsive table-border ">
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>First name</th>
+        <th>Last name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let person of data">
+        <td>{{ person.id }}</td>
+        <td>{{ person.firstName }}</td>
+        <td>{{ person.lastName }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
