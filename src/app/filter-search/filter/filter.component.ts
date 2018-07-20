@@ -21,7 +21,7 @@ export class FilterComponent implements OnInit{
     console.log('changes ',changes)
     this.filterData = changes.filterData.currentValue
   }*/
-
+  
   selectFilter(filterSelect: filter) {
     console.log('this.filterService.filterTypes  ',this.filterService.filterTypes )
     this.filterService.change()

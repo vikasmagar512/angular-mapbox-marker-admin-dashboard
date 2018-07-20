@@ -35,37 +35,8 @@ export class AdService {
     this.info = { name : "Jack"+this.counter };
 
     this.filterTypes=[]
-    this.contractFilter = {
-      filterDisplayText:"Contract",
-      filterArray:[
-        {
-          id:"1",
-          name:"inContract",
-          displayText:"In Contract",
-          type:"contract",
-          value:false,
-          image:'../../../assets/13.png',
-        },
-        {
-          id:"2",
-          name:"expired",
-          displayText:"Expired",
-          type:"contract",
-          value:false,
-          image:'../../../assets/14.png'
-        },
-        {
-          id:"3",
-          name:"expiringSoon",
-          displayText:"Expiring Soon",
-          type:"contract",
-          value:false,
-          image:'../../../assets/15.png'
-        },
-      ]
-    }
     this.assetStatusFilter = {
-      filterDisplayText:"assetStatus",
+      filterDisplayText:"Asset Status",
       filterArray:[
         {
           id:"1",
@@ -109,15 +80,45 @@ export class AdService {
           value:false,
           image:'../../../assets/06.png'
         },
-        {
+        /* {
           id:"3",
           name:"robot",
           displayText:"Cleaning Robot",
           type:"assetType",
           value:false,
           image:'../../../assets/12.png'
-        },
+        }, */
       ]}
+    this.contractFilter = {
+      filterDisplayText:"Contract Status",
+      filterArray:[
+        {
+          id:"1",
+          name:"inContract",
+          displayText:"In Contract",
+          type:"contract",
+          value:false,
+          image:'../../../assets/13.png',
+        },
+        {
+          id:"2",
+          name:"expired",
+          displayText:"Expired",
+          type:"contract",
+          value:false,
+          image:'../../../assets/14.png'
+        },
+        {
+          id:"3",
+          name:"expiringSoon",
+          displayText:"Expiring Soon",
+          type:"contract",
+          value:false,
+          image:'../../../assets/15.png'
+        },
+      ]
+    }
+      
       this.assetLocationFilter = {
       filterDisplayText:  "Location",
       filterArray:[
@@ -130,7 +131,7 @@ export class AdService {
           image:'../../../assets/05.png',
         }
       ]}
-    this.filterTypes.push(this.contractFilter,this.assetStatusFilter,this.assetTypeFilter )
+    this.filterTypes.push(this.assetStatusFilter,this.assetTypeFilter,this.contractFilter)
   }
   contractFilter:filterGroup;
   assetTypeFilter:filterGroup;

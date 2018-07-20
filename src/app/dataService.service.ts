@@ -25,14 +25,24 @@ export class dataService {
   }
   Assets: Array<Asset>=[
     {
-      "id": "01",
+      /* "id": "01",
       "category": "Coffee_Machine",
       "name": "Coffee Machine",
-      "status":0,
-      "location": "Bromma",
+      "status":09,
+      "agreement_no":"AGR10923347",
+      "location": "Solna",
       "serialno": "CM12190",
-      "supplier":"Siemens LLP",
-      "img":"../../../assets/machine.svg",
+      "customer":"ABC",
+      "img":"../../../assets/machine.svg", */
+      "id": "02",
+      "category": "Printer",
+      "name": "Canon SW2014",
+      "status":10,
+      "location": "Bromma",
+      "agreement_no":"AGR10923347",
+      "serialno": "SR12190",
+      "customer":"XYZ",
+      "img":"../../../assets/printer.svg",
       "metrics": [
         {
           "category": "Coffee Powder",
@@ -56,10 +66,11 @@ export class dataService {
       "id": "02",
       "category": "Printer",
       "name": "Canon SW2014",
-      "status":1,
+      "status":10,
       "location": "Bromma",
+      "agreement_no":"AGR10923347",
       "serialno": "SR12190",
-      "supplier":"ATOS LLP",
+      "customer":"XYZ",
       "img":"../../../assets/printer.svg",
       "metrics": [
         {
@@ -76,10 +87,11 @@ export class dataService {
       "id": "03",
       "category": "Vaccum",
       "name": "Vaccum",
-      "status":2,
+      "status":12,
+      "agreement_no":"AGR10923347",
       "location": "Bromma",
       "serialno": "VC12190",
-      "supplier":"ATOS LLP",
+      "customer":"PQR",
       "img":"../../../assets/broom.svg",
       "metrics": [
         {

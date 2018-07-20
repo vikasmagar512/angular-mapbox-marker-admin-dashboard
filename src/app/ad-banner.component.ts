@@ -1,9 +1,9 @@
-import {Component, Input, OnInit, ViewChild, ComponentFactoryResolver, OnDestroy, SimpleChange} from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ComponentFactoryResolver, OnDestroy, SimpleChange } from '@angular/core';
 
 import { AdDirective } from './ad.directive';
-import { AdItem }      from './ad-item';
+import { AdItem } from './ad-item';
 import { AdComponent } from './ad.component';
-import {HeroProfileComponent} from './hero-profile.component';
+import { HeroProfileComponent } from './hero-profile.component';
 
 @Component({
   selector: 'app-ad-banner',
@@ -28,8 +28,8 @@ export class AdBannerComponent implements OnInit, OnDestroy {
     this.currentAdIndex = this.activeComponent;
     this.loadComponent();
   }
-  ngOnChanges(changes : {[propKey:string]: SimpleChange}){
-    let log : string [] =[];
+  ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
+    let log: string[] = [];
     this.currentAdIndex = changes.activeComponent.currentValue
     this.loadComponent();
   }

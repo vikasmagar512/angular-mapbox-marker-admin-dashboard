@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Supercluster} from 'Supercluster';
-import { LngLatLike} from 'mapbox-gls';
+import { LngLatLike} from 'mapbox-gl';
 
 import {Http} from '@angular/http';
 import {Map} from "mapbox-gl";
