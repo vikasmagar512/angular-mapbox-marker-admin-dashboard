@@ -34,17 +34,14 @@ export class TableWrapperComponent implements OnInit{
       /* let stat:'asset.status';
       console.log("stat"); */
       return acc.concat({
-      "id": ' asset.id',
+      "id": asset.id,
       /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
-      "name":'asset.name',
-      "type":'asset.category',
-      "customer":'asset.customer',
-      "agreement":'asset.agreement',
-      "location":'asset.location',
-      "status":'<span>'+
-               '<img src="../../assets/stat.svg">'+
-               '</span>'
-      
+      "name":asset.name,
+      "type":asset.category,
+      "customer":asset.customer,
+      "agreement":asset.agreement_no,
+      "location":asset.location,
+      "status":`<span><img src="../../assets/${asset.status}.png"></span>`
     });
   },[]);
   }

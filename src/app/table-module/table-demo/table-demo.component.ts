@@ -48,7 +48,8 @@ export class TableDemoComponent implements OnInit {
 
   // private data:Array<any> = TableData;
 
-  public constructor(    private router: Router,
+  public constructor(   
+    //  private router: Router,
   ) {
     // this.length = this.data.length;
   }
