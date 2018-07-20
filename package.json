@@ -37,6 +37,7 @@
     "ngx-mapbox-gl": "^1.2.0",
     "rxjs": "^6.2.0",
     "rxjs-compat": "^6.2.0",
+    "supercluster": "^4.0.1",
     "zone.js": "^0.8.24"
   },
   "devDependencies": {

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Supercluster} from 'Supercluster';
+import { LngLatLike} from 'mapbox-gls';
 
 import {Http} from '@angular/http';
 import {Map} from "mapbox-gl";
+import {Cluster} from 'cluster';
 // import earthquakes from './earthquakes.geo.json';
 /*
 @Component({

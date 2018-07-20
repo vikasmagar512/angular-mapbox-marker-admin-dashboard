@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script src='https://api.tiles.mapbox.com/mapbox.js/v2.0.0/mapbox.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox.js/v2.0.0/mapbox.css' rel='stylesheet' />
+  <link rel="stylesheet" href="https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js"></script>
+  <style>
+    #map {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .search-field {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      width: 250px;
+      height: 40px;
+      font-size: 12px;
+      text-align: left;
+      padding: 5px;
+      z-index: 100;
+    }
+    /*
+ * These CSS rules affect the tooltips within maps with the custom-popup
+ * class. See the full CSS for all customizable options:
+ * https://github.com/mapbox/mapbox.js/blob/001754177f3985c0e6b4a26e3c869b0c66162c99/theme/style.css#L321-L366
+ */
+    .custom-popup .leaflet-popup-content-wrapper {
+      background:#2c3e50;
+      color:#fff;
+      font-size:16px;
+      line-height:24px;
+    }
+    .custom-popup .leaflet-popup-content-wrapper a {
+      color:rgba(255,255,255,0.5);
+    }
+    .custom-popup .leaflet-popup-tip-container {
+      width:30px;
+      height:15px;
+    }
+    .custom-popup .leaflet-popup-tip {
+      border-left:15px solid transparent;
+      border-right:15px solid transparent;
+      border-top:15px solid #2c3e50;
+    }
+
+
+    /*
+     * These CSS rules affect the tooltips within maps with the custom-popup
+     * class. See the full CSS for all customizable options:
+     * https://github.com/mapbox/mapbox.js/blob/001754177f3985c0e6b4a26e3c869b0c66162c99/theme/style.css#L321-L366
+     */
+    .custom-popup .leaflet-popup-content-wrapper {
+      background:black;
+      color:#fff;
+      font-size:16px;
+      line-height:24px;
+    }
+    .custom-popup .leaflet-popup-content-wrapper a {
+      color:white;
+    }
+    .custom-popup .leaflet-popup-tip-container {
+      width:30px;
+      height:15px;
+    }
+    .custom-popup .leaflet-popup-tip {
+      border-left:15px solid transparent;
+      border-right:15px solid transparent;
+      border-top:15px solid #2c3e50;
+    }
+
+
+    .leaflet-popup-content {
+      padding: 0px 0px 0px;
+      margin: 0;
+    }
+
+    .leaflet-popup.leaflet-zoom-animated {
+      width: 260px;
+      left: -130px;
+    }
+
+    .generalt {
+      background-image: url("http://boogybuggy.com/wp-content/uploads/2014/12/GeneralTsoChicken_5.jpg");
+      width: 100%;
+      height: 90px;
+      background-size: 140%;
+      background-repeat: no-repeat;
+      background-position: 15% 50%;
+      padding: 20px 10px 0px 10px;
+      color: white;
+      text-shadow: 0px 0px 5px black;
+    }
+
+    .detail {
+      background-color: #FCF4E1;
+      color: #432B20;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id='map'></div>
+  <input type="text" id="searchByName" class="search-field" placeholder="Washington, Chicago or Dallas">
+  <script>
+    L.mapbox.accessToken = 'pk.eyJ1IjoibmFkaiIsImEiOiJjaW43a2hyOXYwMDJrd29semd6bmZha2JuIn0.nE1hjNjGG2rlxm_oMrysyg';
+    var map = L.mapbox.map('map', 'mapbox.streets')
+      .setView([38.13455657705411, -94.5703125], 4);
+
+    var myLayer = L.mapbox.featureLayer().addTo(map);
+
+    var geojson = {
+      type: 'FeatureCollection',
+      features: [{
+        type: 'Feature',
+        properties: {
+          id: 1,
+          'title': 'Washington, D.C.',
+          "cityName": "washington",
+          "icon": {
+            "iconUrl": "https://www.mapbox.com/mapbox.js/assets/images/astronaut2.png",
+            "iconSize": [50, 50],
+            "iconAnchor": [25, 25],
+            "popupAnchor": [0, -25],
+            "className": "dot"
+          }
+        },
+        geometry: {
+          type: 'Point',
+          coordinates: [-77.03201, 38.90065]
+        }
+      }, {
+        type: 'Feature',
+        properties: {
+          id: 2,
+          'title': 'Chicago, M',
+          "cityName": "chicago",
+          "icon": {
+            "iconUrl": "https://www.mapbox.com/mapbox.js/assets/images/astronaut2.png",
+            "iconSize": [50, 50],
+            "iconAnchor": [25, 25],
+            "popupAnchor": [0, -25],
+            "className": "dot"
+          }
+        },
+        geometry: {
+          type: 'Point',
+          coordinates: [-87.71484375, 41.80407814427234]
+        }
+      },
+
+        {
+          type: 'Feature',
+          properties: {
+            id: 3,
+            'title': 'Dallas, T',
+            "cityName": "dallas",
+            "icon": {
+              "iconUrl": "https://www.mapbox.com/mapbox.js/assets/images/astronaut2.png",
+              "iconSize": [50, 50],
+              "iconAnchor": [25, 25],
+              "popupAnchor": [0, -25],
+              "className": "dot"
+            }
+          },
+          geometry: {
+            type: 'Point',
+            coordinates: [-96.85546875, 32.80574473290688]
+          }
+        }
+      ]
+    };
+
+    var myLayer = L.mapbox.featureLayer().addTo(map);
+
+    myLayer.on('layeradd', function(e) {
+      var marker = e.layer,
+        feature = marker.feature;
+      marker.setIcon(L.icon(feature.properties.icon));
+    });
+
+    myLayer.setGeoJSON(geojson);
+
+
+    // Search by city name
+    $('#searchByName').keyup(cityMapSearch);
+
+    function cityMapSearch() {
+
+      var searchString = $('#searchByName').val().toLowerCase();
+
+      myLayer.setFilter(showCity);
+
+
+      function showCity(feature) {
+
+        if (feature.properties.cityName == searchString) {
+          map.setView([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], 17);
+        } else {
+          return feature.properties.cityName
+            .toLowerCase()
+            .indexOf(searchString) !== -1;
+        }
+        return true;
+      }
+
+    }
+
+  </script>
+</body>
+
+<div class='custom-popup' id='map'></div>
+</html>
