@@ -54,7 +54,6 @@ export class TableWrapperComponent implements OnInit{
     {title: 'Agreement', className:[ 'text-warning'], name: 'agreement',filter:'text'},
     {title: 'Status',name: 'status',sort: false,filter:'text'},
     {title: 'Location', name: 'location', sort: '', filtering: {filterString: '', placeholder: 'Filter by extn.'},filter:'text'},
-   
   ];
   public assetConfig:any = {
     paging: true,
@@ -62,4 +61,36 @@ export class TableWrapperComponent implements OnInit{
     filtering: {filterString: ''},
     className: ['third-t','s-table','table-striped', 'table-bordered']
   };
+  
+  this.serviceRequestData = this.assetDetail.reduce((acc,asset:Asset) => {
+    /* let stat:'asset.status';
+    console.log("stat"); */
+    return acc.concat({
+    "id": asset.id,
+    /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
+    "name":asset.name,
+    "type":asset.category,
+    "customer":asset.customer,
+    "agreement":asset.agreement_no,
+    "location":asset.location,
+    "status":`<span><img src="../../assets/${asset.status}.png"></span>`
+  });
+},[]);
+}
+
+public serviceRequestColumns:Array<any> = [
+  {title: 'Asset Id', name: 'id', filtering: {filterString: '', placeholder: 'Filter by name'},filter:'text'},
+  {title: 'Asset Name', name: 'name', filtering: {filterString: '', placeholder: 'Filter by name'},filter:'text'},
+  {title: 'Asset Type', name: 'type', filtering: {filterString: '', placeholder: 'Filter by name'},filter:'text'},
+  {title: 'Customer', className:[ 'text-warning'], name: 'customer',filter:'text'},
+  {title: 'Agreement', className:[ 'text-warning'], name: 'agreement',filter:'text'},
+  {title: 'Status',name: 'status',sort: false,filter:'text'},
+  {title: 'Location', name: 'location', sort: '', filtering: {filterString: '', placeholder: 'Filter by extn.'},filter:'text'},
+];
+public serviceRequestConfig:any = {
+  paging: true,
+  sorting: {columns: this.assetColumns},
+  filtering: {filterString: ''},
+  className: ['third-t','s-table','table-striped', 'table-bordered']
+};
 }

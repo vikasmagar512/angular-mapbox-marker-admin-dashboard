@@ -3,6 +3,7 @@ import { Asset } from './asset';
 import { Metric} from "./metric";
 import { Agreement } from './agreement';
 import {Customer} from './customer';
+import { normalRequest } from './Request';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,30 @@ export class dataService {
     "contact":"12312312313",
     "img":"../../../assets/machine.svg",
   }
+  serviceRequest={
+    "id":"123",
+    "assetId":"123",
+    "name":"vikas",
+    "email":"vikasmagar512@gmail.com",
+    "address":"vikasmagar512@gmail.com address address address address address ",
+    "contact":"12312312313",
+    "img":"../../../assets/machine.svg",
+  }
+  serviceRequets:Array<normalRequest>=[
+    "requetId":"123",
+    "customerId":"1",
+    "parameter":{
+      "id": "1",
+      "name": "choco Powder",
+      "unit": "kg",
+    },
+    "description": string,
+    "status": string,
+    "quantity": string,
+    "RequestedOn":string,
+    "dueBy":string,
+    "assetCategory":string,
+  ]
   Assets: Array<Asset>=[
     {
       /* "id": "01",
@@ -45,16 +70,24 @@ export class dataService {
       "img":"../../../assets/printer.svg",
       "metrics": [
         {
-          "category": "Coffee Powder",
-          "unit": "kg",
+          // "parameter":{
+            "id": "1",
+          //   "name": "Choco Powder",
+          //   "unit": "kg",
+          // },
           "available": 45,
           "required": 10,
           "uptime": "80%",
           "usage": "300"
         },
         {
-          "category": "Milk Powder",
-          "unit": "kg",
+          // "parameter":{
+            "id": "2",
+          //   "name": "Milk Powder",
+          //   "unit": "kg",
+          // },
+          // "category": "",
+          // "unit": "kg",
           "available": 45,
           "required": 10,
           "uptime": "80%",
@@ -62,7 +95,7 @@ export class dataService {
         },
       ]
     },
-    {
+   /*  {
       "id": "02",
       "category": "Printer",
       "name": "Canon SW2014",
@@ -74,6 +107,7 @@ export class dataService {
       "img":"../../../assets/printer.svg",
       "metrics": [
         {
+          
           "category": "Cartridge",
           "unit": "#",
           "available": 15,
@@ -103,7 +137,7 @@ export class dataService {
           "usage": "20 Hrs 80m"
         }
       ]
-    }
+    } */
   ];
 
   Agreement: Array<Agreement> = [

@@ -163,12 +163,12 @@ export class TableDemoComponent implements OnInit {
   public onCellClick(data: any): any {
     console.log(data)
     // If Button View
-    if (data.column == "name") {
+    /* if (data.column == "name") {
       this.router.navigate(['/main/asset/',data.row['id'] ]);
     }
     if (data.column == "agreement_no") {
       this.router.navigate(['/main/agreementNo/',data.row['id'] ]);
-    }
+    } */
 
     // If Button View
     // if (data.column == "action") {
