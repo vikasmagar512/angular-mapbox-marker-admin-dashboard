@@ -8,7 +8,7 @@
       </button>
       <!--</span>-->
       <span>
-          <input type="search" name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location" class="bg-grey">
+          <input type="search" (keyup)="onKey(locationSearchBox.value)" #locationSearchBox name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location" class="bg-grey">
         </span>
       <span></span>
     </div>
@@ -22,6 +22,5 @@
         <span class="cross"></span>
       </p>
     </div>
-    
   </div>
 </div>

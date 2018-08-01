@@ -17,10 +17,15 @@ import { TopComponent } from './top/top.component';
 import {FilterSearchModule} from './filter-search/filter-search.module';
 import {dataService} from './dataService.service';
 import {TableModuleModule} from './table-module/table-module.module';
+import {FormsModule} from '@angular/forms';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 @NgModule({
   imports: [ BrowserModule,PostModule, MapModule, DataTablesModule,FinancialTablesModule,
     FilterSearchModule,
-    TableModuleModule],
+    TableModuleModule,
+    FormsModule,
+    HttpClientModule
+  ],
   providers: [AdService,dataService],
   declarations: [ AppComponent,
     AdBannerComponent,

@@ -7,7 +7,6 @@
       <button type="button" class="btn btn-primary" (click)="exporttoCSV()">Export to Excel</button>
 -->
     </div>
-
   </div>
   <div class="col-md-8 pull-right">
     <div class="sie-btn pull-right">
@@ -26,10 +25,11 @@
     </div>
   </div>
 </div>
-  <!-- <app-reusable-table></app-reusable-table> -->
-  <app-table-demo [data]="assetData" [config]="assetConfig" [columns]="assetColumns"></app-table-demo>
- <!--  <app-table-demo data="productCOlumnConfig" config></app-table-demo>
+  <!--<app-reusable-table></app-reusable-table>-->
+  <app-table-demo [data]="assetData" [config]="assetConfig" [columns]="assetColumns" [(dataNumber)]="dataNumber"></app-table-demo>
+ <!--
+  <app-table-demo data="productCOlumnConfig" config></app-table-demo>
   <app-table-demo data="serviceCOlumnConfig" config></app-table-demo>
-  <app-table-demo data="serviceCOlumnConfig" config></app-table-demo> -->
+ -->
 <!--<app-table-comp [dataNumber]="dataNumber"></app-table-comp>-->
 </div>

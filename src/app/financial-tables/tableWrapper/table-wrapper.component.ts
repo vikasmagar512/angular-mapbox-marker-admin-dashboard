@@ -29,22 +29,22 @@ export class TableWrapperComponent implements OnInit{
   ngOnInit() {
     this.assetDetail = this.dataService.getAssets();
 
-   
+
     this.assetData = this.assetDetail.reduce((acc,asset:Asset) => {
       /* let stat:'asset.status';
       console.log("stat"); */
       return acc.concat({
-      "id": ' asset.id',
+      "id": asset.id,
       /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
-      "name":'asset.name',
-      "type":'asset.category',
-      "customer":'asset.customer',
-      "agreement":'asset.agreement',
-      "location":'asset.location',
+      "name":asset.name,
+      "type":asset.category,
+      "customer":asset.customer,
+      "agreement":asset.agreement_no,
+      "location":asset.location,
       "status":'<span>'+
                '<img src="../../assets/stat.svg">'+
                '</span>'
-      
+
     });
   },[]);
   }
@@ -57,7 +57,6 @@ export class TableWrapperComponent implements OnInit{
     {title: 'Agreement', className:[ 'text-warning'], name: 'agreement',filter:'text'},
     {title: 'Status',name: 'status',sort: false,filter:'text'},
     {title: 'Location', name: 'location', sort: '', filtering: {filterString: '', placeholder: 'Filter by extn.'},filter:'text'},
-   
   ];
   public assetConfig:any = {
     paging: true,

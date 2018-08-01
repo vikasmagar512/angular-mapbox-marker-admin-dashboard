@@ -4,6 +4,11 @@
     [zoom]="[3]"
     [center]="[-103.59179687498357, 40.66995747013945]"
   >
+
+    <mgl-control
+      mglGeocoder
+      [searchInput]="'Paris'"
+    ></mgl-control>
     <!--<mgl-popup
       [lngLat]="[-96, 37.8]"
       [closeOnClick]="false"

@@ -13,6 +13,7 @@ export class TableDemoComponent implements OnInit {
   @Input() columns: any[];
   @Input() config: Object;
   @Input() data: Array<any>;
+  @Input() dataNumber: any;
   exportFileName:string = "csv";
 
   public rows:Array<any> = [];
@@ -48,13 +49,14 @@ export class TableDemoComponent implements OnInit {
 
   // private data:Array<any> = TableData;
 
-  public constructor(    private router: Router,
+  public constructor(
+    // private router: Router,
   ) {
     // this.length = this.data.length;
   }
 
   public ngOnInit():void {
-
+    console.log('dataNumber ',this.dataNumber)
     this.length = this.data.length;
     this.onChangeTable(this.config);
   }
@@ -148,11 +150,9 @@ export class TableDemoComponent implements OnInit {
     if (config.filtering) {
       Object.assign(this.config['filtering'], config.filtering);
     }
-
     if (config['sorting']) {
       Object.assign(this.config['sorting'], config['sorting']);
     }
-
     let filteredData = this.changeFilter(this.data, this.config);
     let sortedData = this.changeSort(filteredData, this.config);
     this.rows = page && config.paging ? this.changePage(page, sortedData) : sortedData;
@@ -163,10 +163,10 @@ export class TableDemoComponent implements OnInit {
     console.log(data)
     // If Button View
     if (data.column == "name") {
-      this.router.navigate(['/main/asset/',data.row['id'] ]);
+      // this.router.navigate(['/main/asset/',data.row['id'] ]);
     }
     if (data.column == "agreement_no") {
-      this.router.navigate(['/main/agreementNo/',data.row['id'] ]);
+      // this.router.navigate(['/main/agreementNo/',data.row['id'] ]);
     }
 
     // If Button View

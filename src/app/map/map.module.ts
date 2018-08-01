@@ -5,6 +5,7 @@ import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { ClusterComponent } from './cluster/cluster.component';
 import {HttpModule} from '@angular/http';
 import {TableModuleModule} from '../table-module/table-module.module';
+import {AdService} from '../ad.service';
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import {TableModuleModule} from '../table-module/table-module.module';
   ],
   declarations: [MapComponent, ClusterComponent],
   entryComponents:[MapComponent,ClusterComponent],
-  exports:[MapComponent,ClusterComponent]
+  exports:[MapComponent,ClusterComponent],
 })
 export class MapModule { }

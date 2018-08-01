@@ -1,6 +1,8 @@
 
+/*
 @import "~mapbox-gl/dist/mapbox-gl.css";
 @import "~@mapbox/mapbox-gl-geocoder/lib/mapbox-gl-geocoder.css";
+*/
 
 mgl-map {
   height: 100%;

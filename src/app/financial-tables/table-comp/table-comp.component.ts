@@ -12,7 +12,6 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./table-comp.component.css']
 })
 export class TableCompComponent implements OnInit,OnDestroy, OnChanges {
-  @Input() dataNumber: any;
   dtOptions: DataTables.Settings = {};
   data: Person[] = [];
   columns: any[];
@@ -23,6 +22,7 @@ export class TableCompComponent implements OnInit,OnDestroy, OnChanges {
 
   constructor(private http: Http,private myPostService: MyPostService) { }
   ngOnInit(): void {
+    // console.log('dataNumber ',this.dataNumber)
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,

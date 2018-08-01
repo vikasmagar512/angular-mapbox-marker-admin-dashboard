@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Supercluster} from 'Supercluster';
+// import { Supercluster} from 'Supercluster';
 import { LngLatLike} from 'mapbox-gl';
 
 import {Http} from '@angular/http';
 import {Map} from "mapbox-gl";
-import {Cluster} from 'cluster';
+// import {Cluster} from 'Supercluster';
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import { Cluster, Supercluster } from 'supercluster';
+
+// import {Cluster} from 'cluster';
 // import earthquakes from './earthquakes.geo.json';
 /*
 @Component({
@@ -19,7 +23,6 @@ export class ClusterComponent implements OnInit {
   async ngOnInit() {
     this.earthquakes = await import('./earthquakes.geo.json');
   }
-
 }
 */
 
@@ -40,12 +43,12 @@ export class ClusterComponent implements OnInit {
     this.http.get('./assets/earthquakes.geo.json')
     .subscribe(res => this.earthquakes = res.json());
   }
-  // map: Map; // Mapbox GL Map object (Mapbox is ran outside angular zone, keep that in mind when binding events from this object)
+  map: Map; // Mapbox GL Map object (Mapbox is ran outside angular zone, keep that in mind when binding events from this object)
 
   async ngOnInit() {
-  //   this.earthquakes = await import('./earthquakes.geo.json');
+    // this.earthquakes = await import('./earthquakes.geo.json');
   }
-
+/*
   selectCluster(event: MouseEvent, feature: Cluster) {
     event.stopPropagation(); // This is needed, otherwise the popup will close immediately
     this.selectedCluster = {
@@ -54,16 +57,22 @@ export class ClusterComponent implements OnInit {
       count: feature.properties.point_count!,
       id: feature.properties.cluster_id!
     };
+  }*/
+  // $('#searchByName').keyup(cityMapSearch);
+  /*
+  cityMapSearch() {
+    var searchString = this.values.toLowerCase();
+    // myLayer.setFilter(showCity);
   }
-  // async ngOnInit() {
-    // this.earthquakes = await import('./earthquakes.geo.json');
-    // import("./earthquakes.geo.json").then(widget => {
-    //   this.earthquakes = widget
-    // });
+  showCity(feature) {
 
-    // this.earthquakes = await import('./earthquakes.geo.json');
-    // import("./earthquakes.geojson").then(function (widget) {
-    //   this.earthquakes = widget;
-    // });
-  // }
+    if (feature.properties.cityName == searchString) {
+      map.setView([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], 17);
+    } else {
+      return feature.properties.cityName
+        .toLowerCase()
+        .indexOf(searchString) !== -1;
+    }
+    return true;
+  }*/
 }

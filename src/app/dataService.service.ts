@@ -3,13 +3,16 @@ import { Asset } from './asset';
 import { Metric} from "./metric";
 import { Agreement } from './agreement';
 import {Customer} from './customer';
+import {Http, RequestOptions} from '@angular/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class dataService {
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
+  locationSearch = ''
   assetCategory={
     "Coffee_Machine":"Coffee Machine",
     "Printer":"Printer",
@@ -141,6 +144,44 @@ export class dataService {
   getAssets():Asset[] {
     return this.Assets;
   }
+/*  bankId(){
+    const myheader = new HttpHeaders().set('Content-Type', 'application/json')
+    // let headers = new Headers();
+    // headers.append('Content-Type', 'application/json');
+    const obj = { "personalNumber":"198112289874","endUserIp": "114.143.194.231"}
+
+    // let headers = new Headers({ 'Content-Type': 'application/json' });
+    // let options = new RequestOptions({ headers: headers });
+    // let headers = new Headers();
+    // headers.append("Content-Type", 'application/json');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+      })
+    };
+    // this.http.post('http://cors.io/?https://appapi2.test.bankid.com/rp/v5/auth',JSON.stringify(obj),headers)
+    this.http.post('https://appapi2.test.bankid.com/rp/v5/auth',JSON.stringify(obj),httpOptions)
+      .subscribe(
+        data => {
+          console.log(data)
+          alert('ok');
+        },
+        error => {
+          console.log(error)
+          console.log(JSON.stringify(error.json()));
+        }
+      )
+        // .map(this.extractData)
+        // .catch(this.handleErrorObservable);
+  }*/
+  // extractData(res: Response) {
+  //   let body = res.json();
+  //   return body || {};
+  // }
+  // handleErrorObservable (error: Response | any) {
+  //   console.error(error.message || error);
+  //   return Observable.throw(error.message || error);
+  // }
   getCustomer():Customer {
     return this.customer;
   }

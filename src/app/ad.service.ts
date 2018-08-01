@@ -11,16 +11,28 @@ import {MyPostBannerComponent} from './post/mypost-banner.component';
 import {TableWrapperComponent} from './financial-tables/tableWrapper/table-wrapper.component';
 import {filter} from './filter-search/filter';
 import {filterGroup} from './filter-search/filterGroup';
-import {Subject} from 'rxjs/index';
+import {BehaviorSubject, Subject} from 'rxjs/index';
 
 @Injectable()
 export class AdService {
   filterTypes:Array<filterGroup>;
   info:Object;
   counter:number;
+  // locationS:string;
+  private messageSource = new BehaviorSubject('malegaon');
+  currentMessage = this.messageSource.asObservable();
+
+ /* changeMessage(message: string) {
+    this.messageSource.next(message)
+  }
+*/
   change(){
     this.info['name']= "Jane" + this.counter;
     this.counter = this.counter + 1;
+  }
+  changeLocation(location){
+    // this.locationS = location;
+    this.messageSource.next(location)
   }
   // EventEmitter should not be used this way - only for `@Output()`s
   //nameChange: EventEmitter<string> = new EventEmitter<string>();
@@ -32,6 +44,7 @@ export class AdService {
 
   constructor() {
     this.counter=0;
+    // this.locationS = 'nashik';
     this.info = { name : "Jack"+this.counter };
 
     this.filterTypes=[]
@@ -118,7 +131,7 @@ export class AdService {
         },
       ]
     }
-      
+
       this.assetLocationFilter = {
       filterDisplayText:  "Location",
       filterArray:[
@@ -227,12 +240,8 @@ export class AdService {
   }
   getAds() {
     return [
-      /*new AdItem(HeroProfileComponent, {name: 'Bombasto', bio: 'Brave as they come'}),
-
+      /*
       new AdItem(HeroProfileComponent, {name: 'Dr IQ', bio: 'Smart as they come'}),
-
-      new AdItem(HeroJobAdComponent,   {headline: 'Hiring for several positions',
-                                        body: 'Submit your resume today!'}),
 
       new AdItem(HeroJobAdComponent,   {headline: 'Openings in all departments',
                                         body: 'Apply today'}),
@@ -241,12 +250,12 @@ export class AdService {
       /*new AdItem(TechnologyComponent,   {headline: 'Openings in all departments',
         body: 'Apply today'}),*/
 
-      new AdItem(MapComponent,   {headline: 'Openings in all departments',
+      new AdItem(MapComponent,   {location: this.currentMessage,
                                         body: 'Apply today'}),
-      new AdItem(ClusterComponent,   {headline: 'Openings in all departments',
-                                        body: 'Apply today'}),
-/*      new AdItem(ArticleComponent,   {headline: 'Openings in all departments',
-        body: 'Apply today'}),*/
+      // new AdItem(ClusterComponent,   {headline: 'Openings in all departments',
+      //                                   body: 'Apply today'}),
+      new AdItem(ArticleComponent,   {headline: 'Openings in all departments',
+        body: 'Apply today'}),
       new AdItem(TableWrapperComponent,   {headline: 'Openings in all departments',
         body: 'Apply today'}),
       /*
