@@ -6,6 +6,7 @@ import {Subject} from 'rxjs/index';
 import {Asset} from '../../asset';
 import {dataService} from '../../dataService.service';
 import {MyPostService} from '../../post/mypost.service';
+import { normalRequest } from '../../Request';
 
 @Component({
   selector: 'app-table-wrapper',
@@ -25,11 +26,32 @@ export class TableWrapperComponent implements OnInit{
 
   assetDetail:Array<Asset>;
   assetData: Array<any>;
+  serviceRequestData:Array<normalRequest>
+  assetConfig:any;
+  serviceRequestConfig:any;
   constructor(private dataService: dataService){}
+  public serviceRequestColumns:Array<any> = [
+    {title: 'Asset Id', name: 'id', filtering: {filterString: '', placeholder: 'Filter by name'},filter:'text'},
+    {title: 'Asset Name', name: 'name', filtering: {filterString: '', placeholder: 'Filter by name'},filter:'text'},
+    {title: 'Asset Type', name: 'type', filtering: {filterString: '', placeholder: 'Filter by name'},filter:'text'},
+    {title: 'Customer', className:[ 'text-warning'], name: 'customer',filter:'text'},
+    {title: 'Agreement', className:[ 'text-warning'], name: 'agreement',filter:'text'},
+    {title: 'Status',name: 'status',sort: false,filter:'text'},
+    {title: 'Location', name: 'location', sort: '', filtering: {filterString: '', placeholder: 'Filter by extn.'},filter:'text'},
+  ];
+  public assetColumns:Array<any> = [
+    {title: 'Asset Id', name: 'id', filtering: {filterString: '', placeholder: 'Filter by name'},filter:'text'},
+    {title: 'Asset Name', name: 'name', filtering: {filterString: '', placeholder: 'Filter by name'},filter:'text'},
+    {title: 'Asset Type', name: 'type', filtering: {filterString: '', placeholder: 'Filter by name'},filter:'text'},
+    {title: 'Customer', className:[ 'text-warning'], name: 'customer',filter:'text'},
+    {title: 'Agreement', className:[ 'text-warning'], name: 'agreement',filter:'text'},
+    {title: 'Status',name: 'status',sort: false,filter:'text'},
+    {title: 'Location', name: 'location', sort: '', filtering: {filterString: '', placeholder: 'Filter by extn.'},filter:'text'},
+  ];
   ngOnInit() {
     this.assetDetail = this.dataService.getAssets();
 
-   
+    
     this.assetData = this.assetDetail.reduce((acc,asset:Asset) => {
       /* let stat:'asset.status';
       console.log("stat"); */
@@ -44,18 +66,9 @@ export class TableWrapperComponent implements OnInit{
       "status":`<span><img src="../../assets/${asset.status}.png"></span>`
     });
   },[]);
-  }
 
-  public assetColumns:Array<any> = [
-    {title: 'Asset Id', name: 'id', filtering: {filterString: '', placeholder: 'Filter by name'},filter:'text'},
-    {title: 'Asset Name', name: 'name', filtering: {filterString: '', placeholder: 'Filter by name'},filter:'text'},
-    {title: 'Asset Type', name: 'type', filtering: {filterString: '', placeholder: 'Filter by name'},filter:'text'},
-    {title: 'Customer', className:[ 'text-warning'], name: 'customer',filter:'text'},
-    {title: 'Agreement', className:[ 'text-warning'], name: 'agreement',filter:'text'},
-    {title: 'Status',name: 'status',sort: false,filter:'text'},
-    {title: 'Location', name: 'location', sort: '', filtering: {filterString: '', placeholder: 'Filter by extn.'},filter:'text'},
-  ];
-  public assetConfig:any = {
+
+ this.assetConfig = {
     paging: true,
     sorting: {columns: this.assetColumns},
     filtering: {filterString: ''},
@@ -76,21 +89,13 @@ export class TableWrapperComponent implements OnInit{
     "status":`<span><img src="../../assets/${asset.status}.png"></span>`
   });
 },[]);
-}
 
-public serviceRequestColumns:Array<any> = [
-  {title: 'Asset Id', name: 'id', filtering: {filterString: '', placeholder: 'Filter by name'},filter:'text'},
-  {title: 'Asset Name', name: 'name', filtering: {filterString: '', placeholder: 'Filter by name'},filter:'text'},
-  {title: 'Asset Type', name: 'type', filtering: {filterString: '', placeholder: 'Filter by name'},filter:'text'},
-  {title: 'Customer', className:[ 'text-warning'], name: 'customer',filter:'text'},
-  {title: 'Agreement', className:[ 'text-warning'], name: 'agreement',filter:'text'},
-  {title: 'Status',name: 'status',sort: false,filter:'text'},
-  {title: 'Location', name: 'location', sort: '', filtering: {filterString: '', placeholder: 'Filter by extn.'},filter:'text'},
-];
-public serviceRequestConfig:any = {
+
+this.serviceRequestConfig= {
   paging: true,
-  sorting: {columns: this.assetColumns},
+  sorting: {columns: this.serviceRequestColumns},
   filtering: {filterString: ''},
   className: ['third-t','s-table','table-striped', 'table-bordered']
 };
+  }
 }

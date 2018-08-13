@@ -1,39 +1,53 @@
-import { BrowserModule }        from '@angular/platform-browser';
-import { NgModule }             from '@angular/core';
-import { AppComponent }         from './app.component';
-import { HeroJobAdComponent }   from './hero-job-ad.component';
-import { AdBannerComponent }    from './ad-banner.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { AppComponent } from './app.component';
+import { HeroJobAdComponent } from './hero-job-ad.component';
+import { AdBannerComponent } from './ad-banner.component';
 import { HeroProfileComponent } from './hero-profile.component';
-import { AdDirective }          from './ad.directive';
-import { AdService }            from './ad.service';
-import {PostModule} from './post/post.module';
-import { MapModule } from './map/map.module';
-import { FinancialTablesModule } from './financial-tables/financial-tables.module';
-
-  import { DataTablesModule } from 'angular-datatables';
-import {TableWrapperComponent} from './financial-tables/tableWrapper/table-wrapper.component';
+import { AdDirective } from './ad.directive';
+import { AdService } from './ad.service';
+import { TableWrapperComponent } from './financial-tables/tableWrapper/table-wrapper.component';
 import { BottomComponent } from './bottom/bottom.component';
 import { TopComponent } from './top/top.component';
-import {FilterSearchModule} from './filter-search/filter-search.module';
-import {dataService} from './dataService.service';
-import {TableModuleModule} from './table-module/table-module.module';
+import { NavbarComponent } from './navbar/navbar.component';
+import { dataService } from './dataService.service';
+import { FinancialTablesModule } from './financial-tables/financial-tables.module';
+import{BsDropdownModule, ModalModule, PaginationModule, PopoverModule, ProgressbarModule, TabsModule, TooltipModule} from 'ngx-bootstrap';
+
+import { DashboardModuleModule } from './dashboard-module/dashboard-module.module';
+import { NotificationModuleModule } from './notification-module/notification-module.module';
+import { DataTablesModule } from 'angular-datatables';
+import { FilterSearchModule } from './filter-search/filter-search.module';
+import { TableModuleModule } from './table-module/table-module.module';
+import { PostModule } from './post/post.module';
+import { MapModule } from './map/map.module';
+
 @NgModule({
-  imports: [ BrowserModule,PostModule, MapModule, DataTablesModule,FinancialTablesModule,
+  imports: [BrowserModule, PostModule, MapModule, DataTablesModule, FinancialTablesModule,
     FilterSearchModule,
-    TableModuleModule],
-  providers: [AdService,dataService],
-  declarations: [ AppComponent,
+    TableModuleModule,
+    DashboardModuleModule,
+    NotificationModuleModule,
+    ModalModule.forRoot(),
+    PopoverModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    PaginationModule.forRoot(),
+    TabsModule.forRoot(),
+    TooltipModule.forRoot()],
+  providers: [AdService, dataService],
+  declarations: [AppComponent,
     AdBannerComponent,
     HeroJobAdComponent,
     HeroProfileComponent,
     AdDirective,
     BottomComponent,
     TopComponent,
-],
-  entryComponents: [ HeroJobAdComponent, HeroProfileComponent,TableWrapperComponent],
-  bootstrap: [ AppComponent ]
+    NavbarComponent,
+  ],
+  entryComponents: [HeroJobAdComponent, HeroProfileComponent, TableWrapperComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor() {}
+  constructor() { }
 }
 

@@ -1,4 +1,6 @@
-
+.b-color{
+  background-color: #f3ecec;
+}
 .flexVertM{
   display: flex;
   vertical-align: middle;
@@ -46,7 +48,7 @@
 
 .bottom{
 
-  background-color: #ece5e5;
+  /* background-color: #ece5e5; */
   height: auto;
   padding: 5px 15px;
 }

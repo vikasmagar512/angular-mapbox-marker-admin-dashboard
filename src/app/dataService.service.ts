@@ -18,13 +18,13 @@ export class dataService {
   }
   customer:Customer={
     "id":"123",
-    "name":"vikas",
+    "name":"vikas Magar",
     "email":"vikasmagar512@gmail.com",
     "address":"vikasmagar512@gmail.com address address address address address ",
     "contact":"12312312313",
     "img":"../../../assets/machine.svg",
   }
-  serviceRequest={
+/*   serviceRequest={
     "id":"123",
     "assetId":"123",
     "name":"vikas",
@@ -32,21 +32,23 @@ export class dataService {
     "address":"vikasmagar512@gmail.com address address address address address ",
     "contact":"12312312313",
     "img":"../../../assets/machine.svg",
-  }
+  } */
   serviceRequets:Array<normalRequest>=[
-    "requetId":"123",
-    "customerId":"1",
-    "parameter":{
-      "id": "1",
-      "name": "choco Powder",
-      "unit": "kg",
-    },
-    "description": string,
-    "status": string,
-    "quantity": string,
-    "RequestedOn":string,
-    "dueBy":string,
-    "assetCategory":string,
+    {
+      "requetId":"123",
+      "customerId":"1",
+      "parameter":{
+        "id": "1",
+        "name": "choco Powder",
+        "unit": "kg",
+      },
+      "description": 'description',
+      "status":'status',
+      "quantity":'quantity',
+      "RequestedOn":'RequestedOn',
+      "dueBy":'dueBy',
+      "assetCategory":'assetCategory',
+    }
   ]
   Assets: Array<Asset>=[
     {
