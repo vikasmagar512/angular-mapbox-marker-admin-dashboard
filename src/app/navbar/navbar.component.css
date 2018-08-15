@@ -4,6 +4,7 @@
   border-radius: 0px;
   margin-bottom: 13px;
   background-color: black;
+  /* height: 65px; */
 }
 
 /* #modal> tabset{
@@ -17,7 +18,7 @@
 
 .log{
   width: 71%;
-  /* margin-top: -3%; */
+  margin-top: -3%;
 }
 .navbar-nav>li>a {
   line-height: 0px;
@@ -30,14 +31,14 @@
   margin-bottom: 0px;
   margin-top: 0px;
 }
-/*.mar-top{
-    margin-bottom: 2px;
-}*/
+.mar{
+    margin:-7px;
+}
 .flex-nav{
   display: flex;
-    justify-content: center;
-    align-items: center;
-    /* margin: -20px; */
+  justify-content: center;
+  align-items: center;
+  /* margin: -20px; */
 }
 
 .rlogo{
@@ -60,11 +61,6 @@
 
 /* CSS used here will be applied after bootstrap.css */
 
-.dropdown {
-  display:inline-block;
-  margin-left:20px;
-  padding:10px;
-}
 
 .mar-3{
   margin-top: 3px;
@@ -120,7 +116,7 @@
   justify-content: center;
   float: none;
   align-items: center;
- /*  margin: 0; */
+  /*  margin: 0; */
   /* padding: 0; */
   border: none;
   padding-bottom: 20px;

@@ -4,6 +4,13 @@ import { Metric} from "./metric";
 import { Agreement } from './agreement';
 import {Customer} from './customer';
 import { normalRequest } from './Request';
+import { SettingOptions } from './SettingOptions';
+import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/index';
+import 'rxjs-compat/add/operator/catch';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import 'rxjs-compat/add/operator/map';
 
 @Injectable({
   providedIn: 'root'
@@ -171,6 +178,57 @@ export class dataService {
     }
   ];
 
+  notificationOptions: Array<SettingOptions> = [
+    {
+      name: "Service Request",
+      id: "1",
+      selected: false
+    },
+    {
+      name: "Change in Asset status",
+      id: "2",
+      selected: false
+    },
+    {
+      name: "Product Request",
+      id: "3",
+      selected: false
+    },
+    {
+      name: "Change in Contract status",
+      id: "4",
+      selected: false
+    }
+  ];
+
+  dashboardOptions: Array<SettingOptions> = [
+    {
+      name: "Overall Cost",
+      id: "1",
+      selected: false
+    },
+    {
+      name: "Downtime",
+      id: "2",
+      selected: false
+    },
+    {
+      name: "Usage",
+      id: "3",
+      selected: false
+    },
+    {
+      name: "Utilization",
+      id: "4",
+      selected: false
+    }
+  ];
+
+  dashSetting: Subject<Array<SettingOptions>> = new BehaviorSubject<Array<SettingOptions>>(this.dashboardOptions);
+  currentDashSetting = this.dashSetting.asObservable();
+  notifSetting: Subject<Array<SettingOptions>> = new BehaviorSubject<Array<SettingOptions>>(this.notificationOptions);
+  currentNotifSetting = this.notifSetting.asObservable();
+
   getAgreement():Agreement[]{
     return this.Agreement;
   }
@@ -183,4 +241,13 @@ export class dataService {
   getAssetCategory() {
     return this.assetCategory;
   }
+
+  getNotificationOptions() {
+    return this.notificationOptions;
+  }
+
+  getDashboardOptions() {
+    return this.dashboardOptions;
+  }
+
 }

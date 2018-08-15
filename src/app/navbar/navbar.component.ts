@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit {
     private modalService: BsModalService) { }
 
   openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+    this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
   }
 
   ngOnInit() {
