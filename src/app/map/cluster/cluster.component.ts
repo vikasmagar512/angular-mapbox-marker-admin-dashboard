@@ -32,7 +32,7 @@ export class ClusterComponent implements OnInit {
   styleUrls: ['./cluster.component.css']
 })
 export class ClusterComponent implements OnInit {
-  earthquakes: object;
+  earthquakes;
   supercluster: Supercluster;
   selectedCluster: {
     lngLat: LngLatLike;
@@ -40,12 +40,15 @@ export class ClusterComponent implements OnInit {
     id: number;
   };
   constructor(private http:Http){
-    this.http.get('./assets/earthquakes.geo.json')
-    .subscribe(res => this.earthquakes = res.json());
+
   }
   map: Map; // Mapbox GL Map object (Mapbox is ran outside angular zone, keep that in mind when binding events from this object)
 
   async ngOnInit() {
+    this.http.get('./assets/earthquakes.geo.json')
+      .subscribe(res => {
+        this.earthquakes = res.json()
+      });
     // this.earthquakes = await import('./earthquakes.geo.json');
   }
 /*

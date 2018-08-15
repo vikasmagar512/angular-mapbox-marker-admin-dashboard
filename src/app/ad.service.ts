@@ -19,7 +19,7 @@ export class AdService {
   info:Object;
   counter:number;
   // locationS:string;
-  private messageSource = new BehaviorSubject('malegaon');
+  private messageSource = new BehaviorSubject('sweden');
   currentMessage = this.messageSource.asObservable();
 
  /* changeMessage(message: string) {
@@ -252,10 +252,10 @@ export class AdService {
 
       new AdItem(MapComponent,   {location: this.currentMessage,
                                         body: 'Apply today'}),
-      // new AdItem(ClusterComponent,   {headline: 'Openings in all departments',
-      //                                   body: 'Apply today'}),
-      new AdItem(ArticleComponent,   {headline: 'Openings in all departments',
-        body: 'Apply today'}),
+      new AdItem(ClusterComponent,   {headline: 'Openings in all departments',
+                                        body: 'Apply today'}),
+      /*new AdItem(ArticleComponent,   {headline: 'Openings in all departments',
+        body: 'Apply today'}),*/
       new AdItem(TableWrapperComponent,   {headline: 'Openings in all departments',
         body: 'Apply today'}),
       /*
