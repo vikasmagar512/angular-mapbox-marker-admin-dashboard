@@ -1,0 +1,56 @@
+
+  
+  /* CSS used here will be applied after bootstrap.css */
+  
+  
+  .notifications {
+    min-width:420px;
+  }
+  
+  .notifications-wrapper {
+    overflow:auto;
+    max-height:250px;
+    background-color: #fff;
+  }
+  
+ 
+  
+  .glyphicon-circle-arrow-right {
+    margin-left:10px;
+  }
+  
+  
+  .item-title {
+  
+    font-size:1.3rem;
+    color:#000;
+  
+  }
+  
+  .notifications a.content {
+    text-decoration:none;
+    background:#ccc;
+  
+  }
+  .notification-item {
+    padding:10px;
+    margin:5px;
+    background:#fff;  
+    border-bottom: 1px solid black;
+    cursor:pointer;
+    font-size: 16px;
+  }
+  
+  .notification-item.blur{
+    background: red;
+    color: #fff;
+  }
+  
+  .fb{
+    font-weight: 600;
+  }
+  .clr-b{
+    color: #000;
+  }
+  
+  

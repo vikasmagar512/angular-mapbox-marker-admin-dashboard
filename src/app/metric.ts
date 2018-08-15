@@ -1,6 +1,9 @@
+import { Parameter } from "./parameter";
+
+
 export interface Metric{
-      "category": string;
-      "unit": string;
+      // 'parameter':Parameter;
+      "id":string;
       "available": number;
       "required": number;
       "uptime":string;

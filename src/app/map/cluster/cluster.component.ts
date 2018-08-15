@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-// import { Supercluster} from 'Supercluster';
+import { Cluster,Supercluster} from 'Supercluster';
 import { LngLatLike} from 'mapbox-gl';
 
 import {Http} from '@angular/http';
 import {Map} from "mapbox-gl";
 // import {Cluster} from 'Supercluster';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
-import { Cluster, Supercluster } from 'supercluster';
 
 // import {Cluster} from 'cluster';
 // import earthquakes from './earthquakes.geo.json';

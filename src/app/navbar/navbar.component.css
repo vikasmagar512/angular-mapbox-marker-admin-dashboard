@@ -1,0 +1,215 @@
+
+.navbar{
+  margin-top: 0.5%;
+  border-radius: 0px;
+  margin-bottom: 13px;
+  background-color: black;
+  /* height: 65px; */
+}
+
+/* #modal> tabset{
+  border: none !important;
+} */
+/*
+.navbar img{
+  margin-top: -14px;
+  float: left;
+} */
+
+.log{
+  width: 71%;
+  margin-top: -3%;
+}
+.navbar-nav>li>a {
+  line-height: 0px;
+}
+.navbar-header a{
+  /* margin-top: 6px; */
+  padding-left: 30px;
+}
+.navbar.noTopBottomMargin{
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+.mar{
+    margin:-7px;
+}
+.flex-nav{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* margin: -20px; */
+}
+
+.rlogo{
+  max-width: none;
+  width: 35px;
+  /* height: 35px; */
+}
+.fs{
+  font-size: 35px;
+}
+.navbar li{
+  top: 1px;
+  /* padding: 12px 0px; */
+  cursor: pointer;
+}
+
+.marR-14{
+  margin-right: -14px;
+}
+
+/* CSS used here will be applied after bootstrap.css */
+
+
+.mar-3{
+  margin-top: 3px;
+  width: 35px;
+
+}
+/* CSS used here will be applied after bootstrap.css */
+
+.dropdown {
+  display:inline-block;
+  margin-left:20px;
+  padding:10px;
+}
+
+
+.glyphicon-bell {
+
+  font-size:1.5rem;
+}
+
+.notifications {
+  min-width:420px;
+  width: 350px;
+}
+
+.notifications-wrapper {
+  overflow:auto;
+  max-height:250px;
+}
+
+.menu-title {
+  color:#ff7788;
+  font-size:1.5rem;
+  display:inline-block;
+}
+
+.glyphicon-circle-arrow-right {
+  margin-left:10px;
+}
+.i-size{
+  font-size: 20px;
+}
+.dropdown-menu{
+  min-width: 379px;
+  height: 355px;
+  overflow-y: scroll;
+}
+.mr-10{
+  margin-right:-10px;
+}
+.wd-300{
+  /* width: 300px; */
+  justify-content: center;
+  float: none;
+  align-items: center;
+  /*  margin: 0; */
+  /* padding: 0; */
+  border: none;
+  padding-bottom: 20px;
+}
+.borderLeft{
+  border-left: 1px solid black;
+}
+/* .nav-item {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.nav-tabs>li{
+  background-color: red;
+}*/
+
+tabset.nav-tabs>ul {
+  margin-bottom: 10px;
+}
+
+.bclr-white{
+  background-color: #fff;
+  border: none;
+}
+
+.mr-b{margin-bottom: 20px;}
+
+.nav-justified{
+  border: none;
+  color: red;
+}
+
+.customClass{
+  border:none;
+}
+.customClass li:active{
+  border-bottom: 2px solid red;
+}
+/* .customClass>a:hover {
+  background-color:rgb(250, 246, 246) !important;
+  border: none !important;
+  outline: 0 !important;
+} */
+.customClass>a{
+  background-color:#efefef !important;
+  border: none !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
+  color: #000;
+}
+.customClass.bor-l>a{
+  border-right: 1px solid rgb(163, 158, 158) !important;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+  color:#000;
+  cursor: default;
+  /* background-color:green; */
+  border-bottom:2px solid rgb(38, 218, 218) !important;
+}
+
+.btn{
+  background-color: rgb(56, 55, 55);
+  padding: 3px 17px;
+  color:#fff;
+}
+
+.btn:hover{
+  background-color: aqua !important;
+  color:white !important;
+}
+/* .nav-tabs{
+  background-color:#f1f3f3;
+} */
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+  color:#000;
+  cursor: default;
+  /* background-color:green; */
+  border-bottom:2px solid rgb(38, 218, 218) !important;
+}
+
+.customClass.bor-l > a{
+  border-right: 1px solid rgb(163, 158, 158) !important;
+}
+
+.customClass > a{
+  background-color:#efefef !important;
+  border: none !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
+  color: #000;
+}
+/* tabset ::ng-deep .nav-tabs.nav-justified>li>a {
+  border-bottom: none;
+
+  background-color:grey !important;
+} */

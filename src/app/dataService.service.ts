@@ -5,6 +5,13 @@ import { Agreement } from './agreement';
 import {Customer} from './customer';
 import {Http, RequestOptions} from '@angular/http';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { normalRequest } from './Request';
+import { SettingOptions } from './SettingOptions';
+import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/index';
+import 'rxjs-compat/add/operator/catch';
+import 'rxjs-compat/add/operator/map';
 
 @Injectable({
   providedIn: 'root'
@@ -20,12 +27,38 @@ export class dataService {
   }
   customer:Customer={
     "id":"123",
-    "name":"vikas",
+    "name":"vikas Magar",
     "email":"vikasmagar512@gmail.com",
     "address":"vikasmagar512@gmail.com address address address address address ",
     "contact":"12312312313",
     "img":"../../../assets/machine.svg",
   }
+/*   serviceRequest={
+    "id":"123",
+    "assetId":"123",
+    "name":"vikas",
+    "email":"vikasmagar512@gmail.com",
+    "address":"vikasmagar512@gmail.com address address address address address ",
+    "contact":"12312312313",
+    "img":"../../../assets/machine.svg",
+  } */
+  serviceRequets:Array<normalRequest>=[
+    {
+      "requetId":"123",
+      "customerId":"1",
+      "parameter":{
+        "id": "1",
+        "name": "choco Powder",
+        "unit": "kg",
+      },
+      "description": 'description',
+      "status":'status',
+      "quantity":'quantity',
+      "RequestedOn":'RequestedOn',
+      "dueBy":'dueBy',
+      "assetCategory":'assetCategory',
+    }
+  ]
   Assets: Array<Asset>=[
     {
       /* "id": "01",
@@ -48,16 +81,24 @@ export class dataService {
       "img":"../../../assets/printer.svg",
       "metrics": [
         {
-          "category": "Coffee Powder",
-          "unit": "kg",
+          // "parameter":{
+            "id": "1",
+          //   "name": "Choco Powder",
+          //   "unit": "kg",
+          // },
           "available": 45,
           "required": 10,
           "uptime": "80%",
           "usage": "300"
         },
         {
-          "category": "Milk Powder",
-          "unit": "kg",
+          // "parameter":{
+            "id": "2",
+          //   "name": "Milk Powder",
+          //   "unit": "kg",
+          // },
+          // "category": "",
+          // "unit": "kg",
           "available": 45,
           "required": 10,
           "uptime": "80%",
@@ -65,7 +106,7 @@ export class dataService {
         },
       ]
     },
-    {
+   /*  {
       "id": "02",
       "category": "Printer",
       "name": "Canon SW2014",
@@ -77,6 +118,7 @@ export class dataService {
       "img":"../../../assets/printer.svg",
       "metrics": [
         {
+
           "category": "Cartridge",
           "unit": "#",
           "available": 15,
@@ -106,7 +148,7 @@ export class dataService {
           "usage": "20 Hrs 80m"
         }
       ]
-    }
+    } */
   ];
 
   Agreement: Array<Agreement> = [
@@ -137,6 +179,57 @@ export class dataService {
       "assets_covered": ["03"]
     }
   ];
+
+  notificationOptions: Array<SettingOptions> = [
+    {
+      name: "Service Request",
+      id: "1",
+      selected: false
+    },
+    {
+      name: "Change in Asset status",
+      id: "2",
+      selected: false
+    },
+    {
+      name: "Product Request",
+      id: "3",
+      selected: false
+    },
+    {
+      name: "Change in Contract status",
+      id: "4",
+      selected: false
+    }
+  ];
+
+  dashboardOptions: Array<SettingOptions> = [
+    {
+      name: "Overall Cost",
+      id: "1",
+      selected: false
+    },
+    {
+      name: "Downtime",
+      id: "2",
+      selected: false
+    },
+    {
+      name: "Usage",
+      id: "3",
+      selected: false
+    },
+    {
+      name: "Utilization",
+      id: "4",
+      selected: false
+    }
+  ];
+
+  dashSetting: Subject<Array<SettingOptions>> = new BehaviorSubject<Array<SettingOptions>>(this.dashboardOptions);
+  currentDashSetting = this.dashSetting.asObservable();
+  notifSetting: Subject<Array<SettingOptions>> = new BehaviorSubject<Array<SettingOptions>>(this.notificationOptions);
+  currentNotifSetting = this.notifSetting.asObservable();
 
   getAgreement():Agreement[]{
     return this.Agreement;
@@ -188,4 +281,13 @@ export class dataService {
   getAssetCategory() {
     return this.assetCategory;
   }
+
+  getNotificationOptions() {
+    return this.notificationOptions;
+  }
+
+  getDashboardOptions() {
+    return this.dashboardOptions;
+  }
+
 }

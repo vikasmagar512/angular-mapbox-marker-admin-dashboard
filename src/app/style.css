@@ -125,9 +125,9 @@ font-size: 18px;
   margin-bottom: 7px;
 }
 
-.mar-r{
+/* .mar-r{
   margin-right: -4px;
-}
+} */
 
 .bttn{
   padding: 8px 19px;
@@ -154,7 +154,7 @@ font-size: 18px;
 
 .bottom{
 
-  background-color: #ece5e5;  
+  /* background-color: #ece5e5;   */
   height: auto;
   padding: 5px 15px;
 }

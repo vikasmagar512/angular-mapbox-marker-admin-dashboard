@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Customer} from '../customer';
+import {dataService} from '../dataService.service';
 
 @Component({
   selector: 'app-bottom',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BottomComponent implements OnInit {
 
-  constructor() { }
+  customer:any;
+  constructor(private dataService:dataService)
+  { }
 
   ngOnInit() {
+    this.customer =this.dataService.getCustomer();
   }
 
 }

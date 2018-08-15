@@ -8,18 +8,22 @@
       </button>
       <!--</span>-->
       <span>
-          <input type="search" (keyup)="onKey(locationSearchBox.value)" #locationSearchBox name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location" class="bg-grey">
+          <!--<input type="search" (keyup)="onKey(locationSearchBox.value)" #locationSearchBox name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location" class="bg-grey">-->
+          <input type="search" (keyup)="onKey(locationSearchBox.value)" #locationSearchBox  name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location" class="bg-grey">
+          <button type="button" class="close" aria-label="Close" id="clearCust" onClick="display(false)">
+          <span aria-hidden="true">&times;</span>
+          </button>
         </span>
       <span></span>
     </div>
-    <div class="col-md-2 cust-name" id="cust-name">
-      <p>Customer ABC
-        <span class="caret"></span>
-      </p>
-    </div>
-    <div class="col-md-2 cust-name col-md-right" id="clearCust" onClick="display(false)">
+<!--     <div class="col-md-2 cust-name col-md-right" id="clearCust" onClick="display(false)">
       <p>Clear
         <span class="cross"></span>
+      </p>
+    </div> -->
+    <div class="col-md-2 cust-name pull-right" id="cust-name">
+      <p>Customer ABC
+        <span class="caret"></span>
       </p>
     </div>
   </div>

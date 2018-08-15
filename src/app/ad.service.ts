@@ -265,7 +265,6 @@ export class AdService {
     ];
   }
   selectFilter(filterSelect: filter,filterDisplayText:string) {
-    debugger
     console.log('this.filterService.filterTypes  ',this.filterTypes )
     this.filterTypes =
       this.filterTypes.map((filterGrp: filterGroup) => (
@@ -281,7 +280,6 @@ export class AdService {
           :
           filterGrp
       ))
-    debugger
     console.log('this.filterTypes ',this.filterTypes)
 
     this.filterChange.next(this.filterTypes);
