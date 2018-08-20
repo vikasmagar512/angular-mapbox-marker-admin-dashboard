@@ -12,6 +12,7 @@ import {TableWrapperComponent} from './financial-tables/tableWrapper/table-wrapp
 import {filter} from './filter-search/filter';
 import {filterGroup} from './filter-search/filterGroup';
 import {BehaviorSubject, Subject} from 'rxjs/index';
+import { DashboardChartsComponent } from './dashboard-module/dashboard-charts/dashboard-charts.component';
 
 @Injectable()
 export class AdService {
@@ -134,6 +135,7 @@ export class AdService {
 
       this.assetLocationFilter = {
       filterDisplayText:  "Location",
+      // display:false,
       filterArray:[
         {
           id:"1",
@@ -252,11 +254,13 @@ export class AdService {
 
       new AdItem(MapComponent,   {location: this.currentMessage,
                                         body: 'Apply today'}),
-      new AdItem(ClusterComponent,   {headline: 'Openings in all departments',
-                                        body: 'Apply today'}),
-      /*new AdItem(ArticleComponent,   {headline: 'Openings in all departments',
-        body: 'Apply today'}),*/
-      new AdItem(TableWrapperComponent,   {headline: 'Openings in all departments',
+     /*  new AdItem(ClusterComponent,   {headline: 'Openings in all departments',
+                                        body: 'Apply today'}), */
+      /* new AdItem(ArticleComponent,   {headline: 'Openings in all departments',
+        body: 'Apply today'}), */
+        new AdItem(DashboardChartsComponent,{headline: 'Openings in all departments',
+        body: 'Apply today'}),
+      new AdItem(TableWrapperComponent, {headline: 'Openings in all departments',
         body: 'Apply today'}),
       /*
       new AdItem(MyPostBannerComponent,   {headline: 'Openings in all departments',
@@ -283,5 +287,21 @@ export class AdService {
     console.log('this.filterTypes ',this.filterTypes)
 
     this.filterChange.next(this.filterTypes);
+  }
+
+  movies = [
+    { 'name': 'yaariyaan', 'realese yr': '2015','location':'dharni'},
+    { 'name': 'Gold', 'realese yr': '2018','location':'dharni'},
+    { 'name': 'Raazi', 'realese yr': '2018','location':'dharni' },
+    { 'name': 'Raaz 2', 'realese yr': '2017','location':'dharni'},
+    { 'name': 'Harry Potter', 'realese yr': '2014','location':'dharni'},
+    { 'name': 'Harry Meet Sejal', 'realese yr': '2016','location':'dharni'},
+    { 'name': 'Singham', 'realese yr': '2015','location':'dharni'},
+    { 'name': 'Singham 2', 'realese yr': '2018','location':'dharni'},
+    { 'name': 'Raaz', 'realese yr': '2015','location':'dharni'},
+  ];
+
+  getMovies() {
+    return this.movies;
   }
 }

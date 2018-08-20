@@ -1,23 +1,20 @@
-<!--
 <div class="mapDiv">
   <mgl-map
     style="mapbox://styles/mapbox/dark-v9"
     [zoom]="[3]"
     [center]="[-103.59179687498357, 40.66995747013945]"
   >
-
     <mgl-control
       mglGeocoder
       [searchInput]="'Paris'"
     ></mgl-control>
-    &lt;!&ndash;<mgl-popup
+    <mgl-popup
       [lngLat]="[-96, 37.8]"
       [closeOnClick]="false"
     >
       <h1>Hello world !</h1>
-    </mgl-popup>&ndash;&gt;
-
-   &lt;!&ndash; <mgl-marker
+    </mgl-popup>
+    <mgl-marker
       #myMarker
       [lngLat]="[-77.0353, 38.8895]"
     >
@@ -37,8 +34,8 @@
       [marker]="myMarker"
     >
       Construction on the Washington Monument began in 1848.
-    </mgl-popup>&ndash;&gt;
-    <ng-container *ngIf="earthquakes">
+    </mgl-popup>
+    <!-- <ng-container *ngIf="earthquakes">
       <mgl-geojson-source
         id="earthquakes"
         [data]="earthquakes"
@@ -99,14 +96,13 @@
         }"
       >
       </mgl-layer>
-    </ng-container>
+    </ng-container> -->
   </mgl-map>
 </div>
--->
 
+<!-- 
 <div class="mapDiv container">
   <div class="mainComponent" style="height: 400px;">
-    <!--<app-reusable-table></app-reusable-table>-->
     <div class="map-sec">
       <div class="row">
         <div class="col-md-5">
@@ -130,4 +126,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

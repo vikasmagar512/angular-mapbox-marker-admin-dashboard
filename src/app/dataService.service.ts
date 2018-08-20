@@ -27,14 +27,14 @@ export class dataService {
   }
   customer:Customer={
     "id":"123",
-    "name":"vikas Magar",
-    "email":"vikasmagar512@gmail.com",
-    "address":"vikasmagar512@gmail.com address address address address address ",
+    "name":"demo Customer",
+    "email":"demo@demo.com",
+    "address":"solna solna   ",
     "contact":"12312312313",
     "img":"../../../assets/machine.svg",
   }
 /*   serviceRequest={
-    "id":"123",
+    "id":"123", 
     "assetId":"123",
     "name":"vikas",
     "email":"vikasmagar512@gmail.com",
@@ -93,12 +93,13 @@ export class dataService {
         },
         {
           // "parameter":{
-            "id": "2",
+           
           //   "name": "Milk Powder",
           //   "unit": "kg",
           // },
           // "category": "",
           // "unit": "kg",
+          "id": "1",
           "available": 45,
           "required": 10,
           "uptime": "80%",
@@ -106,7 +107,7 @@ export class dataService {
         },
       ]
     },
-   /*  {
+    {
       "id": "02",
       "category": "Printer",
       "name": "Canon SW2014",
@@ -119,8 +120,9 @@ export class dataService {
       "metrics": [
         {
 
-          "category": "Cartridge",
-          "unit": "#",
+          // "category": "Cartridge",
+          // "unit": "#",
+          "id": "2",
           "available": 15,
           "required": 20,
           "uptime": "95%",
@@ -140,15 +142,16 @@ export class dataService {
       "img":"../../../assets/broom.svg",
       "metrics": [
         {
-          "category": "Motor",
-          "unit": "#",
+          // "category": "Motor",
+          // "unit": "#",
+          "id": "3",
           "available": 1,
           "required": 2,
           "uptime": "850%",
           "usage": "20 Hrs 80m"
         }
       ]
-    } */
+    }
   ];
 
   Agreement: Array<Agreement> = [
@@ -226,6 +229,7 @@ export class dataService {
     }
   ];
 
+  
   dashSetting: Subject<Array<SettingOptions>> = new BehaviorSubject<Array<SettingOptions>>(this.dashboardOptions);
   currentDashSetting = this.dashSetting.asObservable();
   notifSetting: Subject<Array<SettingOptions>> = new BehaviorSubject<Array<SettingOptions>>(this.notificationOptions);

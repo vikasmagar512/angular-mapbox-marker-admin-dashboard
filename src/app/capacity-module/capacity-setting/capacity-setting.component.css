@@ -1,0 +1,19 @@
+ input, select{
+    outline: none;
+    border: none;
+    background-color: #ececec;
+    width: 130px;
+    padding: 2px;
+}
+
+.capacity{
+    padding:10px;
+    margin: 6% 11%;
+    display: flex;
+    justify-content: center;
+    vertical-align: top;
+}
+
+table{
+    width: 50%;
+}

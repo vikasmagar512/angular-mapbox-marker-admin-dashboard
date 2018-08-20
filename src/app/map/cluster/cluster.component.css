@@ -5,11 +5,14 @@
 */
 
 mgl-map {
-  height: 100%;
+  /* height: 100%; */
   width: 100%;
+
+  height: 350px;
+  min-height: 350px;
+  max-height: 350px;
 }
 .mapDiv{
-
   width: 100%;
   height: 350px;
 }

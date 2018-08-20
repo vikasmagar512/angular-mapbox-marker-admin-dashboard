@@ -1,0 +1,78 @@
+
+.mapDiv{
+
+    width: 100%;
+    height: 350px;
+  }
+
+  #tooltip {
+  position: absolute;
+  background-color: rgba(255, 255, 255, .8);
+  border: solid 1px #ccc;
+  border-radius: 4px;
+  padding: 5px;
+  transition: all 0.5s;
+  z-index: 999
+}
+
+.f-w-600{
+  font-weight: 600;
+}
+  
+  .pie {
+    margin: 20px;
+  }
+  
+  .pie text {
+    font-family: "Verdana";
+    fill: #888;
+  }
+  
+  .pie .name-text{
+    font-size: 1em;
+  }
+  
+  .pie .value-text{
+    font-size: 3em;
+  }
+
+  .box-shadow{
+    box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .dashboard-table table{
+    border: 1px solid gray;
+    margin: 17px;
+    border-radius: 15px;
+    display: inline-block;
+  }
+
+  .dashboard-table thead{
+    border-bottom: 1px solid;
+  }
+
+  .dashboard-table th:not(:last-child){
+    border-right: 1px solid;
+  }
+
+  .dashboard-table td:not(:last-child){
+    border-right: 1px solid;
+  }
+
+  .long-tr{
+    border: 0px solid;
+    border-bottom: 1px solid;
+    border-top: 1px solid;
+    text-align: left;
+  }
+
+  .dashboard-table td{
+    height: 40px;
+  }
+
+  .long-tr td{
+    height: 20px;
+  }
+  
+
+  

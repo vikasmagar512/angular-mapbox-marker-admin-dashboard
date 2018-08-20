@@ -10,7 +10,7 @@ import { HeroProfileComponent } from './hero-profile.component';
   template: `
               <div class="ad-banneri">
                 <!--<h3>Advertisements</h3>-->
-                <ng-template ad-host></ng-template>
+                <ng-template ad-host></ng-template>    
               </div>
             `
 })
@@ -42,6 +42,12 @@ export class AdBannerComponent implements OnInit, OnDestroy {
     // this.currentAdIndex = (this.currentAdIndex + 1) % this.ads.length;
     let adItem = this.ads[this.currentAdIndex];
 
+
+
+
+
+
+    
     let componentFactory = this.componentFactoryResolver.resolveComponentFactory(adItem.component);
 
     let viewContainerRef = this.adHost.viewContainerRef;

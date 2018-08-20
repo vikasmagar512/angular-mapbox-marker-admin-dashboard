@@ -5,6 +5,7 @@
   display: flex;
   vertical-align: middle;
   justify-content: center;
+  padding: 1px;
 }
 .vertBox{
   flex-direction: column;
@@ -20,6 +21,7 @@
 .flex{
   display: flex;
   align-self: center;
+  justify-content: center;
 }
 .center{
   justify-content: center;
@@ -106,7 +108,7 @@
 
 .message{
   background-color: #000;
-  margin-top: 19px;
+  /* margin-top: 19px; */
   color: white;
   border-radius: 16px;
   padding: 6px 10px;
@@ -121,7 +123,11 @@
   padding: 5px;
   width: 28px;
 }
-
+.cust-senti{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .cust-senti img{
   float: left;
   position: absolute;
@@ -132,7 +138,7 @@
 
 .cust-senti p{
   margin-left: 128px;
-  margin-top: 6px;
+  /* margin-top: 6px; */
   padding-top: 20px;
   font-size: 15px;
   font-weight: 700;

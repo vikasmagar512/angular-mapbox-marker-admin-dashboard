@@ -1,6 +1,6 @@
-
 <div class="top-container">
-  <div class="row mar-top marginLRZero">
+  <div class="row mar-top marginLRZero relContainer">
+
     <div class="col-md-8 search">
       <!--<span>-->
       <button type="submit" onClick="display(true)" class="bg-grey">
@@ -8,15 +8,49 @@
       </button>
       <!--</span>-->
       <span>
-          <!--<input type="search" (keyup)="onKey(locationSearchBox.value)" #locationSearchBox name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location" class="bg-grey">-->
-          <input type="search" (keyup)="onKey(locationSearchBox.value)" #locationSearchBox  name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location" class="bg-grey">
-          <button type="button" class="close" aria-label="Close" id="clearCust" onClick="display(false)">
+        <!--<input type="search" (keyup)="onKey(locationSearchBox.value)" #locationSearchBox name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location" class="bg-grey">-->
+        <input type="search" (keyup)="onKey(locationSearchBox.value)" #locationSearchBox name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location"
+          class="bg-grey">
+        <button type="button" class="close" aria-label="Close" id="clearCust" onClick="display(false)">
           <span aria-hidden="true">&times;</span>
-          </button>
-        </span>
-      <span></span>
+        </button>
+      </span>
+      <!-- <ul class="filter-select">
+        <li *ngFor="let result of results" class="filter-select-list"><p class="artist-name">
+          {{result.name}}</p>
+      <span class="tags" *ngFor='let genre of result?.genres | slice:0:6'>{{genre}}</span>
+      </ul> -->
+      <div class="suggest-box">
+        <ul class="filter-select">
+          <div *ngIf="newMovies">
+            <!-- <span>Movies</span> -->
+            <li class="filter-select-list" *ngFor="let result of newMovies">
+              <p class="">{{result.name}}</p>
+            </li>
+          </div>
+          <div *ngIf="newAsset.length>0">
+            <span>Asset Name</span>
+            <li class="filter-select-list" *ngFor="let asset of newAsset">
+              <p class="">{{asset.category}}</p>
+            </li>
+          </div>
+          <!-- <li class="filter-select-list">
+            <p class="">Sweden</p>
+          </li>
+          <li class="filter-select-list">
+            <p class="">Singapor</p>
+          </li>
+          <li class="filter-select-list">
+            <p class="">England</p>
+          </li>
+          <li class="filter-select-list">
+            <p class="">Finland</p>
+          </li> -->
+        </ul>
+      </div>
+
     </div>
-<!--     <div class="col-md-2 cust-name col-md-right" id="clearCust" onClick="display(false)">
+    <!--     <div class="col-md-2 cust-name col-md-right" id="clearCust" onClick="display(false)">
       <p>Clear
         <span class="cross"></span>
       </p>
@@ -27,4 +61,8 @@
       </p>
     </div>
   </div>
+  <!-- <div class="row">
+    <div class="col-md-12">Search</div>
+  </div> -->
+
 </div>
