@@ -1,4 +1,4 @@
-import { Injectable }           from '@angular/core';
+import { Injectable, Inject }           from '@angular/core';
 
 import { HeroJobAdComponent }   from './hero-job-ad.component';
 import { HeroProfileComponent } from './hero-profile.component';
@@ -14,7 +14,10 @@ import {filterGroup} from './filter-search/filterGroup';
 import {BehaviorSubject, Subject} from 'rxjs/index';
 import { DashboardChartsComponent } from './dashboard-module/dashboard-charts/dashboard-charts.component';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
+// Inject({providedIn: 'root'});
 export class AdService {
   filterTypes:Array<filterGroup>;
   info:Object;
@@ -261,7 +264,7 @@ export class AdService {
         new AdItem(DashboardChartsComponent,{headline: 'Openings in all departments',
         body: 'Apply today'}),
       new AdItem(TableWrapperComponent, {headline: 'Openings in all departments',
-        body: 'Apply today'}),
+        body: 'Apply today',filterTypes:this.filterTypes}),
       /*
       new AdItem(MyPostBannerComponent,   {headline: 'Openings in all departments',
         body: 'Apply today'}),
@@ -285,7 +288,7 @@ export class AdService {
           filterGrp
       ))
     console.log('this.filterTypes ',this.filterTypes)
-
+    
     this.filterChange.next(this.filterTypes);
   }
 

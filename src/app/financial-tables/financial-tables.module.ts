@@ -5,6 +5,7 @@ import { TableCompComponent } from './table-comp/table-comp.component';
 
 import { DataTablesModule } from 'angular-datatables';
 import {TableModuleModule} from '../table-module/table-module.module';
+import { AdService } from '../ad.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -13,6 +14,7 @@ import {TableModuleModule} from '../table-module/table-module.module';
   ],
   declarations: [TableWrapperComponent, TableCompComponent],
   exports:[TableWrapperComponent],
-  entryComponents:[TableWrapperComponent]
+  // providers:[AdService],
+  entryComponents:[TableWrapperComponent],
 })
 export class FinancialTablesModule { }

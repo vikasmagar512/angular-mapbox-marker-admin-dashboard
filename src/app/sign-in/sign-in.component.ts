@@ -81,7 +81,6 @@ export class SignInComponent implements OnInit {
             response.token,
             response.name
           );
-          debugger
           if(!this.returnUrl){
             this.router.navigate(['main']);
           }else{
