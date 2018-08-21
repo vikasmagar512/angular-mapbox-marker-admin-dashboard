@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import * as d3 from "d3";
+import { filterGroup } from '../../filter-search/filterGroup';
+import { Subscription } from 'rxjs';
+import { dataService } from '../../dataService.service';
+import { AdService } from '../../ad.service';
 // declare let d3: any;
 
 @Component({
@@ -131,8 +135,20 @@ export class DashboardChartsComponent implements OnInit {
     }],
 
   }
+  filterTypes:Array<filterGroup>;
+  subscription1: Subscription;
+  
 
-  constructor() { }
+  // constructor(private _options: dataService, private filterService : AdService) {
+  //   this.filterTypes = this.filterService.getFilters();
+  //   // this.filterTypes = filterService.filterTypes;
+  //   this.subscription1 = filterService.filterChange$.subscribe((value:Array<filterGroup>) => {
+  //     this.filterTypes = value;
+  //   });
+  //   // this.getUserList();
+    
+  // }
+
 
   ngOnInit() {
 
@@ -199,11 +215,9 @@ export class DashboardChartsComponent implements OnInit {
     this.stackedBarChart(this.barChartData);
     setTimeout(() => {
       this.tableData.Assets.map((item, i) => {
-        debugger
         this.lineChart(item.data, 'Assets', i);
       });
       this.tableData.Services.map((item, i) => {
-        debugger
         this.lineChart(item.data, 'Services', i);
       })
     }, 1000)
@@ -576,7 +590,7 @@ export class DashboardChartsComponent implements OnInit {
 
     let y = d3.scaleLinear().rangeRound([height, 0]);
 
-    let color = d3.scaleOrdinal(d3.schemeCategory20);
+    let color = d3.scaleOrdinal(d3.schemeCategory10);
 
     let xScale = d3.scaleLinear().range([margin.left, width - margin.right]);
 
@@ -686,7 +700,6 @@ export class DashboardChartsComponent implements OnInit {
         d3.select('#tooltip')
           .data(data)
           .text(function (d) {
-            debugger
             // console.log(this.barChartData2)
             return `${'Working'} (${d['Working']})
           ${'Not Working'} (${d['Not Working']})
@@ -704,7 +717,6 @@ export class DashboardChartsComponent implements OnInit {
 
   }
   lineChart(data, type, Num) {
-    debugger;
 
     let h = 40;
     let w = 100;

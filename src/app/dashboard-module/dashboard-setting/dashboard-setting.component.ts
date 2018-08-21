@@ -1,6 +1,9 @@
 import { Component,ElementRef, OnInit, ViewChild} from '@angular/core';
 import { SettingOptions } from '../../SettingOptions';
 import { dataService } from '../../dataService.service';
+import { AdService } from '../../ad.service';
+import { filterGroup } from '../../filter-search/filterGroup';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard-setting',
@@ -18,9 +21,25 @@ export class DashboardSettingComponent implements OnInit {
   notSelectedUserList : any = [];
   selectedCountry:any;
   optionsSettings:Array<SettingOptions>;
-  constructor(private _options:dataService) {
+
+  filterTypes:Array<filterGroup>;
+  subscription1: Subscription;
+  
+
+  constructor(private _options: dataService, private filterService : AdService) {
+    this.filterTypes = this.filterService.getFilters();
+    // this.filterTypes = filterService.filterTypes;
+    this.subscription1 = filterService.filterChange$.subscribe((value:Array<filterGroup>) => {
+      this.filterTypes = value;
+    });
     this.getUserList();
+    
   }
+
+
+  // constructor(private _options:dataService, private filterService : AdService) {
+  //   this.getUserList();
+  // }
   getUserList(){
     this._options.currentDashSetting.subscribe(message => {
       console.log('message ',message)

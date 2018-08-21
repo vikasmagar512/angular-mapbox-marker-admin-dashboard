@@ -24,7 +24,7 @@ export class FilterComponent implements OnInit{
   
   selectFilter(filterSelect: filter) {
     console.log('this.filterService.filterTypes  ',this.filterService.filterTypes )
-    this.filterService.change()
+    // this.filterService.change()
     this.filterService.selectFilter(filterSelect,this.filterData.filterDisplayText)
   }
 }

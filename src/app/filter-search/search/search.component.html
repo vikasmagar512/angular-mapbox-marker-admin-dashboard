@@ -20,7 +20,7 @@
           {{result.name}}</p>
       <span class="tags" *ngFor='let genre of result?.genres | slice:0:6'>{{genre}}</span>
       </ul> -->
-      <div class="suggest-box">
+      <div class="suggest-box" style="display: none;">
         <ul class="filter-select">
           <div *ngIf="newMovies">
             <!-- <span>Movies</span> -->

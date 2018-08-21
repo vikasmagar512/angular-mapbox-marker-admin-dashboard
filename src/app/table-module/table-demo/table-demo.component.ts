@@ -168,6 +168,14 @@ export class TableDemoComponent implements OnInit {
     if (data.column == "agreement_no") {
       // this.router.navigate(['/main/agreementNo/',data.row['id'] ]);
     }
+    if (data.column == "assetStatus") {
+      alert('assetStatus')
+      // this.router.navigate(['/main/agreementNo/',data.row['id'] ]);
+    }
+    if (data.column == "agreementStatus") {
+      alert('agreementStatus')
+      // this.router.navigate(['/main/agreementNo/',data.row['id'] ]);
+    }
 
     // If Button View
     // if (data.column == "action") {

@@ -4,6 +4,8 @@ import { AdDirective } from './ad.directive';
 import { AdItem } from './ad-item';
 import { AdComponent } from './ad.component';
 import { HeroProfileComponent } from './hero-profile.component';
+import { filter } from './filter-search/filter';
+import { filterGroup } from './filter-search/filterGroup';
 
 @Component({
   selector: 'app-ad-banner',
@@ -16,6 +18,7 @@ import { HeroProfileComponent } from './hero-profile.component';
 })
 export class AdBannerComponent implements OnInit, OnDestroy {
   @Input() ads: AdItem[];
+  @Input() filterTypes: Array<filterGroup>
   @Input() activeComponent;
   currentAdIndex;
 
@@ -41,13 +44,6 @@ export class AdBannerComponent implements OnInit, OnDestroy {
   loadComponent() {
     // this.currentAdIndex = (this.currentAdIndex + 1) % this.ads.length;
     let adItem = this.ads[this.currentAdIndex];
-
-
-
-
-
-
-    
     let componentFactory = this.componentFactoryResolver.resolveComponentFactory(adItem.component);
 
     let viewContainerRef = this.adHost.viewContainerRef;

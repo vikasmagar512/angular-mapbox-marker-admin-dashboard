@@ -102,7 +102,7 @@ const appRoutes: Routes = [
     )
   ],
   providers: [
-    AdService,
+    // AdService,
     CustomHttpService,
     ApiService,
     AuthService,
