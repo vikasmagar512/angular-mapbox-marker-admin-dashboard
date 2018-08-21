@@ -81,3 +81,10 @@ searchSuggest{
   list-style-type: none;
   /* border-bottom: 1px solid black; */
 }
+
+
+.dropdown {
+  display:inline-block;
+  margin-left:20px;
+  padding:10px;
+}

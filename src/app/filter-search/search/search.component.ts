@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,TemplateRef,ViewChild,ElementRef, Renderer} from '@angular/core';
 import {dataService} from '../../dataService.service';
 import {AdService} from '../../ad.service';
 import { FormControl } from '@angular/forms';
 import { Asset } from '../../asset';
+
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 @Component({
   selector: 'app-search',
@@ -10,6 +13,8 @@ import { Asset } from '../../asset';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
+
+  @ViewChild('locationSearchBox') inp:ElementRef;
   queryField: FormControl = new FormControl();
   locationSearchBox = '';
   Asset:Array<Asset>;
@@ -17,16 +22,35 @@ export class SearchComponent implements OnInit {
   movies:Array<any>=[];
   searchValue:string;
   newMovies:Array<any>=[];
+  showFilters:boolean = false  
   filters=['customerName','location','assetType','assetName']
-  constructor(private filterService :AdService,
-
-  private data:dataService) {
+  
+  public modalRef: BsModalRef;
+  constructor(private filterService :AdService,   
+     private modalService: BsModalService,
+  private data:dataService,
+  private renderer: Renderer) {
     // this.locationSearch = filterService.locationSearch; 
   }
   ngOnInit() {
     this.movies=this.filterService.getMovies();
     this.Asset=this.data.getAssets();
   }
+
+  setFocus(template:TemplateRef<any>) {
+    // alert("onFocus")
+    debugger
+    this.showFilters = true 
+    // this.renderer.invokeElementMethod(template, 'focus');
+  }
+  removeFilters() {
+    // alert("onFocus")
+    debugger
+    
+    this.showFilters = false
+    // this.renderer.invokeElementMethod(template, 'focus');
+  }
+
   onKey(value: string) {
     this.locationSearchBox = value.toLowerCase();
     this.filterService.changeLocation(this.locationSearchBox) 

@@ -5,6 +5,7 @@ import {ApiService} from '../api.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {Observable} from 'rxjs/index';
+import { moment } from 'ngx-bootstrap/chronos/test/chain';
 
 @Component({
   selector: 'app-sign-in',
@@ -17,6 +18,7 @@ export class SignInComponent implements OnInit {
   public isBusy = false;
   public hasFailed = false;
   public showInputErrors = false;
+  public  myMoment;
   public now: Date = new Date();
 
   public returnUrl: string;
@@ -42,6 +44,7 @@ export class SignInComponent implements OnInit {
   }
   ngOnInit() {
     this.defaultSignInMethod = 0;
+    this.myMoment= moment().format("Do MMM YYYY");
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }

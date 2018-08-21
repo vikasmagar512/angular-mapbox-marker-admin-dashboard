@@ -59,10 +59,11 @@
         <h6 class="foot">Powered by SIEMENS SFS</h6>
       </div>
       <div class="dataInp">
-        <p>{{now | date:'longDate'}}</p>
+        <!-- <p>{{now | date:'longDate'}}</p> -->
+        <p>{{myMoment}}</p>
         <h1>Hello!</h1>
         <h3>Welcome to
-          <br>SIECONNECT</h3>
+          <br>SFS_Connect</h3>
         <div class="input">
           <button [ngClass]="defaultSignInMethod == 0 ? 'tablink img-rounded active' : 'tablink img-rounded'" (click)="openCity(0)">Mobile Bank ID</button>
           <span> OR</span>
