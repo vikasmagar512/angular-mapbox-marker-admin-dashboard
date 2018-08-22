@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Asset } from './asset';
-import { Metric} from "./metric";
+import { Metric } from "./metric";
 import { Agreement } from './agreement';
-import {Customer} from './customer';
-import {Http, RequestOptions} from '@angular/http';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Customer } from './customer';
+import { Http, RequestOptions } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { normalRequest } from './Request';
 import { SettingOptions } from './SettingOptions';
 import { BehaviorSubject } from 'rxjs';
@@ -18,48 +18,74 @@ import 'rxjs-compat/add/operator/map';
 })
 export class dataService {
 
-  constructor(private http:HttpClient) { }
+
+  constructor(private http: HttpClient) { 
+    this.dataNumber=0  
+  }
+  dataNumber: number;
+  detailType: string;
+  detailTypes: Array<any> = ["Service Request", "Product Request", "Assets Details", "Agreement Details"];
+
   locationSearch = ''
-  assetCategory={
-    "Coffee_Machine":"Coffee Machine",
-    "Printer":"Printer",
-    "Vaccum":"Vaccum"
+  assetCategory = {
+    "Coffee_Machine": "Coffee Machine",
+    "Printer": "Printer",
+    "Vaccum": "Vaccum"
   }
-  customer:Customer={
-    "id":"123",
-    "name":"vikas Magar",
-    "email":"vikasmagar512@gmail.com",
-    "address":"vikasmagar512@gmail.com address address address address address ",
-    "contact":"12312312313",
-    "img":"../../../assets/machine.svg",
+  customer: Customer = {
+    "id": "123",
+    "name": "demo Customer",
+    "email": "demo@demo.com",
+    "address": "solna solna   ",
+    "contact": "12312312313",
+    "img": "../../../assets/machine.svg",
   }
-/*   serviceRequest={
-    "id":"123",
-    "assetId":"123",
-    "name":"vikas",
-    "email":"vikasmagar512@gmail.com",
-    "address":"vikasmagar512@gmail.com address address address address address ",
-    "contact":"12312312313",
-    "img":"../../../assets/machine.svg",
-  } */
-  serviceRequets:Array<normalRequest>=[
+  /*   serviceRequest={
+      "id":"123", 
+      "assetId":"123",
+      "name":"vikas",
+      "email":"vikasmagar512@gmail.com",
+      "address":"vikasmagar512@gmail.com address address address address address ",
+      "contact":"12312312313",
+      "img":"../../../assets/machine.svg",
+    } */
+  serviceRequets: Array<normalRequest> = [
     {
-      "requetId":"123",
-      "customerId":"1",
-      "parameter":{
+      "requetId": "123",
+      "customerId": "1",
+      "parameter": {
         "id": "1",
         "name": "choco Powder",
         "unit": "kg",
       },
       "description": 'description',
-      "status":'status',
-      "quantity":'quantity',
-      "RequestedOn":'RequestedOn',
-      "dueBy":'dueBy',
-      "assetCategory":'assetCategory',
+      "status": 'status',
+      "quantity": 'quantity',
+      "RequestedOn": 'RequestedOn',
+      "dueBy": 'dueBy',
+      "assetCategory": 'assetCategory',
     }
   ]
-  Assets: Array<Asset>=[
+  customers:Array<Customer>=[
+    {
+      "id": "123",
+      "name": "demo2 Customer",
+      "email": "demo@demo2.com",
+      "address": "solna solna2   ",
+      "contact": "12312312313",
+      "img": "../../../assets/machine.svg",
+    },
+    {
+      "id": "234",
+      "name": "demo Customer",
+      "email": "demo@demo.com",
+      "address": "solna solna   ",
+      "contact": "64612312312313",
+      "img": "../../../assets/machine.svg",
+    }
+  ]
+
+  Assets: Array<Asset> = [
     {
       /* "id": "01",
       "category": "Coffee_Machine",
@@ -73,16 +99,16 @@ export class dataService {
       "id": "02",
       "category": "Printer",
       "name": "Canon SW2014",
-      "status":10,
+      "status": 1,
       "location": "Bromma",
-      "agreement_no":"AGR10923347",
+      "agreement_no": "AGR10923347",
       "serialno": "SR12190",
-      "customer":"XYZ",
-      "img":"../../../assets/printer.svg",
+      "customer": "XYZ",
+      "img": "../../../assets/printer.svg",
       "metrics": [
         {
           // "parameter":{
-            "id": "1",
+          "id": "1",
           //   "name": "Choco Powder",
           //   "unit": "kg",
           // },
@@ -93,12 +119,13 @@ export class dataService {
         },
         {
           // "parameter":{
-            "id": "2",
+
           //   "name": "Milk Powder",
           //   "unit": "kg",
           // },
           // "category": "",
           // "unit": "kg",
+          "id": "1",
           "available": 45,
           "required": 10,
           "uptime": "80%",
@@ -106,21 +133,22 @@ export class dataService {
         },
       ]
     },
-   /*  {
+    {
       "id": "02",
       "category": "Printer",
       "name": "Canon SW2014",
-      "status":10,
+      "status": 0,
       "location": "Bromma",
-      "agreement_no":"AGR10923347",
+      "agreement_no": "AGR10923347",
       "serialno": "SR12190",
-      "customer":"XYZ",
-      "img":"../../../assets/printer.svg",
+      "customer": "XYZ",
+      "img": "../../../assets/printer.svg",
       "metrics": [
         {
 
-          "category": "Cartridge",
-          "unit": "#",
+          // "category": "Cartridge",
+          // "unit": "#",
+          "id": "2",
           "available": 15,
           "required": 20,
           "uptime": "95%",
@@ -132,51 +160,56 @@ export class dataService {
       "id": "03",
       "category": "Vaccum",
       "name": "Vaccum",
-      "status":12,
-      "agreement_no":"AGR10923347",
+      "status": 2,
+      "agreement_no": "AGR10923347",
       "location": "Bromma",
       "serialno": "VC12190",
-      "customer":"PQR",
-      "img":"../../../assets/broom.svg",
+      "customer": "PQR",
+      "img": "../../../assets/broom.svg",
       "metrics": [
         {
-          "category": "Motor",
-          "unit": "#",
+          // "category": "Motor",
+          // "unit": "#",
+          "id": "3",
           "available": 1,
           "required": 2,
           "uptime": "850%",
           "usage": "20 Hrs 80m"
         }
       ]
-    } */
+    }
   ];
 
   Agreement: Array<Agreement> = [
     {
-      "id":"AGR01",
+      "id": "AGR01",
       "agreement_no": "AGR984567854",
       "type": "Annual",
       "contact": "James Bond",
-      "start_date": "12th Dec 2014",
-      "end_date": "14th June 2020",
+      "start_date": "14th Dec 2014",
+      "end_date": "16th June 2020",
       "termination_date": "14th June 2018",
       "payment_freq": "Monthly",
       "Remaining_term": "18 months",
       "term": "80 months",
-      "assets_covered": ["01", "02"]
+      "assets_covered": ["01", "02"],
+      "prolongationDueDate": "18th June 2018",
+      "status": 0,
     },
-   {
-      "id":"AGR02",
+    {
+      "id": "AGR02",
       "agreement_no": "AGR984567888",
       "type": "Month",
       "contact": "Tom Lee",
-      "start_date": "12th Dec 2014",
+      "start_date": "15th Dec 2014",
       "end_date": "13th April 2022",
       "termination_date": "14th April 2018",
       "payment_freq": "Weekly",
       "Remaining_term": "17 months",
       "term": "70 months",
-      "assets_covered": ["03"]
+      "assets_covered": ["03"],
+      "prolongationDueDate": "19th June 2018",
+      "status": 0,
     }
   ];
 
@@ -226,56 +259,19 @@ export class dataService {
     }
   ];
 
+
   dashSetting: Subject<Array<SettingOptions>> = new BehaviorSubject<Array<SettingOptions>>(this.dashboardOptions);
   currentDashSetting = this.dashSetting.asObservable();
   notifSetting: Subject<Array<SettingOptions>> = new BehaviorSubject<Array<SettingOptions>>(this.notificationOptions);
   currentNotifSetting = this.notifSetting.asObservable();
 
-  getAgreement():Agreement[]{
+  getAgreement(): Agreement[] {
     return this.Agreement;
   }
-  getAssets():Asset[] {
+  getAssets(): Asset[] {
     return this.Assets;
   }
-/*  bankId(){
-    const myheader = new HttpHeaders().set('Content-Type', 'application/json')
-    // let headers = new Headers();
-    // headers.append('Content-Type', 'application/json');
-    const obj = { "personalNumber":"198112289874","endUserIp": "114.143.194.231"}
-
-    // let headers = new Headers({ 'Content-Type': 'application/json' });
-    // let options = new RequestOptions({ headers: headers });
-    // let headers = new Headers();
-    // headers.append("Content-Type", 'application/json');
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-      })
-    };
-    // this.http.post('http://cors.io/?https://appapi2.test.bankid.com/rp/v5/auth',JSON.stringify(obj),headers)
-    this.http.post('https://appapi2.test.bankid.com/rp/v5/auth',JSON.stringify(obj),httpOptions)
-      .subscribe(
-        data => {
-          console.log(data)
-          alert('ok');
-        },
-        error => {
-          console.log(error)
-          console.log(JSON.stringify(error.json()));
-        }
-      )
-        // .map(this.extractData)
-        // .catch(this.handleErrorObservable);
-  }*/
-  // extractData(res: Response) {
-  //   let body = res.json();
-  //   return body || {};
-  // }
-  // handleErrorObservable (error: Response | any) {
-  //   console.error(error.message || error);
-  //   return Observable.throw(error.message || error);
-  // }
-  getCustomer():Customer {
+  getCustomer(): Customer {
     return this.customer;
   }
   getAssetCategory() {

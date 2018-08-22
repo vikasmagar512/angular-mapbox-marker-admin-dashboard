@@ -1,5 +1,5 @@
 .filter{
-  margin-top: -18px;
+  /* margin-top: -18px; */
   border: 1px solid grey;
   border-radius: 24px;
   position: relative;
@@ -10,10 +10,11 @@
 
 
 .filter-tag{
-  position: relative;
+  /* position: relative; */
   width: 10%;
-  right: 22px;
-  display: flex;
+  height: 130;
+  /* right: 22px; */
+  /* display: flex; */
   margin-left: 20px;
   border-left: 1px solid grey;
 }
@@ -22,7 +23,7 @@
 .fil{
   top:20px;
   margin-top:50px;
-  margin-left: 5px;
+  margin-left: 30px;
   transform: rotate(-90deg);
 }
 
@@ -60,4 +61,9 @@
 .f-data .filterCriterias{
   margin-top: -5px;
   margin-left: 0px;
+}
+.filter-div{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }

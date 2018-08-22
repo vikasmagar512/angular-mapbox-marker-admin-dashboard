@@ -57,3 +57,34 @@
   margin-left: 0px !important;
   margin-right: 0px !important;
 }
+
+.relContainer{
+  position: relative;
+}
+
+searchSuggest{
+  position: absolute;
+  left: 15px;
+  background-color: red;
+
+}
+
+.suggest-box{
+    position: absolute;
+    z-index: 1000;
+    background: aliceblue;
+    left: 75px;
+    margin-top: 5px;
+}
+
+.filter-select-list{
+  list-style-type: none;
+  /* border-bottom: 1px solid black; */
+}
+
+
+.dropdown {
+  display:inline-block;
+  margin-left:20px;
+  padding:10px;
+}

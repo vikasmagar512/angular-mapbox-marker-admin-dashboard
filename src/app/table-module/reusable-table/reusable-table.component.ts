@@ -61,6 +61,7 @@ export class ReusableTableComponent implements OnInit {
   }
 
   public ngOnInit():void {
+    debugger;
     this.onChangeTable(this.config);
   }
 

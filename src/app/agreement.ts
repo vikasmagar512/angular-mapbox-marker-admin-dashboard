@@ -10,4 +10,6 @@ export interface Agreement {
 	"Remaining_term": string;
 	"term": string;
 	"assets_covered": Array<string>;
+	"prolongationDueDate": string;
+      "status":Number;
 }

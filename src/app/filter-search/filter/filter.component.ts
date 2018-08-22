@@ -13,7 +13,7 @@ export class FilterComponent implements OnInit{
   info: Object;
   constructor(private filterService: AdService) {
     this.info = filterService.info;
-    console.log('here info is ',this.info)
+    // console.log('here info is ',this.info)
   }
   ngOnInit() {
   }
@@ -24,7 +24,7 @@ export class FilterComponent implements OnInit{
   
   selectFilter(filterSelect: filter) {
     console.log('this.filterService.filterTypes  ',this.filterService.filterTypes )
-    this.filterService.change()
+    // this.filterService.change()
     this.filterService.selectFilter(filterSelect,this.filterData.filterDisplayText)
   }
 }

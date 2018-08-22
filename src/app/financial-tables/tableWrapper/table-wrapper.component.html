@@ -1,37 +1,185 @@
 <div class="financialInfo">
-<div class="row top-header marginLRZero ">
-  <div class="col-md-4">
-    <div class="xlsExport">
-      <!--<img src="../../../assets/24.png">-->
-<!--
+  <div class="row top-header marginLRZero ">
+    <div class="col-md-4">
+      <span class="detail-type">{{dataService.detailType}}</span>
+      <div class="xlsExport">
+        <!--<img src="../../../assets/24.png">-->
+        <!--
       <button type="button" class="btn btn-primary" (click)="exporttoCSV()">Export to Excel</button>
 -->
+      </div>
+    </div>
+    <div class="col-md-8 pull-right">
+      <div class="sie-btn pull-right">
+        <button class="sieBtn 1num first" (click)="loadTable(0)" [class.active]="dataService.dataNumber == 0">
+          <img src="../../../assets/26.svg">
+        </button>
+        <button class="sieBtn 2num" (click)="loadTable(1)" [class.active]="dataService.dataNumber == 1">
+          <img src="../../../assets/27.svg">
+        </button>
+        <button class="sieBtn 3num" (click)="loadTable(2)" [class.active]="dataService.dataNumber == 2">
+          <img src="../../../assets/28.svg">
+        </button>
+        <button class="sieBtn 4num" (click)="loadTable(3)" [class.active]="dataService.dataNumber == 3">
+          <img src="../../../assets/29.svg">
+        </button>
+      </div>
     </div>
   </div>
-  <div class="col-md-8 pull-right">
-    <div class="sie-btn pull-right">
-      <button class="sieBtn 1num first" (click)="loadTable(1)">
-        <img src="../../../assets/26.svg">
-      </button>
-      <button class="sieBtn 2num" (click)="loadTable(2)">
-        <img src="../../../assets/27.svg">
-      </button>
-      <button class="sieBtn 3num" (click)="loadTable(3)">
-        <img src="../../../assets/28.svg">
-      </button>
-      <button class="sieBtn 4num" (click)="loadTable(4)">
-        <img src="../../../assets/29.svg">
-      </button>
-    </div>
+  <div *ngIf="dataService.dataNumber===0">
+    <app-table-demo #assetTable (change)="openAssetModal($event)" [data]="assetData" [config]="assetConfig" [columns]="assetColumns" [(dataNumber)]="dataService.dataNumber"></app-table-demo>
   </div>
-</div>
-  <!--<app-reusable-table></app-reusable-table>-->
-  <!--<app-table-demo [data]="assetData" [config]="assetConfig" [columns]="assetColumns" [(dataNumber)]="dataNumber"></app-table-demo>-->
-  <app-table-demo [data]="serviceRequestData" [config]="serviceRequestConfig" [columns]="serviceRequestColumns"></app-table-demo>
+  <div *ngIf="dataService.dataNumber===1">
+    <app-table-demo #productRequestTable (change)="openServiceModal($event)" [data]="serviceRequestData" #serviceRequestTable [config]="serviceRequestConfig"
+      [columns]="serviceRequestColumns"></app-table-demo>
+
+  </div>
+  <div *ngIf="dataService.dataNumber===2">
+    <app-table-demo #serviceRequestTable (change)="openProductModal($event)" [data]="productRequestData" #productRequestTable [config]="productRequestConfig"
+      [columns]="productRequestColumns"></app-table-demo>
+  </div>
+
+  <div *ngIf="dataService.dataNumber===3">
+    <app-table-demo (change)="openAgreementModal($event)" [data]="agreementData" #agreementTable [config]="agreementConfig" [columns]="agreementColumns"
+      [(dataNumber)]="dataService.dataNumber"></app-table-demo>
+  </div>
 
   <!--
   <app-table-demo data="productCOlumnConfig" config></app-table-demo>
   <app-table-demo data="serviceCOlumnConfig" config></app-table-demo>
  -->
-<!--<app-table-comp [dataNumber]="dataNumber"></app-table-comp>-->
+  <!--<app-table-comp [dataNumber]="dataNumber"></app-table-comp>-->
 </div>
+
+<ng-template #AssetTemplate>
+  <div class="modal-header">
+    <span>Asset Id: {{assetCurrentObj.id}}</span>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">
+        <img src="../assets/cross.svg" class="log">
+      </span>
+    </button>
+  </div>
+  <div class="modal-body" style="background-color: #f6f3f3;">
+    <div class="row">
+      <div class="col-md-12">
+        <p>Asset Name: {{assetCurrentObj.name}}</p>
+        <p>Asset Type: {{assetCurrentObj.type}}</p>
+        <p>Customer: {{assetCurrentObj.customer}}</p>
+        <p>Agreement: {{assetCurrentObj.agreement}}</p>
+        <p>Location: {{assetCurrentObj.location}}</p>
+        <!-- <p>Status: <span >{{assetCurrentObj.assetStatus}}</span></p> -->
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn" (click)="modalRef.hide()">Close</button>
+  </div>
+</ng-template>
+
+
+<ng-template #AgreementTemplate>
+  <div class="modal-header">
+    <span>Agreement Id:{{agreementCurrentObj.id}}</span>
+    <!-- <span>Agreement Id:{{agreementCurrentObj.type}}</span> -->
+
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">
+        <img src="../assets/cross.svg" class="log">
+      </span>
+    </button>
+  </div>
+  <div class="modal-body" style="background-color: #f6f3f3;">
+    <div class="row">
+      <div class="col-md-12">
+        <p>Name: {{agreementCurrentObj.name}}</p>
+        <p>Type: {{agreementCurrentObj.type}}</p>
+        <p>Start Date: {{agreementCurrentObj.start_date}}</p>
+        <p>End Date: {{agreementCurrentObj.end_date}}</p>
+        <p>Prolongation Due Date: {{agreementCurrentObj.prolongationDueDate}}</p>
+        <!-- <p>Status: <span >{{agreementCurrentObj.assetStatus}}</span></p>  -->
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn" (click)="modalRef.hide()">Close</button>
+  </div>
+</ng-template>
+
+
+<ng-template #ServiceTemplate>
+  <div class="modal-header">
+    <span>Agreement Id:{{serviceCurrentObj.id}}</span>
+    <!-- <span>Agreement Id:{{agreementCurrentObj.type}}</span> -->
+
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">
+        <img src="../assets/cross.svg" class="log">
+      </span>
+    </button>
+  </div>
+  <div class="modal-body" style="background-color: #f6f3f3;">
+    <div class="row">
+      <div class="col-md-12">
+        <p>Name: {{serviceCurrentObj.name}}</p>
+        <p>Type: {{serviceCurrentObj.type}}</p>
+        <p>Agreement: {{serviceCurrentObj.agreement}}</p>
+        <!-- <p>End Date: {{serviceCurrentObj.end_date}}</p> -->
+        <p>Location: {{serviceCurrentObj.location}}</p>
+        <!-- <p>Status: <span >{{agreementCurrentObj.assetStatus}}</span></p>  -->
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn" (click)="modalRef.hide()">Close</button>
+  </div>
+</ng-template>
+
+<ng-template #ProductTemplate>
+  <div class="modal-header">
+    <span>Agreement Id:{{productCurrentObj.id}}</span>
+
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">
+        <img src="../assets/cross.svg" class="log">
+      </span>
+    </button>
+  </div>
+  <div class="modal-body" style="background-color: #f6f3f3;">
+    <div class="row">
+      <div class="col-md-12">
+        <p>Name: {{productCurrentObj.name}}</p>
+        <p>Type: {{productCurrentObj.type}}</p>
+        <p>Agreement: {{productCurrentObj.agreement}}</p>
+        <p>Customer: {{productCurrentObj.customer}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn" (click)="modalRef.hide()">Close</button>
+  </div>
+</ng-template>
+
+
+<ng-template #CustomerTemplate>
+  <div class="modal-header">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">
+        <img src="../assets/cross.svg" class="log">
+      </span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12">
+        <p>Name: {{customerCurrentObj['name']}}</p>
+        <p>Contact: {{customerCurrentObj['contact']}}</p>
+        <p>E-mail: {{customerCurrentObj.email}}</p>
+        <p>Address: {{customerCurrentObj.address}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn" (click)="modalRef.hide()">Close</button>
+  </div>
+</ng-template>

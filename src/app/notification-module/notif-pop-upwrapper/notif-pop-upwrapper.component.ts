@@ -8,15 +8,15 @@ import { Router } from '@angular/router';
 })
 export class NotifPopUpwrapperComponent implements OnInit {
 
-  // constructor(private router:Router) { }
-  constructor() { }
+  constructor(private router:Router) { }
+  // constructor() { }
 
   ngOnInit() {
   }
 
   viewAll(){
     console.log("in viweAll()");
-    // this.router.navigate(['main/notifications/all']);
+    this.router.navigate(['main/notifications/all']);
   }
 
 }

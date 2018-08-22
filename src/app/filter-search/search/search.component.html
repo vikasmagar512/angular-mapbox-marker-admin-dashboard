@@ -1,30 +1,115 @@
-
 <div class="top-container">
-  <div class="row mar-top marginLRZero">
+    <div><ul>
+        <li class="nav-item dropdown" style="margin-right: 5px">
+                <span dropdown style="display: block">
+                  <a class="nav-link dropdown-toggle mr-lg-2" id="basic-link" dropdownToggle (click)="false" aria-controls="basic-link-dropdown">
+                    <img src="../assets/message.svg" class="img-responsive rlogo">
+                  </a>
+                  <div class="dropdown-menu notification">
+                    <!-- <app-notif-pop-upwrapper>
+                      <app-real-notif></app-real-notif>
+                    </app-notif-pop-upwrapper> -->
+                  </div>
+                </span>
+              </li>
+            </ul>
+        </div>
+        
+  <div class="row mar-top marginLRZero relContainer">
+
+    <!-- <div class="col-md-8 search" (focus)="setFocus('template')" (focusout)="removeFilters()"> -->
     <div class="col-md-8 search">
-      <!--<span>-->
-      <button type="submit" onClick="display(true)" class="bg-grey">
+      <button type="submit">
         <img src="../../../assets/04.png">
       </button>
-      <!--</span>-->
-      <span>
-          <!--<input type="search" (keyup)="onKey(locationSearchBox.value)" #locationSearchBox name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location" class="bg-grey">-->
-          <input type="search" (keyup)="onKey(locationSearchBox.value)" #locationSearchBox  name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location" class="bg-grey">
-          <button type="button" class="close" aria-label="Close" id="clearCust" onClick="display(false)">
-          <span aria-hidden="true">&times;</span>
-          </button>
+
+    
+      
+      <span dropdown>
+          <input type="search" (keyup)="onKey(locationSearchBox.value)" #locationSearchBox name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location"
+          class="bg-grey dropdown-toggle" id="basic-link" dropdownToggle (click)="false" aria-controls="basic-link-dropdown">
+          <button type="submit" class="bg-grey dropdown-toggle" id="basic-link" dropdownToggle (click)="false" aria-controls="basic-link-dropdown">
+              <img src="../../../assets/04.png">
+            </button>
+          <div class="dropdown-menu notification">
+              <input type="checkbox" name="vehicle1" value="Bike"> Location
+              <br>
+              <input type="checkbox" name="vehicle2" value="Car"> Customer
+              <br>
+              <input type="checkbox" name="vehicle3" value="Boat" checked>Asset Type
+              <br>
+          </div>
         </span>
-      <span></span>
-    </div>
-<!--     <div class="col-md-2 cust-name col-md-right" id="clearCust" onClick="display(false)">
+      <span>
+        <!--<input type="search" (keyup)="onKey(locationSearchBox.value)" #locationSearchBox name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location" class="bg-grey">-->
+        <!-- <input type="search" (keyup)="onKey(locationSearchBox.value)" #locationSearchBox name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location"
+          class="bg-grey" id="basic-link" dropdownToggle (click)="false" aria-controls="basic-link-dropdown">
+         <button type="button" class="close" aria-label="Close" id="clearCust" onClick="display(false)"> -->
+          <!-- <span aria-hidden="true">&times;</span>
+        </button>
+        <div id="dropdown-basic" *dropdownMenu class="dropdown-menu suggest-box">
+          <input type="checkbox" name="vehicle1" value="Bike"> Location
+          <br>
+          <input type="checkbox" name="vehicle2" value="Car"> Customer
+          <br>
+          <input type="checkbox" name="vehicle3" value="Boat" checked>Asset Type
+          <br>
+        </div>
+      </span> -->
+      <!-- <ul class="filter-select">
+        <li *ngFor="let result of results" class="filter-select-list"><p class="artist-name">
+          {{result.name}}</p>
+      <span class="tags" *ngFor='let genre of result?.genres | slice:0:6'>{{genre}}</span>
+      </ul> -->
+      <!-- <ng-template *ngIf="showFilters" #template class="suggest-box"> -->
+      <!-- <div *ngIf="showFilters" class="suggest-box">
+          <input type="checkbox" name="vehicle1" value="Bike"> Location<br>
+          <input type="checkbox" name="vehicle2" value="Car"> Customer<br>
+          <input type="checkbox" name="vehicle3" value="Boat" checked>Asset Type<br>
+
+        <ul class="filter-select">
+          <div *ngIf="newMovies">
+            <!-- <span>Movies</span> -->
+      <!-- <li class="filter-select-list" *ngFor="let result of newMovies">
+              <p class="">{{result.name}}</p>
+            </li>
+          </div>
+          <div *ngIf="newAsset.length>0">
+            <span>Asset Name</span>
+            <li class="filter-select-list" *ngFor="let asset of newAsset">
+              <p class="">{{asset.category}}</p>
+            </li>
+          </div> -->
+      <!-- <li class="filter-select-list">
+            <p class="">Sweden</p>
+          </li>
+          <li class="filter-select-list">
+            <p class="">Singapor</p>
+          </li>
+          <li class="filter-select-list">
+            <p class="">England</p>
+          </li>
+          <li class="filter-select-list">
+            <p class="">Finland</p>
+          </li> 
+        </ul>
+      <!-- </ng-template> 
+      </div> -->
+
+
+      <!--     <div class="col-md-2 cust-name col-md-right" id="clearCust" onClick="display(false)">
       <p>Clear
         <span class="cross"></span>
       </p>
     </div> -->
-    <div class="col-md-2 cust-name pull-right" id="cust-name">
-      <p>Customer ABC
-        <span class="caret"></span>
-      </p>
-    </div>
-  </div>
-</div>
+      <div class="col-md-2 cust-name pull-right" id="cust-name">
+        <p>Customer ABC
+          <span class="caret"></span>
+        </p>
+      </div>
+    <!-- </div> -->
+    <!-- <div class="row">
+    <div class="col-md-12">Search</div>
+  </div> -->
+
+  <!-- </div> -->
