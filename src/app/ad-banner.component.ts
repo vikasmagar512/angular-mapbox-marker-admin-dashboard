@@ -33,7 +33,9 @@ export class AdBannerComponent implements OnInit, OnDestroy {
   }
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
     let log: string[] = [];
-    this.currentAdIndex = changes.activeComponent.currentValue
+    if(changes.activeComponent){
+      this.currentAdIndex = changes.activeComponent.currentValue      
+    }
     this.loadComponent();
   }
 

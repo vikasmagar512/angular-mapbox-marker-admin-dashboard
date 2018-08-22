@@ -66,6 +66,7 @@ export class TableDemoComponent implements OnInit {
     let end = page.itemsPerPage > -1 ? (start + page.itemsPerPage) : data.length;
     return data.slice(start, end);
   }
+  
 
   public changeSort(data:any, config:any):any {
     if (!config['sorting']) {
@@ -99,6 +100,8 @@ export class TableDemoComponent implements OnInit {
   }
 
   public globalSearch(globalSearchText){
+    debugger;
+    console.log(`this.config${this.config}`)
     let config = {
       ...this.config,
       filtering:{
@@ -114,10 +117,19 @@ export class TableDemoComponent implements OnInit {
     let filteredData:Array<any> = data;
     this.columns.forEach((column:any) => {
       if (column.filtering) {
-        filteredData = filteredData.filter((item:any) => {
-          return item[column.name].toLowerCase().match(column.filtering.filterString.toLowerCase());
-        });
-      }
+        // debugger
+        // if(column.filtering.name==='assetStatus'){
+        //   filteredData = filteredData.filter((item:any) => {
+        //     return item[column.name].toLowerCase()
+        //     return item[column.name].toLowerCase().match(column.filtering.filterString.toLowerCase());
+        //   });  
+        // }else{
+          filteredData = filteredData.filter((item:any) => {
+            return item[column.name].toLowerCase().match(column.filtering.filterString.toLowerCase());
+          });
+        
+        // }
+        }
     });
 
     if (!config.filtering) {

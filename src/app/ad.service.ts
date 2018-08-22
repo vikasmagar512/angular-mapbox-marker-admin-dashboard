@@ -54,6 +54,7 @@ export class AdService {
     this.filterTypes=[]
     this.assetStatusFilter = {
       filterDisplayText:"Asset Status",
+      filterType:"ASSET_STATUS",
       filterArray:[
         {
           id:"1",
@@ -81,6 +82,7 @@ export class AdService {
     }
     this.assetTypeFilter = {
       filterDisplayText:  "Asset Type",
+      filterType:"ASSET_TYPE",
       filterArray:[
         {
           id:"1",
@@ -108,6 +110,7 @@ export class AdService {
       ]}
     this.contractFilter = {
       filterDisplayText:"Contract Status",
+      filterType:"CONTRACT_STATUS",
       filterArray:[
         {
           id:"1",
@@ -138,6 +141,7 @@ export class AdService {
 
       this.assetLocationFilter = {
       filterDisplayText:  "Location",
+      filterType:"ASSET_LOCATION",      
       // display:false,
       filterArray:[
         {
@@ -264,7 +268,7 @@ export class AdService {
         new AdItem(DashboardChartsComponent,{headline: 'Openings in all departments',
         body: 'Apply today'}),
       new AdItem(TableWrapperComponent, {headline: 'Openings in all departments',
-        body: 'Apply today',filterTypes:this.filterTypes}),
+        body: 'Apply today',filterTypes:this.filterChange}),
       /*
       new AdItem(MyPostBannerComponent,   {headline: 'Openings in all departments',
         body: 'Apply today'}),

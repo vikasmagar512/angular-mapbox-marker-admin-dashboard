@@ -26,22 +26,22 @@
       </div>
     </div>
   </div>
-  <div *ngIf="dataService.dataNumber===0">
-    <app-table-demo [data]="assetData" [config]="assetConfig" [columns]="assetColumns" [(dataNumber)]="dataService.dataNumber"></app-table-demo>
-  </div>
-  <div *ngIf="dataService.dataNumber===1">
-    <app-table-demo [data]="serviceRequestData" [config]="serviceRequestConfig" [columns]="serviceRequestColumns"></app-table-demo>
+  <!-- <div *ngIf="dataService.dataNumber===0"> -->
+    <app-table-demo [data]="assetData" #assetTable [config]="assetConfig" [columns]="assetColumns" [(dataNumber)]="dataService.dataNumber"></app-table-demo>
+  <!-- </div> -->
+  <!-- <div *ngIf="dataService.dataNumber===1">
+    <app-table-demo [data]="serviceRequestData" #serviceRequestTable [config]="serviceRequestConfig" [columns]="serviceRequestColumns"></app-table-demo>
 
   </div>
   <div *ngIf="dataService.dataNumber===2">
-      <app-table-demo [data]="productRequestData" [config]="productRequestConfig" [columns]="productRequestColumns"></app-table-demo>
+      <app-table-demo [data]="productRequestData" #productRequestTable [config]="productRequestConfig" [columns]="productRequestColumns"></app-table-demo>
   
     </div>
 
     <div *ngIf="dataService.dataNumber===3">
-        <app-table-demo [data]="agreementData" [config]="agreementConfig" [columns]="agreementColumns" [(dataNumber)]="dataService.dataNumber"></app-table-demo>
+        <app-table-demo [data]="agreementData" #agreementTable [config]="agreementConfig" [columns]="agreementColumns" [(dataNumber)]="dataService.dataNumber"></app-table-demo>
 
-      </div>
+      </div> -->
   
   <!--
   <app-table-demo data="productCOlumnConfig" config></app-table-demo>
