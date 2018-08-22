@@ -66,6 +66,25 @@ export class dataService {
       "assetCategory": 'assetCategory',
     }
   ]
+  customers:Array<Customer>=[
+    {
+      "id": "123",
+      "name": "demo2 Customer",
+      "email": "demo@demo2.com",
+      "address": "solna solna2   ",
+      "contact": "12312312313",
+      "img": "../../../assets/machine.svg",
+    },
+    {
+      "id": "234",
+      "name": "demo Customer",
+      "email": "demo@demo.com",
+      "address": "solna solna   ",
+      "contact": "64612312312313",
+      "img": "../../../assets/machine.svg",
+    }
+  ]
+
   Assets: Array<Asset> = [
     {
       /* "id": "01",

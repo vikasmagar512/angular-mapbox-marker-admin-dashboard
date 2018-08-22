@@ -1,12 +1,13 @@
-import { Component, Input, OnDestroy, OnInit, SimpleChange, OnChanges, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, SimpleChange, OnChanges, ViewChild, TemplateRef } from '@angular/core';
 import { Http } from '@angular/http';
 import { Subject, Subscription } from 'rxjs/index';
 import { Asset } from '../../asset';
-import {dataService} from '../../dataService.service';
+import { dataService } from '../../dataService.service';
 import { normalRequest } from '../../Request';
 import { Agreement } from '../../agreement';
 import { AdService } from '../../ad.service';
 import { filterGroup } from '../../filter-search/filterGroup';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-table-wrapper',
@@ -14,11 +15,63 @@ import { filterGroup } from '../../filter-search/filterGroup';
   styleUrls: ['./table-wrapper.component.css', '../../style.css']
 })
 
-export class TableWrapperComponent implements OnInit,OnChanges {
+export class TableWrapperComponent implements OnInit, OnChanges {
   @Input() data;
-  
-  public filterTypesReceived:Array<filterGroup>;
-  constructor(private dataService: dataService) {
+
+  agreementIdSelected: string;
+  agreementCurrentObj: any;
+
+  assetCurrentObj: any;
+  assetIdSelected: string;
+
+  serviceCurrentObj: any;
+  serviceIdSelected: string;
+
+  productCurrentObj: any;
+  productIdSelected: string;
+
+  customerCurrentObj: any;
+  customerId: string;
+
+
+  public filterTypesReceived: Array<filterGroup>;
+
+  constructor(private dataService: dataService, private modalService: BsModalService) {
+  }
+  public modalRef: BsModalRef; // {1}
+
+  public openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, { class: 'modal-sm' }); // {3}
+  }
+  openAssetModal(event) {
+    this.assetIdSelected = event;
+    this.assetCurrentObj = this.assetData.find((item) => item['id'] === this.assetIdSelected)
+    this.openModal(this.AssetTemplate)
+  }
+
+  openAgreementModal(event) {
+    this.agreementIdSelected = event;
+    this.agreementCurrentObj = this.agreementData.find((item) => item['id'] === this.agreementIdSelected)
+    this.openModal(this.AgreementTemplate)
+  }
+
+  openServiceModal(event) {
+    this.serviceIdSelected = event;
+    this.serviceCurrentObj = this.serviceRequestData.find((item) => item['id'] === this.serviceIdSelected)
+    this.openModal(this.ServiceTemplate)
+  }
+
+  openCustomerModal(event) {
+    this.customerId = "123"
+    this.customerCurrentObj = this.dataService.customers.find((item) => item['id'] == this.customerId)
+    this.openModal(this.CustomerTemplate)
+  }
+
+  openProductModal(event) {
+    debugger;
+    this.productIdSelected = event
+    this.productCurrentObj = this.productRequestData.find((item) => item['id'] == this.productIdSelected)
+    this.openModal(this.ProductTemplate)
   }
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
     let log: string[] = [];
@@ -50,12 +103,10 @@ export class TableWrapperComponent implements OnInit,OnChanges {
   agreementConfig: any;
 
   serviceRequestData: Array<normalRequest>
-
   serviceRequestConfig: any;
   serviceRequestColumns: Array<any>
 
   productRequestData: Array<normalRequest>
-
   productRequestConfig: any;
   productRequestColumns: Array<any>
 
@@ -68,7 +119,7 @@ export class TableWrapperComponent implements OnInit,OnChanges {
     { title: 'Asset Type', name: 'type', filtering: { filterString: '', placeholder: 'Filter by name' }, filter: 'text' },
     { title: 'Customer', className: ['text-warning'], name: 'customer', filter: 'text' },
     { title: 'Agreement', className: ['text-warning'], name: 'agreement', filter: 'text' },
-    { title: 'Status', name: 'assetStatus',filtering: { filterString: '', placeholder: 'Filter by status' }, sort: false, filter: 'text' },
+    { title: 'Status', name: 'assetStatus', filtering: { filterString: '', placeholder: 'Filter by status' }, sort: false, filter: 'text' },
     { title: 'Location', name: 'location', sort: '', filtering: { filterString: '', placeholder: 'Filter by extn.' }, filter: 'text' },
   ];
   public agreementColumns: Array<any> = [
@@ -82,66 +133,80 @@ export class TableWrapperComponent implements OnInit,OnChanges {
     // {title: 'Location', name: 'location', sort: '', filtering: {filterString: '', placeholder: 'Filter by extn.'},filter:'text'},
 
   ];
-  applyFilterBottom(){
+  applyFilterBottom() {
     debugger
     // this.filterTypesReceived.map((item)=>{
-      let k,p ;
-      // this.onSearchKey('vaccum')  
-      // this.assetTableRef.globalSearch('vaccum')      
-      
-      // if(this.filterTypesReceived[0].filterType==="ASSET_STATUS"){
-      //    k =  this.filterTypesReceived[0].filterArray.find(item=>item.value)
-      //    debugger
-      //    p = k['id'] - 1 
-      //    debugger 
-      //    switch(p){
-      //       case 0 :
-      //       this.onSearchKey('vaccum')        
-      //       break;
-      //       case 1 :
-      //       this.onSearchKey('canon')      
-      //       break 
-      //       case 2 :
-      //       this.onSearchKey('asdfasdf')      
-      //       break;
-      //       default:
-      //       this.onSearchKey('')                  
-      //    }
+    let k, p;
+    // this.onSearchKey('vaccum')  
+    // this.assetTableRef.globalSearch('vaccum')      
 
-      // }
+    // if(this.filterTypesReceived[0].filterType==="ASSET_STATUS"){
+    //    k =  this.filterTypesReceived[0].filterArray.find(item=>item.value)
+    //    debugger
+    //    p = k['id'] - 1 
+    //    debugger 
+    //    switch(p){
+    //       case 0 :
+    //       this.onSearchKey('vaccum')        
+    //       break;
+    //       case 1 :
+    //       this.onSearchKey('canon')      
+    //       break 
+    //       case 2 :
+    //       this.onSearchKey('asdfasdf')      
+    //       break;
+    //       default:
+    //       this.onSearchKey('')                  
+    //    }
+
+    // }
     // })
   }
   @ViewChild('assetTable') assetTableRef;
-@ViewChild('serviceRequestTable') serviceRequestTableRef;
-@ViewChild('productRequestTable') productRequestTableRef;
-@ViewChild('agreementTable') agreementTableRef;
+  @ViewChild('AssetTemplate') AssetTemplate: TemplateRef<any>;
 
-onSearchKey(value: string) {
-  // this.searchValue = value;
-  this.assetTableRef.globalSearch(value)
-  // this.serviceRequestTableRef.globalSearch(this.searchValue)
-  // this.productRequestTableRef.globalSearch(this.searchValue)
-  // this.agreementTableRef.globalSearch(this.searchValue)
-}
+  @ViewChild('agreementTable') agreementTableRef;
+  @ViewChild('AgreementTemplate') AgreementTemplate: TemplateRef<any>;
+
+  @ViewChild('CustomerTemplate') CustomerTemplate: TemplateRef<any>;
+
+  @ViewChild('serviceRequestTable') serviceRequestTableRef;
+  @ViewChild('ServiceTemplate') ServiceTemplate: TemplateRef<any>;
+  
+  @ViewChild('productRequestTable') productRequestTableRef;
+  @ViewChild('ProductTemplate') ProductTemplate: TemplateRef<any>;
+
+
+
+  onSearchKey(value: string) {
+    // this.searchValue = value;
+    debugger;
+    this.assetTableRef.globalSearch(value)
+    // this.serviceRequestTableRef.globalSearch(this.searchValue)
+    // this.productRequestTableRef.globalSearch(this.searchValue)
+    // this.agreementTableRef.globalSearch(this.searchValue)
+  }
   ngOnInit() {
     // debugger;
     // console.log(this.data)
-    
+    debugger
     console.log(this.data)
     // this.searchBox = this.data.location;
-    
-      // setTimeout(()=>{
-      //   this.onSearchKey('no')        
-      // },2000)
-      // setTimeout(()=>{
-      //   this.onSearchKey('not')        
-      // },4000)
+
+    // setTimeout(()=>{
+    //   this.onSearchKey('no')        
+    // },2000)
+    // setTimeout(()=>{
+    //   this.onSearchKey('not')        
+    // },4000)
     // https://angularfirebase.com/lessons/sharing-data-between-angular-components-four-methods/
-    
+
     this.loadTable(this.dataService.dataNumber);
 
     this.assetDetail = this.dataService.getAssets();
 
+
+    debugger;
     this.assetData = this.assetDetail.reduce((acc, asset: Asset) => {
       /* let stat:'asset.status';
       console.log("stat"); */
@@ -161,6 +226,12 @@ onSearchKey(value: string) {
         */
         // "status":`<span><img src="../../assets/${asset.status}.png"></span>`,
         "assetStatus": '<img src="../../assets/' + (!asset.status ? '09.png' : (asset.status === 1 ? '10.png' : '12.png')) + '" class="ass-size">',
+        // "actionAsset": '<div class="a-div bg-aqua mbot-2p">\n' +
+        //   '                  <span>\n' +
+        //   '                    <img src="../../assets/wrench.svg" class="a-size wd-10">\n' +
+        //   '                  </span>\n' +
+        //   '                <p class="c-white service" data-id="'+asset.id+'">Do it yourself</p>\n' +
+        //   '              </div>\n'
       });
     }, []);
 
@@ -271,18 +342,18 @@ onSearchKey(value: string) {
     this.data.filterTypes.subscribe(message => {
       debugger
       this.filterTypesReceived = message
-    
+
       // setTimeout(()=>{
       //   this.applyFilterBottom()    
       //   },2000)
 
-      
-    // setTimeout(()=>{
-    //   //   this.applyFilterBottom()    
-    //   alert('d')
-    //   debugger
-        that.assetTableRef.globalSearch('vaccum')   
-      // },2000)
+
+      setTimeout(()=>{
+      //   //   this.applyFilterBottom()    
+      //   alert('d')
+      //   debugger
+      that.assetTableRef.globalSearch('vaccum')
+      },2000)
 
     })
   }

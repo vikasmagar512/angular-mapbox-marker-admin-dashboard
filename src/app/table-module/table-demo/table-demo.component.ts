@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output,EventEmitter} from '@angular/core';
 import {TableData} from '../../tableData';
 import {Router} from '@angular/router';
 import {Format} from '../../Format';
@@ -15,6 +15,8 @@ export class TableDemoComponent implements OnInit {
   @Input() data: Array<any>;
   @Input() dataNumber: any;
   exportFileName:string = "csv";
+  @Output() change: EventEmitter<string> = new EventEmitter<string>();
+  
 
   public rows:Array<any> = [];
   /*public columns:Array<any> = [
@@ -176,10 +178,18 @@ export class TableDemoComponent implements OnInit {
     // If Button View
     if (data.column == "name") {
       // this.router.navigate(['/main/asset/',data.row['id'] ]);
+      this.change.emit(data.row['id']);
+      
     }
     if (data.column == "agreement_no") {
       // this.router.navigate(['/main/agreementNo/',data.row['id'] ]);
     }
+    // if (data.column == "actionAsset") {
+    //       // data.row['id']
+    //       // alert("actionAsset")
+    //       this.change.emit(data.row['id']);
+    //     }
+    
     if (data.column == "assetStatus") {
       alert('assetStatus')
       // this.router.navigate(['/main/agreementNo/',data.row['id'] ]);
