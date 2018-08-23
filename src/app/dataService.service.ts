@@ -31,7 +31,7 @@ export class dataService {
   assetCategory = {
     "Coffee_Machine": "Coffee Machine",
     "Printer": "Printer",
-    "Vaccum": "Vaccum"
+    "Vaccum": "Vacuum"
   }
 
   printer={
@@ -117,7 +117,7 @@ export class dataService {
       "category": "Printer",
       "name": "Canon SW2014",
       "status": 1,
-      "location": "Bromma",
+      "location": "sweden",
       "agreement_no": "AGR10923347",
       "serialno": "SR12190",
       "customer": "XYZ",
@@ -176,7 +176,7 @@ export class dataService {
     {
       "id": "03",
       "category": "Vaccum",
-      "name": "Vaccum",
+      "name": "Vacuum",
       "status": 2,
       "agreement_no": "AGR10923347",
       "location": "Bromma",

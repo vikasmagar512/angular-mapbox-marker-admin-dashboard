@@ -113,9 +113,9 @@ export class TableWrapperComponent implements OnInit, OnChanges {
   // detailType: string;
 
   public assetColumns: Array<any> = [
-    { title: 'Asset Id', name: 'id', filtering: { filterString: '', placeholder: 'Filter by name' }, filter: 'text' },
+    { title: 'Asset Id', name: 'id', filtering: { filterString: '', placeholder: 'Filter by Id' }, filter: 'text' },
     { title: 'Asset Name', name: 'name', filtering: { filterString: '', placeholder: 'Filter by name' }, filter: 'text' },
-    { title: 'Asset Type', name: 'type', filtering: { filterString: '', placeholder: 'Filter by name' }, filter: 'text' },
+    { title: 'Asset Type', name: 'type', filtering: { filterString: '', placeholder: 'Filter by Type' }, filter: 'text' },
     { title: 'Customer', className: ['text-warning'], name: 'customer', filter: 'text' },
     { title: 'Agreement', className: ['text-warning'], name: 'agreement', filter: 'text' },
     { title: 'Status', name: 'assetStatus', filtering: { filterString: '', placeholder: 'Filter by status' }, sort: false, filter: 'text' },
@@ -132,39 +132,51 @@ export class TableWrapperComponent implements OnInit, OnChanges {
     // {title: 'Location', name: 'location', sort: '', filtering: {filterString: '', placeholder: 'Filter by extn.'},filter:'text'},
 
   ];
+  // newColumnSearchTable(reflect={'type':'printer','assetStatus':'Not working'}){
+    newColumnSearchTable(reflect:object){
+      debugger
+    // let reflect = {'type':'printer','assetStatus':'Not working'}
+    let newAssetColumns = this.assetColumns.map((item)=>
+      reflect.hasOwnProperty(item.name) ? {...item,filtering:{...item.filtering,filterString:reflect[item.name]}} : item
+    )
+    debugger
+    this.assetTableRef.newColumnSearch(newAssetColumns)
+  }
+
   applyFilterBottom() {
     debugger
-    // this.filterTypesReceived.map((item)=>{
     let k, p;
-    // this.onSearchKey('vaccum')
-    // this.assetTableRef.globalSearch('vaccum')
-
-    if(this.filterTypesReceived[0].filterType==="ASSET_STATUS"){
-      k =  this.filterTypesReceived[0].filterArray.find(item=>item.value)
+    let obj ={}
+    this.filterTypesReceived.map((filterTypeItem) => {
+      // let search = this.dataService.dataNumber === 0 && (["ASSET_STATUS", "ASSET_TYPE"].indexOf(filterTypeItem.filterType) !== -1) ||
+      let search = this.dataService.dataNumber === 0 && (["ASSET_STATUS",'ASSET_TYPE'].indexOf(filterTypeItem.filterType) !== -1)
+        // this.dataService.dataNumber === 2 && (["ASSET_TYPE"].indexOf(filterTypeItem.filterType) !== -1) ||
+        // this.dataService.dataNumber === 3 && (["CONTRACT_STATUS"].indexOf(filterTypeItem.filterType) !== -1)
       debugger
-      if(k){
-       p = k['id'] - 1
-       debugger
-       switch(p){
-          case 0 :
-          this.onSearchKey('vaccum')
-          break;
-          case 1 :
-          this.onSearchKey('canon')
-          break
-          case 2 :
-          this.onSearchKey('asdfasdf')
-          break;
-          default:
-          this.onSearchKey('')
-       }
-      }else{
-        this.onSearchKey('')
+      if (search) {
+        k = filterTypeItem.filterArray.find(item => item.value)
+        debugger
+        // this.onSearchKey(k.displayText)
+        if(k){
+          if(filterTypeItem.filterType==='ASSET_STATUS'){
+            obj['assetStatus'] =  k.displayText
+          }
+          if(filterTypeItem.filterType==='ASSET_TYPE'){
+            obj['type'] =  k.displayText
+          }
+        } else {
+          if(filterTypeItem.filterType==='ASSET_STATUS'){
+            obj['assetStatus'] =  ''
+          }
+          if(filterTypeItem.filterType==='ASSET_TYPE'){
+            obj['type'] =  ''
+          }
+        }
       }
-
-    }
-    // })
+    })
+    this.newColumnSearchTable(obj)
   }
+
   @ViewChild('assetTable') assetTableRef;
   @ViewChild('AssetTemplate') AssetTemplate: TemplateRef<any>;
 
@@ -179,8 +191,6 @@ export class TableWrapperComponent implements OnInit, OnChanges {
   @ViewChild('productRequestTable') productRequestTableRef;
   @ViewChild('ProductTemplate') ProductTemplate: TemplateRef<any>;
 
-
-
   onSearchKey(value: string) {
     // this.searchValue = value;
     debugger;
@@ -190,6 +200,12 @@ export class TableWrapperComponent implements OnInit, OnChanges {
     // this.agreementTableRef.globalSearch(this.searchValue)
   }
   ngOnInit() {
+    // setTimeout(() => {
+    //   $('input[placeholder="Filter by name"]')
+    //   .val("Vaccum")
+    //   .change()
+    // }, 2000)
+    // $('input').addClass("text");
     // debugger;
     // console.log(this.data)
     debugger
@@ -227,7 +243,7 @@ export class TableWrapperComponent implements OnInit, OnChanges {
                        '</span>'
         */
         // "status":`<span><img src="../../assets/${asset.status}.png"></span>`,
-        "assetStatus": '<img src="../../assets/' + (!asset.status ? '09.png' : (asset.status === 1 ? '10.png' : '12.png')) + '" class="ass-size">',
+        "assetStatus": '<img src="../../assets/' + (!asset.status ? '09.png' : (asset.status === 1 ? '10.png' : '12.png')) + '" class="ass-size" alt="' + (!asset.status ? 'Not Working' : (asset.status === 1 ? 'Service Required' : 'Working')) + '">',
 
       });
     }, []);
@@ -253,9 +269,8 @@ export class TableWrapperComponent implements OnInit, OnChanges {
                      '</span>'
         */
         // "status":`<span><img src="../../assets/${asset.status}.png"></span>`,
-        "agreementStatus": '<img src="../../assets/' + (!asset.status ? '09.png' : (asset.status === 1 ? '10.png' : '12.png')) + '" class="ass-size">',
 
-
+        "agreementStatus": '<img src="../../assets/' + (!asset.status ? '09.png' : (asset.status === 1 ? '10.png' : '12.png')) + '" alt="' + (!asset.status ? 'In Contract' : (asset.status === 1 ? 'Expired' : 'Expiring Soon')) + '" class="ass-size">',
       });
     }, []);
 
@@ -344,28 +359,28 @@ export class TableWrapperComponent implements OnInit, OnChanges {
       //   this.applyFilterBottom()
       //   },2000)
 
-      setTimeout(()=>{
-          // this.applyFilterBottom()
-      //   alert('d')
-      //   debugger
-      //   this.assetTableRef.globalSearch('Canon')
-      },1000)
+      setTimeout(() => {
+        this.applyFilterBottom()
+        //   alert('d')
+        //   debugger
+        //   this.assetTableRef.globalSearch('Canon')
+      }, 1000)
     })
-    setTimeout(()=>{
-      this.newColumnSearchTable()
-    },3000)
-  }
-  newColumnSearchTable(){
-    let newAssetColumns: Array<any> = [
-      { title: 'Asset Id', name: 'id', filtering: { filterString: '', placeholder: 'Filter by name' }, filter: 'text' },
-      { title: 'Asset Name', name: 'name', filtering: { filterString: '', placeholder: 'Filter by name' }, filter: 'text' },
-      { title: 'Asset Type', name: 'type', filtering: { filterString: 'printer', placeholder: 'Filter by name' }, filter: 'text' },
-      { title: 'Customer', className: ['text-warning'], name: 'customer', filter: 'text' },
-      { title: 'Agreement', className: ['text-warning'], name: 'agreement', filter: 'text' },
-      { title: 'Status', name: 'assetStatus', filtering: { filterString: '', placeholder: 'Filter by status' }, sort: false, filter: 'text' },
-      { title: 'Location', name: 'location', sort: '', filtering: { filterString: '', placeholder: 'Filter by extn.' }, filter: 'text' },
-    ];
-    this.assetTableRef.newColumnSearch(newAssetColumns)
-  }
 
+  // setTimeout(()=>{
+  //   this.newColumnSearchTable()
+  // },3000)
+}
+// newColumnSearchTable(){
+//   let newAssetColumns: Array<any> = [
+//     { title: 'Asset Id', name: 'id', filtering: { filterString: '', placeholder: 'Filter by name' }, filter: 'text' },
+//     { title: 'Asset Name', name: 'name', filtering: { filterString: '', placeholder: 'Filter by name' }, filter: 'text' },
+//     { title: 'Asset Type', name: 'type', filtering: { filterString: 'printer', placeholder: 'Filter by name' }, filter: 'text' },
+//     { title: 'Customer', className: ['text-warning'], name: 'customer', filter: 'text' },
+//     { title: 'Agreement', className: ['text-warning'], name: 'agreement', filter: 'text' },
+//     { title: 'Status', name: 'assetStatus', filtering: { filterString: 'not working', placeholder: 'Filter by status' }, sort: false, filter: 'text' },
+//     { title: 'Location', name: 'location', sort: '', filtering: { filterString: '', placeholder: 'Filter by extn.' }, filter: 'text' },
+//   ];
+//   this.assetTableRef.newColumnSearch(newAssetColumns)
+// }
 }

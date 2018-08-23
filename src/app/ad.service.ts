@@ -89,20 +89,20 @@ export class AdService {
           image:'../../../assets/05.png',
         },{
           id:"2",
-          name:"coffeeMaching",
+          name:"coffeeMachine",
           displayText:"Coffee Machine",
           type:"assetType",
           value:false,
           image:'../../../assets/06.png'
         },
-        /* {
+         {
           id:"3",
-          name:"robot",
-          displayText:"Cleaning Robot",
+          name:"Vacuum",
+          displayText:"Vacuum",
           type:"assetType",
           value:false,
           image:'../../../assets/12.png'
-        }, */
+        }, 
       ]}
     this.contractFilter = {
       filterDisplayText:"Contract Status",
