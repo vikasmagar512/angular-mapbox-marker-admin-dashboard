@@ -31,7 +31,7 @@ export class DashboardSettingComponent implements OnInit {
   constructor(private _options: dataService, private filterService: AdService) {
     this.filterTypes = this.filterService.getFilters();
     // this.filterTypes = filterService.filterTypes;
-    this.subscription1 = filterService.filterChange$.subscribe((value: Array<filterGroup>) => {
+    this.subscription1 = filterService.filterChange.subscribe((value: Array<filterGroup>) => {
       this.filterTypes = value;
     });
     this.getUserList();
