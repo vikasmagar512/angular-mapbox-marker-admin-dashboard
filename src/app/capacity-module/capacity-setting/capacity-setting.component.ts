@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { dataService } from '../../dataService.service';
 
 @Component({
   selector: 'app-capacity-setting',
@@ -7,9 +8,41 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CapacitySettingComponent implements OnInit {
 
-  constructor() { }
+  public assetCatagory: any = [];
+  public types: any;
+  public units: any;
+
+  constructor(
+    private dataService: dataService,
+  ) { }
 
   ngOnInit() {
+    this.getAssetCatagory();
+    this.assetSelected("Coffee Machine");
   }
 
+  getAssetCatagory() {
+    for (const key of Object.keys(this.dataService.assetCategory)) {
+      this.assetCatagory.push(this.dataService.assetCategory[key])
+    }
+  }
+
+  assetSelected(asset) {
+    debugger;
+    
+    switch (asset) {
+      case "Coffee Machine":
+        this.types = this.dataService.coffee["types"];
+        this.units = this.dataService.coffee["unit"];
+        break;
+      case "Printer":
+        this.types = this.dataService.printer["types"];
+        this.units = this.dataService.printer["unit"];
+        break;
+      case "Vaccum":
+        this.types = this.dataService.vaccume["types"];
+        this.units = this.dataService.vaccume["unit"];
+        break;
+    }
+  }
 }

@@ -355,6 +355,7 @@ export class TableWrapperComponent implements OnInit, OnChanges {
       that.assetTableRef.globalSearch('vaccum')
       },2000)
 
+
     })
   }
 }
