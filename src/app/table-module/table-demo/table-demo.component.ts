@@ -113,18 +113,31 @@ export class TableDemoComponent implements OnInit {
     }
     this.onChangeTable(config);
   }
+  
+  public newColumnSearch(columns){
+    this.columns = columns;
+    this.onChangeTable(this.config);
+  }
 
   public changeFilter(data:any, config:any):any {
     console.log(this.config)
     let filteredData:Array<any> = data;
     this.columns.forEach((column:any) => {
       if (column.filtering) {
-        // debugger
-        if (column.filtering.name === 'assetStatus') {
+        debugger
+        if (column.name === 'agreementStatus') {
           filteredData = filteredData.filter((item: any) => {
             debugger
-            // return item[column.name].toLowerCase()
-            return item[column.name].toLowerCase().match(column.filtering.filterString.toLowerCase());
+             let k = item[column.name].split('alt="')[1].split('>')[0].split('"')[0]
+             debugger
+             return k.toLowerCase().match(column.filtering.filterString.toLowerCase());
+          });
+        } else if (column.name === 'assetStatus') {
+          filteredData = filteredData.filter((item: any) => {
+            debugger
+             let k = item[column.name].split('alt="')[1].split('>')[0].split('"')[0]
+             debugger
+             return k.toLowerCase().match(column.filtering.filterString.toLowerCase());
           });
         } else {
           filteredData = filteredData.filter((item: any) => {
@@ -138,10 +151,18 @@ export class TableDemoComponent implements OnInit {
       return filteredData;
     }
 
+    // if (config.filtering.columnName) {
+    //   return filteredData.filter((item:any) =>
+    //     item[config['filtering'].columnName].toLowerCase().match(this.config['filtering'].filterString.toLowerCase()));
+    // }
+    
     if (config.filtering.columnName) {
-      return filteredData.filter((item:any) =>
-        item[config['filtering'].columnName].toLowerCase().match(this.config['filtering'].filterString.toLowerCase()));
+      return filteredData.filter((item:any) =>{
+        debugger
+       return  item[config['filtering'].columnName].toLowerCase().match(this.config['filtering'].filterString.toLowerCase())})
     }
+      
+
 
     let tempArray:Array<any> = [];
     filteredData.forEach((item:any) => {
