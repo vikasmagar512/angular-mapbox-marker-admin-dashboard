@@ -27,11 +27,28 @@ export class dataService {
   detailTypes: Array<any> = ["Service Request", "Product Request", "Assets Details", "Agreement Details"];
 
   locationSearch = ''
+
   assetCategory = {
     "Coffee_Machine": "Coffee Machine",
     "Printer": "Printer",
     "Vaccum": "Vaccum"
   }
+
+  printer={
+    "types": ["Prints/Day","Ink/Day"],
+     "unit": "#"
+  }
+
+  coffee={
+    "types": ["Powder","Cups/Day"],
+     "unit": "Kg"
+  }
+
+  vaccume={
+    "types": ["Water/Day","Steam/Day"],
+    "unit": "#"
+  }
+
   customer: Customer = {
     "id": "123",
     "name": "demo Customer",

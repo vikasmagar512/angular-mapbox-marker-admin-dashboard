@@ -1,10 +1,13 @@
 <div class="sel-cust">
   <p class="f-sw">Selected Customer</p>
   <select>
-    <option value="volvo">ABC</option>
+    <option *ngFor="let customer of customerNames" [value]="customer">
+      {{customer}}
+    </option>
+    <!-- <option value="volvo">ABC</option>
     <option value="saab">Demo</option>
     <option value="opel">PQR</option>
-    <option value="audi">Ayu</option>
+    <option value="audi">Ayu</option> -->
   </select>
 </div>
 <div class="row mar-t flex-r">

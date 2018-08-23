@@ -5,11 +5,10 @@
         <label>Asset Category</label>
       </td>
       <td>
-        <select>
-          <option value="volvo">ABC</option>
-          <option value="saab">Demo</option>
-          <option value="opel">PQR</option>
-          <option value="audi">Ayu</option>
+        <select (change)="assetSelected($event.target.value)">
+          <option *ngFor="let asset of assetCatagory" value={{asset}}>
+            {{asset}}
+          </option>
         </select>
       </td>
     </tr>
@@ -35,10 +34,9 @@
       </td>
       <td>
         <select>
-          <option value="volvo">ABC</option>
-          <option value="saab">Demo</option>
-          <option value="opel">PQR</option>
-          <option value="audi">Ayu</option>
+          <option *ngFor="let type of types" value={{type}}>
+            {{type}}
+          </option>
         </select>
       </td>
     </tr>
@@ -47,10 +45,13 @@
         <label>Unit</label>
       </td>
       <td>
-        <input type="text" placeholder="#">
+        <select>
+          <option value={{unit}}>
+            {{units}}
+          </option>
+        </select>
       </td>
     </tr>
-
     <tr>
       <td>
         <label>Value</label>
