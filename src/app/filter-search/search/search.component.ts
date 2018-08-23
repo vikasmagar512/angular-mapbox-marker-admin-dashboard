@@ -22,15 +22,16 @@ export class SearchComponent implements OnInit {
   movies:Array<any>=[];
   searchValue:string;
   newMovies:Array<any>=[];
-  showFilters:boolean = false  
-  filters=['customerName','location','assetType','assetName']
-  
+  showFilters:boolean = false
+  // filters=['Customer','Asset Type','Asset','Location']
+  filters=['Customer','Asset Type']
+
   public modalRef: BsModalRef;
-  constructor(private filterService :AdService,   
+  constructor(private filterService :AdService,
      private modalService: BsModalService,
   private data:dataService,
   private renderer: Renderer) {
-    // this.locationSearch = filterService.locationSearch; 
+    // this.locationSearch = filterService.locationSearch;
   }
   ngOnInit() {
     this.movies=this.filterService.getMovies();
@@ -39,21 +40,23 @@ export class SearchComponent implements OnInit {
 
   setFocus(template:TemplateRef<any>) {
     alert("onFocus")
-    debugger
-    this.showFilters = true;
+    // debugger
+    this.showFilters = true
     // this.renderer.invokeElementMethod(template, 'focus');
   }
   removeFilters() {
     // alert("onFocus")
-    debugger
-    
+    // debugger
+
     this.showFilters = false
     // this.renderer.invokeElementMethod(template, 'focus');
   }
 
   onKey(value: string) {
     this.locationSearchBox = value.toLowerCase();
-    this.filterService.changeLocation(this.locationSearchBox) 
+    // alert('value')
+    this.filterService.changeLocation(this.locationSearchBox)
+
     // this.filterService.locationS = this.locationSearchBox;
     console.log(this.locationSearchBox);
     this.newMovies = this.movies.filter(movies => movies.name.toLowerCase().indexOf(this.locationSearchBox) > -1);

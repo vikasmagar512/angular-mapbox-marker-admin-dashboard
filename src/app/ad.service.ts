@@ -20,16 +20,19 @@ import { DashboardChartsComponent } from './dashboard-module/dashboard-charts/da
 // Inject({providedIn: 'root'});
 export class AdService {
   filterTypes:Array<filterGroup>;
+  filterChange;
   info:Object;
   counter:number;
   // locationS:string;
-  private messageSource = new BehaviorSubject('sweden');
+  messageSource = new BehaviorSubject('sweden');
   currentMessage = this.messageSource.asObservable();
 
- /* changeMessage(message: string) {
-    this.messageSource.next(message)
-  }
-*/
+  //nameChange: EventEmitter<string> = new EventEmitter<string>();
+  // filterChange: Subject<Array<filterGroup>> = new Subject<Array<filterGroup>>();
+  // private filterChange: Subject<Array<filterGroup>> = new Subject<Array<filterGroup>>();
+
+  // filterChange$ = this.filterChange.asObservable();
+
   change(){
     this.info['name']= "Jane" + this.counter;
     this.counter = this.counter + 1;
@@ -38,13 +41,6 @@ export class AdService {
     // this.locationS = location;
     this.messageSource.next(location)
   }
-  // EventEmitter should not be used this way - only for `@Output()`s
-  //nameChange: EventEmitter<string> = new EventEmitter<string>();
-  filterChange: Subject<Array<filterGroup>> = new Subject<Array<filterGroup>>();
-  // _subscription=new Subject<Array<filterGroup>>();
-
-  // Observable string streams
-  filterChange$ = this.filterChange.asObservable();
 
   constructor() {
     this.counter=0;
@@ -54,6 +50,7 @@ export class AdService {
     this.filterTypes=[]
     this.assetStatusFilter = {
       filterDisplayText:"Asset Status",
+      filterType:"ASSET_STATUS",
       filterArray:[
         {
           id:"1",
@@ -81,6 +78,7 @@ export class AdService {
     }
     this.assetTypeFilter = {
       filterDisplayText:  "Asset Type",
+      filterType:"ASSET_TYPE",
       filterArray:[
         {
           id:"1",
@@ -108,6 +106,7 @@ export class AdService {
       ]}
     this.contractFilter = {
       filterDisplayText:"Contract Status",
+      filterType:"CONTRACT_STATUS",
       filterArray:[
         {
           id:"1",
@@ -136,8 +135,9 @@ export class AdService {
       ]
     }
 
-      this.assetLocationFilter = {
+    this.assetLocationFilter = {
       filterDisplayText:  "Location",
+      filterType:"ASSET_LOCATION",
       // display:false,
       filterArray:[
         {
@@ -148,8 +148,10 @@ export class AdService {
           value:false,
           image:'../../../assets/05.png',
         }
-      ]}
+    ]}
     this.filterTypes.push(this.assetStatusFilter,this.assetTypeFilter,this.contractFilter)
+    this.filterChange = new BehaviorSubject(this.filterTypes);
+
   }
   contractFilter:filterGroup;
   assetTypeFilter:filterGroup;
@@ -243,34 +245,17 @@ export class AdService {
     this.filterTypes.push(this.contractFilter,this.assetStatusFilter,this.assetTypeFilter )*/
     return this.filterTypes;
   }
-  getAds() {
+  /*getAds() {
     return [
-      /*
-      new AdItem(HeroProfileComponent, {name: 'Dr IQ', bio: 'Smart as they come'}),
-
-      new AdItem(HeroJobAdComponent,   {headline: 'Openings in all departments',
-                                        body: 'Apply today'}),
-      new AdItem(TechnologyComponent,   {headline: 'Openings in all departments',
-                                        body: 'Apply today'}),*/
-      /*new AdItem(TechnologyComponent,   {headline: 'Openings in all departments',
-        body: 'Apply today'}),*/
-
       new AdItem(MapComponent,   {location: this.currentMessage,
                                         body: 'Apply today'}),
-     /*  new AdItem(ClusterComponent,   {headline: 'Openings in all departments',
-                                        body: 'Apply today'}), */
-      /* new AdItem(ArticleComponent,   {headline: 'Openings in all departments',
-        body: 'Apply today'}), */
+     /!*  new AdItem(ClusterComponent,   {headline: 'Openings in all departments',
+                                        body: 'Apply today'}), *!/
         new AdItem(DashboardChartsComponent,{headline: 'Openings in all departments',
         body: 'Apply today'}),
-      new AdItem(TableWrapperComponent, {headline: 'Openings in all departments',
-        body: 'Apply today',filterTypes:this.filterTypes}),
-      /*
-      new AdItem(MyPostBannerComponent,   {headline: 'Openings in all departments',
-        body: 'Apply today'}),
-        */
+      new AdItem(TableWrapperComponent, {filterTypes:this.filterChange}),
     ];
-  }
+  }*/
   selectFilter(filterSelect: filter,filterDisplayText:string) {
     console.log('this.filterService.filterTypes  ',this.filterTypes )
     this.filterTypes =
@@ -288,7 +273,7 @@ export class AdService {
           filterGrp
       ))
     console.log('this.filterTypes ',this.filterTypes)
-    
+
     this.filterChange.next(this.filterTypes);
   }
 

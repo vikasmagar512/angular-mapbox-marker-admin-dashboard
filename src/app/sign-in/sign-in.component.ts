@@ -1,11 +1,13 @@
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators,FormControl } from '@angular/forms';
 import {AuthService} from '../auth.service';
 import {ApiService} from '../api.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {Observable} from 'rxjs/index';
 import { moment } from 'ngx-bootstrap/chronos/test/chain';
+import { CustomValidators } from '../CustomValidators';
+
 
 @Component({
   selector: 'app-sign-in',
@@ -15,13 +17,14 @@ import { moment } from 'ngx-bootstrap/chronos/test/chain';
 export class SignInComponent implements OnInit {
   public defaultSignInMethod :number;
   public frm: FormGroup;
+  public frm1: FormGroup;
   public isBusy = false;
   public hasFailed = false;
   public showInputErrors = false;
-  public  myMoment;
-  public now: Date = new Date();
-
+  // public now: Date = new Date();
+  public  myMoment;active
   public returnUrl: string;
+  mobnumPattern = "^((\\+91-?)|0)?[0-9]{6}$";
 
   constructor(
     private api: ApiService,
@@ -33,11 +36,25 @@ export class SignInComponent implements OnInit {
     private authService:AuthService
   ) {
     this.frm = fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+      username: ['', [Validators.required,Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+    this.frm1 = fb.group({
+      personalNumber: ['',[
+        Validators.required,
+        Validators.pattern('[0-9]{12}$'),
+        // Validators.pattern(this.mobnumPattern),
+        // Validators.minLength(3),
+        // Validators.maxLength(5)
+      ]
+      ]
     });
   }
   public modalRef: BsModalRef; // {1}
+
+  // convenience getter for easy access to form fields
+  get emailPasswordFieldGetter() { return this.frm.controls; }
+  get bankIDFieldGetter() { return this.frm1.controls; }
 
   public openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template); // {3}
@@ -45,6 +62,7 @@ export class SignInComponent implements OnInit {
   ngOnInit() {
     this.defaultSignInMethod = 0;
     this.myMoment= moment().format("Do MMM YYYY");
+
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
@@ -54,53 +72,61 @@ export class SignInComponent implements OnInit {
   }
 
   public doSignIn() {
+    this.showInputErrors = this.defaultSignInMethod ? (this.frm.invalid) : (this.frm1.invalid)
+    // debugger
+    if(!this.showInputErrors){
 
-    // Make sure form values are valid
-    if (this.frm.invalid) {
-      this.showInputErrors = true;
-      return;
-    }
+      // Reset status
+      this.isBusy = true;
+      this.hasFailed = false;
 
-    // Reset status
-    this.isBusy = true;
-    this.hasFailed = false;
-
-    // Grab values from form
-    const username = this.frm.get('username').value;
-    const password = this.frm.get('password').value;
-
-    // Submit request to API
-    this.router.navigate(['main','home']);
-     /*
-    this.api
-      .signIn(username, password)
-      .subscribe(
-        (response:any) => {
-          console.log('response is ',response)
-         /*this.auth.doSignIn(
-            response.token,
-            response.name
-          );
-          if(!this.returnUrl){
-            this.router.navigate(['main']);
-          }else{
-          // get return url from route parameters or default to '/'
-            this.router.navigateByUrl(this.returnUrl);
-          }
-        },
-        (error) => {
-          if (error.status === 401) {
-            this.authService.doSignOut()
-            //logout users, redirect to login page
-            //redirect to the signin page or show login modal here
-            this.router.navigate(['/sign-in']);
-            //remember to import router class and declare it in the class
-          }
-          Observable.throw(error);
-          this.isBusy = false;
-          this.hasFailed = true;
+      // // Grab values from form
+      const username = this.frm.get('username').value;
+      const password = this.frm.get('password').value;
+      const personalNumber = this.frm1.get('personalNumber').value;
+      // // Submit request to API
+      this.router.navigate(['main','home','dashboard']);
+      /*let payload = this.defaultSignInMethod
+        ?
+        {
+          username, password
+        }:
+        {
+          // pno:personalNumber
+          personalNo:personalNumber
         }
-      );
-      );*/
+      this.api.signIn(payload).subscribe(
+          (response:any) => {
+            console.log('response is ',response)
+           /!*this.auth.doSignIn(
+              response.token,
+              response.name
+            );*!/
+            debugger
+            if(!this.returnUrl){
+              this.router.navigate(['main']);
+            }else{
+            // get return url from route parameters or default to '/'
+              this.router.navigateByUrl(this.returnUrl);
+            }
+          },
+          (error) => {
+            if (error.status === 401) {
+              this.authService.doSignOut()
+              //logout users, redirect to login page
+              //redirect to the signin page or show login modal here
+              this.router.navigate(['/sign-in']);
+              //remember to import router class and declare it in the class
+            }
+            Observable.throw(error);
+            this.isBusy = false;
+            this.hasFailed = true;
+          }
+        );*/
+    }else{
+      debugger
+      alert('Please enter correct credentials')
+      return
+    }
   }
 }

@@ -20,5 +20,6 @@ import {AdService} from '../ad.service';
   declarations: [MapComponent, ClusterComponent],
   entryComponents:[MapComponent,ClusterComponent],
   exports:[MapComponent,ClusterComponent],
+
 })
 export class MapModule { }

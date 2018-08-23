@@ -1,87 +1,49 @@
-<div class="row mar-top marginLRZero relContainer">
+<div class="top-container">
 
-  <!-- <div class="col-md-8 search" (focus)="setFocus('template')" (focusout)="removeFilters()"> -->
-  <div class="col-md-8 search">
-    <!-- <button type="submit">
-        <img src="../../../assets/04.png">
-      </button> -->
-    <!-- <span dropdown>
-      <button type="submit" class="bg-grey dropdown-toggle" id="basic-link" dropdownToggle (click)="false" aria-controls="basic-link-dropdown">
+  <div class="row mar-top marginLRZero relContainer">
+
+    <!-- <div class="col-md-8 search" (focus)="setFocus('template')" (focusout)="removeFilters()"> -->
+    <div class="col-md-8 search">
+      <button type="submit">
         <img src="../../../assets/04.png">
       </button>
-      <input type="search" (keyup)="onKey(locationSearchBox.value)" #locationSearchBox name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location">
-
-      <div class="dropdown-menu notification">
-        <input type="checkbox" name="vehicle1" value="Bike"> Location
-        <br>
-        <input type="checkbox" name="vehicle2" value="Car"> Customer
-        <br>
-        <input type="checkbox" name="vehicle3" value="Boat" checked>Asset Type
-        <br>
-      </div>
-    </span> -->
-    <span>
-      <!--<input type="search" (keyup)="onKey(locationSearchBox.value)" #locationSearchBox name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location" class="bg-grey">-->
-      <input type="search" (keyup)="onKey(locationSearchBox.value)" #locationSearchBox name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location"
-          class="bg-grey" id="basic-link" (focus)="setFocus('template')" dropdownToggle (click)="false" aria-controls="basic-link-dropdown">
-         <button type="button" class="close" aria-label="Close" id="clearCust" onClick="display(false)">
-      <span aria-hidden="true">&times;</span>
-        </button>
-        <div class="dropdown-menu suggest-box" *ngIf="showFilters">
-          <input type="checkbox" name="vehicle1" value="Bike"> Location
-          <br>
-          <input type="checkbox" name="vehicle2" value="Car"> Customer
-          <br>
-          <input type="checkbox" name="vehicle3" value="Boat" checked>Asset Type
-          <br>
+      <span dropdown [autoClose]="false">
+        <input type="search" (keyup)="onKey(locationSearchBox.value)" #locationSearchBox name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location"
+          id="basic-link" dropdownToggle (click)="false" aria-controls="basic-link-dropdown">
+        <div class="dropdown-menu notification">
+          <span *ngFor="let filter of filters">
+            <span>{{filter}}</span>
+            <input type="checkbox" name={{filter}} value={{filter}}>
+          </span>
+          <ul class="filter-select">
+            <div *ngIf="newMovies">
+              <!-- <span>Movies</span> -->
+              <li class="filter-select-list" *ngFor="let result of newMovies">
+                <p class="">{{result.name}}</p>
+              </li>
+            </div>
+            <div *ngIf="newAsset.length>0">
+              <span>Asset Name</span>
+              <li class="filter-select-list" *ngFor="let asset of newAsset">
+                <p class="">{{asset.category}}</p>
+              </li>
+            </div>
+            <!-- <li class="filter-select-list">
+                <p class="">Sweden</p>
+              </li>
+              <li class="filter-select-list">
+                <p class="">Singapor</p>
+              </li>
+              <li class="filter-select-list">
+                <p class="">England</p>
+              </li>
+              <li class="filter-select-list">
+                <p class="">Finland</p>
+              </li>-->
+          </ul>
         </div>
-      </span> 
-      <!-- <ul class="filter-select">
-        <li *ngFor="let result of results" class="filter-select-list"><p class="artist-name">
-          {{result.name}}</p>
-      <span class="tags" *ngFor='let genre of result?.genres | slice:0:6'>{{genre}}</span>
-      </ul> -->
-      <!-- <ng-template *ngIf="showFilters" #template class="suggest-box"> -->
-      <!-- <div *ngIf="showFilters" class="suggest-box">
-          <input type="checkbox" name="vehicle1" value="Bike"> Location<br>
-          <input type="checkbox" name="vehicle2" value="Car"> Customer<br>
-          <input type="checkbox" name="vehicle3" value="Boat" checked>Asset Type<br>
-
-        <ul class="filter-select">
-          <div *ngIf="newMovies">
-            <!-- <span>Movies</span> -->
-      <!-- <li class="filter-select-list" *ngFor="let result of newMovies">
-              <p class="">{{result.name}}</p>
-            </li>
-          </div>
-          <div *ngIf="newAsset.length>0">
-            <span>Asset Name</span>
-            <li class="filter-select-list" *ngFor="let asset of newAsset">
-              <p class="">{{asset.category}}</p>
-            </li>
-          </div> -->
-      <!-- <li class="filter-select-list">
-            <p class="">Sweden</p>
-          </li>
-          <li class="filter-select-list">
-            <p class="">Singapor</p>
-          </li>
-          <li class="filter-select-list">
-            <p class="">England</p>
-          </li>
-          <li class="filter-select-list">
-            <p class="">Finland</p>
-          </li> 
-        </ul>
-      <!-- </ng-template> 
-      </div> -->
-
-
-      <!--     <div class="col-md-2 cust-name col-md-right" id="clearCust" onClick="display(false)">
-      <p>Clear
-        <span class="cross"></span>
-      </p>
-    </div> -->
+        
+      </span>
       <div class="col-md-2 cust-name pull-right" id="cust-name">
         <p>Customer ABC
           <span class="caret"></span>
@@ -92,4 +54,5 @@
     <div class="col-md-12">Search</div>
   </div> -->
 
-      <!-- </div> -->
+      <!-- </div>
+</div> -->

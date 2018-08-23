@@ -14,11 +14,13 @@ export class FilterWrapperComponent implements OnInit {
   subscription: Subscription;
 
   constructor(private filterService : AdService) {
-    this.filterTypes = this.filterService.getFilters();
+    // this.filterTypes = this.filterService.getFilters();
     // this.filterTypes = filterService.filterTypes;
-    this.subscription = filterService.filterChange$.subscribe((value:Array<filterGroup>) => {
+    this.subscription = filterService.filterChange.subscribe((value:Array<filterGroup>) => {
+      // alert('wer')
       this.filterTypes = value;
     });
+
   }
 
   ngOnDestroy() {

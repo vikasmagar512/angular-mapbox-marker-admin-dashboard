@@ -88,3 +88,7 @@ searchSuggest{
   margin-left:20px;
   padding:10px;
 }
+.dropdown-menu{
+  width:500px;
+  left: 98px;
+}

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output,EventEmitter} from '@angular/core';
 import {TableData} from '../../tableData';
 import {Router} from '@angular/router';
 import {Format} from '../../Format';
@@ -15,6 +15,8 @@ export class TableDemoComponent implements OnInit {
   @Input() data: Array<any>;
   @Input() dataNumber: any;
   exportFileName:string = "csv";
+  @Output() change: EventEmitter<string> = new EventEmitter<string>();
+
 
   public rows:Array<any> = [];
   /*public columns:Array<any> = [
@@ -67,6 +69,7 @@ export class TableDemoComponent implements OnInit {
     return data.slice(start, end);
   }
 
+
   public changeSort(data:any, config:any):any {
     if (!config['sorting']) {
       return data;
@@ -99,6 +102,8 @@ export class TableDemoComponent implements OnInit {
   }
 
   public globalSearch(globalSearchText){
+    // debugger;
+    console.log(`this.config${this.config}`)
     let config = {
       ...this.config,
       filtering:{
@@ -114,9 +119,18 @@ export class TableDemoComponent implements OnInit {
     let filteredData:Array<any> = data;
     this.columns.forEach((column:any) => {
       if (column.filtering) {
-        filteredData = filteredData.filter((item:any) => {
-          return item[column.name].toLowerCase().match(column.filtering.filterString.toLowerCase());
-        });
+        // debugger
+        if (column.filtering.name === 'assetStatus') {
+          filteredData = filteredData.filter((item: any) => {
+            // debugger
+            // return item[column.name].toLowerCase()
+            return item[column.name].toLowerCase().match(column.filtering.filterString.toLowerCase());
+          });
+        } else {
+          filteredData = filteredData.filter((item: any) => {
+            return item[column.name].toLowerCase().match(column.filtering.filterString.toLowerCase());
+          });
+        }
       }
     });
 
@@ -164,10 +178,18 @@ export class TableDemoComponent implements OnInit {
     // If Button View
     if (data.column == "name") {
       // this.router.navigate(['/main/asset/',data.row['id'] ]);
+      this.change.emit(data.row['id']);
+
     }
     if (data.column == "agreement_no") {
       // this.router.navigate(['/main/agreementNo/',data.row['id'] ]);
     }
+    // if (data.column == "actionAsset") {
+    //       // data.row['id']
+    //       // alert("actionAsset")
+    //       this.change.emit(data.row['id']);
+    //     }
+
     if (data.column == "assetStatus") {
       alert('assetStatus')
       // this.router.navigate(['/main/agreementNo/',data.row['id'] ]);
