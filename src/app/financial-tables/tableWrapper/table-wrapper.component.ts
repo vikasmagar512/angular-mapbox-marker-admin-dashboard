@@ -345,12 +345,27 @@ export class TableWrapperComponent implements OnInit, OnChanges {
       //   },2000)
 
       setTimeout(()=>{
-          this.applyFilterBottom()
+          // this.applyFilterBottom()
       //   alert('d')
       //   debugger
       //   this.assetTableRef.globalSearch('Canon')
       },1000)
     })
+    setTimeout(()=>{
+      this.newColumnSearchTable()
+    },3000)
+  }
+  newColumnSearchTable(){
+    let newAssetColumns: Array<any> = [
+      { title: 'Asset Id', name: 'id', filtering: { filterString: '', placeholder: 'Filter by name' }, filter: 'text' },
+      { title: 'Asset Name', name: 'name', filtering: { filterString: '', placeholder: 'Filter by name' }, filter: 'text' },
+      { title: 'Asset Type', name: 'type', filtering: { filterString: 'printer', placeholder: 'Filter by name' }, filter: 'text' },
+      { title: 'Customer', className: ['text-warning'], name: 'customer', filter: 'text' },
+      { title: 'Agreement', className: ['text-warning'], name: 'agreement', filter: 'text' },
+      { title: 'Status', name: 'assetStatus', filtering: { filterString: '', placeholder: 'Filter by status' }, sort: false, filter: 'text' },
+      { title: 'Location', name: 'location', sort: '', filtering: { filterString: '', placeholder: 'Filter by extn.' }, filter: 'text' },
+    ];
+    this.assetTableRef.newColumnSearch(newAssetColumns)
   }
 
 }

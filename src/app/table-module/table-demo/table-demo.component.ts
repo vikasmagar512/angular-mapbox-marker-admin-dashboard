@@ -113,6 +113,10 @@ export class TableDemoComponent implements OnInit {
     }
     this.onChangeTable(config);
   }
+  public newColumnSearch(columns){
+    this.columns = columns;
+    this.onChangeTable(this.config);
+  }
 
   public changeFilter(data:any, config:any):any {
     console.log(this.config)
