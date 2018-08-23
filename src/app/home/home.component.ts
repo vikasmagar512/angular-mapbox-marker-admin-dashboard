@@ -26,11 +26,10 @@ export class HomeComponent implements OnInit {
 
     // this.filterTypes = this.filterService.getFilters();
     // this.filterTypes = filterService.filterTypes;
-    this.subscription1 = adService.filterChange$.subscribe((value: Array<filterGroup>) => {
+    this.subscription1 = adService.filterChange.subscribe((value: Array<filterGroup>) => {
       this.filterTypes = value;
-
     });
-    // this.getUserList(); 
+    // this.getUserList();
   }
 
   customerSelected: string;
@@ -63,8 +62,8 @@ export class HomeComponent implements OnInit {
         selected: false
       },
     ]
-    this.ads = this.adService.getAds();
-    this.activeComponent = 2;
+    // this.ads = this.adService.getAds();
+    this.activeComponent = 1;
     this.customerSelected = "";
 
   }

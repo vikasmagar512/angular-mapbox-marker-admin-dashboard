@@ -20,6 +20,7 @@ export class BottomComponent implements OnInit {
 
   loadTable1(num: number) {
     this.dataService.dataNumber = num;
+
     this.dataService.detailType = this.dataService.detailTypes[num];
     // $(`.RequestType 2RequestTypeNum top cursPointer active`).removeClass('active');
     // $(`.${this.dataService.dataNumber}num`).addClass('active');

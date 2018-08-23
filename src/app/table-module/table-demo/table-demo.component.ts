@@ -16,7 +16,7 @@ export class TableDemoComponent implements OnInit {
   @Input() dataNumber: any;
   exportFileName:string = "csv";
   @Output() change: EventEmitter<string> = new EventEmitter<string>();
-  
+
 
   public rows:Array<any> = [];
   /*public columns:Array<any> = [
@@ -68,7 +68,7 @@ export class TableDemoComponent implements OnInit {
     let end = page.itemsPerPage > -1 ? (start + page.itemsPerPage) : data.length;
     return data.slice(start, end);
   }
-  
+
 
   public changeSort(data:any, config:any):any {
     if (!config['sorting']) {
@@ -120,18 +120,18 @@ export class TableDemoComponent implements OnInit {
     this.columns.forEach((column:any) => {
       if (column.filtering) {
         // debugger
-        // if(column.filtering.name==='assetStatus'){
-        //   filteredData = filteredData.filter((item:any) => {
-        //     return item[column.name].toLowerCase()
-        //     return item[column.name].toLowerCase().match(column.filtering.filterString.toLowerCase());
-        //   });  
-        // }else{
-          filteredData = filteredData.filter((item:any) => {
+        if (column.filtering.name === 'assetStatus') {
+          filteredData = filteredData.filter((item: any) => {
+            debugger
+            // return item[column.name].toLowerCase()
             return item[column.name].toLowerCase().match(column.filtering.filterString.toLowerCase());
           });
-        
-        // }
+        } else {
+          filteredData = filteredData.filter((item: any) => {
+            return item[column.name].toLowerCase().match(column.filtering.filterString.toLowerCase());
+          });
         }
+      }
     });
 
     if (!config.filtering) {
@@ -179,7 +179,7 @@ export class TableDemoComponent implements OnInit {
     if (data.column == "name") {
       // this.router.navigate(['/main/asset/',data.row['id'] ]);
       this.change.emit(data.row['id']);
-      
+
     }
     if (data.column == "agreement_no") {
       // this.router.navigate(['/main/agreementNo/',data.row['id'] ]);
@@ -189,7 +189,7 @@ export class TableDemoComponent implements OnInit {
     //       // alert("actionAsset")
     //       this.change.emit(data.row['id']);
     //     }
-    
+
     if (data.column == "assetStatus") {
       alert('assetStatus')
       // this.router.navigate(['/main/agreementNo/',data.row['id'] ]);

@@ -16,7 +16,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 })
 
 export class TableWrapperComponent implements OnInit, OnChanges {
-  @Input() data;
+  // @Input() data;
 
   agreementIdSelected: string;
   agreementCurrentObj: any;
@@ -36,7 +36,8 @@ export class TableWrapperComponent implements OnInit, OnChanges {
 
   public filterTypesReceived: Array<filterGroup>;
 
-  constructor(private dataService: dataService, private modalService: BsModalService) {
+  constructor(private dataService: dataService, private adService: AdService, private modalService: BsModalService) {
+
   }
   public modalRef: BsModalRef; // {1}
 
@@ -78,12 +79,10 @@ export class TableWrapperComponent implements OnInit, OnChanges {
     alert('changes')
     debugger
     // if(changes.activeComponent){
-    //   this.currentAdIndex = changes.activeComponent.currentValue      
+    //   this.currentAdIndex = changes.activeComponent.currentValue
     // }
     // this.loadComponent();
   }
-  // filterTypes:Array<filterGroup>;
-  // subscription: Subscription;
 
   loadTable(num: number) {
     this.dataService.detailType = this.dataService.detailTypes[num];
@@ -137,29 +136,33 @@ export class TableWrapperComponent implements OnInit, OnChanges {
     debugger
     // this.filterTypesReceived.map((item)=>{
     let k, p;
-    // this.onSearchKey('vaccum')  
-    // this.assetTableRef.globalSearch('vaccum')      
+    // this.onSearchKey('vaccum')
+    // this.assetTableRef.globalSearch('vaccum')
 
-    // if(this.filterTypesReceived[0].filterType==="ASSET_STATUS"){
-    //    k =  this.filterTypesReceived[0].filterArray.find(item=>item.value)
-    //    debugger
-    //    p = k['id'] - 1 
-    //    debugger 
-    //    switch(p){
-    //       case 0 :
-    //       this.onSearchKey('vaccum')        
-    //       break;
-    //       case 1 :
-    //       this.onSearchKey('canon')      
-    //       break 
-    //       case 2 :
-    //       this.onSearchKey('asdfasdf')      
-    //       break;
-    //       default:
-    //       this.onSearchKey('')                  
-    //    }
+    if(this.filterTypesReceived[0].filterType==="ASSET_STATUS"){
+      k =  this.filterTypesReceived[0].filterArray.find(item=>item.value)
+      debugger
+      if(k){
+       p = k['id'] - 1
+       debugger
+       switch(p){
+          case 0 :
+          this.onSearchKey('vaccum')
+          break;
+          case 1 :
+          this.onSearchKey('canon')
+          break
+          case 2 :
+          this.onSearchKey('asdfasdf')
+          break;
+          default:
+          this.onSearchKey('')
+       }
+      }else{
+        this.onSearchKey('')
+      }
 
-    // }
+    }
     // })
   }
   @ViewChild('assetTable') assetTableRef;
@@ -172,7 +175,7 @@ export class TableWrapperComponent implements OnInit, OnChanges {
 
   @ViewChild('serviceRequestTable') serviceRequestTableRef;
   @ViewChild('ServiceTemplate') ServiceTemplate: TemplateRef<any>;
-  
+
   @ViewChild('productRequestTable') productRequestTableRef;
   @ViewChild('ProductTemplate') ProductTemplate: TemplateRef<any>;
 
@@ -190,21 +193,20 @@ export class TableWrapperComponent implements OnInit, OnChanges {
     // debugger;
     // console.log(this.data)
     debugger
-    console.log(this.data)
+    // console.log(this.data)
     // this.searchBox = this.data.location;
 
     // setTimeout(()=>{
-    //   this.onSearchKey('no')        
+    //   this.onSearchKey('no')
     // },2000)
     // setTimeout(()=>{
-    //   this.onSearchKey('not')        
+    //   this.onSearchKey('not')
     // },4000)
     // https://angularfirebase.com/lessons/sharing-data-between-angular-components-four-methods/
 
     this.loadTable(this.dataService.dataNumber);
 
     this.assetDetail = this.dataService.getAssets();
-
 
     debugger;
     this.assetData = this.assetDetail.reduce((acc, asset: Asset) => {
@@ -226,12 +228,7 @@ export class TableWrapperComponent implements OnInit, OnChanges {
         */
         // "status":`<span><img src="../../assets/${asset.status}.png"></span>`,
         "assetStatus": '<img src="../../assets/' + (!asset.status ? '09.png' : (asset.status === 1 ? '10.png' : '12.png')) + '" class="ass-size">',
-        // "actionAsset": '<div class="a-div bg-aqua mbot-2p">\n' +
-        //   '                  <span>\n' +
-        //   '                    <img src="../../assets/wrench.svg" class="a-size wd-10">\n' +
-        //   '                  </span>\n' +
-        //   '                <p class="c-white service" data-id="'+asset.id+'">Do it yourself</p>\n' +
-        //   '              </div>\n'
+
       });
     }, []);
 
@@ -339,22 +336,21 @@ export class TableWrapperComponent implements OnInit, OnChanges {
       className: ['third-t', 's-table', 'table-striped', 'table-bordered']
     };
     var that = this;
-    this.data.filterTypes.subscribe(message => {
+    // this.data.filterTypes.subscribe(message => {
+    this.adService.filterChange.subscribe(message => {
       debugger
       this.filterTypesReceived = message
-
       // setTimeout(()=>{
-      //   this.applyFilterBottom()    
+      //   this.applyFilterBottom()
       //   },2000)
 
-
       setTimeout(()=>{
-      //   //   this.applyFilterBottom()    
+          this.applyFilterBottom()
       //   alert('d')
       //   debugger
-      that.assetTableRef.globalSearch('vaccum')
-      },2000)
-
+      //   this.assetTableRef.globalSearch('Canon')
+      },1000)
     })
   }
+
 }

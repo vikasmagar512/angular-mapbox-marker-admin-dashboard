@@ -4,7 +4,12 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://192.168.10.33:8081/'
+  apiUrl: 'http://192.168.10.33:8081/',
+  production: false,
+
+  mapbox: {
+    accessToken: 'YOUR_TOKEN'
+  }
 };
 
 /*

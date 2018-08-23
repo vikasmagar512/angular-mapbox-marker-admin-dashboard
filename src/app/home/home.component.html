@@ -1,7 +1,12 @@
 <div class="mainContainer">
   <app-top></app-top>
   <div class="map-sec ">
-    <app-ad-banner [ads]="ads" [filterTypes]="filterTypes" [activeComponent]="activeComponent" class="map"></app-ad-banner>
+    <!--<app-ad-banner [ads]="ads" [filterTypes]="filterTypes" [activeComponent]="activeComponent" class="map"></app-ad-banner>-->
+    <app-map *ngIf="activeComponent===0"></app-map>
+    <!--<app-dashboard-charts *ngIf="activeComponent===1"></app-dashboard-charts>-->
+    <app-cluster *ngIf="activeComponent===1"></app-cluster>
+    <app-table-wrapper *ngIf="activeComponent===2"></app-table-wrapper>
+
     <div class="btn-div bottom">
       <button [ngClass]="(activeComponent===0)?'mar-r bttn active':'mar-r bttn'" (click)="loadComponent(0)">
         <img src="../assets/16.png" class="r-icon ">Map</button>
@@ -9,7 +14,7 @@
         <img src="../assets/17.png" class="r-icon"> Dashboard</button>
       <button [ngClass]="(activeComponent===2)?'bttn active':'bttn'" (click)="loadComponent(2)">
         <img src="../assets/18.png" class="r-icon"> Details</button>
-    </div>    
+    </div>
   </div>
 </div>
 
