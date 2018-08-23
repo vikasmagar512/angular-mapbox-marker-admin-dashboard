@@ -38,9 +38,9 @@ export class SearchComponent implements OnInit {
   }
 
   setFocus(template:TemplateRef<any>) {
-    // alert("onFocus")
+    alert("onFocus")
     debugger
-    this.showFilters = true 
+    this.showFilters = true;
     // this.renderer.invokeElementMethod(template, 'focus');
   }
   removeFilters() {

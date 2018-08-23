@@ -1,53 +1,33 @@
-<div class="top-container">
-    <div><ul>
-        <li class="nav-item dropdown" style="margin-right: 5px">
-                <span dropdown style="display: block">
-                  <a class="nav-link dropdown-toggle mr-lg-2" id="basic-link" dropdownToggle (click)="false" aria-controls="basic-link-dropdown">
-                    <img src="../assets/message.svg" class="img-responsive rlogo">
-                  </a>
-                  <div class="dropdown-menu notification">
-                    <!-- <app-notif-pop-upwrapper>
-                      <app-real-notif></app-real-notif>
-                    </app-notif-pop-upwrapper> -->
-                  </div>
-                </span>
-              </li>
-            </ul>
-        </div>
-        
-  <div class="row mar-top marginLRZero relContainer">
+<div class="row mar-top marginLRZero relContainer">
 
-    <!-- <div class="col-md-8 search" (focus)="setFocus('template')" (focusout)="removeFilters()"> -->
-    <div class="col-md-8 search">
-      <button type="submit">
+  <!-- <div class="col-md-8 search" (focus)="setFocus('template')" (focusout)="removeFilters()"> -->
+  <div class="col-md-8 search">
+    <!-- <button type="submit">
+        <img src="../../../assets/04.png">
+      </button> -->
+    <!-- <span dropdown>
+      <button type="submit" class="bg-grey dropdown-toggle" id="basic-link" dropdownToggle (click)="false" aria-controls="basic-link-dropdown">
         <img src="../../../assets/04.png">
       </button>
+      <input type="search" (keyup)="onKey(locationSearchBox.value)" #locationSearchBox name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location">
 
-    
-      
-      <span dropdown>
-          <!-- <input type="search" (keyup)="onKey(locationSearchBox.value)" #locationSearchBox name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location"
-          class="bg-grey dropdown-toggle" id="basic-link" dropdownToggle (click)="false" aria-controls="basic-link-dropdown"> -->
-          <button type="submit" class="bg-grey dropdown-toggle" id="basic-link" dropdownToggle (click)="false" aria-controls="basic-link-dropdown">
-              <img src="../../../assets/04.png">
-            </button>
-          <div class="dropdown-menu notification">
-              <input type="checkbox" name="vehicle1" value="Bike"> Location
-              <br>
-              <input type="checkbox" name="vehicle2" value="Car"> Customer
-              <br>
-              <input type="checkbox" name="vehicle3" value="Boat" checked>Asset Type
-              <br>
-          </div>
-        </span>
-      <span>
-        <!--<input type="search" (keyup)="onKey(locationSearchBox.value)" #locationSearchBox name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location" class="bg-grey">-->
-        <!-- <input type="search" (keyup)="onKey(locationSearchBox.value)" #locationSearchBox name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location"
-          class="bg-grey" id="basic-link" dropdownToggle (click)="false" aria-controls="basic-link-dropdown">
-         <button type="button" class="close" aria-label="Close" id="clearCust" onClick="display(false)"> -->
-          <!-- <span aria-hidden="true">&times;</span>
+      <div class="dropdown-menu notification">
+        <input type="checkbox" name="vehicle1" value="Bike"> Location
+        <br>
+        <input type="checkbox" name="vehicle2" value="Car"> Customer
+        <br>
+        <input type="checkbox" name="vehicle3" value="Boat" checked>Asset Type
+        <br>
+      </div>
+    </span> -->
+    <span>
+      <!--<input type="search" (keyup)="onKey(locationSearchBox.value)" #locationSearchBox name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location" class="bg-grey">-->
+      <input type="search" (keyup)="onKey(locationSearchBox.value)" #locationSearchBox name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location"
+          class="bg-grey" id="basic-link" (focus)="setFocus('template')" dropdownToggle (click)="false" aria-controls="basic-link-dropdown">
+         <button type="button" class="close" aria-label="Close" id="clearCust" onClick="display(false)">
+      <span aria-hidden="true">&times;</span>
         </button>
-        <div id="dropdown-basic" *dropdownMenu class="dropdown-menu suggest-box">
+        <div class="dropdown-menu suggest-box" *ngIf="showFilters">
           <input type="checkbox" name="vehicle1" value="Bike"> Location
           <br>
           <input type="checkbox" name="vehicle2" value="Car"> Customer
@@ -55,7 +35,7 @@
           <input type="checkbox" name="vehicle3" value="Boat" checked>Asset Type
           <br>
         </div>
-      </span> -->
+      </span> 
       <!-- <ul class="filter-select">
         <li *ngFor="let result of results" class="filter-select-list"><p class="artist-name">
           {{result.name}}</p>
@@ -107,9 +87,9 @@
           <span class="caret"></span>
         </p>
       </div>
-    <!-- </div> -->
-    <!-- <div class="row">
+      <!-- </div> -->
+      <!-- <div class="row">
     <div class="col-md-12">Search</div>
   </div> -->
 
-  <!-- </div> -->
+      <!-- </div> -->
