@@ -7,22 +7,23 @@
 
     <mgl-control
       mglGeocoder
-      [searchInput]=searchBox
-    ></mgl-control>
-    <!--<mgl-geojson-source
+      [searchInput]=searchBox>
+
+    </mgl-control>
+    <mgl-geojson-source
       id="symbols-source">
       <mgl-feature
-        *ngFor="let geometry of geometries"
-        [geometry]="geometry"
-      ></mgl-feature>
-    </mgl-geojson-source>-->
+        *ngFor="let geometry of geojson.features"
+        [geometry]="geometry">
+      </mgl-feature>
+    </mgl-geojson-source>
 
-  <mgl-geojson-source
+<!--  <mgl-geojson-source
     id="earthquakes"
     [data]=earthquakes
     [cluster]="true"
     [clusterMaxZoom]="14"
     [clusterRadius]="50"
-  ></mgl-geojson-source>
+  ></mgl-geojson-source>-->
   </mgl-map>
 </div>

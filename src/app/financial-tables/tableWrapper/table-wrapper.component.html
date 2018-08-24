@@ -26,24 +26,24 @@
       </div>
     </div>
   </div>
-  <!--<div *ngIf="dataService.dataNumber===0">-->
-    <app-table-demo #assetTable (change)="openAssetModal($event)" [data]="assetData" [config]="assetConfig" [columns]="assetColumns" [(dataNumber)]="dataService.dataNumber"></app-table-demo>
-  <!--</div>-->
-  <!--<div *ngIf="dataService.dataNumber===1">-->
-    <!--<app-table-demo #productRequestTable (change)="openServiceModal($event)" [data]="serviceRequestData" #serviceRequestTable [config]="serviceRequestConfig"-->
-      <!--[columns]="serviceRequestColumns"></app-table-demo>-->
-
-  <!--</div>-->
-  <!--<div *ngIf="dataService.dataNumber===2">-->
-    <!--<app-table-demo #serviceRequestTable (change)="openProductModal($event)" [data]="productRequestData" #productRequestTable [config]="productRequestConfig"-->
-      <!--[columns]="productRequestColumns"></app-table-demo>-->
-  <!--</div>-->
-
-  <!--<div *ngIf="dataService.dataNumber===3">-->
-    <!--<app-table-demo  #agreementTable (change)="openAgreementModal($event)" [data]="agreementData" [config]="agreementConfig" [columns]="agreementColumns"-->
-      <!--[(dataNumber)]="dataService.dataNumber"></app-table-demo>-->
-  <!--&lt;!&ndash;</div>&ndash;&gt;-->
-<!--  <div *ngIf="dataService.dataNumber===0">
+  <div *ngIf="dataService.dataNumber===0">
+    <app-table-demo #serviceRequestTable (change)="openServiceModal($event)" [data]="serviceRequestData" #serviceRequestTable
+      [config]="serviceRequestConfig" [columns]="serviceRequestColumns"></app-table-demo>
+  </div>
+  <div *ngIf="dataService.dataNumber===1">
+    <app-table-demo #productRequestTable (change)="openProductModal($event)" [data]="productRequestData" [config]="productRequestConfig"
+      [columns]="productRequestColumns"></app-table-demo>
+  </div>
+  <div *ngIf="dataService.dataNumber===2">
+    <app-table-demo #assetTable (change)="openAssetModal($event)" [data]="assetData" [config]="assetConfig" [columns]="assetColumns"
+      ></app-table-demo>
+  </div>
+<div *ngIf="dataService.dataNumber===3">
+    <app-table-demo #agreementTable (change)="openAgreementModal($event)" [data]="agreementData" [config]="agreementConfig" [columns]="agreementColumns"
+      ></app-table-demo>
+  </div>
+  <!-- &lt;!&ndash;</div>&ndash;&gt; -->
+  <!--  <div *ngIf="dataService.dataNumber===0">
     <app-table-demo #assetTable (change)="openAssetModal($event)" [data]="assetData" [config]="assetConfig" [columns]="assetColumns"
       [(dataNumber)]="dataService.dataNumber"></app-table-demo>
   </div>
@@ -71,7 +71,7 @@
 
 <ng-template #AssetTemplate>
   <div class="modal-header">
-    <span>Asset Id: {{assetCurrentObj.id}}</span>
+    <span>Asset Id: {{assetCurrentObj['id']}}</span>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">
         <img src="../assets/cross.svg" class="log">
@@ -81,11 +81,11 @@
   <div class="modal-body" style="background-color: #f6f3f3;">
     <div class="row">
       <div class="col-md-12">
-        <p>Asset Name: {{assetCurrentObj.name}}</p>
-        <p>Asset Type: {{assetCurrentObj.type}}</p>
-        <p>Customer: {{assetCurrentObj.customer}}</p>
-        <p>Agreement: {{assetCurrentObj.agreement}}</p>
-        <p>Location: {{assetCurrentObj.location}}</p>
+        <p>Asset Name: {{assetCurrentObj['name']}}</p>
+        <p>Asset Type: {{assetCurrentObj['type']}}</p>
+        <p>Customer: {{assetCurrentObj['customer']}}</p>
+        <p>Agreement: {{assetCurrentObj['agreement']}}</p>
+        <p>Location: {{assetCurrentObj['location']}}</p>
         <!-- <p>Status: <span >{{assetCurrentObj.assetStatus}}</span></p> -->
       </div>
     </div>
@@ -98,7 +98,7 @@
 
 <ng-template #AgreementTemplate>
   <div class="modal-header">
-    <span>Agreement Id:{{agreementCurrentObj.id}}</span>
+    <span>Agreement Id:{{agreementCurrentObj['id']}}</span>
     <!-- <span>Agreement Id:{{agreementCurrentObj.type}}</span> -->
 
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -110,11 +110,11 @@
   <div class="modal-body" style="background-color: #f6f3f3;">
     <div class="row">
       <div class="col-md-12">
-        <p>Name: {{agreementCurrentObj.name}}</p>
-        <p>Type: {{agreementCurrentObj.type}}</p>
-        <p>Start Date: {{agreementCurrentObj.start_date}}</p>
-        <p>End Date: {{agreementCurrentObj.end_date}}</p>
-        <p>Prolongation Due Date: {{agreementCurrentObj.prolongationDueDate}}</p>
+        <p>Name: {{agreementCurrentObj['name']}}</p>
+        <p>Type: {{agreementCurrentObj['type']}}</p>
+        <p>Start Date: {{agreementCurrentObj['start_date']}}</p>
+        <p>End Date: {{agreementCurrentObj['end_date']}}</p>
+        <p>Prolongation Due Date: {{agreementCurrentObj['prolongationDueDate']}}</p>
         <!-- <p>Status: <span >{{agreementCurrentObj.assetStatus}}</span></p>  -->
       </div>
     </div>
@@ -127,7 +127,7 @@
 
 <ng-template #ServiceTemplate>
   <div class="modal-header">
-    <span>Agreement Id:{{serviceCurrentObj.id}}</span>
+    <span>Agreement Id:{{serviceCurrentObj['id']}}</span>
     <!-- <span>Agreement Id:{{agreementCurrentObj.type}}</span> -->
 
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -139,11 +139,11 @@
   <div class="modal-body" style="background-color: #f6f3f3;">
     <div class="row">
       <div class="col-md-12">
-        <p>Name: {{serviceCurrentObj.name}}</p>
-        <p>Type: {{serviceCurrentObj.type}}</p>
-        <p>Agreement: {{serviceCurrentObj.agreement}}</p>
+        <p>Name: {{serviceCurrentObj['name']}}</p>
+        <p>Type: {{serviceCurrentObj['type']}}</p>
+        <p>Agreement: {{serviceCurrentObj['agreement']}}</p>
         <!-- <p>End Date: {{serviceCurrentObj.end_date}}</p> -->
-        <p>Location: {{serviceCurrentObj.location}}</p>
+        <p>Location: {{serviceCurrentObj['location']}}</p>
         <!-- <p>Status: <span >{{agreementCurrentObj.assetStatus}}</span></p>  -->
       </div>
     </div>
@@ -155,7 +155,7 @@
 
 <ng-template #ProductTemplate>
   <div class="modal-header">
-    <span>Agreement Id:{{productCurrentObj.id}}</span>
+    <span>Agreement Id:{{productCurrentObj['id']}}</span>
 
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">
@@ -166,10 +166,10 @@
   <div class="modal-body" style="background-color: #f6f3f3;">
     <div class="row">
       <div class="col-md-12">
-        <p>Name: {{productCurrentObj.name}}</p>
-        <p>Type: {{productCurrentObj.type}}</p>
-        <p>Agreement: {{productCurrentObj.agreement}}</p>
-        <p>Customer: {{productCurrentObj.customer}}</p>
+        <p>Name: {{productCurrentObj['name']}}</p>
+        <p>Type: {{productCurrentObj['type']}}</p>
+        <p>Agreement: {{productCurrentObj['agreement']}}</p>
+        <p>Customer: {{productCurrentObj['customer']}}</p>
       </div>
     </div>
   </div>
