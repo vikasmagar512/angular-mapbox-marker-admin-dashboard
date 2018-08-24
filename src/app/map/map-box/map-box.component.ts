@@ -48,7 +48,7 @@ export class MapBoxComponent implements OnInit{
   }
 
   buildMap() {
-    mapboxgl.accessToken = environment.mapbox.accessToken;
+    // mapboxgl.accessToken = environment.mapbox.accessToken;
     this.map = new mapboxgl.Map({
       container: 'map',
       style: this.style,
