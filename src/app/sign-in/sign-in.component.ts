@@ -45,6 +45,8 @@ export class SignInComponent implements OnInit {
   ngOnInit() {
     this.defaultSignInMethod = 0;
     this.myMoment= moment().format("Do MMM YYYY");
+    // this.myMoment= moment().format("DD MMMM YYYY");
+
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }

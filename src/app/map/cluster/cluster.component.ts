@@ -6,7 +6,7 @@ import {Http} from '@angular/http';
 import {Map} from "mapbox-gl";
 // import {Cluster} from 'Supercluster';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
-import L from '@mapbox/mapbox-gl';
+// import L from '@mapbox/mapbox-gl';
 import {AdService} from '../../ad.service';
 
 import * as mapboxgl from 'mapbox-gl'
@@ -42,31 +42,4 @@ export class ClusterComponent implements OnInit {
     this.adService.messageSource.subscribe(message => this.searchBox = message)
 
   }
-/*
-  selectCluster(event: MouseEvent, feature: Cluster) {
-    event.stopPropagation(); // This is needed, otherwise the popup will close immediately
-    this.selectedCluster = {
-      // Change the ref, to trigger mgl-popup onChanges (when the user click on the same cluster)
-      lngLat: [ ...feature.geometry!.coordinates ],
-      count: feature.properties.point_count!,
-      id: feature.properties.cluster_id!
-    };
-  }*/
-  // $('#searchByName').keyup(cityMapSearch);
-  /*
-  cityMapSearch() {
-    var searchString = this.values.toLowerCase();
-    // myLayer.setFilter(showCity);
-  }
-  showCity(feature) {
-
-    if (feature.properties.cityName == searchString) {
-      map.setView([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], 17);
-    } else {
-      return feature.properties.cityName
-        .toLowerCase()
-        .indexOf(searchString) !== -1;
-    }
-    return true;
-  }*/
 }

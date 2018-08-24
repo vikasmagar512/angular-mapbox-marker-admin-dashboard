@@ -113,7 +113,6 @@ export class TableDemoComponent implements OnInit {
     }
     this.onChangeTable(config);
   }
-  
   public newColumnSearch(columns){
     this.columns = columns;
     this.onChangeTable(this.config);
@@ -130,7 +129,8 @@ export class TableDemoComponent implements OnInit {
             debugger
              let k = item[column.name].split('alt="')[1].split('>')[0].split('"')[0]
              debugger
-             return k.toLowerCase().match(column.filtering.filterString.toLowerCase());
+             // return k.toLowerCase().match(column.filtering.filterString.toLowerCase());
+            return (column.filtering.filterString.toLowerCase() === "") ? true : k.toLowerCase() === (column.filtering.filterString.toLowerCase());
           });
         } else if (column.name === 'assetStatus') {
           filteredData = filteredData.filter((item: any) => {
@@ -155,13 +155,13 @@ export class TableDemoComponent implements OnInit {
     //   return filteredData.filter((item:any) =>
     //     item[config['filtering'].columnName].toLowerCase().match(this.config['filtering'].filterString.toLowerCase()));
     // }
-    
+
     if (config.filtering.columnName) {
       return filteredData.filter((item:any) =>{
         debugger
        return  item[config['filtering'].columnName].toLowerCase().match(this.config['filtering'].filterString.toLowerCase())})
     }
-      
+
 
 
     let tempArray:Array<any> = [];

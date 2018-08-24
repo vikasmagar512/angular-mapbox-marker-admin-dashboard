@@ -18,12 +18,9 @@ export class FilterWrapperComponent implements OnInit {
     // this.filterTypes = this.filterService.getFilters();
     // this.filterTypes = filterService.filterTypes;
     this.subscription = filterService.filterChange.subscribe((value:Array<filterGroup>) => {
-      // alert('wer')
       this.filterTypes = value;
     });
-    this.activeTable = this.dataService.dataNumber ;
-    
-
+    // this.activeTable = this.dataService.dataNumber;
   }
 
   ngOnDestroy() {

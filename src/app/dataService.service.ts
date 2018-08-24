@@ -19,8 +19,8 @@ import 'rxjs-compat/add/operator/map';
 export class dataService {
 
 
-  constructor(private http: HttpClient) { 
-    this.dataNumber=0  
+  constructor(private http: HttpClient) {
+    this.dataNumber=3
   }
   dataNumber: number;
   detailType: string;
@@ -32,6 +32,11 @@ export class dataService {
     "Coffee_Machine": "Coffee Machine",
     "Printer": "Printer",
     "Vaccum": "Vacuum"
+  }
+  agreementStatus = {
+    "InContract": "In Contract",
+    "Expired": "Expired",
+    "ExpiringSoon": "Expiring Soon"
   }
 
   printer={
@@ -58,7 +63,7 @@ export class dataService {
     "img": "../../../assets/machine.svg",
   }
   /*   serviceRequest={
-      "id":"123", 
+      "id":"123",
       "assetId":"123",
       "name":"vikas",
       "email":"vikasmagar512@gmail.com",
@@ -248,7 +253,22 @@ export class dataService {
       "term": "70 months",
       "assets_covered": ["03"],
       "prolongationDueDate": "19th June 2018",
-      "status": 0,
+      "status": 1,
+    },
+    {
+      "id": "AGR03",
+      "agreement_no": "AGR984567889",
+      "type": "Month",
+      "contact": "Tom Lee",
+      "start_date": "15th Dec 2014",
+      "end_date": "13th April 2022",
+      "termination_date": "14th April 2018",
+      "payment_freq": "Weekly",
+      "Remaining_term": "17 months",
+      "term": "70 months",
+      "assets_covered": ["03"],
+      "prolongationDueDate": "19th June 2018",
+      "status": 2,
     }
   ];
 
