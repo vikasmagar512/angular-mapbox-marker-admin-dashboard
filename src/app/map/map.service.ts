@@ -11,7 +11,7 @@ export class MapService {
 
   // constructor(private db: AngularFireDatabase) {
   constructor() {
-    mapboxgl.accessToken = environment.mapbox.accessToken
+    // mapboxgl.accessToken = environment.mapbox.accessToken
   }
 
   // getMarkers(): FirebaseListObservable<any> {

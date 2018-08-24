@@ -129,14 +129,15 @@ export class TableDemoComponent implements OnInit {
             debugger
              let k = item[column.name].split('alt="')[1].split('>')[0].split('"')[0]
              debugger
-             return k.toLowerCase().match(column.filtering.filterString.toLowerCase());
+             // return k.toLowerCase().match(column.filtering.filterString.toLowerCase());
+            return (column.filtering.filterString.toLowerCase() === "") ? true : k.toLowerCase() === (column.filtering.filterString.toLowerCase());
           });
         } else if (column.name === 'assetStatus') {
           filteredData = filteredData.filter((item: any) => {
             debugger
              let k = item[column.name].split('alt="')[1].split('>')[0].split('"')[0]
              debugger
-             return k.toLowerCase().match(column.filtering.filterString.toLowerCase());
+             return (column.filtering.filterString.toLowerCase() === "") ? true : k.toLowerCase() === (column.filtering.filterString.toLowerCase());
           });
         } else {
           filteredData = filteredData.filter((item: any) => {

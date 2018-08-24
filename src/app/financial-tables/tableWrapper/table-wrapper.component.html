@@ -26,24 +26,24 @@
       </div>
     </div>
   </div>
-  <!--<div *ngIf="dataService.dataNumber===0">-->
-    <app-table-demo #assetTable (change)="openAssetModal($event)" [data]="assetData" [config]="assetConfig" [columns]="assetColumns" [(dataNumber)]="dataService.dataNumber"></app-table-demo>
-  <!--</div>-->
-  <!--<div *ngIf="dataService.dataNumber===1">-->
-    <!--<app-table-demo #serviceRequestTable (change)="openServiceModal($event)" [data]="serviceRequestData" #serviceRequestTable [config]="serviceRequestConfig"-->
-      <!--[columns]="serviceRequestColumns"></app-table-demo>-->
-
-  <!--</div>-->
-  <!--<div *ngIf="dataService.dataNumber===2">-->
-    <!--<app-table-demo #productRequestTable  (change)="openProductModal($event)" [data]="productRequestData" #productRequestTable [config]="productRequestConfig"-->
-      <!--[columns]="productRequestColumns"></app-table-demo>-->
-  <!--</div>-->
-
-  <!--<div *ngIf="dataService.dataNumber===3">-->
-    <!--<app-table-demo  #agreementTable (change)="openAgreementModal($event)" [data]="agreementData" [config]="agreementConfig" [columns]="agreementColumns"-->
-      <!--[(dataNumber)]="dataService.dataNumber"></app-table-demo>-->
-  <!--&lt;!&ndash;</div>&ndash;&gt;-->
-<!--  <div *ngIf="dataService.dataNumber===0">
+  <div *ngIf="dataService.dataNumber===0">
+    <app-table-demo #serviceRequestTable (change)="openServiceModal($event)" [data]="serviceRequestData" #serviceRequestTable
+      [config]="serviceRequestConfig" [columns]="serviceRequestColumns"></app-table-demo>
+  </div>
+  <div *ngIf="dataService.dataNumber===1">
+    <app-table-demo #productRequestTable (change)="openProductModal($event)" [data]="productRequestData" [config]="productRequestConfig"
+      [columns]="productRequestColumns"></app-table-demo>
+  </div>
+  <div *ngIf="dataService.dataNumber===2">
+    <app-table-demo #assetTable (change)="openAssetModal($event)" [data]="assetData" [config]="assetConfig" [columns]="assetColumns"
+      ></app-table-demo>
+  </div>
+<div *ngIf="dataService.dataNumber===3">
+    <app-table-demo #agreementTable (change)="openAgreementModal($event)" [data]="agreementData" [config]="agreementConfig" [columns]="agreementColumns"
+      ></app-table-demo>
+  </div>
+  <!-- &lt;!&ndash;</div>&ndash;&gt; -->
+  <!--  <div *ngIf="dataService.dataNumber===0">
     <app-table-demo #assetTable (change)="openAssetModal($event)" [data]="assetData" [config]="assetConfig" [columns]="assetColumns"
       [(dataNumber)]="dataService.dataNumber"></app-table-demo>
   </div>
@@ -136,7 +136,7 @@
       </span>
     </button>
   </div>
-  <div class="modal-body" style="background-color: #f6f3f3;"> 
+  <div class="modal-body" style="background-color: #f6f3f3;">
     <div class="row">
       <div class="col-md-12">
         <p>Name: {{serviceCurrentObj['name']}}</p>

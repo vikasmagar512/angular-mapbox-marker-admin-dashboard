@@ -19,8 +19,8 @@ import 'rxjs-compat/add/operator/map';
 export class dataService {
 
 
-  constructor(private http: HttpClient) { 
-    this.dataNumber=0  
+  constructor(private http: HttpClient) {
+    this.dataNumber=3
   }
   dataNumber: number;
   detailType: string;
@@ -32,6 +32,11 @@ export class dataService {
     "Coffee_Machine": "Coffee Machine",
     "Printer": "Printer",
     "Vaccum": "Vacuum"
+  }
+  agreementStatus = {
+    "InContract": "In Contract",
+    "Expired": "Expired",
+    "ExpiringSoon": "Expiring Soon"
   }
 
   printer={
@@ -58,7 +63,7 @@ export class dataService {
     "img": "../../../assets/machine.svg",
   }
   /*   serviceRequest={
-      "id":"123", 
+      "id":"123",
       "assetId":"123",
       "name":"vikas",
       "email":"vikasmagar512@gmail.com",
@@ -113,7 +118,7 @@ export class dataService {
       "serialno": "CM12190",
       "customer":"ABC",
       "img":"../../../assets/machine.svg", */
-      "id": "02",
+      "id": "01",
       "category": "Printer",
       "name": "Canon SW2014",
       "status": 1,
@@ -152,11 +157,11 @@ export class dataService {
     },
     {
       "id": "02",
-      "category": "Printer",
-      "name": "Canon SW2014",
+      "category": "Coffee Machine",
+      "name": "Jura E8 Coffee Machine ",
       "status": 0,
       "location": "Bromma",
-      "agreement_no": "AGR10923347",
+      "agreement_no": "AGR10923349",
       "serialno": "SR12190",
       "customer": "XYZ",
       "img": "../../../assets/printer.svg",
@@ -175,9 +180,31 @@ export class dataService {
     },
     {
       "id": "03",
-      "category": "Vaccum",
+      "category": "Vacuum",
       "name": "Vacuum",
       "status": 2,
+      "agreement_no": "AGR10923347",
+      "location": "Bromma",
+      "serialno": "VC12190",
+      "customer": "PQR",
+      "img": "../../../assets/broom.svg",
+      "metrics": [
+        {
+          // "category": "Motor",
+          // "unit": "#",
+          "id": "3",
+          "available": 1,
+          "required": 2,
+          "uptime": "850%",
+          "usage": "20 Hrs 80m"
+        }
+      ]
+    },
+    {
+      "id": "04",
+      "category": "Vacuum",
+      "name": "Vacuum",
+      "status": 1,
       "agreement_no": "AGR10923347",
       "location": "Bromma",
       "serialno": "VC12190",
@@ -226,7 +253,22 @@ export class dataService {
       "term": "70 months",
       "assets_covered": ["03"],
       "prolongationDueDate": "19th June 2018",
-      "status": 0,
+      "status": 1,
+    },
+    {
+      "id": "AGR03",
+      "agreement_no": "AGR984567889",
+      "type": "Month",
+      "contact": "Tom Lee",
+      "start_date": "15th Dec 2014",
+      "end_date": "13th April 2022",
+      "termination_date": "14th April 2018",
+      "payment_freq": "Weekly",
+      "Remaining_term": "17 months",
+      "term": "70 months",
+      "assets_covered": ["03"],
+      "prolongationDueDate": "19th June 2018",
+      "status": 2,
     }
   ];
 

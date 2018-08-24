@@ -67,3 +67,8 @@
   justify-content: space-around;
   align-items: center;
 }
+
+.blur{
+  opacity: 0.5;
+  pointer-events: none;
+} 

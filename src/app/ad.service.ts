@@ -51,6 +51,8 @@ export class AdService {
     this.assetStatusFilter = {
       filterDisplayText:"Asset Status",
       filterType:"ASSET_STATUS",
+      filterId:'assetStatus',
+      enabled:true,
       filterArray:[
         {
           id:"1",
@@ -74,11 +76,14 @@ export class AdService {
           type:"assetStatus",
           value:false,
           image:'../../../assets/12.png'
-        },]
+        },
+      ]
     }
     this.assetTypeFilter = {
       filterDisplayText:  "Asset Type",
       filterType:"ASSET_TYPE",
+      filterId:'assetType',
+      enabled:true,
       filterArray:[
         {
           id:"1",
@@ -102,17 +107,19 @@ export class AdService {
           type:"assetType",
           value:false,
           image:'../../../assets/12.png'
-        }, 
+        },
       ]}
     this.contractFilter = {
       filterDisplayText:"Contract Status",
       filterType:"CONTRACT_STATUS",
+      filterId:'agreementStatus',
+      enabled:false,
       filterArray:[
         {
           id:"1",
           name:"inContract",
           displayText:"In Contract",
-          type:"contract",
+          type:"agreementStatus",
           value:false,
           image:'../../../assets/13.png',
         },
@@ -120,17 +127,17 @@ export class AdService {
           id:"2",
           name:"expired",
           displayText:"Expired",
-          type:"contract",
+          type:"agreementStatus",
           value:false,
-          image:'../../../assets/14.png'
+          image:'../../../assets/15.png'
         },
         {
           id:"3",
           name:"expiringSoon",
           displayText:"Expiring Soon",
-          type:"contract",
+          type:"agreementStatus",
           value:false,
-          image:'../../../assets/15.png'
+          image:'../../../assets/14.png'
         },
       ]
     }
@@ -138,6 +145,8 @@ export class AdService {
     this.assetLocationFilter = {
       filterDisplayText:  "Location",
       filterType:"ASSET_LOCATION",
+      filterId:'location',
+      enabled:false,
       // display:false,
       filterArray:[
         {
@@ -273,7 +282,36 @@ export class AdService {
           filterGrp
       ))
     console.log('this.filterTypes ',this.filterTypes)
+    this.filterChange.next(this.filterTypes);
+  }
+  disableFilter(dataNumber:Number) {
+    let objMapping = {
+      SERVICE_TABLE:0,
+      PRODUCT_TABLE: 1,
+      ASSET_TABLE:2,
+      AGREEMENT_TABLE:3,
+    }
 
+    console.log('this.filterService.filterTypes  ',this.filterTypes )
+    this.filterTypes = this.filterTypes.map((filterGrp: filterGroup) => {
+        if (dataNumber === 0) {
+          //service Table no filters applicable
+          return {...filterGrp, enabled: false}
+        }
+        if (dataNumber === 1) {
+          // product table 'ASSET_STATUS','ASSET_TYPE' applicable
+          return {...filterGrp, enabled: ['ASSET_TYPE'].indexOf(filterGrp.filterType) !==-1}
+        }
+        if (dataNumber === 2) {
+          // product table 'ASSET_STATUS','ASSET_TYPE' applicable
+          return {...filterGrp, enabled: ['ASSET_STATUS','ASSET_TYPE'].indexOf(filterGrp.filterType) !==-1}
+        }
+        if (dataNumber === 3) {
+          // AGREEMENT table 'CONTRACT_STATUS' applicable
+          return {...filterGrp, enabled: ['CONTRACT_STATUS'].indexOf(filterGrp.filterType) !==-1}
+        }
+      })
+    console.log('this.filterTypes ',this.filterTypes)
     this.filterChange.next(this.filterTypes);
   }
 
