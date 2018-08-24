@@ -291,6 +291,9 @@ export class dataService {
   getCustomer(): Customer {
     return this.customer;
   }
+  getCustomers(): Customer[] {
+    return this.customers;
+  }
   getAssetCategory() {
     return this.assetCategory;
   }
