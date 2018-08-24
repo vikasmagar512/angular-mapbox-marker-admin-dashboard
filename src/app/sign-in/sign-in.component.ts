@@ -86,7 +86,7 @@ export class SignInComponent implements OnInit {
       const password = this.frm.get('password').value;
       const personalNumber = this.frm1.get('personalNumber').value;
       // // Submit request to API
-      this.router.navigate(['main','home','dashboard']);
+      this.router.navigate(['main','home']);
       /*let payload = this.defaultSignInMethod
         ?
         {
