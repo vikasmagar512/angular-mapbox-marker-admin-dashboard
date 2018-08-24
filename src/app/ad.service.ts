@@ -51,6 +51,8 @@ export class AdService {
     this.assetStatusFilter = {
       filterDisplayText:"Asset Status",
       filterType:"ASSET_STATUS",
+      filterId:'assetStatus',   
+      enabled:true,               
       filterArray:[
         {
           id:"1",
@@ -79,6 +81,8 @@ export class AdService {
     this.assetTypeFilter = {
       filterDisplayText:  "Asset Type",
       filterType:"ASSET_TYPE",
+      filterId:'assetType',      
+      enabled:true,
       filterArray:[
         {
           id:"1",
@@ -107,6 +111,8 @@ export class AdService {
     this.contractFilter = {
       filterDisplayText:"Contract Status",
       filterType:"CONTRACT_STATUS",
+      filterId:'contractStatus',
+      enabled:false,
       filterArray:[
         {
           id:"1",
@@ -138,6 +144,8 @@ export class AdService {
     this.assetLocationFilter = {
       filterDisplayText:  "Location",
       filterType:"ASSET_LOCATION",
+      filterId:'location',
+      enabled:false,
       // display:false,
       filterArray:[
         {
@@ -276,6 +284,33 @@ export class AdService {
 
     this.filterChange.next(this.filterTypes);
   }
+  // disableFilter(filterSelect: filter) {
+  //   let objMapping = {
+  //     SERVICE_TABLE:0,
+  //     PRODUCT_TABLE: 1,
+  //     ASSET_TABLE:2,
+  //     AGREEMENT_TABLE:3,
+  //   }
+
+  //   console.log('this.filterService.filterTypes  ',this.filterTypes )
+  //   this.filterTypes =
+  //     this.filterTypes.map((filterGrp: filterGroup) => (
+  //       (filterGrp.filterDisplayText === filterDisplayText)
+  //         ?
+  //         {
+  //           ...filterGrp,
+  //           filterArray: filterGrp.filterArray.map((filterItr: filter) => (
+  //             (filterItr === filterSelect)
+  //               ?{...filterItr, value: !filterItr.value}
+  //               :{ ...filterItr,value:false}))
+  //         }
+  //         :
+  //         filterGrp
+  //     ))
+  //   console.log('this.filterTypes ',this.filterTypes)
+
+  //   this.filterChange.next(this.filterTypes);
+  // }
 
   movies = [
     { 'name': 'yaariyaan', 'realese yr': '2015','location':'dharni'},

@@ -3,6 +3,7 @@ import {filter} from '../filter';
 import {AdService} from '../../ad.service';
 import {Subject, Subscription} from 'rxjs/index';
 import {filterGroup} from '../filterGroup';
+import { dataService } from '../../dataService.service';
 
 @Component({
   selector: 'app-filter-wrapper',
@@ -12,14 +13,16 @@ import {filterGroup} from '../filterGroup';
 export class FilterWrapperComponent implements OnInit {
   filterTypes:Array<filterGroup>;
   subscription: Subscription;
-
-  constructor(private filterService : AdService) {
+  activeTable : Number;
+  constructor(private filterService : AdService,private dataService : dataService) {
     // this.filterTypes = this.filterService.getFilters();
     // this.filterTypes = filterService.filterTypes;
     this.subscription = filterService.filterChange.subscribe((value:Array<filterGroup>) => {
       // alert('wer')
       this.filterTypes = value;
     });
+    this.activeTable = this.dataService.dataNumber ;
+    
 
   }
 
