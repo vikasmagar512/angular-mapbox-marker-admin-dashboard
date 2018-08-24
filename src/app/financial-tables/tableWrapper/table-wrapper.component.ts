@@ -157,18 +157,19 @@ export class TableWrapperComponent implements OnInit, OnChanges {
         k = filterTypeItem.filterArray.find(item => item.value)
         debugger
         // this.onSearchKey(k.displayText)
+        obj['assetStatus'] = k ? (filterTypeItem.filterType === 'ASSET_STATUS') : ""
         if(k){
-          if(filterTypeItem.filterType==='ASSET_STATUS'){
+          if(filterTypeItem.filterType === 'ASSET_STATUS'){
             obj['assetStatus'] =  k.displayText
           }
-          if(filterTypeItem.filterType==='ASSET_TYPE'){
+          if(filterTypeItem.filterType === 'ASSET_TYPE'){
             obj['type'] =  k.displayText
           }
         } else {
-          if(filterTypeItem.filterType==='ASSET_STATUS'){
+          if(filterTypeItem.filterType === 'ASSET_STATUS'){
             obj['assetStatus'] =  ''
           }
-          if(filterTypeItem.filterType==='ASSET_TYPE'){
+          if(filterTypeItem.filterType === 'ASSET_TYPE'){
             obj['type'] =  ''
           }
         }

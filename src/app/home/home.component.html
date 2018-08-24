@@ -4,7 +4,9 @@
     <!--<app-ad-banner [ads]="ads" [filterTypes]="filterTypes" [activeComponent]="activeComponent" class="map"></app-ad-banner>-->
     <app-map *ngIf="activeComponent===0"></app-map>
     <!-- <app-dashboard-charts *ngIf="activeComponent===1"></app-dashboard-charts> -->
-    <app-cluster *ngIf="activeComponent===1"></app-cluster>
+    <!--<app-cluster *ngIf="activeComponent===1"></app-cluster>-->
+    <!--<map-box *ngIf="activeComponent===1"></map-box>-->
+    <app-map *ngIf="activeComponent===1"></app-map>
     <app-table-wrapper *ngIf="activeComponent===2"></app-table-wrapper>
 
     <div class="btn-div bottom">
