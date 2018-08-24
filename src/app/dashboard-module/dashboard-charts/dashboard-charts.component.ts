@@ -4,7 +4,7 @@ import { filterGroup } from '../../filter-search/filterGroup';
 import { Subscription } from 'rxjs';
 import { dataService } from '../../dataService.service';
 import { AdService } from '../../ad.service';
-// declare let d3: any;
+declare let d3: any;
 
 @Component({
   selector: 'app-dashboard-charts',
