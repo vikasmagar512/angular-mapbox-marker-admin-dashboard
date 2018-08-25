@@ -27,7 +27,7 @@ export class MapBoxComponent implements OnInit{
   stores;
 
   constructor(private mapService: MapService) {
-    mapboxgl['accessToken'] = 'pk.eyJ1IjoidmlrYXNtYWdhciIsImEiOiJjamczbGl1bXUxdDB3MndvNmV3NGZtN2ltIn0.iYOKmUXqreHAmf1v5HiYeQ';
+    // mapboxgl['accessToken'] = 'pk.eyJ1IjoidmlrYXNtYWdhciIsImEiOiJjamczbGl1bXUxdDB3MndvNmV3NGZtN2ltIn0.iYOKmUXqreHAmf1v5HiYeQ';
     // This will let you use the .remove() function later on
     // if (!('remove' in Element.prototype)) {
     //   Element.prototype.remove = function() {

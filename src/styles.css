@@ -73,3 +73,6 @@ nav a.active {
   height: 50px !important;
   max-height: 50px !important;
 }
+.cursPointer{
+  cursor: pointer;
+}

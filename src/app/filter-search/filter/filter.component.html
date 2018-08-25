@@ -3,7 +3,7 @@
   <!--<p>{{info.name}}</p>-->
 
   <div class="filterCriterias" >
-    <p *ngFor="let filter of filterData.filterArray" [ngClass]="{'f-14':true,'blur':!filter.value}" (click)="selectFilter(filter)">
+    <p *ngFor="let filter of filterData.filterArray" [ngClass]="{'cursPointer f-14':true,'blur':!filter.value}" (click)="selectFilter(filter)">
       <img src={{filter.image}} class="ass-size">
       <span class="mar-l">{{filter.displayText}}</span>
     </p>

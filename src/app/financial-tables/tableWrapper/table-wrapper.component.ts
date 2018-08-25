@@ -51,6 +51,7 @@ export class TableWrapperComponent implements OnInit, OnChanges {
   }
 
   openAgreementModal(event) {
+    alert('asdf')
     this.agreementIdSelected = event;
     this.agreementCurrentObj = this.agreementData.find((item) => item['id'] === this.agreementIdSelected)
     this.openModal(this.AgreementTemplate)
@@ -126,14 +127,12 @@ export class TableWrapperComponent implements OnInit, OnChanges {
   ];
   public agreementColumns: Array<any> = [
     { title: 'Agreement Number', name: 'id', filtering: { filterString: '', placeholder: 'Filter by name' }, filter: 'text' },
-    { title: 'Customer', name: 'name', filtering: { filterString: '', placeholder: 'Filter by name' }, filter: 'text' },
+    { title: 'Customer', name: 'customer', filtering: { filterString: '', placeholder: 'Filter by name' }, filter: 'text' },
     { title: 'Start Date', name: 'start_date', filtering: { filterString: '', placeholder: 'Filter by name' }, filter: 'text' },
     { title: 'End Date', className: ['text-warning'], name: 'end_date', filter: 'text' },
     { title: 'Prolongation Due Date', name: 'prolongationDueDate', sort: false, filter: 'text' },
     { title: 'Status', className: ['text-warning'], name: 'agreementStatus', filter: 'text' },
-
     // {title: 'Location', name: 'location', sort: '', filtering: {filterString: '', placeholder: 'Filter by extn.'},filter:'text'},
-
   ];
   addFilterString=(columns,reflect: object)=>columns.map((item) =>
     reflect.hasOwnProperty(item.name) ? { ...item, filtering: { ...item.filtering, filterString: reflect[item.name] } } : item
@@ -211,16 +210,6 @@ export class TableWrapperComponent implements OnInit, OnChanges {
     // debugger;
     // console.log(this.data)
     debugger
-    // console.log(this.data)
-    // this.searchBox = this.data.location;
-
-    // setTimeout(()=>{
-    //   this.onSearchKey('no')
-    // },2000)
-    // setTimeout(()=>{
-    //   this.onSearchKey('not')
-    // },4000)
-    // https://angularfirebase.com/lessons/sharing-data-between-angular-components-four-methods/
 
     this.loadTable(this.dataService.dataNumber);
 
@@ -238,7 +227,6 @@ export class TableWrapperComponent implements OnInit, OnChanges {
         "customer": asset.customer,
         "agreement": asset.agreement_no,
         "location": asset.location,
-
         /*
               "status":'<span>'+
                        '<img src="../../assets/stat.svg">'+
@@ -257,7 +245,7 @@ export class TableWrapperComponent implements OnInit, OnChanges {
       return acc.concat({
         "id": asset.agreement_no,
         /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
-        "name": asset.contact,
+        "customer": asset.contact,
         "type": asset.type,
         "start_date": asset.start_date,
         "end_date": asset.end_date,
@@ -271,7 +259,7 @@ export class TableWrapperComponent implements OnInit, OnChanges {
         */
         // "status":`<span><img src="../../assets/${asset.status}.png"></span>`,
 
-        "agreementStatus": '<img src="../../assets/' + (!asset.status ? '09.png' : (asset.status === 1 ? '10.png' : '12.png')) + '" alt="' + (!asset.status ? 'In Contract' : (asset.status === 1 ? 'Expired' : 'Expiring Soon')) + '" class="ass-size">',
+        "agreementStatus": '<img src="../../assets/' + (!asset.status ? '09.png' : (asset.status === 1 ? '10.png' : '12.png')) + '" alt="' + (!asset.status ? 'Expired' : (asset.status === 1 ? 'Expiring Soon' : 'In Contract')) + '" class="ass-size">',
       });
     }, []);
 

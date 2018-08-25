@@ -159,9 +159,6 @@ export class TableDemoComponent implements OnInit {
         debugger
        return  item[config['filtering'].columnName].toLowerCase().match(this.config['filtering'].filterString.toLowerCase())})
     }
-
-
-
     let tempArray:Array<any> = [];
     filteredData.forEach((item:any) => {
       let flag = false;
@@ -198,7 +195,6 @@ export class TableDemoComponent implements OnInit {
     if (data.column == "name") {
       // this.router.navigate(['/main/asset/',data.row['id'] ]);
       this.change.emit(data.row['id']);
-
     }
     if (data.column == "agreement_no") {
       // this.router.navigate(['/main/agreementNo/',data.row['id'] ]);
@@ -210,11 +206,11 @@ export class TableDemoComponent implements OnInit {
     //     }
 
     if (data.column == "assetStatus") {
-      alert('assetStatus')
+      // alert('assetStatus')
       // this.router.navigate(['/main/agreementNo/',data.row['id'] ]);
     }
     if (data.column == "agreementStatus") {
-      alert('agreementStatus')
+      // alert('agreementStatus')
       // this.router.navigate(['/main/agreementNo/',data.row['id'] ]);
     }
 
