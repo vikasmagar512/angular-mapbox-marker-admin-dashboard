@@ -13,7 +13,6 @@ export class TableDemoComponent implements OnInit {
   @Input() columns: any[];
   @Input() config: Object;
   @Input() data: Array<any>;
-  @Input() dataNumber: any;
   exportFileName:string = "csv";
   @Output() change: EventEmitter<string> = new EventEmitter<string>();
 
@@ -58,7 +57,6 @@ export class TableDemoComponent implements OnInit {
   }
 
   public ngOnInit():void {
-    console.log('dataNumber ',this.dataNumber)
     this.length = this.data.length;
     this.onChangeTable(this.config);
   }
@@ -102,7 +100,7 @@ export class TableDemoComponent implements OnInit {
   }
 
   public globalSearch(globalSearchText){
-    debugger;
+    // debugger;
     console.log(`this.config${this.config}`)
     let config = {
       ...this.config,

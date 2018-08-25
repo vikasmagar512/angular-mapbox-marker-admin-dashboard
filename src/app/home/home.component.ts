@@ -23,7 +23,6 @@ export class HomeComponent implements OnInit {
 
   // private filterService : AdService;
   constructor(private adService: AdService) {
-
     // this.filterTypes = this.filterService.getFilters();
     // this.filterTypes = filterService.filterTypes;
     this.subscription1 = adService.filterChange.subscribe((value: Array<filterGroup>) => {

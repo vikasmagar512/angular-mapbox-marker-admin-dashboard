@@ -3,95 +3,89 @@
   <div class="row mar-top marginLRZero relContainer">
 
     <!-- <div class="col-md-8 search" (focus)="setFocus('template')" (focusout)="removeFilters()"> -->
-    <div class="col-md-8 search">
+    <div class="col-md-6 search">
       <button type="submit">
         <img src="../../../assets/04.png">
       </button>
 
+      <!-- <span dropdown [autoClose]="false"> -->
+      <span dropdown>
+        <input type="search" (keyup)="onKey(locationSearchBox.value)" #locationSearchBox name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location"
+          class="ser-inp" id="basic-link" dropdownToggle (click)="false" aria-controls="basic-link-dropdown">
+        <div class="dropdown-menu notification">
+          <div>
+            <div *ngFor="let filter of filters;">
+              <ng-container *ngIf="filter['value']">
+                <span>
+                  {{filter['name']}}
+                  <ul>
+                    <li *ngFor="let list of filterList[filter.name]['results']">
+                      <span>
+                        {{list['name']}}
+                      </span>
+                    </li>
+                  </ul>
+                </span>
+              </ng-container>
+            </div>
 
-
-        <span dropdown>
-          <input type="search" (keyup)="onKey(locationSearchBox.value)" #locationSearchBox name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location"
-          class="bg-grey dropdown-toggle" id="basic-link" dropdownToggle (click)="false" aria-controls="basic-link-dropdown">
-          <button type="submit" class="bg-grey dropdown-toggle" id="basic-link" dropdownToggle (click)="false" aria-controls="basic-link-dropdown">
-              <img src="../../../assets/04.png">
-            </button>
-          <div class="dropdown-menu notification">
-              <input type="checkbox" name="vehicle1" value="Bike"> Location
-              <br>
-              <input type="checkbox" name="vehicle2" value="Car"> Customer
-              <br>
-              <input type="checkbox" name="vehicle3" value="Boat" checked>Asset Type
-              <br>
           </div>
-        </span>
-      </div>
-        <!--<input type="search" (keyup)="onKey(locationSearchBox.value)" #locationSearchBox name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location" class="bg-grey">-->
-        <!-- <input type="search" (keyup)="onKey(locationSearchBox.value)" #locationSearchBox name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location"
-          class="bg-grey" id="basic-link" dropdownToggle (click)="false" aria-controls="basic-link-dropdown">
-         <button type="button" class="close" aria-label="Close" id="clearCust" onClick="display(false)"> -->
-          <!-- <span aria-hidden="true">&times;</span>
-        </button>
-        <div id="dropdown-basic" *dropdownMenu class="dropdown-menu suggest-box">
-          <input type="checkbox" name="vehicle1" value="Bike"> Location
-          <br>
-          <input type="checkbox" name="vehicle2" value="Car"> Customer
-          <br>
-          <input type="checkbox" name="vehicle3" value="Boat" checked>Asset Type
-          <br>
-        </div>
-      </span> -->
-      <!-- <ul class="filter-select">
-        <li *ngFor="let result of results" class="filter-select-list"><p class="artist-name">
-          {{result.name}}</p>
-      <span class="tags" *ngFor='let genre of result?.genres | slice:0:6'>{{genre}}</span>
-      </ul> -->
-      <!-- <ng-template *ngIf="showFilters" #template class="suggest-box"> -->
-      <!-- <div *ngIf="showFilters" class="suggest-box">
-          <input type="checkbox" name="vehicle1" value="Bike"> Location<br>
-          <input type="checkbox" name="vehicle2" value="Car"> Customer<br>
-          <input type="checkbox" name="vehicle3" value="Boat" checked>Asset Type<br>
+          <!-- <ul class="filter-select">
+            <div *ngIf="ifTrue('Location')">
+              <span >Movies</span>
+              <li class="filter-select-list" *ngFor="let result of newMovies">
+                <p class="">{{result.name}}</p>
+              </li>
+            </div>
+            <div *ngIf="">
+              <span>Customer</span>
+              <li class="filter-select-list" *ngFor="let cust of filteredCustomer">
+                <p class="">{{cust.name}}</p>
+              </li>
+            </div>
+            <div *ngIf="ifTrue('Asset')">
+              <span>Asset Name</span>
+              <li class="filter-select-list" *ngFor="let asset of newAsset">
+                <p class="">{{asset.category}}</p>
+              </li>
+            </div>
+        <!-- <li class="filter-select-list">
+                <p class="">Sweden</p>
+              </li>
+              <li class="filter-select-list">
+                <p class="">Singapor</p>
+              </li>
+              <li class="filter-select-list">
+                <p class="">England</p>
+              </li>
+              <li class="filter-select-list">
+                <p class="">Finland</p>
+              </li>-->
+        <!-- </ul>-->
+        </div> 
 
-        <ul class="filter-select">
-          <div *ngIf="newMovies">
-            <!-- <span>Movies</span> -->
-      <!-- <li class="filter-select-list" *ngFor="let result of newMovies">
-              <p class="">{{result.name}}</p>
-            </li>
-          </div>
-          <div *ngIf="newAsset.length>0">
-            <span>Asset Name</span>
-            <li class="filter-select-list" *ngFor="let asset of newAsset">
-              <p class="">{{asset.category}}</p>
-            </li>
-          </div> -->
-      <!-- <li class="filter-select-list">
-            <p class="">Sweden</p>
-          </li>
-          <li class="filter-select-list">
-            <p class="">Singapor</p>
-          </li>
-          <li class="filter-select-list">
-            <p class="">England</p>
-          </li>
-          <li class="filter-select-list">
-            <p class="">Finland</p>
-          </li>
-        </ul>
-      <!-- </ng-template>
-      </div> -->
+      </span>
+    </div>
 
+    <!-- <ng2-simple-autocomplete
+  [(search)]="keyword"
+  [searchResults]="remoteData"
+  (onSelect)="onSelectItem($event)"
+  (onChange)="onChangeInput($event)"
+  [style]="inputStyle"></ng2-simple-autocomplete> -->
 
-      <!--     <div class="col-md-2 cust-name col-md-right" id="clearCust" onClick="display(false)">
-      <p>Clear
-        <span class="cross"></span>
+    <div class="col-md-4 filter-option">
+      <span *ngFor="let filter of filters">
+        <input type="checkbox" name={{filter.name}} (change)=onFilter() value={{filter.value}} [(ngModel)]="filter.value">
+        <label>{{filter.name}}</label>
+      </span>
+    </div>
+
+    <div class="col-md-2 cust-name pull-right" id="cust-name">
+      <p>Customer ABC
+        <span class="caret"></span>
       </p>
-    </div> -->
-      <div class="col-md-2 cust-name pull-right" id="cust-name">
-        <p>Customer ABC
-          <span class="caret"></span>
-        </p>
-      </div>
+    </div>
     <!-- </div> -->
     <!-- <div class="row">
     <div class="col-md-12">Search</div>

@@ -19,6 +19,7 @@ export class FilterWrapperComponent implements OnInit {
     // this.filterTypes = filterService.filterTypes;
     this.subscription = filterService.filterChange.subscribe((value:Array<filterGroup>) => {
       this.filterTypes = value;
+      debugger
     });
     // this.activeTable = this.dataService.dataNumber;
   }

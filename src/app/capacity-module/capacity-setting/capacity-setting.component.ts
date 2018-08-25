@@ -28,7 +28,7 @@ export class CapacitySettingComponent implements OnInit {
   }
 
   assetSelected(asset) {
-    debugger;
+    // debugger;
     
     switch (asset) {
       case "Coffee Machine":

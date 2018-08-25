@@ -6,7 +6,7 @@ import 'rxjs-compat/add/operator/catch';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs-compat/add/operator/map';
 
-const API_URL = environment.apiUrl;
+const API_URL = environment['apiUrl'];
 
 @Injectable(/*{
   providedIn: 'root'
