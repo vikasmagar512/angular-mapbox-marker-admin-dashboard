@@ -89,6 +89,7 @@ export class TableWrapperComponent implements OnInit, OnChanges {
     this.dataService.detailType = this.dataService.detailTypes[num];
     console.log(`loadTable${num}`);
     this.dataService.dataNumber = num;
+    // this.adService.flushFilters()
     this.adService.disableFilter(this.dataService.dataNumber)
 
     // this.activeTable = this.dataService.dataNumber;

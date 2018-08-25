@@ -26,6 +26,8 @@ export class dataService {
   detailType: string;
   detailTypes: Array<any> = ["Service Request", "Product Request", "Assets Details", "Agreement Details"];
 
+  currentCustomer: any;
+
   locationSearch = ''
 
   assetCategory = {

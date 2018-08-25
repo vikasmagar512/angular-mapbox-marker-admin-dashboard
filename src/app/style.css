@@ -1,3 +1,4 @@
+
 html{
   font-size: 16px;
 }
@@ -639,3 +640,7 @@ font-size: 18px;
       -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
       filter: grayscale(100%);
   }
+
+.blur{
+  opacity: 0.5;
+}

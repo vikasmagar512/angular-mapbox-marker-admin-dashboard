@@ -15,6 +15,10 @@ import { Customer } from '../../customer';
 })
 export class SearchComponent implements OnInit {
 
+  isEmpty: boolean = false;
+  newAssetLocaion: any[];
+  newAssetName: any[];
+  newAssetCatagory: any[];
   filterList: object;
   @ViewChild('locationSearchBox') inp: ElementRef;
   queryField: FormControl = new FormControl();
@@ -30,10 +34,10 @@ export class SearchComponent implements OnInit {
   showFilters: boolean = false
   // filters=['Customer','Asset Type','Asset','Location']
   filters = [
-    { name: 'Customer', value: false },
-    { name: 'Asset Type', value: false },
-    { name: 'Asset Name', value: false },
-    { name: 'Location', value: false }
+    { name: 'Customer', value: true },
+    { name: 'Asset Type', value: true },
+    { name: 'Asset Name', value: true },
+    { name: 'Location', value: true }
   ];
   public modalRef: BsModalRef;
   constructor(private filterService: AdService,
@@ -47,22 +51,29 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
+    debugger;
     this.movies = this.filterService.getMovies();
     this.Asset = this.data.getAssets();
     this.customers = this.data.getCustomers();
+    this.filterList = {
+      "Customer": {
+        "results": [],
+      },
+      "Asset Type": {
+        "results": [],
+      },
+      "Asset Name": {
+        "results": []
+      },
+      "Location": {
+        "results": []
+      }
+    };
   }
 
-  onFilter() {
-    // for(let i=0;i<this.filters.length;i++){
-    //   if(this.filters[i].value===true){
-    //     if(this.filters[i].name === "Customer"){
-    //       filterList.push(this.)
-    //     }
-    //   }
-    // }
-    // alert("changed")
+  // onFilter() {
 
-  }
+  // }
 
   setFocus(template: TemplateRef<any>) {
     alert("onFocus")
@@ -87,20 +98,29 @@ export class SearchComponent implements OnInit {
     // And reassign the 'remoteData' which is binded to 'searchResults' property.
   }
 
+  onClickSearchBox(value: string){
+    if(value == ""){
+      this.isEmpty = true;
+    }
+  }
+
+  customnerSelected(customer: any){
+    debugger;
+    this.data.currentCustomer = customer.id;
+  }
+
   onKey(value: string) {
+    debugger;
     this.locationSearchBox = value.toLowerCase();
-    // alert('value')
     this.filterService.changeLocation(this.locationSearchBox)
 
-    // this.filterService.locationS = this.locationSearchBox;
     console.log(this.locationSearchBox);
-    // debugger
     if (!value.trim()) {
-      this.newMovies = [];
+      this.newAssetLocaion = [];
     }
     else {
-      this.newMovies = this.movies.filter(movies => movies.name.toLowerCase().indexOf(this.locationSearchBox) > -1);
-      console.log(this.newMovies);
+      this.newAssetLocaion = this.Asset.filter(asset => asset.location.toLowerCase().indexOf(this.locationSearchBox) > -1);
+      console.log(this.newAssetLocaion);
     }
 
     if (!value.trim()) {
@@ -112,31 +132,74 @@ export class SearchComponent implements OnInit {
     }
 
     if (!value.trim()) {
-      this.newAsset = [];
+      this.newAssetCatagory = [];
     }
     else {
-      this.newAsset = this.Asset.filter(asset => asset.category.toLowerCase().indexOf(this.locationSearchBox) > -1);
+      this.newAssetCatagory = this.Asset.filter(asset => asset.category.toLowerCase().indexOf(this.locationSearchBox) > -1);
       // debugger
-      console.log("Asset", this.newAsset);
+      console.log("Asset", this.newAssetCatagory);
     }
 
-    this.filterList = {
-      "Customer":{
-        "results": this.filteredCustomer,
-      },
-      "Asset Type":{
-        "results": this.newAsset,
-      },
-      "Asset Name":{
-        "results": this.newAsset
-      },
-      "Location":{
-        "results": this.newMovies
-      }
-    };
+    if (!value.trim()) {
+      this.newAssetName = [];
+    }
+    else {
+      this.newAssetName = this.Asset.filter(asset => asset.name.toLowerCase().indexOf(this.locationSearchBox) > -1);
+      // debugger
+      console.log("Asset", this.newAssetCatagory);
+    }
 
-    console.log("sdfsdf"+JSON.stringify(this.filterList))
+    // debugger;
+    if (value === "" || value === undefined) {
+      this.isEmpty = true;
+      // this.filterList = {
+      //   "Customer": {
+      //     "results": this.customers,
+      //   },
+      //   "Asset Type": {
+      //     "results": this.Asset,
+      //   },
+      //   "Asset Name": {
+      //     "results": this.Asset
+      //   },
+      //   "Location": {
+      //     "results": this.Asset
+      //   }
+      // };
+      this.filterList = {
+        "Customer": {
+          "results": [],
+        },
+        "Asset Type": {
+          "results": [],
+        },
+        "Asset Name": {
+          "results": []
+        },
+        "Location": {
+          "results": []
+        }
+      };
+    }
+    else {
+      this.isEmpty = false;
+      this.filterList = {
+        "Customer": {
+          "results": this.filteredCustomer,
+        },
+        "Asset Type": {
+          "results": this.newAssetCatagory,
+        },
+        "Asset Name": {
+          "results": this.newAssetName
+        },
+        "Location": {
+          "results": this.newAssetLocaion
+        }
+      };
+    }
 
+    // console.log("sdfsdf" + JSON.stringify(this.filterList))
 
   }
 }
