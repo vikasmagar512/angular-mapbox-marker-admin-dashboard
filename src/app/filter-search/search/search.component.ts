@@ -3,7 +3,6 @@ import { dataService } from '../../dataService.service';
 import { AdService } from '../../ad.service';
 import { FormControl } from '@angular/forms';
 import { Asset } from '../../asset';
-import { AutoCompleteItem, AutocompleteStyle } from 'ng2-simple-autocomplete';
 
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
@@ -31,7 +30,7 @@ export class SearchComponent implements OnInit {
   showFilters: boolean = false
   // filters=['Customer','Asset Type','Asset','Location']
   filters = [
-    { name: 'Customer', value: true },
+    { name: 'Customer', value: false },
     { name: 'Asset Type', value: false },
     { name: 'Asset Name', value: false },
     { name: 'Location', value: false }
@@ -137,7 +136,7 @@ export class SearchComponent implements OnInit {
     };
 
     console.log("sdfsdf"+JSON.stringify(this.filterList))
-    
+
 
   }
 }
