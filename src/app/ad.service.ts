@@ -284,6 +284,20 @@ export class AdService {
     console.log('this.filterTypes ',this.filterTypes)
     this.filterChange.next(this.filterTypes);
   }
+  flushFilters(){
+    console.log('this.filterService.filterTypes  ',this.filterTypes )
+    this.filterTypes =
+      this.filterTypes.map((filterGrp: filterGroup) => (
+        {
+          ...filterGrp,
+          filterArray: filterGrp.filterArray.map((filterItr: filter) => (
+              {...filterItr, value: false}
+          ))
+        }
+      ))
+    console.log('this.filterTypes ',this.filterTypes)
+    // this.filterChange.next(this.filterTypes);
+  }
   disableFilter(dataNumber:Number) {
     let objMapping = {
       SERVICE_TABLE:0,
@@ -291,8 +305,8 @@ export class AdService {
       ASSET_TABLE:2,
       AGREEMENT_TABLE:3,
     }
-
-    console.log('this.filterService.filterTypes  ',this.filterTypes )
+    this.flushFilters()
+    console.log('this.filterTypes ',this.filterTypes)
     this.filterTypes = this.filterTypes.map((filterGrp: filterGroup) => {
         if (dataNumber === 0) {
           //service Table no filters applicable
