@@ -2,83 +2,56 @@
 
   <div class="row mar-top marginLRZero relContainer">
 
-    <!-- <div class="col-md-8 search" (focus)="setFocus('template')" (focusout)="removeFilters()"> -->
     <div class="col-md-6 search">
       <button type="submit">
         <img src="../../../assets/04.png">
       </button>
 
-      <!-- <span dropdown [autoClose]="false"> -->
       <span dropdown>
-        <input type="search" (keyup)="onKey(locationSearchBox.value)" #locationSearchBox name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location"
-          class="ser-inp" id="basic-link" dropdownToggle (click)="false" aria-controls="basic-link-dropdown">
-        <div class="dropdown-menu notification">
-          <div>
-            <div *ngFor="let filter of filters;">
+        <input type="search" (keyup)="onKey(locationSearchBox.value)" (click)="onClickSearchBox(locationSearchBox.value)" #locationSearchBox
+          name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location" class="ser-inp" id="basic-link"
+          dropdownToggle (click)="false" aria-controls="basic-link-dropdown">
+        <div class="dropdown-menu notification" *ngIf="!isEmpty">
+          <div class="dropdown-div">
+            <div *ngFor="let filter of filters;" class="filter-div">
               <ng-container *ngIf="filter['value']">
                 <span>
-                  {{filter['name']}}
-                  <ul>
+                  <span class="filter-name">
+                    {{filter['name']}}
+                  </span>
+                  <ul style="margin-bottom: -10px;">
                     <li *ngFor="let list of filterList[filter.name]['results']">
-                      <span>
+                      <span *ngIf="filter.name == 'Customer' || filter.name == 'Asset Name' " (click)="customnerSelected(list)">
                         {{list['name']}}
+                      </span>
+                      <span *ngIf="filter.name == 'Asset Type'">
+                        {{list['category']}}
+                      </span>
+                      <span *ngIf="filter.name == 'Location'">
+                        {{list['location']}}
                       </span>
                     </li>
                   </ul>
                 </span>
+                <hr style="margin-bottom: 0px">
               </ng-container>
             </div>
-
           </div>
-          <!-- <ul class="filter-select">
-            <div *ngIf="ifTrue('Location')">
-              <span >Movies</span>
-              <li class="filter-select-list" *ngFor="let result of newMovies">
-                <p class="">{{result.name}}</p>
-              </li>
-            </div>
-            <div *ngIf="">
-              <span>Customer</span>
-              <li class="filter-select-list" *ngFor="let cust of filteredCustomer">
-                <p class="">{{cust.name}}</p>
-              </li>
-            </div>
-            <div *ngIf="ifTrue('Asset')">
-              <span>Asset Name</span>
-              <li class="filter-select-list" *ngFor="let asset of newAsset">
-                <p class="">{{asset.category}}</p>
-              </li>
-            </div>
-        <!-- <li class="filter-select-list">
-                <p class="">Sweden</p>
-              </li>
-              <li class="filter-select-list">
-                <p class="">Singapor</p>
-              </li>
-              <li class="filter-select-list">
-                <p class="">England</p>
-              </li>
-              <li class="filter-select-list">
-                <p class="">Finland</p>
-              </li>-->
-        <!-- </ul>-->
-        </div> 
-
+        </div>
       </span>
     </div>
 
-    <!-- <ng2-simple-autocomplete
-  [(search)]="keyword"
-  [searchResults]="remoteData"
-  (onSelect)="onSelectItem($event)"
-  (onChange)="onChangeInput($event)"
-  [style]="inputStyle"></ng2-simple-autocomplete> -->
-
     <div class="col-md-4 filter-option">
       <span *ngFor="let filter of filters">
-        <input type="checkbox" name={{filter.name}} (change)=onFilter() value={{filter.value}} [(ngModel)]="filter.value">
-        <label>{{filter.name}}</label>
-      </span>
+      <label class="check-container" style="display: inline-block">
+        <input type="checkbox" class="checkbox2" id="{{filter.name}}" name={{filter.name}} (change)=onFilter() value={{filter.value}} [(ngModel)]="filter.value" />
+        <span class="checkmark" style="left: -2px"></span>
+      </label>
+      <label style="margin-left: 25px;" for={{filter.name}}>{{filter.name}}</label>
+      
+    </span>
+      
+      
     </div>
 
     <div class="col-md-2 cust-name pull-right" id="cust-name">
@@ -86,11 +59,5 @@
         <span class="caret"></span>
       </p>
     </div>
-    <!-- </div> -->
-    <!-- <div class="row">
-    <div class="col-md-12">Search</div>
-  </div> -->
-
-  <!-- </div> -->
-</div>
+  </div>
 </div>

@@ -37,6 +37,7 @@ import { CanActivateRoutesGuard } from './can-activate-routes.guard';
 import { CustomHttpService } from './custom-http-service.service';
 import { SessionService } from './session.service';
 import { DashboardChartsComponent } from './dashboard-module/dashboard-charts/dashboard-charts.component';
+import { CustomerBottomComponent } from './customer-bottom/customer-bottom.component';
 
 
 const appRoutes: Routes = [
@@ -128,6 +129,7 @@ const appRoutes: Routes = [
     MainComponent,
     HomeComponent,
     PageNotFoundComponent,
+    CustomerBottomComponent,
     // DashboardChartsComponent
   ],
   entryComponents: [HeroJobAdComponent, HeroProfileComponent, TableWrapperComponent,DashboardChartsComponent],

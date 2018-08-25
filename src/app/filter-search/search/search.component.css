@@ -96,5 +96,95 @@ searchSuggest{
   padding:10px;
 }
 .dropdown-menu{
-  width:500px;
+  width: 610px;
+  position: absolute;
+  left: 84px;
+}
+
+.dropdown-div{
+  padding: 15px;
+  padding-top: 0;
+  max-height: 350px;
+  overflow-y: scroll;
+}
+
+.dropdown-div li{
+  list-style-type: none;
+  padding: 6px 0;
+  /* background: #19e8a5 */
+}
+.dropdown-div ul{
+  padding-left: 20px;
+}
+
+.dropdown-div li:hover{
+  font-weight: 600;
+  cursor: pointer;  
+}
+
+.filter-name{
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.filter-div{
+  padding: 10px;
+}
+
+
+
+
+
+.check-container {
+  display: block;
+  position: relative;
+  padding-left: 0;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.check-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+.checkmark {
+  position: absolute;
+  top: 0px;
+  left: 100px;
+  height: 20px;
+  width: 20px;
+  background-color: #fff;
+  border:2px solid #000;
+}
+.check-container:hover input ~ .checkmark {
+  background-color: #fff;
+  border: 2px solid #000;
+}
+.check-container input:checked ~ .checkmark {
+  background-color: #fff;
+  border: 2px solid #000;
+}
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.check-container input:checked ~ .checkmark:after {
+  display: block;
+}
+.check-container .checkmark:after {
+  left: 9px;
+  top: -10px;
+  width: 10px;
+  height: 22px;
+  border: solid #50E3C2;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }

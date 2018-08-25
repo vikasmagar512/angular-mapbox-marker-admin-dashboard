@@ -10,6 +10,7 @@ import { dataService } from '../dataService.service';
 export class BottomComponent implements OnInit {
 
   customer: any;
+  custId;
   constructor(
     private dataService: dataService,
   ) { }
@@ -20,6 +21,8 @@ export class BottomComponent implements OnInit {
 
   loadTable1(num: number) {
     this.dataService.dataNumber = num;
+    // this.custId = this.dataService.currentSelectedCustomer;
+    
 
     this.dataService.detailType = this.dataService.detailTypes[num];
     // $(`.RequestType 2RequestTypeNum top cursPointer active`).removeClass('active');
