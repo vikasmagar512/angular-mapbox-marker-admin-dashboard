@@ -1,7 +1,7 @@
 <div class="financialInfo">
   <div class="row top-header marginLRZero ">
     <div class="col-md-4">
-      <span class="detail-type">{{dataService.detailType}}</span>
+      <span class="detail-type">{{detailType}}</span>
       <div class="xlsExport">
         <!--<img src="../../../assets/24.png">-->
         <!--
@@ -11,34 +11,34 @@
     </div>
     <div class="col-md-8 pull-right">
       <div class="sie-btn pull-right">
-        <button class="sieBtn 1num first" (click)="loadTable(0)" [class.active]="dataService.dataNumber == 0">
+        <button class="sieBtn 1num first" (click)="loadTable(0)" [class.active]="dataNumber == 0">
           <img src="../../../assets/26.svg">
         </button>
-        <button class="sieBtn 2num" (click)="loadTable(1)" [class.active]="dataService.dataNumber == 1">
+        <button class="sieBtn 2num" (click)="loadTable(1)" [class.active]="dataNumber == 1">
           <img src="../../../assets/27.svg">
         </button>
-        <button class="sieBtn 3num" (click)="loadTable(2)" [class.active]="dataService.dataNumber == 2">
+        <button class="sieBtn 3num" (click)="loadTable(2)" [class.active]="dataNumber == 2">
           <img src="../../../assets/28.svg">
         </button>
-        <button class="sieBtn 4num" (click)="loadTable(3)" [class.active]="dataService.dataNumber == 3">
+        <button class="sieBtn 4num" (click)="loadTable(3)" [class.active]="dataNumber == 3">
           <img src="../../../assets/29.svg">
         </button>
       </div>
     </div>
   </div>
-  <div *ngIf="dataService.dataNumber===0">
-    <app-table-demo #serviceRequestTable (change)="openServiceModal($event)" [data]="serviceRequestData" #serviceRequestTable
+  <div *ngIf="dataNumber===0">
+    <app-table-demo #serviceRequestTable (change)="openServiceModal($event)" [data]="serviceRequestData"
       [config]="serviceRequestConfig" [columns]="serviceRequestColumns"></app-table-demo>
   </div>
-  <div *ngIf="dataService.dataNumber===1">
+  <div *ngIf="dataNumber===1">
     <app-table-demo #productRequestTable (change)="openProductModal($event)" [data]="productRequestData" [config]="productRequestConfig"
       [columns]="productRequestColumns"></app-table-demo>
   </div>
-  <div *ngIf="dataService.dataNumber===2">
+  <div *ngIf="dataNumber===2">
     <app-table-demo #assetTable (change)="openAssetModal($event)" [data]="assetData" [config]="assetConfig" [columns]="assetColumns"
       ></app-table-demo>
   </div>
-<div *ngIf="dataService.dataNumber===3">
+<div *ngIf="dataNumber===3">
     <app-table-demo #agreementTable (change)="openAgreementModal($event)" [data]="agreementData" [config]="agreementConfig" [columns]="agreementColumns"
       ></app-table-demo>
   </div>

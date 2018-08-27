@@ -18,11 +18,20 @@ import 'rxjs-compat/add/operator/map';
 })
 export class dataService {
 
+  // dataNumber:number
 
+  dataNumber: Subject<number> = new BehaviorSubject<number>(0);
+  // dataNumberSetting = this.dataNumber.asObservable();
   constructor(private http: HttpClient) {
-    this.dataNumber=3
+    // this.dataNumber=3
+    // this.dataNumberSetting.subscribe((value) => {
+    //   this.dataNumber = 0
+    // });
   }
-  dataNumber: number;
+  changeDataNumber(dataNumber:number) {
+    this.dataNumber.next(dataNumber);
+  }
+
   detailType: string;
   detailTypes: Array<any> = ["Service Request", "Product Request", "Assets Details", "Agreement Details"];
 

@@ -13,8 +13,7 @@ import { dataService } from '../../dataService.service';
 export class FilterWrapperComponent implements OnInit {
   filterTypes:Array<filterGroup>;
   subscription: Subscription;
-  activeTable : Number;
-  constructor(private filterService : AdService,private dataService : dataService) {
+  constructor(private filterService : AdService ,private dataService : dataService) {
     // this.filterTypes = this.filterService.getFilters();
     // this.filterTypes = filterService.filterTypes;
     this.subscription = filterService.filterChange.subscribe((value:Array<filterGroup>) => {
@@ -26,7 +25,7 @@ export class FilterWrapperComponent implements OnInit {
 
   ngOnDestroy() {
     // prevent memory leak when component destroyed
-    this.subscription.unsubscribe();
+    // this.subscription.unsubscribe();
   }
   ngOnInit() {
     // this.filterTypes=this.filterService.getFilters();

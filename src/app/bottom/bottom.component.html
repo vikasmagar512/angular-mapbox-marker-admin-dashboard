@@ -1,11 +1,11 @@
 
 <div class="row marginLRZero flexVertM b-color" >
   <div class="col-md-2 mar-le flexVertM vertBox">
-    <div class="RequestType 2RequestTypeNum top cursPointer" (click)="loadTable1(1)" [class.active]="dataService.dataNumber == 1">
+    <div class="RequestType 2RequestTypeNum top cursPointer" (click)="loadTable1(1)" [class.active]="dataNumber === 1">
       <p class="font">Product Requests</p>
       <p class="f-p">12</p>
     </div>
-    <div class="RequestType 1RequestTypeNum bot cursPointer" (click)="loadTable1(0)" [class.active]="dataService.dataNumber == 0">
+    <div class="RequestType 1RequestTypeNum bot cursPointer" (click)="loadTable1(0)" [class.active]="dataNumber === 0">
       <p class="font">Service Requests</p>
       <p class="f-p">08</p>
     </div>
