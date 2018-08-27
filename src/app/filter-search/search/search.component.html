@@ -2,7 +2,7 @@
 
   <div class="row mar-top marginLRZero relContainer">
 
-    <div class="col-md-6 search">
+    <div class="col-md-5 search">
       <button type="submit">
         <img src="../../../assets/04.png">
       </button>
@@ -20,7 +20,7 @@
                     {{filter['name']}}
                   </span>
                   <ul style="margin-bottom: -10px;">
-                    <li *ngFor="let list of filterList[filter.name]['results']">
+                    <li *ngFor="let list of filterList[filter.name]['results']" (click)="customnerSelected(list)">
                       <span *ngIf="filter.name == 'Customer' || filter.name == 'Asset Name' " (click)="customnerSelected(list)">
                         {{list['name']}}
                       </span>
@@ -40,6 +40,9 @@
         </div>
       </span>
     </div>
+    <div class="col-md-1">
+      <button class="btn" (click)="data.currentCustomer = null" style="margin:9px 0;">Remove</button>
+    </div>
 
     <div class="col-md-4 filter-option">
       <span *ngFor="let filter of filters">
@@ -54,8 +57,8 @@
       
     </div>
 
-    <div class="col-md-2 cust-name pull-right" id="cust-name">
-      <p>Customer ABC
+    <div class="col-md-2 cust-name pull-right" id="cust-name" *ngIf="data.currentCustomer">
+      <p >{{data.currentCustomer.name}}
         <span class="caret"></span>
       </p>
     </div>

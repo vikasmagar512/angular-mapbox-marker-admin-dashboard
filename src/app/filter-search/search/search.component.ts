@@ -15,6 +15,7 @@ import { Customer } from '../../customer';
 })
 export class SearchComponent implements OnInit {
 
+  customersList: any;
   isEmpty: boolean = false;
   newAssetLocaion: any[];
   newAssetName: any[];
@@ -104,9 +105,14 @@ export class SearchComponent implements OnInit {
     }
   }
 
+
   customnerSelected(customer: any){
     debugger;
-    this.data.currentCustomer = customer.id;
+    this.customersList = this.data.getCustomers();
+    this.data.currentCustomer = this.customersList.find((item)=>item.id ==customer.id)
+    debugger;
+    $('.search input').val("");
+    
   }
 
   onKey(value: string) {

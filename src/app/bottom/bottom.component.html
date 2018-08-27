@@ -1,5 +1,4 @@
-
-<div class="row marginLRZero flexVertM b-color" >
+<div class="row marginLRZero flexVertM b-color">
   <div class="col-md-2 mar-le flexVertM vertBox">
     <div class="RequestType 2RequestTypeNum top cursPointer" (click)="loadTable1(1)" [class.active]="dataService.dataNumber == 1">
       <p class="font">Product Requests</p>
@@ -10,7 +9,12 @@
       <p class="f-p">08</p>
     </div>
   </div>
-  <app-customer-bottom></app-customer-bottom>
+  <div class="col-md-4">
+    <!-- <ng-container class="col-md-4"> -->
+    <span  *ngIf="dataService.currentCustomer"> 
+      <app-customer-bottom></app-customer-bottom>
+    </span>
+  </div>
   <!-- <customerBottom (custId)=custId></customerBottom> -->
   <!-- <div class="col-md-4">
     <div class="row flexVertM" style="display: flex;flex-direction: row;" id="customer">

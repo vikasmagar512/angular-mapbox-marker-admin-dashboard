@@ -16,8 +16,7 @@ export class CustomerBottomComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.dataService.currentCustomer = "123"
-    this.customers = this.dataService.getCustomers();
-    this.customer = this.customers.find((item) => item.id == this.dataService.currentCustomer)
+    debugger;
+    // this.customer = this.dataService.currentCustomer;
   }
 }
