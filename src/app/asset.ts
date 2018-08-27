@@ -4,6 +4,7 @@ export interface Asset{
       "id":string;
       "category": string;
       "name": string;
+      "detail"?:string;
       "agreement_no":string;
       "location": string;
       "serialno": string;

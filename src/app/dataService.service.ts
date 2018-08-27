@@ -123,6 +123,7 @@ export class dataService {
       "id": "01",
       "category": "Printer",
       "name": "Canon SW2014",
+      "detail":"Pages Required",
       "status": 1,
       "location": "sweden",
       "agreement_no": "AGR10923347",
@@ -140,7 +141,7 @@ export class dataService {
           "required": 10,
           "uptime": "80%",
           "usage": "300"
-        },
+         },
         {
           // "parameter":{
 
@@ -162,6 +163,7 @@ export class dataService {
       "category": "Coffee Machine",
       "name": "Jura E8 Coffee Machine ",
       "status": 0,
+      "detail":"Cleaning Milk System",
       "location": "Bromma",
       "agreement_no": "AGR10923349",
       "serialno": "SR12190",
@@ -185,6 +187,7 @@ export class dataService {
       "category": "Vacuum",
       "name": "Vacuum",
       "status": 2,
+      "detail":"Servicing Required",
       "agreement_no": "AGR10923347",
       "location": "Bromma",
       "serialno": "VC12190",

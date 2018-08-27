@@ -288,12 +288,13 @@ export class TableWrapperComponent implements OnInit, OnChanges {
     };
     this.serviceRequestColumns = [
       {title: 'Request Id', name: 'id', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
-      {title: 'Request Name', name: 'name', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
-      {title: 'Request Type', name: 'type', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
+      // {title: 'Request Details', name: 'detail', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
       {title: 'Customer', className: ['text-warning'], name: 'customer', filter: 'text'},
+      {title: 'Request Type', name: 'type', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
       {title: 'Agreement', className: ['text-warning'], name: 'agreement', filter: 'text'},
-      {title: 'Status', name: 'status', sort: false, filter: 'text'},
       {title: 'Location', name: 'location', sort: '', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
+      // {title: 'Status', name: 'status', sort: false, filter: 'text'},
+
     ];
     this.serviceRequestData = this.assetDetail.reduce((acc, asset: Asset) => {
       /* let stat:'asset.status';
@@ -301,12 +302,12 @@ export class TableWrapperComponent implements OnInit, OnChanges {
       return acc.concat({
         "id": asset.id,
         /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
-        "name": asset.name,
-        "type": asset.category,
+        // "detail": asset.detail,
         "customer": asset.customer,
+        "type": asset.category,
         "agreement": asset.agreement_no,
         "location": asset.location,
-        "status": `<span><img src="../../assets/${asset.status}.png"></span>`
+        // "status": `<span><img src="../../assets/${asset.status}.png"></span>`
       });
     }, []);
 
@@ -333,7 +334,7 @@ export class TableWrapperComponent implements OnInit, OnChanges {
       return acc.concat({
         "id": asset.id,
         /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
-        "name": asset.name,
+        "name": asset.detail,
         "assetType": asset.category,
         "customer": asset.customer,
         "agreement": asset.agreement_no,
