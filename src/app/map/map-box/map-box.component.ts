@@ -42,7 +42,7 @@ export class MapBoxComponent implements OnInit{
 
   ngOnInit() {
     // this.markers = this.mapService.getMarkers()
-    mapboxgl['accessToken'] = 'pk.eyJ1IjoidmlrYXNtYWdhciIsImEiOiJjamczbGl1bXUxdDB3MndvNmV3NGZtN2ltIn0.iYOKmUXqreHAmf1v5HiYeQ';
+    // mapboxgl['accessToken'] = 'pk.eyJ1IjoidmlrYXNtYWdhciIsImEiOiJjamczbGl1bXUxdDB3MndvNmV3NGZtN2ltIn0.iYOKmUXqreHAmf1v5HiYeQ';
 
     this.initializeMap()
   }

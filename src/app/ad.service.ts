@@ -116,14 +116,6 @@ export class AdService {
       enabled:false,
       filterArray:[
         {
-          id:"1",
-          name:"inContract",
-          displayText:"In Contract",
-          type:"agreementStatus",
-          value:false,
-          image:'../../../assets/13.png',
-        },
-        {
           id:"2",
           name:"expired",
           displayText:"Expired",
@@ -138,6 +130,13 @@ export class AdService {
           type:"agreementStatus",
           value:false,
           image:'../../../assets/14.png'
+        },{
+          id:"1",
+          name:"inContract",
+          displayText:"In Contract",
+          type:"agreementStatus",
+          value:false,
+          image:'../../../assets/13.png',
         },
       ]
     }
