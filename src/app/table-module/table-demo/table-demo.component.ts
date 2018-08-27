@@ -121,20 +121,20 @@ export class TableDemoComponent implements OnInit {
     let filteredData:Array<any> = data;
     this.columns.forEach((column:any) => {
       if (column.filtering) {
-        debugger
+        // debugger
         if (column.name === 'agreementStatus') {
           filteredData = filteredData.filter((item: any) => {
-            debugger
+            // debugger
              let k = item[column.name].split('alt="')[1].split('>')[0].split('"')[0]
-             debugger
+            //  debugger
              // return k.toLowerCase().match(column.filtering.filterString.toLowerCase());
             return (column.filtering.filterString.toLowerCase() === "") ? true : k.toLowerCase() === (column.filtering.filterString.toLowerCase());
           });
         } else if (column.name === 'assetStatus') {
           filteredData = filteredData.filter((item: any) => {
-            debugger
+            // debugger
              let k = item[column.name].split('alt="')[1].split('>')[0].split('"')[0]
-             debugger
+            //  debugger
              return (column.filtering.filterString.toLowerCase() === "") ? true : k.toLowerCase() === (column.filtering.filterString.toLowerCase());
           });
         } else {
@@ -156,12 +156,9 @@ export class TableDemoComponent implements OnInit {
 
     if (config.filtering.columnName) {
       return filteredData.filter((item:any) =>{
-        debugger
+        // debugger
        return  item[config['filtering'].columnName].toLowerCase().match(this.config['filtering'].filterString.toLowerCase())})
     }
-
-
-
     let tempArray:Array<any> = [];
     filteredData.forEach((item:any) => {
       let flag = false;
@@ -198,7 +195,6 @@ export class TableDemoComponent implements OnInit {
     if (data.column == "name") {
       // this.router.navigate(['/main/asset/',data.row['id'] ]);
       this.change.emit(data.row['id']);
-
     }
     if (data.column == "agreement_no") {
       // this.router.navigate(['/main/agreementNo/',data.row['id'] ]);
@@ -210,11 +206,11 @@ export class TableDemoComponent implements OnInit {
     //     }
 
     if (data.column == "assetStatus") {
-      alert('assetStatus')
+      // alert('assetStatus')
       // this.router.navigate(['/main/agreementNo/',data.row['id'] ]);
     }
     if (data.column == "agreementStatus") {
-      alert('agreementStatus')
+      // alert('agreementStatus')
       // this.router.navigate(['/main/agreementNo/',data.row['id'] ]);
     }
 

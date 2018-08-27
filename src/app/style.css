@@ -7,9 +7,9 @@ p{
   margin: 0px;
 }
 
-.cursPointer{
+/*.cursPointer{
   cursor: pointer;
-}
+}*/
 /*body{
   box-sizing: border-box;
   margin: 0;
@@ -17,7 +17,6 @@ p{
   width: 1367px;
   height: 663;
   overflow: hidden;
-  
 }*/
 
 button,input{
@@ -161,7 +160,7 @@ font-size: 18px;
 
 .bottom .col-md-5 {
   width: 41%;
-}           
+}
 
 .filter{
   border: 1px solid grey;
@@ -340,7 +339,7 @@ font-size: 18px;
 .cust-detail h5{
   font-weight: normal;
   color:#000;
-}   
+}
 
 .message{
   background-color: #000;
@@ -411,7 +410,7 @@ font-size: 18px;
   padding: 6px;
   font-weight: normal;
   color: #000;
-}   
+}
 
 .popup img{
   width: 31px;
@@ -442,7 +441,7 @@ font-size: 18px;
 }
 
 .s-table , .s-table th{
-  border:2px solid #cecbcb; 
+  border:2px solid #cecbcb;
 }
 .s-table , .s-table th{
   border:2px solid #cecbcb;
@@ -456,7 +455,7 @@ font-size: 18px;
 .s-table{
   box-sizing: border-box;
   width: 99%;
-  max-width: 100%;    
+  max-width: 100%;
   margin-left: 5px;
   margin-bottom: 20px;
   border-collapse: collapse;
@@ -492,16 +491,16 @@ font-size: 18px;
 
   .third-t tr>td{
       padding: 14px;
-      border-bottom: none;    
+      border-bottom: none;
   }
 
   .fourth-t tr>td{
       padding: 10px;
-      border-bottom: none;    
+      border-bottom: none;
   }
   /*.s-table tr>td{
       padding: 10px;
-      border-bottom: none;    
+      border-bottom: none;
   }*/
 
 
@@ -619,10 +618,10 @@ font-size: 18px;
   .clr-blue{
       color: #3aa7d4;
   }
-  
+
   .bg-grey{
       background: #dad1d1;
-  }   
+  }
   .tb{
       display: none;
       height: 338px;
@@ -641,7 +640,7 @@ font-size: 18px;
       -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
       filter: grayscale(100%);
   }
-  
+
 .blur{
   opacity: 0.5;
-} 
+}
