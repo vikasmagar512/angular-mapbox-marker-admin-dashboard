@@ -10,6 +10,7 @@ import {LoaderServiceService} from '../loader-service.service';
 @NgModule({
   imports: [
     CommonModule,
+    // MatProgressBarModule,
   ],
   providers:[LoaderServiceService],
   exports:[LoaderComponent],

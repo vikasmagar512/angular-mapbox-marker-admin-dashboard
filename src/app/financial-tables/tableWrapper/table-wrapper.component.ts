@@ -12,12 +12,13 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 @Component({
   selector: 'app-table-wrapper',
   templateUrl: './table-wrapper.component.html',
-  styleUrls: ['./table-wrapper.component.css']
+  styleUrls: ['./table-wrapper.component.css', '../../style.css','../../table.css']
 })
 
 export class TableWrapperComponent implements OnInit, OnChanges {
   // @Input() data;
-
+  detailType:string;
+  dataNumber:number;
   agreementIdSelected: string;
   agreementCurrentObj: any;
 
@@ -32,12 +33,18 @@ export class TableWrapperComponent implements OnInit, OnChanges {
 
   customerCurrentObj: any;
   customerId: string;
-
+  _subscription: any;
 
   public filterTypesReceived: Array<filterGroup>;
 
   constructor(private dataService: dataService, private adService: AdService, private modalService: BsModalService) {
-
+    this.detailType = dataService.detailType;
+    this.dataNumber = 0;
+    // this.loadTable(this.dataNumber);
+    this._subscription = this.dataService.dataNumber.subscribe((value) => {
+      this.dataNumber = value
+      this.adService.disableFilter(this.dataNumber)
+    })
   }
   public modalRef: BsModalRef; // {1}
 
@@ -51,7 +58,6 @@ export class TableWrapperComponent implements OnInit, OnChanges {
   }
 
   openAgreementModal(event) {
-    alert('asdf')
     this.agreementIdSelected = event;
     this.agreementCurrentObj = this.agreementData.find((item) => item['id'] === this.agreementIdSelected)
     this.openModal(this.AgreementTemplate)
@@ -86,11 +92,14 @@ export class TableWrapperComponent implements OnInit, OnChanges {
   }
 
   loadTable(num: number) {
-    this.dataService.detailType = this.dataService.detailTypes[num];
+    this.detailType = this.dataService.detailTypes[num];
     console.log(`loadTable${num}`);
-    this.dataService.dataNumber = num;
+    // this.dataService.dataNumber = num;
+    this.dataService.changeDataNumber(num)
     // this.adService.flushFilters()
-    this.adService.disableFilter(this.dataService.dataNumber)
+    debugger
+    this.adService.disableFilter(num)
+    // this.adService.disableFilter(this.dataNumber)
 
     // this.activeTable = this.dataService.dataNumber;
     // $(`.sieBtn`).removeClass('active');
@@ -142,17 +151,18 @@ export class TableWrapperComponent implements OnInit, OnChanges {
   newColumnSearchTable(reflect: object) {
     // debugger
     // let reflect = {'type':'printer','assetStatus':'Not working'}
-    if (this.dataService.dataNumber === 2) {
+    debugger
+    if (this.dataNumber === 2) {
       let newAssetColumns = this.addFilterString(this.assetColumns,reflect)
       // debugger
       this.assetTableRef.newColumnSearch(newAssetColumns)
     }
-    if (this.dataService.dataNumber === 1) {
+    if (this.dataNumber === 1) {
       let newProductColumns = this.addFilterString(this.productRequestColumns,reflect)
       // debugger
       this.productRequestTableRef.newColumnSearch(newProductColumns)
     }
-    if (this.dataService.dataNumber === 3) {
+    if (this.dataNumber === 3) {
       let agreementColumns = this.addFilterString(this.agreementColumns,reflect)
       // debugger
       this.agreementTableRef.newColumnSearch(agreementColumns)
@@ -166,9 +176,9 @@ export class TableWrapperComponent implements OnInit, OnChanges {
     this.filterTypesReceived.map((filterTypeItem) => {
       // let search = this.dataService.dataNumber === 0 && (["ASSET_STATUS", "ASSET_TYPE"].indexOf(filterTypeItem.filterType) !== -1) ||
 
-      let search = this.dataService.dataNumber === 2 && (['ASSET_STATUS','ASSET_TYPE'].indexOf(filterTypeItem.filterType) !== -1) //asset
-        || this.dataService.dataNumber === 1 && (['ASSET_TYPE'].indexOf(filterTypeItem.filterType) !== -1)  //prduct
-        || this.dataService.dataNumber === 3 && (["CONTRACT_STATUS"].indexOf(filterTypeItem.filterType) !== -1) //agreement
+      let search = this.dataNumber === 2 && (['ASSET_STATUS','ASSET_TYPE'].indexOf(filterTypeItem.filterType) !== -1) //asset
+        || this.dataNumber === 1 && (['ASSET_TYPE'].indexOf(filterTypeItem.filterType) !== -1)  //prduct
+        || this.dataNumber === 3 && (["CONTRACT_STATUS"].indexOf(filterTypeItem.filterType) !== -1) //agreement
       // debugger
       if (search) {
         k = filterTypeItem.filterArray.find(item => item.value)
@@ -202,6 +212,11 @@ export class TableWrapperComponent implements OnInit, OnChanges {
     // this.agreementTableRef.globalSearch(this.searchValue)
   }
   ngOnInit() {
+    // setTimeout(()=>{
+    //   this.loadTable(this.dataNumber);
+    // },1000)
+
+    // this.dataNumber = this.dataService.dataNumber
     // setTimeout(() => {
     //   $('input[placeholder="Filter by name"]')
     //   .val("Vaccum")
@@ -220,7 +235,6 @@ export class TableWrapperComponent implements OnInit, OnChanges {
     // },4000)
     // https://angularfirebase.com/lessons/sharing-data-between-angular-components-four-methods/
 
-    this.loadTable(this.dataService.dataNumber);
 
     this.assetDetail = this.dataService.getAssets();
 
@@ -288,12 +302,12 @@ export class TableWrapperComponent implements OnInit, OnChanges {
     };
     this.serviceRequestColumns = [
       {title: 'Request Id', name: 'id', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
-      // {title: 'Request Details', name: 'detail', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
-      {title: 'Customer', className: ['text-warning'], name: 'customer', filter: 'text'},
-      {title: 'Request Type', name: 'type', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
-      {title: 'Agreement', className: ['text-warning'], name: 'agreement', filter: 'text'},
-      {title: 'Location', name: 'location', sort: '', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
-      // {title: 'Status', name: 'status', sort: false, filter: 'text'},
+      {title: 'Request Details', name: 'name', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
+      {title: 'Customer', className: ['text-warning'], name: 'customer', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
+      {title: 'Asset Name', name: 'type', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
+      {title: 'Requested On', className: ['text-warning'], name: 'requestedOn', filter: 'text'},
+      {title: 'Due By', name: 'dueBy', sort: '', filter: 'text'},
+      {title: 'Status', name: 'status', sort: false, filter: 'text'},
 
     ];
     this.serviceRequestData = this.assetDetail.reduce((acc, asset: Asset) => {
@@ -303,11 +317,12 @@ export class TableWrapperComponent implements OnInit, OnChanges {
         "id": asset.id,
         /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
         // "detail": asset.detail,
+        "name": asset.detail,
         "customer": asset.customer,
         "type": asset.category,
-        "agreement": asset.agreement_no,
-        "location": asset.location,
-        // "status": `<span><img src="../../assets/${asset.status}.png"></span>`
+        "requestedOn": asset.requestedOn,
+        "dueBy": asset.dueBy,
+        "status": asset.requestStatus
       });
     }, []);
 
@@ -320,13 +335,15 @@ export class TableWrapperComponent implements OnInit, OnChanges {
 
     this.productRequestColumns = [
       {title: 'Request Id', name: 'id', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
-      {title: 'Product Name', name: 'name', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
-      {title: 'Asset Type', name: 'assetType', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
-      {title: 'Customer', className: ['text-warning'], name: 'customer', filter: 'text'},
-      {title: 'Agreement', className: ['text-warning'], name: 'agreement', filter: 'text'},
-      // { title: 'Status', name: 'assetStatus', sort: false },
-      // { title: 'Status', name: 'assetStatus', sort: false },
-      {title: 'Location', name: 'location', sort: '', filtering: {filterString: '', placeholder: 'Filter by extn.'}, filter: 'text'},
+      {title: 'Product', name: 'name', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
+      {title: 'Asset Type', name: 'type', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
+      {title: 'Customer', className: ['text-warning'], name: 'customer', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
+      {title: 'Quantity', className: ['text-warning'], name: 'quantity', filter: 'text'},
+      {title: 'Requested On', className: ['text-warning'], name: 'requestedOn', filter: 'text'},
+      {title: 'Due By', name: 'dueBy', sort: '', filter: 'text'},
+      {title: 'Status', name: 'status', sort: false, filter: 'text'},
+
+
     ];
     this.productRequestData = this.assetDetail.reduce((acc, asset: Asset) => {
       /* let stat:'asset.status';
@@ -334,12 +351,14 @@ export class TableWrapperComponent implements OnInit, OnChanges {
       return acc.concat({
         "id": asset.id,
         /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
-        "name": asset.detail,
-        "assetType": asset.category,
+        // "detail": asset.detail,
+        "name": asset.prodName,
         "customer": asset.customer,
-        "agreement": asset.agreement_no,
-        "location": asset.location,
-        // "assetStatus": `<span><img src="../../assets/${asset.status}.png"></span>`
+        "type": asset.category,
+        "quantity":asset.quantity,
+        "requestedOn": asset.requestedOn,
+        "dueBy": asset.dueBy,
+        "status": asset.requestStatus
       });
     }, []);
 

@@ -170,12 +170,12 @@ tabset.nav-tabs>ul {
 .customClass.bor-l>a{
   border-right: 1px solid rgb(163, 158, 158) !important;
 }
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
-  color:#000;
-  cursor: default;
-  /* background-color:green; */
-  border-bottom:2px solid rgb(38, 218, 218) !important;
-}
+/*.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {*/
+  /*color:#000;*/
+  /*cursor: default;*/
+  /*!* background-color:green; *!*/
+  /*border-bottom:2px solid rgb(38, 218, 218) !important;*/
+/*}*/
 
 .btn{
   background-color: rgb(56, 55, 55);

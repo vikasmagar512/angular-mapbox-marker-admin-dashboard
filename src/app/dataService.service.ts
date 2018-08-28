@@ -18,15 +18,28 @@ import 'rxjs-compat/add/operator/map';
 })
 export class dataService {
 
+  dataNumber: Subject<number> = new BehaviorSubject<number>(0);
+  currentCustomer:Subject<Customer> = new BehaviorSubject<Customer>(null);
 
+
+  // dataNumberSetting = this.dataNumber.asObservable();
   constructor(private http: HttpClient) {
-    this.dataNumber=3
+    // this.dataNumber=3
+    // this.dataNumberSetting.subscribe((value) => {
+    //   this.dataNumber = 0
+    // });
   }
-  dataNumber: number;
+  changeDataNumber(dataNumber:number) {
+    this.dataNumber.next(dataNumber);
+  }
+  changeCurrentCustomer(customer:Customer) {
+    this.currentCustomer.next(customer);
+  }
+
   detailType: string;
+
   detailTypes: Array<any> = ["Service Request", "Product Request", "Assets Details", "Agreement Details"];
 
-  currentCustomer: any;
 
   locationSearch = ''
 
@@ -35,24 +48,25 @@ export class dataService {
     "Printer": "Printer",
     "Vaccum": "Vacuum"
   }
+
   agreementStatus = {
     "InContract": "In Contract",
     "Expired": "Expired",
     "ExpiringSoon": "Expiring Soon"
   }
 
-  printer={
-    "types": ["Prints/Day","Ink/Day"],
-     "unit": "#"
+  printer = {
+    "types": ["Prints/Day", "Ink/Day"],
+    "unit": "#"
   }
 
-  coffee={
-    "types": ["Powder","Cups/Day"],
-     "unit": "Kg"
+  coffee = {
+    "types": ["Powder", "Cups/Day"],
+    "unit": "Kg"
   }
 
-  vaccume={
-    "types": ["Water/Day","Steam/Day"],
+  vaccume = {
+    "types": ["Water/Day", "Steam/Day"],
     "unit": "#"
   }
 
@@ -90,7 +104,7 @@ export class dataService {
       "assetCategory": 'assetCategory',
     }
   ]
-  customers:Array<Customer>=[
+  customers: Array<Customer> = [
     {
       "id": "123",
       "name": "demo2 Customer",
@@ -129,6 +143,12 @@ export class dataService {
       "agreement_no": "AGR10923347",
       "serialno": "SR12190",
       "customer": "XYZ",
+      "requestedOn":"28-08-2018",
+      "dueBy":"8-09-2018",
+      "quantity":"500",
+      "prodName": "Pages",
+      "unit": "#",
+      "requestStatus":"Received",
       "img": "../../../assets/printer.svg",
       "metrics": [
         {
@@ -168,6 +188,12 @@ export class dataService {
       "agreement_no": "AGR10923349",
       "serialno": "SR12190",
       "customer": "XYZ",
+      "requestedOn":"29-09-2018",
+      "dueBy":"18-10-2018",
+      "quantity":"2 Kg",
+      "prodName": "Milk Powder",
+      "unit": "Kg",
+      "requestStatus":"In Progress",
       "img": "../../../assets/printer.svg",
       "metrics": [
         {
@@ -192,6 +218,12 @@ export class dataService {
       "location": "Bromma",
       "serialno": "VC12190",
       "customer": "PQR",
+      "quantity":"1",
+      "prodName": "Motor",
+      "unit": "#",
+      "requestedOn":"20-09-2018",
+      "dueBy":"11-10-2018",
+      "requestStatus":"Fulfilled",
       "img": "../../../assets/broom.svg",
       "metrics": [
         {
@@ -209,11 +241,18 @@ export class dataService {
       "id": "04",
       "category": "Vacuum",
       "name": "Vacuum",
+      "detail":"Servicing Required",
       "status": 1,
       "agreement_no": "AGR10923347",
       "location": "Bromma",
       "serialno": "VC12190",
       "customer": "PQR",
+      "quantity":"2",
+      "prodName": "Motor",
+      "unit": "#",
+      "requestedOn":"19-09-2018",
+      "dueBy":"15-10-2018",
+      "requestStatus":"Received",
       "img": "../../../assets/broom.svg",
       "metrics": [
         {

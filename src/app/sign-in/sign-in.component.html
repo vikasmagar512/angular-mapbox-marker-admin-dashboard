@@ -46,7 +46,7 @@
  -->
 
 
-<div class="container-fluid">
+ <div class="container-fluid">
   <div class="row section">
     <div class="col-sm-8 col-md-6 col-lg-6 backimg pull-left">
       <img src="../../assets/login image.png" class="img-fluid">
@@ -99,7 +99,7 @@
               </div>
               <div *ngIf=" (frm.get('username').invalid && frm.get('username').touched) && emailPasswordFieldGetter.username.errors" class="input-errors mrl clr-red">
                 <div *ngIf="emailPasswordFieldGetter.username.errors.required">Email is required</div>
-                <div *ngIf="emailPasswordFieldGetter.username.errors.email">Email is not valid</div>
+                <div *ngIf="emailPasswordFieldGetter.username.errors.pattern">Email is not valid</div>
               </div>
 
               <div>
@@ -139,6 +139,7 @@
     </div>
   </div>
 </div>
+<!-- <app-gdpr></app-gdpr> -->
 <ng-template #template>
   <!-- <div class="modal-header">
     <h4 class="modal-title pull-left">Forgot Password ?</h4>

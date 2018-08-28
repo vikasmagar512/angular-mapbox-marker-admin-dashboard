@@ -590,3 +590,8 @@ button:hover, button:focus{
 .log{
   width: 22px;
 }
+
+.s-table .dataTable thead td {
+  padding: 10px 7px;
+  border-bottom: 1px solid #111111;
+}

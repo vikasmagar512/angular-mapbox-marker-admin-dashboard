@@ -12,7 +12,7 @@
 .filter-tag{
   /* position: relative; */
   width: 10%;
-  height: 130;
+  height: 130px;
   /* right: 22px; */
   /* display: flex; */
   margin-left: 20px;
@@ -71,4 +71,4 @@
 .blur{
   opacity: 0.5;
   pointer-events: none;
-} 
+}

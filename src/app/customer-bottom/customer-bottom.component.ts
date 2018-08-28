@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { dataService } from '../dataService.service';
 import { Customer } from '../customer';
+import {Subscription} from 'rxjs/index';
 
 @Component({
   selector: 'app-customer-bottom',
@@ -8,16 +9,21 @@ import { Customer } from '../customer';
   styleUrls: ['./customer-bottom.component.css']
 })
 export class CustomerBottomComponent implements OnInit {
-
+  currentCustomer:Customer;
+  subscription:Subscription;
   customer: any;
   customers: any;
   constructor(
     private dataService: dataService
-  ) { }
+  ) {
+    this.subscription = this.dataService.currentCustomer.subscribe((value:Customer) => {
+      this.currentCustomer = value;
+      debugger
+    });
+  }
 
   ngOnInit() {
-    this.dataService.currentCustomer = "123"
-    this.customers = this.dataService.getCustomers();
-    this.customer = this.customers.find((item) => item.id == this.dataService.currentCustomer)
+    debugger;
+    // this.customer = this.dataService.currentCustomer;
   }
 }
