@@ -39,6 +39,7 @@ import { SessionService } from './session.service';
 import { DashboardChartsComponent } from './dashboard-module/dashboard-charts/dashboard-charts.component';
 import { CustomerBottomComponent } from './customer-bottom/customer-bottom.component';
 import { GdprComponent } from './gdpr/gdpr.component';
+import {DedicatedNotificationComponent} from './notification-module/dedicated-notification/dedicated-notification.component';
 
 
 const appRoutes: Routes = [
@@ -58,6 +59,7 @@ const appRoutes: Routes = [
     component: MainComponent,
     children:[
       {path: '', redirectTo: 'home', pathMatch: 'full'},
+      { path: 'notifications/all',  component:DedicatedNotificationComponent},
       { path: 'home',  component:HomeComponent,
         children: [
           // {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
