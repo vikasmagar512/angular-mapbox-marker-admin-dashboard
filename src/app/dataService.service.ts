@@ -137,11 +137,18 @@ export class dataService {
       "id": "01",
       "category": "Printer",
       "name": "Canon SW2014",
+      "detail":"Pages Required",
       "status": 1,
       "location": "sweden",
       "agreement_no": "AGR10923347",
       "serialno": "SR12190",
       "customer": "XYZ",
+      "requestedOn":"28-08-2018",
+      "dueBy":"8-09-2018",
+      "quantity":"500",
+      "prodName": "Pages",
+      "unit": "#",
+      "requestStatus":"Received",
       "img": "../../../assets/printer.svg",
       "metrics": [
         {
@@ -154,7 +161,7 @@ export class dataService {
           "required": 10,
           "uptime": "80%",
           "usage": "300"
-        },
+         },
         {
           // "parameter":{
 
@@ -176,10 +183,17 @@ export class dataService {
       "category": "Coffee Machine",
       "name": "Jura E8 Coffee Machine ",
       "status": 0,
+      "detail":"Cleaning Milk System",
       "location": "Bromma",
       "agreement_no": "AGR10923349",
       "serialno": "SR12190",
       "customer": "XYZ",
+      "requestedOn":"29-09-2018",
+      "dueBy":"18-10-2018",
+      "quantity":"2 Kg",
+      "prodName": "Milk Powder",
+      "unit": "Kg",
+      "requestStatus":"In Progress",
       "img": "../../../assets/printer.svg",
       "metrics": [
         {
@@ -199,10 +213,17 @@ export class dataService {
       "category": "Vacuum",
       "name": "Vacuum",
       "status": 2,
+      "detail":"Servicing Required",
       "agreement_no": "AGR10923347",
       "location": "Bromma",
       "serialno": "VC12190",
       "customer": "PQR",
+      "quantity":"1",
+      "prodName": "Motor",
+      "unit": "#",
+      "requestedOn":"20-09-2018",
+      "dueBy":"11-10-2018",
+      "requestStatus":"Fulfilled",
       "img": "../../../assets/broom.svg",
       "metrics": [
         {
@@ -220,11 +241,18 @@ export class dataService {
       "id": "04",
       "category": "Vacuum",
       "name": "Vacuum",
+      "detail":"Servicing Required",
       "status": 1,
       "agreement_no": "AGR10923347",
       "location": "Bromma",
       "serialno": "VC12190",
       "customer": "PQR",
+      "quantity":"2",
+      "prodName": "Motor",
+      "unit": "#",
+      "requestedOn":"19-09-2018",
+      "dueBy":"15-10-2018",
+      "requestStatus":"Received",
       "img": "../../../assets/broom.svg",
       "metrics": [
         {

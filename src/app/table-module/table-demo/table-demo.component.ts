@@ -7,7 +7,7 @@ import {Format} from '../../Format';
 @Component({
   selector: 'app-table-demo',
   templateUrl: './table-demo.component.html',
-  styleUrls: ['./table-demo.component.css','../../table.css']
+  styleUrls: ['./table-demo.component.css','../../table.css','../../style.css']
 })
 export class TableDemoComponent implements OnInit {
   @Input() columns: any[];
