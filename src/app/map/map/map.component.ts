@@ -68,12 +68,14 @@ export class MapComponent implements OnInit{
     // this.earthquakes = await import('./earthquakes.geo.json');
   }
   ngOnInit(): void {
+    let that = this
+
     // console.log(this.data)
     // this.searchBox = this.data.location;
     // this.data.location.subscribe(message => this.searchBox = message)
     this.searchBox= 'malegaon'
     this.adService.messageSource.subscribe(message => this.searchBox = message)
-
+    // let that = this
     // add markers to map
     this.geojson.features.forEach(function(marker) {
       // create a DOM element for the marker
@@ -90,7 +92,7 @@ export class MapComponent implements OnInit{
       // add marker to map
       new mapboxgl.Marker(el)
         .setLngLat(marker.geometry.coordinates)
-        .addTo(this.map);
+        .addTo(that.map);
     });
   }
 
