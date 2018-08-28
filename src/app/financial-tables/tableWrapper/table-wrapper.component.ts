@@ -8,6 +8,8 @@ import { Agreement } from '../../agreement';
 import { AdService } from '../../ad.service';
 import { filterGroup } from '../../filter-search/filterGroup';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { Customer } from '../../customer';
+import { PARAMETERS } from '@angular/core/src/util/decorators';
 
 @Component({
   selector: 'app-table-wrapper',
@@ -34,6 +36,9 @@ export class TableWrapperComponent implements OnInit, OnChanges {
   customerCurrentObj: any;
   customerId: string;
   _subscription: any;
+  _subscription1: any;
+  currentCustomer:Customer;
+  
 
   public filterTypesReceived: Array<filterGroup>;
 
@@ -45,9 +50,49 @@ export class TableWrapperComponent implements OnInit, OnChanges {
       this.dataNumber = value
       this.adService.disableFilter(this.dataNumber)
     })
+    this._subscription1 = this.dataService.currentCustomer.subscribe((value:Customer) => {
+      this.currentCustomer = value;
+      this.constructServiceTable()
+      alert(this.currentCustomer)
+      debugger
+    });
   }
   public modalRef: BsModalRef; // {1}
-
+  constructServiceTable(){
+    this.serviceRequestData = this.assetDetail.reduce((acc, asset: Asset) => {
+      if(this.currentCustomer !== null){
+        if(asset.customer === this.currentCustomer.id){
+          alert('found')
+          return acc.concat({
+            "id": asset.id,
+            /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
+            // "detail": asset.detail,
+            "name": asset.detail,
+            "customer": asset.customer,
+            "type": asset.category,
+            "requestedOn": asset.requestedOn,
+            "dueBy": asset.dueBy,
+            "status": asset.requestStatus
+          })
+        } else{
+          return acc
+        }
+      }else {
+        alert('not found')
+        return acc.concat({
+          "id": asset.id,
+          /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
+          // "detail": asset.detail,
+          "name": asset.detail,
+          "customer": asset.customer,
+          "type": asset.category,
+          "requestedOn": asset.requestedOn,
+          "dueBy": asset.dueBy,
+          "status": asset.requestStatus
+        })
+      }
+    },[]); 
+  }
   public openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' }); // {3}
   }
@@ -112,7 +157,7 @@ export class TableWrapperComponent implements OnInit, OnChanges {
     // $(`.${this.dataService.dataNumber}num`).addClass('active');
   }
 
-  assetDetail: Array<Asset>;
+  assetDetail: Array<Asset> = [];
   assetData: Array<any>;
   assetConfig: any;
 
@@ -287,22 +332,7 @@ export class TableWrapperComponent implements OnInit, OnChanges {
       {title: 'Due By', name: 'dueBy', sort: '', filter: 'text'},
       {title: 'Status', name: 'status', sort: false, filter: 'text'},
     ];
-    this.serviceRequestData = this.assetDetail.reduce((acc, asset: Asset) => {
-      /* let stat:'asset.status';
-      console.log("stat"); */
-      return acc.concat({
-        "id": asset.id,
-        /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
-        // "detail": asset.detail,
-        "name": asset.detail,
-        "customer": asset.customer,
-        "type": asset.category,
-        "requestedOn": asset.requestedOn,
-        "dueBy": asset.dueBy,
-        "status": asset.requestStatus
-      });
-    }, []);
-
+   
     this.serviceRequestConfig = {
       paging: true,
       sorting: { columns: this.serviceRequestColumns },
