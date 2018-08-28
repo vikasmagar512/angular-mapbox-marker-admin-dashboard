@@ -8,11 +8,15 @@
       </button>
 
       <span dropdown>
-        <input type="search" (keyup)="onKey(locationSearchBox.value)" (click)="onClickSearchBox(locationSearchBox.value)" #locationSearchBox
+        <!-- <input type="search" (keyup)="onKey(locationSearchBox.value)" (click)="onClickSearchBox(locationSearchBox.value)" #locationSearchBox
           name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location" class="ser-inp" id="basic-link"
-          dropdownToggle (click)="false" aria-controls="basic-link-dropdown">
-          
-        <div class="dropdown-menu notification" *ngIf="!isEmpty">
+          dropdownToggle (click)="false" aria-controls="basic-link-dropdown"> -->
+        <input type="search" (keyup)="onKey(locationSearchBox.value)" (blur)="onSearchBoxBlur()" (click)="onClickSearchBox(locationSearchBox.value)"
+          #locationSearchBox name="" placeholder="Type here to search by customer/ Assets type/ Asset/ Location" class="ser-inp"
+          id="basic-link" (click)="false">
+
+        <!-- <div class="dropdown-menu notification" *ngIf="!isEmpty"> -->
+        <div class="dropdown-menu" id="cust-dropdown-menu" style="display: block;" *ngIf="showDropdown">
           <div class="dropdown-div">
             <div *ngFor="let filter of filters;" class="filter-div">
               <ng-container *ngIf="filter['value']">
@@ -21,14 +25,18 @@
                     {{filter['name']}}
                   </span>
                   <ul style="margin-bottom: -10px;">
-                    <li *ngFor="let list of filterList[filter.name]['results']" (click)="customnerSelected(list)">
-                      <span *ngIf="filter.name == 'Customer' || filter.name == 'Asset Name' " (click)="customnerSelected(list)">
+                    <li *ngFor="let list of filterList[filter.name]['results']" >
+                      <span *ngIf="filter.name == 'Customer'" (click)="customnerSelected(list)">
                         {{list['name']}}
                       </span>
+                      <span *ngIf="filter.name == 'Asset Name' ">
+                          {{list['name']}}
+                        </span>
                       <span *ngIf="filter.name == 'Asset Type'">
                         {{list['category']}}
                       </span>
-                      <span *ngIf="filter.name == 'Location'">
+                      <!-- <span *ngIf="filter.name == 'Location'" (click)="isSearchLocation = true; onKey(list['location'])"> -->
+                      <span *ngIf="filter.name == 'Location'" (click)=" locationSelected(list['location'])">
                         {{list['location']}}
                       </span>
                     </li>

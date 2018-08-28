@@ -34,6 +34,9 @@ export class SearchComponent implements OnInit {
   movies: Array<any> = [];
   searchValue: string;
   newMovies: Array<any> = [];
+  // isSearchLocation: boolean = false;
+
+  showDropdown: boolean = false;
 
   showFilters: boolean = false
   filters = [
@@ -109,6 +112,7 @@ export class SearchComponent implements OnInit {
     }
     else {
       this.isEmpty = false;
+      this.onKey(value);
     }
     // this.isEmpty = value==="" ? true : false;
 
@@ -116,16 +120,35 @@ export class SearchComponent implements OnInit {
 
   customnerSelected(customer: any) {
     debugger;
+    this.showDropdown = false;
     this.customersList = this.dataService.getCustomers();
     this.dataService.changeCurrentCustomer(this.customersList.find((item) => item.id == customer.id))
     debugger;
     $('.search input').val("");
   }
 
+  locationSelected(location: string) {
+    debugger
+    let locationSearchBox = location.toLowerCase();
+    this.filterService.changeLocation(locationSearchBox);
+    this.showDropdown = false;
+    $('.search input').val("");
+  }
+
+  onSearchBoxBlur() {
+    $(document).click(function (e) {
+      if (!$(e.target).is("#cust-dropdown-menu")) {
+        $("#basic-link").hide();
+      }
+    });
+  }
+
   onKey(value: string) {
+    this.showDropdown = true;
     debugger;
-    this.locationSearchBox = value.toLowerCase();
-    this.filterService.changeLocation(this.locationSearchBox)
+    // this.locationSearchBox = value.toLowerCase();
+
+    // this.filterService.changeLocation(this.locationSearchBox)
 
     console.log(this.locationSearchBox);
     if (!value.trim()) {
@@ -165,6 +188,7 @@ export class SearchComponent implements OnInit {
     // debugger;
     if (!value) {
       this.isEmpty = true;
+      this.showDropdown = false
       // this.filterList = {
       //   "Customer": {
       //     "results": this.customers,
@@ -213,6 +237,15 @@ export class SearchComponent implements OnInit {
     }
 
     // console.log("sdfsdf" + JSON.stringify(this.filterList))
+
+    // if (this.isSearchLocation) {
+    //   debugger;
+    //   this.locationSearchBox = value.toLowerCase();
+    //   this.filterService.changeLocation(this.locationSearchBox)
+    //   this.isSearchLocation = false;
+    //   $('.search input').val("");
+    //   this.locationSearchBox = null;
+    // }
 
   }
 }
