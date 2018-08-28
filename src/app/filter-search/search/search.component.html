@@ -25,13 +25,13 @@
                     {{filter['name']}}
                   </span>
                   <ul style="margin-bottom: -10px;">
-                    <li *ngFor="let list of filterList[filter.name]['results']" >
+                    <li *ngFor="let list of filterList[filter.name]['results']">
                       <span *ngIf="filter.name == 'Customer'" (click)="customnerSelected(list)">
                         {{list['name']}}
                       </span>
                       <span *ngIf="filter.name == 'Asset Name' ">
-                          {{list['name']}}
-                        </span>
+                        {{list['name']}}
+                      </span>
                       <span *ngIf="filter.name == 'Asset Type'">
                         {{list['category']}}
                       </span>
@@ -50,9 +50,9 @@
       </span>
     </div>
 
-    <div class="col-md-1">
+    <!-- <div class="col-md-1">
       <button class="btn" (click)="resetCustomer()" *ngIf="currentCustomer" style="margin:9px 0; ">Remove</button>
-    </div>
+    </div> -->
 
     <!-- <div class="col-md-4 filter-option">
       <span *ngFor="let filter of filters">
@@ -84,11 +84,51 @@
       </div>
     </ng-template>
 
-    <div class="col-md-2 cust-name pull-right" id="cust-name" *ngIf="currentCustomer">
+    <!-- <div class="col-md-2 cust-name pull-right" id="cust-name" *ngIf="currentCustomer">
       <p>{{currentCustomer.name}}
         <span class="caret"></span>
       </p>
+    </div> -->
+
+    <div class="col-md-3 cust-name" id="cust-name">
+      <span dropdown>
+        <button class="btn " dropdownToggle (click)="false" aria-controls="basic-link-dropdown" style="margin: 9px 0;">
+          <span *ngIf="!currentCustomer">Select Customer</span>
+          <span *ngIf="currentCustomer">{{currentCustomer.name}}</span>
+          <span class="caret"></span>
+        </button>
+
+        <div class="dropdown-menu customer-dropdown">
+          <ul class="customer-list">
+            <li *ngFor="let customer of customers" (click)="customnerSelected(customer)">
+              {{customer['name']}}
+            </li>
+          </ul>
+        </div>
+
+      </span>
+      <div class="customer-remove">
+        <button class="btn" (click)="resetCustomer()" *ngIf="currentCustomer" style="margin:9px 0; ">Remove Customer</button>
+      </div>
     </div>
+
+    <!-- <div class="col-md-1">
+      <button class="btn" (click)="resetCustomer()" *ngIf="currentCustomer" style="margin:9px 0; ">Remove</button>
+    </div> -->
+
+    <!-- <div class="col-md-1">
+
+      <span dropdown>
+        <button class="btn" dropdownToggle (click)="false" aria-controls="basic-link-dropdown">Some</button>
+
+        <div class="dropdown-menu notification">
+          <div class="dropdown-div">
+            somne text
+          </div>
+        </div>
+      </span>
+    </div> -->
+
 
   </div>
 </div>

@@ -188,3 +188,33 @@
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+
+.customer-dropdown{
+  width: 190px;
+  left: 0;
+  top: 40px;
+}
+
+.customer-list{
+  list-style-type: none;
+  padding: 0px 10px;
+  margin: 0;
+}
+
+.customer-list li{
+  margin: 10px 5px;
+}
+
+.customer-list li:hover{
+  cursor: pointer;
+}
+
+.customer-remove{
+  display: inline-block;
+  margin-left: 25px;
+}
+
+#cust-name{
+  padding: 0;
+  margin: 0;
+}

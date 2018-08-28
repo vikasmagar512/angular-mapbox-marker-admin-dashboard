@@ -136,9 +136,12 @@ export class SearchComponent implements OnInit {
   }
 
   onSearchBoxBlur() {
+    debugger;
+    let that = this;
     $(document).click(function (e) {
       if (!$(e.target).is("#cust-dropdown-menu")) {
-        $("#basic-link").hide();
+        // $("#basic-link").hide();
+        that.showDropdown = false;
       }
     });
   }
