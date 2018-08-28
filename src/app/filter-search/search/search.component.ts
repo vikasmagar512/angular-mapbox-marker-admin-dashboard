@@ -7,6 +7,8 @@ import { Asset } from '../../asset';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { Customer } from '../../customer';
+import {filterGroup} from '../filterGroup';
+import {Subscription} from 'rxjs/index';
 
 @Component({
   selector: 'app-search',
@@ -14,7 +16,9 @@ import { Customer } from '../../customer';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-
+  currentCustomer:Customer;
+  subscription:Subscription;
+  customersList: any;
   isEmpty: boolean = false;
   newAssetLocaion: any[];
   newAssetName: any[];
@@ -42,19 +46,26 @@ export class SearchComponent implements OnInit {
   public modalRef: BsModalRef;
   constructor(private filterService: AdService,
     private modalService: BsModalService,
-    private data: dataService,
+    private dataService: dataService,
     private renderer: Renderer) {
     // this.locationSearch = filterService.locationSearch;
+    this.subscription = this.dataService.currentCustomer.subscribe((value:Customer) => {
+      this.currentCustomer = value;
+      debugger
+    });
   }
   updateFilterState($event, filter) {
     // debugger
+  }
+  resetCustomer(){
+    this.dataService.changeCurrentCustomer(null)
   }
 
   ngOnInit() {
     debugger;
     this.movies = this.filterService.getMovies();
-    this.Asset = this.data.getAssets();
-    this.customers = this.data.getCustomers();
+    this.Asset = this.dataService.getAssets();
+    this.customers = this.dataService.getCustomers();
     this.filterList = {
       "Customer": {
         "results": [],
@@ -104,9 +115,14 @@ export class SearchComponent implements OnInit {
     }
   }
 
+
   customnerSelected(customer: any){
     debugger;
-    this.data.currentCustomer = customer.id;
+    this.customersList = this.dataService.getCustomers();
+    this.dataService.changeCurrentCustomer(this.customersList.find((item)=>item.id ==customer.id))
+    debugger;
+    $('.search input').val("");
+
   }
 
   onKey(value: string) {

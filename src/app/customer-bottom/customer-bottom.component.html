@@ -1,40 +1,49 @@
-    <ng-container>
-    <div class="row flexVertM" style="display: flex;flex-direction: row;" id="customer" >
-      <div class="col-md-6">
-        <div class="cust-detail">
-          <h4>{{customer.name}}</h4>
-          <p>{{customer.address}}</p>
-
-          <h4>Customer Activity</h4>
-          <h5>12th of May 2016</h5>
-
-          <button type="button" class="btn-d" onclick="show()">Details</button>
-        </div>
-      </div>
-      <div class="col-md-6 custExtra">
-        <div style="display: flex;flex-direction: column"><div class="message">
-          <p>
-            <img src="../../assets/22.png">Message
-            <br>{{customer.name}}</p>
-        </div>
-
-          <div class="cust-senti">
-            <img src="../../assets/21.png">
-            <p>Customer Sentiment</p>
-          </div>
-        </div>
-
+<ng-container>
+  <div class="row flexVertM" style="display: flex;flex-direction: row;" id="customer">
+    <div class="col-md-6">
+      <div class="cust-detail">
+        <h4>{{currentCustomer['name']}}</h4>
+        <p>{{currentCustomer['address']}}</p>
+        <h4>Customer Activity</h4>
+        <h5>12th of May 2016</h5>
+        <button type="button" class="btn-d" [popover]="popup" placement="top" outsideClick="false">Details</button>
+        <!-- <a href="javascript:void(0)" [popover]="popup" placement="top" outsideClick="false">Details</a> -->
       </div>
     </div>
+    <div class="col-md-6 custExtra">
+      <div style="display: flex;flex-direction: column">
+        <div class="message">
+          <p>
+            <img src="../../assets/22.png">Message
+            <br>{{currentCustomer['name']}}</p>
+        </div>
 
-  <div class="popup" id="popup">
+        <div class="cust-senti">
+          <img src="../../assets/21.png">
+          <p>Customer Sentiment</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- <div class="popup" id="popup">
     <div class="content">
-      <p>Name-{{customer.name}}</p>
-      <p>Contact-{{customer.contact}}</p>
-      <p>Contact-{{customer.contact}}</p>
-
+      <p>Name-{{currentCustomer['name']}}</p>
+      <p>Contact-{{currentCustomer['contact']}}</p>
+      <p>Contact-{{currentCustomer['contact']}}</p>
       <p class="addnum">
         <img src="../../assets/20.png">Add Number</p>
     </div>
-  </div>
+  </div> -->
 </ng-container>
+
+<ng-template #popup>
+  <div class="content">
+    <p>Name: {{currentCustomer['name']}}</p>
+    <p>Contact: {{currentCustomer['contact']}}</p>
+    <p>Contact: {{currentCustomer['contact']}}</p>
+    <p class="addnum">
+      <img src="../../assets/20.png"> Add Number</p>
+  </div>
+</ng-template>

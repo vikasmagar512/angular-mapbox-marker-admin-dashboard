@@ -121,14 +121,14 @@ public tableData: any = {
   }],
   "Services": [{
     "type": "Services",
-    "key": "Utilization",
+    "key": "Average Response Time(In Hrs)",
     "Actual": 15,
     "Forecast": 23,
     "data": this.progress2,
   },
   {
     "type": "Services",
-    "key": "Availability",
+    "key": "Upsell Service Value",
     "Actual": 15,
     "Forecast": 23,
     "data": this.progress,

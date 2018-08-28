@@ -18,9 +18,10 @@ import 'rxjs-compat/add/operator/map';
 })
 export class dataService {
 
-  // dataNumber:number
-
   dataNumber: Subject<number> = new BehaviorSubject<number>(0);
+  currentCustomer:Subject<Customer> = new BehaviorSubject<Customer>(null);
+
+
   // dataNumberSetting = this.dataNumber.asObservable();
   constructor(private http: HttpClient) {
     // this.dataNumber=3
@@ -31,11 +32,14 @@ export class dataService {
   changeDataNumber(dataNumber:number) {
     this.dataNumber.next(dataNumber);
   }
+  changeCurrentCustomer(customer:Customer) {
+    this.currentCustomer.next(customer);
+  }
 
   detailType: string;
+
   detailTypes: Array<any> = ["Service Request", "Product Request", "Assets Details", "Agreement Details"];
 
-  currentCustomer: any;
 
   locationSearch = ''
 
@@ -44,24 +48,25 @@ export class dataService {
     "Printer": "Printer",
     "Vaccum": "Vacuum"
   }
+
   agreementStatus = {
     "InContract": "In Contract",
     "Expired": "Expired",
     "ExpiringSoon": "Expiring Soon"
   }
 
-  printer={
-    "types": ["Prints/Day","Ink/Day"],
-     "unit": "#"
+  printer = {
+    "types": ["Prints/Day", "Ink/Day"],
+    "unit": "#"
   }
 
-  coffee={
-    "types": ["Powder","Cups/Day"],
-     "unit": "Kg"
+  coffee = {
+    "types": ["Powder", "Cups/Day"],
+    "unit": "Kg"
   }
 
-  vaccume={
-    "types": ["Water/Day","Steam/Day"],
+  vaccume = {
+    "types": ["Water/Day", "Steam/Day"],
     "unit": "#"
   }
 
@@ -99,7 +104,7 @@ export class dataService {
       "assetCategory": 'assetCategory',
     }
   ]
-  customers:Array<Customer>=[
+  customers: Array<Customer> = [
     {
       "id": "123",
       "name": "demo2 Customer",

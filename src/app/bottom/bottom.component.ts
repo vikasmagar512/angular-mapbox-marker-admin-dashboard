@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from '../customer';
 import { dataService } from '../dataService.service';
+import {Subscription} from 'rxjs/index';
 
 @Component({
   selector: 'app-bottom',
@@ -11,6 +12,8 @@ export class BottomComponent implements OnInit {
   dataNumber:number
   customer: any;
   _subscription: any;
+  currentCustomer:Customer;
+  subscription:Subscription;
 
   custId;
   constructor(
@@ -20,6 +23,10 @@ export class BottomComponent implements OnInit {
     this._subscription = this.dataService.dataNumber.subscribe((value) => {
       this.dataNumber = value
     })
+    this.subscription = this.dataService.currentCustomer.subscribe((value:Customer) => {
+      this.currentCustomer = value;
+      debugger
+    });
   }
 
   ngOnInit() {
