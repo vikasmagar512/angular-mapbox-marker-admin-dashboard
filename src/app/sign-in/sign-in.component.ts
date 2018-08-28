@@ -15,14 +15,13 @@ import { CustomValidators } from '../CustomValidators';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
-  public cookiePopupShow: boolean = true;
   public defaultSignInMethod: number;
   public frm: FormGroup;
   public frm1: FormGroup;
   public isBusy = false;
   public hasFailed = false;
   public showInputErrors = false;
-  
+
   config = {
     animated: true,
     keyboard: true,
@@ -33,7 +32,6 @@ export class SignInComponent implements OnInit {
   // public now: Date = new Date();
   public myMoment; active
   public returnUrl: string;
-  public cookiesEnable: boolean;
   mobnumPattern = "^((\\+91-?)|0)?[0-9]{6}$";
 
   constructor(
@@ -45,7 +43,6 @@ export class SignInComponent implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthService
   ) {
-    this.cookiesEnable = false;
     // this.cookiePopupShow = false;
     this.frm = fb.group({
       username: ['', [Validators.required, Validators.email]],
@@ -71,20 +68,20 @@ export class SignInComponent implements OnInit {
   public openModal(template: TemplateRef<any>) {
     // this.modalRef = this.modalService.show(template, {class: 'modal-ver'}); // {3}
     this.modalRef = this.modalService.show(template, this.config); // {3}
-    
+
   }
   ngOnInit() {
-    this.defaultSignInMethod = 0; 
-    this.myMoment= moment().format("Do MMMM YYYY");
+    this.defaultSignInMethod = 0;
+    this.myMoment = moment().format("Do MMMM YYYY");
 
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
     // let cookie = document.cookie;
-    debugger
-    let consent = this.getCookie("consent")
-    this.cookiePopupShow = consent !== "yes"
-    debugger;
+    // debugger
+    // let consent = this.getCookie("consent")
+    // this.cookiePopupShow = consent !== "yes"
+    // debugger;
   }
   openCity(type) {
     console.log(type)
@@ -93,7 +90,7 @@ export class SignInComponent implements OnInit {
 
   public doSignIn() {
     this.showInputErrors = this.defaultSignInMethod ? (this.frm.invalid) : (this.frm1.invalid)
-     if(!this.showInputErrors){
+    if (!this.showInputErrors) {
 
       // Reset status
       this.isBusy = true;
@@ -102,7 +99,7 @@ export class SignInComponent implements OnInit {
       // // Grab values from form
       const username = this.frm.get('username').value;
       const password = this.frm.get('password').value;
-     
+
       const personalNumber = this.frm1.get('personalNumber').value;
       // // Submit request to API
       this.router.navigate(['main', 'home']);
@@ -142,42 +139,9 @@ export class SignInComponent implements OnInit {
             this.hasFailed = true;
           }
         );*/
-    }else{
+    } else {
       alert('Please enter correct credentials')
       return
     }
-  }
-
-  useCookies(cookiesEnable: any) {
-    debugger;
-    this.cookiesEnable = cookiesEnable;
-    this.cookiePopupShow= false;
-    // this.cookiePopupShow = true;
-    if (cookiesEnable) {
-      document.cookie = "consent = yes";
-      // this.cookiePopupShow= true;
-    }
-    else{
-      document.cookie = "consent = no";
-      // this.cookiePopupShow= true;
-    }
-    
-    
-  }
-
-  getCookie(cname) {
-    let name = cname + "=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
   }
 }

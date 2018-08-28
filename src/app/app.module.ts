@@ -38,6 +38,7 @@ import { CustomHttpService } from './custom-http-service.service';
 import { SessionService } from './session.service';
 import { DashboardChartsComponent } from './dashboard-module/dashboard-charts/dashboard-charts.component';
 import { CustomerBottomComponent } from './customer-bottom/customer-bottom.component';
+import { GdprComponent } from './gdpr/gdpr.component';
 
 
 const appRoutes: Routes = [
@@ -130,6 +131,7 @@ const appRoutes: Routes = [
     HomeComponent,
     PageNotFoundComponent,
     CustomerBottomComponent,
+    GdprComponent,
     // DashboardChartsComponent
   ],
   entryComponents: [HeroJobAdComponent, HeroProfileComponent, TableWrapperComponent,DashboardChartsComponent],

@@ -19,7 +19,6 @@ export class BottomComponent implements OnInit {
   constructor(
     private dataService: dataService,
   ) {
-    // this.dataNumber = dataService.dataNumber;
     this._subscription = this.dataService.dataNumber.subscribe((value) => {
       this.dataNumber = value
     })
