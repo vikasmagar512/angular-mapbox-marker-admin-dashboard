@@ -10,7 +10,12 @@
 .status .iconText p{
   margin: 0;
 }
-
+table.dataTable thead th, table.dataTable thead td {
+  padding: 10px 18px;
+  border-bottom: 1px solid #060606;
+  background-color: black;
+  color: #fff;
+}
 .table-container{
   width: 100%;
   /*padding: 0px 15px;*/
@@ -21,7 +26,9 @@
   border-style: hidden;
   box-shadow: 0 0 3px 2px #9c9898;
 }
-
+.third-t>tbody>tr>td:nth-child(6) {
+  text-align: center;
+}
 .s-table , .s-table th{
   border:2px solid #cecbcb;
 }

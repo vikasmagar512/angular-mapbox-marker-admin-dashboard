@@ -12,7 +12,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 @Component({
   selector: 'app-table-wrapper',
   templateUrl: './table-wrapper.component.html',
-  styleUrls: ['./table-wrapper.component.css', '../../style.css']
+  styleUrls: ['./table-wrapper.component.css', '../../style.css','../../table.css']
 })
 
 export class TableWrapperComponent implements OnInit, OnChanges {
@@ -58,7 +58,6 @@ export class TableWrapperComponent implements OnInit, OnChanges {
   }
 
   openAgreementModal(event) {
-    alert('asdf')
     this.agreementIdSelected = event;
     this.agreementCurrentObj = this.agreementData.find((item) => item['id'] === this.agreementIdSelected)
     this.openModal(this.AgreementTemplate)
@@ -211,33 +210,9 @@ export class TableWrapperComponent implements OnInit, OnChanges {
   @ViewChild('ProductTemplate') ProductTemplate: TemplateRef<any>;
 
   onSearchKey(value: string) {
-    // this.searchValue = value;
-    // debugger;
     this.assetTableRef.globalSearch(value)
-    // this.serviceRequestTableRef.globalSearch(this.searchValue)
-    // this.productRequestTableRef.globalSearch(this.searchValue)
-    // this.agreementTableRef.globalSearch(this.searchValue)
   }
   ngOnInit() {
-    // setTimeout(()=>{
-    //   this.loadTable(this.dataNumber);
-    // },1000)
-
-    // this.dataNumber = this.dataService.dataNumber
-
-    // $('input').addClass("text");
-    // debugger;
-    // console.log(this.data)
-    // this.searchBox = this.data.location;
-
-    // setTimeout(()=>{
-    //   this.onSearchKey('no')
-    // },2000)
-    // setTimeout(()=>{
-    //   this.onSearchKey('not')
-    // },4000)
-    // https://angularfirebase.com/lessons/sharing-data-between-angular-components-four-methods/
-
 
     this.assetDetail = this.dataService.getAssets();
 
@@ -304,13 +279,13 @@ export class TableWrapperComponent implements OnInit, OnChanges {
       className: ['third-t', 's-table', 'table-striped', 'table-bordered']
     };
     this.serviceRequestColumns = [
-      { title: 'Request Id', name: 'id', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
-      { title: 'Request Name', name: 'name', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
-      { title: 'Request Type', name: 'type', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
-      { title: 'Customer', className: ['text-warning'], name: 'customer', filter: 'text' },
-      { title: 'Agreement', className: ['text-warning'], name: 'agreement', filter: 'text' },
-      { title: 'Status', name: 'status', sort: false, filter: 'text' },
-      { title: 'Location', name: 'location', sort: '', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
+      {title: 'Request Id', name: 'id', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
+      {title: 'Request Details', name: 'name', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
+      {title: 'Customer', className: ['text-warning'], name: 'customer', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
+      {title: 'Asset Name', name: 'type', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
+      {title: 'Requested On', className: ['text-warning'], name: 'requestedOn', filter: 'text'},
+      {title: 'Due By', name: 'dueBy', sort: '', filter: 'text'},
+      {title: 'Status', name: 'status', sort: false, filter: 'text'},
     ];
     this.serviceRequestData = this.assetDetail.reduce((acc, asset: Asset) => {
       /* let stat:'asset.status';
@@ -318,12 +293,13 @@ export class TableWrapperComponent implements OnInit, OnChanges {
       return acc.concat({
         "id": asset.id,
         /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
-        "name": asset.name,
-        "type": asset.category,
+        // "detail": asset.detail,
+        "name": asset.detail,
         "customer": asset.customer,
-        "agreement": asset.agreement_no,
-        "location": asset.location,
-        "status": `<span><img src="../../assets/${asset.status}.png"></span>`
+        "type": asset.category,
+        "requestedOn": asset.requestedOn,
+        "dueBy": asset.dueBy,
+        "status": asset.requestStatus
       });
     }, []);
 
@@ -335,27 +311,27 @@ export class TableWrapperComponent implements OnInit, OnChanges {
     };
 
     this.productRequestColumns = [
-      { title: 'Request Id', name: 'id', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
-      { title: 'Product Name', name: 'name', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
-      { title: 'Asset Type', name: 'assetType', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
-      { title: 'Customer', className: ['text-warning'], name: 'customer', filter: 'text' },
-      { title: 'Agreement', className: ['text-warning'], name: 'agreement', filter: 'text' },
-      // { title: 'Status', name: 'assetStatus', sort: false },
-      // { title: 'Status', name: 'assetStatus', sort: false },
-      { title: 'Location', name: 'location', sort: '', filtering: { filterString: '', placeholder: 'Filter by extn.' }, filter: 'text' },
+      {title: 'Request Id', name: 'id', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
+      {title: 'Product', name: 'name', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
+      {title: 'Asset Type', name: 'assetType', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
+      {title: 'Customer', className: ['text-warning'], name: 'customer', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
+      {title: 'Quantity', className: ['text-warning'], name: 'quantity', filter: 'text'},
+      {title: 'Requested On', className: ['text-warning'], name: 'requestedOn', filter: 'text'},
+      {title: 'Due By', name: 'dueBy', sort: '', filter: 'text'},
+      {title: 'Status', name: 'status', sort: false, filter: 'text'},
     ];
     this.productRequestData = this.assetDetail.reduce((acc, asset: Asset) => {
-      /* let stat:'asset.status';
-      console.log("stat"); */
       return acc.concat({
         "id": asset.id,
         /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
-        "name": asset.name,
-        "assetType": asset.category,
+        // "detail": asset.detail,
+        "name": asset.prodName,
         "customer": asset.customer,
-        "agreement": asset.agreement_no,
-        "location": asset.location,
-        // "assetStatus": `<span><img src="../../assets/${asset.status}.png"></span>`
+        "assetType": asset.category,
+        "quantity":asset.quantity,
+        "requestedOn": asset.requestedOn,
+        "dueBy": asset.dueBy,
+        "status": asset.requestStatus
       });
     }, []);
 
@@ -367,19 +343,12 @@ export class TableWrapperComponent implements OnInit, OnChanges {
       className: ['third-t', 's-table', 'table-striped', 'table-bordered']
     };
     var that = this;
-    // this.data.filterTypes.subscribe(message => {
     this.adService.filterChange.subscribe(message => {
       // debugger
       this.filterTypesReceived = message
-      // setTimeout(()=>{
-      //   this.applyFilterBottom()
-      //   },2000)
 
       setTimeout(() => {
         this.applyFilterBottom()
-        //   alert('d')
-        //   debugger
-        //   this.assetTableRef.globalSearch('Canon')
       }, 1000)
     })
   }
