@@ -7,8 +7,8 @@ import { Asset } from '../../asset';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { Customer } from '../../customer';
-import {filterGroup} from '../filterGroup';
-import {Subscription} from 'rxjs/index';
+import { filterGroup } from '../filterGroup';
+import { Subscription } from 'rxjs/index';
 
 @Component({
   selector: 'app-search',
@@ -16,8 +16,8 @@ import {Subscription} from 'rxjs/index';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-  currentCustomer:Customer;
-  subscription:Subscription;
+  currentCustomer: Customer;
+  subscription: Subscription;
   customersList: any;
   isEmpty: boolean = false;
   newAssetLocaion: any[];
@@ -36,7 +36,6 @@ export class SearchComponent implements OnInit {
   newMovies: Array<any> = [];
 
   showFilters: boolean = false
-  // filters=['Customer','Asset Type','Asset','Location']
   filters = [
     { name: 'Customer', value: true },
     { name: 'Asset Type', value: true },
@@ -48,8 +47,7 @@ export class SearchComponent implements OnInit {
     private modalService: BsModalService,
     private dataService: dataService,
     private renderer: Renderer) {
-    // this.locationSearch = filterService.locationSearch;
-    this.subscription = this.dataService.currentCustomer.subscribe((value:Customer) => {
+    this.subscription = this.dataService.currentCustomer.subscribe((value: Customer) => {
       this.currentCustomer = value;
       debugger
     });
@@ -57,7 +55,7 @@ export class SearchComponent implements OnInit {
   updateFilterState($event, filter) {
     // debugger
   }
-  resetCustomer(){
+  resetCustomer() {
     this.dataService.changeCurrentCustomer(null)
   }
 
@@ -82,10 +80,6 @@ export class SearchComponent implements OnInit {
     };
   }
 
-  // onFilter() {
-
-  // }
-
   setFocus(template: TemplateRef<any>) {
     alert("onFocus")
     // debugger
@@ -109,20 +103,23 @@ export class SearchComponent implements OnInit {
     // And reassign the 'remoteData' which is binded to 'searchResults' property.
   }
 
-  onClickSearchBox(value: string){
-    if(value == ""){
+  onClickSearchBox(value: string) {
+    if (!value) {
       this.isEmpty = true;
     }
+    else {
+      this.isEmpty = false;
+    }
+    // this.isEmpty = value==="" ? true : false;
+
   }
 
-
-  customnerSelected(customer: any){
+  customnerSelected(customer: any) {
     debugger;
     this.customersList = this.dataService.getCustomers();
-    this.dataService.changeCurrentCustomer(this.customersList.find((item)=>item.id ==customer.id))
+    this.dataService.changeCurrentCustomer(this.customersList.find((item) => item.id == customer.id))
     debugger;
     $('.search input').val("");
-
   }
 
   onKey(value: string) {
@@ -166,7 +163,7 @@ export class SearchComponent implements OnInit {
     }
 
     // debugger;
-    if (value === "" || value === undefined) {
+    if (!value) {
       this.isEmpty = true;
       // this.filterList = {
       //   "Customer": {

@@ -11,7 +11,6 @@ export class GdprComponent implements OnInit {
   public cookiesEnable: boolean = false;
   public cookiePopupShow: boolean = true;
 
-
   constructor(private dataService: dataService, ) { }
 
   ngOnInit() {
@@ -19,13 +18,11 @@ export class GdprComponent implements OnInit {
     this.cookiePopupShow = consent !== "yes"
   }
 
-
   useCookies(cookiesEnable: boolean) {
     debugger;
     this.cookiesEnable = cookiesEnable;
     this.cookiePopupShow = false;
     document.cookie = `consent = ${cookiesEnable ? 'yes' : 'no'}` 
-    //  cookiesEnable ?  "consent = yes" : "consent = no";
   }
 
   getCookie(cname) {

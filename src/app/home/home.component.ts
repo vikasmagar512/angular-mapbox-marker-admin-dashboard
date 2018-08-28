@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
       },
     ]
     // this.ads = this.adService.getAds();
-    this.activeComponent = 2;
+    this.activeComponent = 0;
     this.customerSelected = "";
 
   }

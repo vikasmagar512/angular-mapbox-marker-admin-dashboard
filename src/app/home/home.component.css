@@ -23,7 +23,10 @@
  /*  margin-top: -50px; */
   margin-bottom: 7px;
 }
-
+.map-sec{
+  height: 350px;
+  min-height: 350px;
+}
 /* .mar-r{
   margin-right: -4px;
 } */

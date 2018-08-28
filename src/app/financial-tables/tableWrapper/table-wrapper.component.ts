@@ -17,8 +17,8 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
 export class TableWrapperComponent implements OnInit, OnChanges {
   // @Input() data;
-  detailType:string;
-  dataNumber:number;
+  detailType: string;
+  dataNumber: number;
   agreementIdSelected: string;
   agreementCurrentObj: any;
 
@@ -92,6 +92,12 @@ export class TableWrapperComponent implements OnInit, OnChanges {
   }
 
   loadTable(num: number) {
+
+    setTimeout(() => {
+      $('input[placeholder="aggreementSearch"],input[placeholder="assetSearch"]').hide();
+      // $('').hide();
+    }, 1)
+
     this.detailType = this.dataService.detailTypes[num];
     console.log(`loadTable${num}`);
     // this.dataService.dataNumber = num;
@@ -132,19 +138,19 @@ export class TableWrapperComponent implements OnInit, OnChanges {
     { title: 'Customer', className: ['text-warning'], name: 'customer', filter: 'text' },
     { title: 'Agreement', className: ['text-warning'], name: 'agreement', filter: 'text' },
     // { title: 'Status', name: 'assetStatus', filtering: { filterString: '', placeholder: 'Filter by status' }, sort: false, filter: 'text' },
-    { title: 'Status', name: 'assetStatus', sort: false },
+    { title: 'Status', name: 'assetStatus', filtering: { filterString: '', placeholder: 'assetSearch' }, sort: false },
     { title: 'Location', name: 'location', sort: '', filtering: { filterString: '', placeholder: 'Filter by extn.' }, filter: 'text' },
   ];
   public agreementColumns: Array<any> = [
     { title: 'Agreement Number', name: 'id', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
     { title: 'Customer', name: 'customer', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
     { title: 'Start Date', name: 'start_date', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
-    { title: 'End Date', className: ['text-warning'], name: 'end_date',filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
-    { title: 'Prolongation Due Date', name: 'prolongationDueDate', sort: false,filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
-    { title: 'Status', className: ['text-warning'], name: 'agreementStatus', filter: 'text' },
+    { title: 'End Date', className: ['text-warning'], name: 'end_date', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
+    { title: 'Prolongation Due Date', name: 'prolongationDueDate', sort: false, filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
+    { title: 'Status', className: ['text-warning'], name: 'agreementStatus', filtering: { filterString: '', placeholder: 'aggreementSearch' }, filter: 'text' },
     // {title: 'Location', name: 'location', sort: '', filtering: {filterString: '', placeholder: 'Filter by extn.'},filter:'text'},
   ];
-  addFilterString=(columns,reflect: object)=>columns.map((item) =>
+  addFilterString = (columns, reflect: object) => columns.map((item) =>
     reflect.hasOwnProperty(item.name) ? { ...item, filtering: { ...item.filtering, filterString: reflect[item.name] } } : item
   )
   // newColumnSearchTable(reflect={'type':'printer','assetStatus':'Not working'}){
@@ -153,17 +159,17 @@ export class TableWrapperComponent implements OnInit, OnChanges {
     // let reflect = {'type':'printer','assetStatus':'Not working'}
     debugger
     if (this.dataNumber === 2) {
-      let newAssetColumns = this.addFilterString(this.assetColumns,reflect)
+      let newAssetColumns = this.addFilterString(this.assetColumns, reflect)
       // debugger
       this.assetTableRef.newColumnSearch(newAssetColumns)
     }
     if (this.dataNumber === 1) {
-      let newProductColumns = this.addFilterString(this.productRequestColumns,reflect)
+      let newProductColumns = this.addFilterString(this.productRequestColumns, reflect)
       // debugger
       this.productRequestTableRef.newColumnSearch(newProductColumns)
     }
     if (this.dataNumber === 3) {
-      let agreementColumns = this.addFilterString(this.agreementColumns,reflect)
+      let agreementColumns = this.addFilterString(this.agreementColumns, reflect)
       // debugger
       this.agreementTableRef.newColumnSearch(agreementColumns)
     }
@@ -176,7 +182,7 @@ export class TableWrapperComponent implements OnInit, OnChanges {
     this.filterTypesReceived.map((filterTypeItem) => {
       // let search = this.dataService.dataNumber === 0 && (["ASSET_STATUS", "ASSET_TYPE"].indexOf(filterTypeItem.filterType) !== -1) ||
 
-      let search = this.dataNumber === 2 && (['ASSET_STATUS','ASSET_TYPE'].indexOf(filterTypeItem.filterType) !== -1) //asset
+      let search = this.dataNumber === 2 && (['ASSET_STATUS', 'ASSET_TYPE'].indexOf(filterTypeItem.filterType) !== -1) //asset
         || this.dataNumber === 1 && (['ASSET_TYPE'].indexOf(filterTypeItem.filterType) !== -1)  //prduct
         || this.dataNumber === 3 && (["CONTRACT_STATUS"].indexOf(filterTypeItem.filterType) !== -1) //agreement
       // debugger
@@ -217,11 +223,7 @@ export class TableWrapperComponent implements OnInit, OnChanges {
     // },1000)
 
     // this.dataNumber = this.dataService.dataNumber
-    // setTimeout(() => {
-    //   $('input[placeholder="Filter by name"]')
-    //   .val("Vaccum")
-    //   .change()
-    // }, 2000)
+
     // $('input').addClass("text");
     // debugger;
     // console.log(this.data)
@@ -289,25 +291,25 @@ export class TableWrapperComponent implements OnInit, OnChanges {
 
     this.assetConfig = {
       paging: true,
-      sorting: {columns: this.assetColumns},
-      filtering: {filterString: ''},
+      sorting: { columns: this.assetColumns },
+      filtering: { filterString: '' },
       className: ['third-t', 's-table', 'table-striped', 'table-bordered']
     };
 
     this.agreementConfig = {
       paging: true,
-      sorting: {columns: this.agreementColumns},
-      filtering: {filterString: ''},
+      sorting: { columns: this.agreementColumns },
+      filtering: { filterString: '' },
       className: ['third-t', 's-table', 'table-striped', 'table-bordered']
     };
     this.serviceRequestColumns = [
-      {title: 'Request Id', name: 'id', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
-      {title: 'Request Name', name: 'name', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
-      {title: 'Request Type', name: 'type', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
-      {title: 'Customer', className: ['text-warning'], name: 'customer', filter: 'text'},
-      {title: 'Agreement', className: ['text-warning'], name: 'agreement', filter: 'text'},
-      {title: 'Status', name: 'status', sort: false, filter: 'text'},
-      {title: 'Location', name: 'location', sort: '', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
+      { title: 'Request Id', name: 'id', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
+      { title: 'Request Name', name: 'name', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
+      { title: 'Request Type', name: 'type', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
+      { title: 'Customer', className: ['text-warning'], name: 'customer', filter: 'text' },
+      { title: 'Agreement', className: ['text-warning'], name: 'agreement', filter: 'text' },
+      { title: 'Status', name: 'status', sort: false, filter: 'text' },
+      { title: 'Location', name: 'location', sort: '', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
     ];
     this.serviceRequestData = this.assetDetail.reduce((acc, asset: Asset) => {
       /* let stat:'asset.status';
@@ -326,20 +328,20 @@ export class TableWrapperComponent implements OnInit, OnChanges {
 
     this.serviceRequestConfig = {
       paging: true,
-      sorting: {columns: this.serviceRequestColumns},
-      filtering: {filterString: ''},
+      sorting: { columns: this.serviceRequestColumns },
+      filtering: { filterString: '' },
       className: ['third-t', 's-table', 'table-striped', 'table-bordered']
     };
 
     this.productRequestColumns = [
-      {title: 'Request Id', name: 'id', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
-      {title: 'Product Name', name: 'name', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
-      {title: 'Asset Type', name: 'assetType', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
-      {title: 'Customer', className: ['text-warning'], name: 'customer', filter: 'text'},
-      {title: 'Agreement', className: ['text-warning'], name: 'agreement', filter: 'text'},
+      { title: 'Request Id', name: 'id', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
+      { title: 'Product Name', name: 'name', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
+      { title: 'Asset Type', name: 'assetType', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
+      { title: 'Customer', className: ['text-warning'], name: 'customer', filter: 'text' },
+      { title: 'Agreement', className: ['text-warning'], name: 'agreement', filter: 'text' },
       // { title: 'Status', name: 'assetStatus', sort: false },
       // { title: 'Status', name: 'assetStatus', sort: false },
-      {title: 'Location', name: 'location', sort: '', filtering: {filterString: '', placeholder: 'Filter by extn.'}, filter: 'text'},
+      { title: 'Location', name: 'location', sort: '', filtering: { filterString: '', placeholder: 'Filter by extn.' }, filter: 'text' },
     ];
     this.productRequestData = this.assetDetail.reduce((acc, asset: Asset) => {
       /* let stat:'asset.status';
@@ -359,8 +361,8 @@ export class TableWrapperComponent implements OnInit, OnChanges {
 
     this.productRequestConfig = {
       paging: true,
-      sorting: {columns: this.productRequestColumns},
-      filtering: {filterString: ''},
+      sorting: { columns: this.productRequestColumns },
+      filtering: { filterString: '' },
       className: ['third-t', 's-table', 'table-striped', 'table-bordered']
     };
     var that = this;
