@@ -21,7 +21,9 @@
   border-style: hidden;
   box-shadow: 0 0 3px 2px #9c9898;
 }
-
+.third-t>tbody>tr>td:nth-child(6) {
+  text-align: center;
+}
 .s-table , .s-table th{
   border:2px solid #cecbcb;
 }

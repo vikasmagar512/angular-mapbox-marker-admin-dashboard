@@ -12,7 +12,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 @Component({
   selector: 'app-table-wrapper',
   templateUrl: './table-wrapper.component.html',
-  styleUrls: ['./table-wrapper.component.css', '../../style.css']
+  styleUrls: ['./table-wrapper.component.css', '../../style.css','../../table.css']
 })
 
 export class TableWrapperComponent implements OnInit, OnChanges {
@@ -58,7 +58,6 @@ export class TableWrapperComponent implements OnInit, OnChanges {
   }
 
   openAgreementModal(event) {
-    alert('asdf')
     this.agreementIdSelected = event;
     this.agreementCurrentObj = this.agreementData.find((item) => item['id'] === this.agreementIdSelected)
     this.openModal(this.AgreementTemplate)

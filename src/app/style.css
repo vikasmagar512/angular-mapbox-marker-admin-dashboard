@@ -203,8 +203,8 @@ font-size: 18px;
   font-weight: 600
 }
 
-.ass-size{
-  width: 16%;
+.third-t .ass-size{
+  width: 20px;
   padding:0px 3px;
   float: left;
 }
@@ -492,8 +492,11 @@ font-size: 18px;
   .third-t tr>td{
       padding: 14px;
       border-bottom: none;
+    background-color: red;
   }
-
+.third-t>tbody>tr>td:nth-child(6) {
+  text-align: center;
+}
   .fourth-t tr>td{
       padding: 10px;
       border-bottom: none;
