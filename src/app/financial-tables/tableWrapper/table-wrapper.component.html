@@ -27,7 +27,7 @@
     </div>
   </div>
   <div *ngIf="dataService.dataNumber===0">
-    <app-table-demo #serviceRequestTable (change)="openServiceModal($event)" [data]="serviceRequestData" #serviceRequestTable
+    <app-table-demo #serviceRequestTable (change)="openServiceModal($event)" [data]="serviceRequestData"
       [config]="serviceRequestConfig" [columns]="serviceRequestColumns"></app-table-demo>
   </div>
   <div *ngIf="dataService.dataNumber===1">

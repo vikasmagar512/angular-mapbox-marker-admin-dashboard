@@ -12,7 +12,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 @Component({
   selector: 'app-table-wrapper',
   templateUrl: './table-wrapper.component.html',
-  styleUrls: ['./table-wrapper.component.css', '../../style.css']
+  styleUrls: ['./table-wrapper.component.css']
 })
 
 export class TableWrapperComponent implements OnInit, OnChanges {
@@ -277,14 +277,14 @@ export class TableWrapperComponent implements OnInit, OnChanges {
       paging: true,
       sorting: {columns: this.assetColumns},
       filtering: {filterString: ''},
-      className: ['third-t', 's-table', 'table-striped', 'table-bordered']
+      className: ['third-t', 's-table', 'table-bordered']
     };
 
     this.agreementConfig = {
       paging: true,
       sorting: {columns: this.agreementColumns},
       filtering: {filterString: ''},
-      className: ['third-t', 's-table', 'table-striped', 'table-bordered']
+      className: ['third-t', 's-table', 'table-bordered']
     };
     this.serviceRequestColumns = [
       {title: 'Request Id', name: 'id', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
