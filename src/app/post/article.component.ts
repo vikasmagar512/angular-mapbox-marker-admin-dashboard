@@ -9,6 +9,7 @@ import { Subject } from 'rxjs';
 import {MyPostService} from './mypost.service';
 
 @Component({
+  selector: 'static-chart',
   template: `
         <div class="post-highlights2">
             <!--<p><b>Article-{{post.sn}}: {{post.title}}</b></p>-->
