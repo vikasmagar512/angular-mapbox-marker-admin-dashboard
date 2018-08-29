@@ -65,7 +65,7 @@ export class dataService {
     "unit": "Kg"
   }
 
-  vaccume = {
+  Vaccum = {
     "types": ["Water/Day", "Steam/Day"],
     "unit": "#"
   }
@@ -248,7 +248,7 @@ export class dataService {
       "serialno": "VC12190",
       "customer": "234",
       "quantity":"2",
-      "prodName": "Motor",
+      "prodName": "Moto",
       "unit": "#",
       "requestedOn":"19-09-2018",
       "dueBy":"15-10-2018",

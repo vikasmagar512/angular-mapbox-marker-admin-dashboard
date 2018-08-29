@@ -233,7 +233,8 @@ export class TableWrapperComponent implements OnInit, OnChanges {
             "end_date": asset.end_date,
             "agreement": asset.start_date,
             "prolongationDueDate": asset.prolongationDueDate,
-            "agreementStatus": '<img src="../../assets/' + (!asset.status ? '15.png' : (asset.status === 1 ? '14.png' : '13.png')) + '" alt="' + (!asset.status ? 'Expired' : (asset.status === 1 ? 'Expiring Soon' : 'In Contract')) + '" class="ass-size">',
+            // "agreementStatus": '<img src="../../assets/' + (!asset.status ? '15.png' : (asset.status === 1 ? '14.png' : '13.png')) + '" alt="' + (!asset.status ? 'Expired' : (asset.status === 1 ? 'Expiring Soon' : 'In Contract')) + '" class="ass-size">',
+            "agreementStatus": '<img src="../../assets/' + (!asset.status ? '15.png' : (asset.status === 1 ? '14.png' : '13.png')) + '" alt="' + (!asset.status ? 'Expiring Soon' : (asset.status === 1 ? 'Prolongation' : 'In Contract')) + '" class="ass-size">',
           });
         } else {
           return acc
@@ -503,7 +504,31 @@ export class TableWrapperComponent implements OnInit, OnChanges {
     //     "agreementStatus": '<img src="../../assets/' + (!asset.status ? '15.png' : (asset.status === 1 ? '14.png' : '13.png')) + '" alt="' + (!asset.status ? 'Expired' : (asset.status === 1 ? 'Expiring Soon' : 'In Contract')) + '" class="ass-size">',
     //   });
     // }, []);
+    /*this.agreementData = this.agreementDetail.reduce((acc, asset: Agreement) => {
+      /!* let stat:'asset.status';
+      console.log("stat"); *!/
+      return acc.concat({
+        "id": asset.agreement_no,
+        /!* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', *!/
+        "customer": asset.contact,
+        "type": asset.type,
+        "start_date": asset.start_date,
+        "end_date": asset.end_date,
+        "agreement": asset.start_date,
+        "prolongationDueDate": asset.prolongationDueDate,
+        // "location":asset.status.toString(),
+        /!*
+            "status":'<span>'+
+                     '<img src="../../assets/stat.svg">'+
+                     '</span>'
+        *!/
+        // "status":`<span><img src="../../assets/${asset.status}.png"></span>`,
 
+        // "agreementStatus": '<img src="../../assets/' + (!asset.status ? '09.png' : (asset.status === 1 ? '10.png' : '12.png')) + '" alt="' + (!asset.status ? 'Expired' : (asset.status === 1 ? 'Expiring Soon' : 'In Contract')) + '" class="ass-size">',
+        "agreementStatus": '<img src="../../assets/' + (!asset.status ? '15.png' : (asset.status === 1 ? '14.png' : '13.png')) + '" alt="' + (!asset.status ? 'Expiring Soon' : (asset.status === 1 ? 'Prolongation' : 'In Contract')) + '" class="ass-size">',
+      });
+    }, []);
+*/
     this.assetConfig = {
       paging: true,
       sorting: { columns: this.assetColumns },

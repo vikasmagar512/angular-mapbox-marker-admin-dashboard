@@ -32,7 +32,7 @@
   margin-top: 0px;
 }
 .mar{
-    margin:-7px;
+  margin:-7px;
 }
 .flex-nav{
   display: flex;
@@ -133,9 +133,9 @@
   background-color: red;
 }*/
 
-tabset.nav-tabs>ul {
-  margin-bottom: 10px;
-}
+/*tabset.nav-tabs>ul {*/
+/*margin-bottom: 10px;*/
+/*}*/
 
 .bclr-white{
   background-color: #fff;
@@ -149,33 +149,23 @@ tabset.nav-tabs>ul {
   color: red;
 }
 
-.customClass{
-  border:none;
-}
+/*.customClass{*/
+/*border:none;*/
+/*}*/
 .customClass li:active{
   border-bottom: 2px solid red;
 }
-/* .customClass>a:hover {
-  background-color:rgb(250, 246, 246) !important;
-  border: none !important;
-  outline: 0 !important;
-} */
-.customClass>a{
-  background-color:#efefef !important;
-  border: none !important;
-  outline: 0 !important;
-  border-radius: 0 !important;
-  color: #000;
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+  color:#000;
+  cursor: default;
+  /* background-color:green; */
+  border-bottom:2px solid rgb(38, 218, 218) !important;
 }
-.customClass.bor-l>a{
-  border-right: 1px solid rgb(163, 158, 158) !important;
+.customClass{
+  /*background-color: red;*/
+  border:none;
 }
-/*.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {*/
-  /*color:#000;*/
-  /*cursor: default;*/
-  /*!* background-color:green; *!*/
-  /*border-bottom:2px solid rgb(38, 218, 218) !important;*/
-/*}*/
 
 .btn{
   background-color: rgb(56, 55, 55);
@@ -187,16 +177,6 @@ tabset.nav-tabs>ul {
   background-color: aqua !important;
   color:white !important;
 }
-/* .nav-tabs{
-  background-color:#f1f3f3;
-} */
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
-  color:#000;
-  cursor: default;
-  /* background-color:green; */
-  border-bottom:2px solid rgb(38, 218, 218) !important;
-}
-
 .customClass.bor-l > a{
   border-right: 1px solid rgb(163, 158, 158) !important;
 }
@@ -213,3 +193,16 @@ tabset.nav-tabs>ul {
 
   background-color:grey !important;
 } */
+
+.modal-header {
+  padding: 0px;
+  border-bottom: 0;
+}
+
+/*.nav-tabs.nav-justified>>a{*/
+  /*border: none !important;*/
+/*}*/
+
+.customClass .active>a{
+  background-color: green;
+}

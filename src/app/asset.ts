@@ -11,10 +11,10 @@ export interface Asset{
       "customer":string;
       "img":string;
       "status":Number;
-      "quantity"?:string;
+      "quantity":string;
       "requestStatus":string;
-      requestedOn?:string;
-      dueBy?:string;
+      "requestedOn"?:string;
+      "dueBy"?:string;
       "prodName"?:string,
       "unit"?: string,
       "metrics": Array<Metric>;
