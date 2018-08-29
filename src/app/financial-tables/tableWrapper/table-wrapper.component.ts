@@ -9,18 +9,19 @@ import { AdService } from '../../ad.service';
 import { filterGroup } from '../../filter-search/filterGroup';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { Customer } from '../../customer';
-import { PARAMETERS } from '@angular/core/src/util/decorators';
+import { ReusableTableComponent } from '../../table-module/reusable-table/reusable-table.component';
 
 @Component({
   selector: 'app-table-wrapper',
   templateUrl: './table-wrapper.component.html',
-  styleUrls: ['./table-wrapper.component.css', '../../style.css','../../table.css']
+  styleUrls: ['./table-wrapper.component.css', '../../style.css', '../../table.css']
 })
 
 export class TableWrapperComponent implements OnInit, OnChanges {
-  // @Input() data;
+
   detailType: string;
   dataNumber: number;
+
   agreementIdSelected: string;
   agreementCurrentObj: any;
 
@@ -35,14 +36,16 @@ export class TableWrapperComponent implements OnInit, OnChanges {
 
   customerCurrentObj: any;
   customerId: string;
+  currentCustomer: Customer;
+
   _subscription: any;
   _subscription1: any;
-  currentCustomer:Customer;
-  
+
 
   public filterTypesReceived: Array<filterGroup>;
 
   constructor(private dataService: dataService, private adService: AdService, private modalService: BsModalService) {
+    debugger
     this.detailType = dataService.detailType;
     this.dataNumber = 0;
     // this.loadTable(this.dataNumber);
@@ -50,19 +53,27 @@ export class TableWrapperComponent implements OnInit, OnChanges {
       this.dataNumber = value
       this.adService.disableFilter(this.dataNumber)
     })
-    this._subscription1 = this.dataService.currentCustomer.subscribe((value:Customer) => {
+    debugger;
+    this._subscription1 = this.dataService.currentCustomer.subscribe((value: Customer) => {
       this.currentCustomer = value;
-      this.constructServiceTable()
-      alert(this.currentCustomer)
+      this.constructServiceTable();
+      //try Nikhil
+      this.constructProductTable();
+      this.constructAssetTable();
+      this.constructAgreementTable();
+
+      // alert(JSON.stringify(this.currentCustomer))
       debugger
     });
   }
   public modalRef: BsModalRef; // {1}
-  constructServiceTable(){
+  constructServiceTable() {
+    debugger;
     this.serviceRequestData = this.assetDetail.reduce((acc, asset: Asset) => {
-      if(this.currentCustomer !== null){
-        if(asset.customer === this.currentCustomer.id){
-          alert('found')
+      if (this.currentCustomer !== null) {
+        if (asset.customer === this.currentCustomer.id) {
+          alert('found');
+          debugger;
           return acc.concat({
             "id": asset.id,
             /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
@@ -74,10 +85,10 @@ export class TableWrapperComponent implements OnInit, OnChanges {
             "dueBy": asset.dueBy,
             "status": asset.requestStatus
           })
-        } else{
+        } else {
           return acc
         }
-      }else {
+      } else {
         alert('not found')
         return acc.concat({
           "id": asset.id,
@@ -91,8 +102,170 @@ export class TableWrapperComponent implements OnInit, OnChanges {
           "status": asset.requestStatus
         })
       }
-    },[]); 
+    }, []);
+    // this.dataService.changeDataNumber(0)
+    // this.adService.disableFilter(0)
+    debugger;
+    this.loadTable(1);
+    // this.loadTable(0);
+    setTimeout(() => {
+      this.detailType = this.dataService.detailTypes[0];
+      this.dataService.changeDataNumber(0)
+      // debugger
+    }, 0);
   }
+
+  //try Nikhil
+  constructProductTable() {
+    debugger;
+    this.productRequestData = this.assetDetail.reduce((acc, asset: Asset) => {
+      if (this.currentCustomer !== null) {
+        if (asset.customer === this.currentCustomer.id) {
+          // alert('found');
+          debugger;
+          return acc.concat({
+            "id": asset.id,
+            /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
+            // "detail": asset.detail,
+            "name": asset.prodName,
+            "customer": asset.customer,
+            "assetType": asset.category,
+            "quantity": asset.quantity,
+            "requestedOn": asset.requestedOn,
+            "dueBy": asset.dueBy,
+            "status": asset.requestStatus
+          })
+        } else {
+          return acc
+        }
+      } else {
+        // alert('not found')
+        return acc.concat({
+          "id": asset.id,
+          /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
+          // "detail": asset.detail,
+          "name": asset.prodName,
+          "customer": asset.customer,
+          "assetType": asset.category,
+          "quantity": asset.quantity,
+          "requestedOn": asset.requestedOn,
+          "dueBy": asset.dueBy,
+          "status": asset.requestStatus
+        })
+      }
+    }, []);
+    // this.dataService.changeDataNumber(0)
+    // this.adService.disableFilter(0)
+    debugger;
+    // this.loadTable(1);
+    // // this.loadTable(0);
+    // setTimeout(() => {
+    //   this.detailType = this.dataService.detailTypes[0];
+    //   this.dataService.changeDataNumber(0)
+    //   // debugger
+    // }, 0);
+
+    if (!this.currentCustomer) {
+      this.productRequestData = this.assetDetail.reduce((acc, asset: Asset) => {
+        return acc.concat({
+          "id": asset.id,
+          /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
+          // "detail": asset.detail,
+          "name": asset.prodName,
+          "customer": asset.customer,
+          "assetType": asset.category,
+          "quantity": asset.quantity,
+          "requestedOn": asset.requestedOn,
+          "dueBy": asset.dueBy,
+          "status": asset.requestStatus
+        });
+      }, []);
+    }
+  }
+
+
+  constructAssetTable() {
+    this.assetData = this.assetDetail.reduce((acc, asset: Asset) => {
+      if (this.currentCustomer !== null) {
+        if (asset.customer === this.currentCustomer.id) {
+          debugger;
+          return acc.concat({
+            "id": asset.id,
+            "name": asset.name,
+            "assetType": asset.category,
+            "customer": asset.customer,
+            "agreement": asset.agreement_no,
+            "location": asset.location,
+            "assetStatus": '<img src="../../assets/' + (!asset.status ? '09.png' : (asset.status === 1 ? '10.png' : '12.png')) + '" class="ass-size" alt="' + (!asset.status ? 'Not Working' : (asset.status === 1 ? 'Service Required' : 'Working')) + '">',
+          });
+        } else {
+          return acc
+        }
+      } else {
+        return acc.concat({
+          "id": asset.id,
+          "name": asset.name,
+          "assetType": asset.category,
+          "customer": asset.customer,
+          "agreement": asset.agreement_no,
+          "location": asset.location,
+          "assetStatus": '<img src="../../assets/' + (!asset.status ? '09.png' : (asset.status === 1 ? '10.png' : '12.png')) + '" class="ass-size" alt="' + (!asset.status ? 'Not Working' : (asset.status === 1 ? 'Service Required' : 'Working')) + '">',
+        })
+      }
+    }, []);
+  }
+
+  constructAgreementTable() {
+
+    // this.agreementData = this.agreementDetail.reduce((acc, asset: Agreement) => {
+    //   /* let stat:'asset.status';
+    //   console.log("stat"); */
+    //   return acc.concat({
+    //     "id": asset.agreement_no,
+    //     /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
+    //     "customer": asset.contact,
+    //     "type": asset.type,
+    //     "start_date": asset.start_date,
+    //     "end_date": asset.end_date,
+    //     "agreement": asset.start_date,
+    //     "prolongationDueDate": asset.prolongationDueDate,
+    //     "agreementStatus": '<img src="../../assets/' + (!asset.status ? '15.png' : (asset.status === 1 ? '14.png' : '13.png')) + '" alt="' + (!asset.status ? 'Expired' : (asset.status === 1 ? 'Expiring Soon' : 'In Contract')) + '" class="ass-size">',
+    //   });
+    // }, []);
+    this.agreementDetail = this.dataService.getAgreement();
+
+    this.agreementData = this.agreementDetail.reduce((acc, asset: Agreement) => {
+      if (this.currentCustomer !== null) {
+        if (asset.contact === this.currentCustomer.id) {
+          debugger;
+          return acc.concat({
+            "id": asset.agreement_no,
+            "customer": asset.contact,
+            "type": asset.type,
+            "start_date": asset.start_date,
+            "end_date": asset.end_date,
+            "agreement": asset.start_date,
+            "prolongationDueDate": asset.prolongationDueDate,
+            "agreementStatus": '<img src="../../assets/' + (!asset.status ? '15.png' : (asset.status === 1 ? '14.png' : '13.png')) + '" alt="' + (!asset.status ? 'Expired' : (asset.status === 1 ? 'Expiring Soon' : 'In Contract')) + '" class="ass-size">',
+          });
+        } else {
+          return acc
+        }
+      } else {
+        return acc.concat({
+          "id": asset.agreement_no,
+          "customer": asset.contact,
+          "type": asset.type,
+          "start_date": asset.start_date,
+          "end_date": asset.end_date,
+          "agreement": asset.start_date,
+          "prolongationDueDate": asset.prolongationDueDate,
+          "agreementStatus": '<img src="../../assets/' + (!asset.status ? '15.png' : (asset.status === 1 ? '14.png' : '13.png')) + '" alt="' + (!asset.status ? 'Expired' : (asset.status === 1 ? 'Expiring Soon' : 'In Contract')) + '" class="ass-size">',
+        })
+      }
+    }, []);
+  }
+
   public openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' }); // {3}
   }
@@ -262,53 +435,53 @@ export class TableWrapperComponent implements OnInit, OnChanges {
     this.assetDetail = this.dataService.getAssets();
 
     // debugger;
-    this.assetData = this.assetDetail.reduce((acc, asset: Asset) => {
-      /* let stat:'asset.status';
-      console.log("stat"); */
-      return acc.concat({
-        "id": asset.id,
-        /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
-        "name": asset.name,
-        "assetType": asset.category,
-        "customer": asset.customer,
-        "agreement": asset.agreement_no,
-        "location": asset.location,
-        /*
-              "status":'<span>'+
-                       '<img src="../../assets/stat.svg">'+
-                       '</span>'
-        */
-        // "status":`<span><img src="../../assets/${asset.status}.png"></span>`,
-        "assetStatus": '<img src="../../assets/' + (!asset.status ? '09.png' : (asset.status === 1 ? '10.png' : '12.png')) + '" class="ass-size" alt="' + (!asset.status ? 'Not Working' : (asset.status === 1 ? 'Service Required' : 'Working')) + '">',
-      });
-    }, []);
+    // this.assetData = this.assetDetail.reduce((acc, asset: Asset) => {
+    //   /* let stat:'asset.status';
+    //   console.log("stat"); */
+    //   return acc.concat({
+    //     "id": asset.id,
+    //     /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
+    //     "name": asset.name,
+    //     "assetType": asset.category,
+    //     "customer": asset.customer,
+    //     "agreement": asset.agreement_no,
+    //     "location": asset.location,
+    //     /*
+    //           "status":'<span>'+
+    //                    '<img src="../../assets/stat.svg">'+
+    //                    '</span>'
+    //     */
+    //     // "status":`<span><img src="../../assets/${asset.status}.png"></span>`,
+    //     "assetStatus": '<img src="../../assets/' + (!asset.status ? '09.png' : (asset.status === 1 ? '10.png' : '12.png')) + '" class="ass-size" alt="' + (!asset.status ? 'Not Working' : (asset.status === 1 ? 'Service Required' : 'Working')) + '">',
+    //   });
+    // }, []);
 
     this.agreementDetail = this.dataService.getAgreement();
 
-    this.agreementData = this.agreementDetail.reduce((acc, asset: Agreement) => {
-      /* let stat:'asset.status';
-      console.log("stat"); */
-      return acc.concat({
-        "id": asset.agreement_no,
-        /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
-        "customer": asset.contact,
-        "type": asset.type,
-        "start_date": asset.start_date,
-        "end_date": asset.end_date,
-        "agreement": asset.start_date,
-        "prolongationDueDate": asset.prolongationDueDate,
-        // "location":asset.status.toString(),
-        /*
-            "status":'<span>'+
-                     '<img src="../../assets/stat.svg">'+
-                     '</span>'
-        */
-        // "status":`<span><img src="../../assets/${asset.status}.png"></span>`,
+    // this.agreementData = this.agreementDetail.reduce((acc, asset: Agreement) => {
+    //   /* let stat:'asset.status';
+    //   console.log("stat"); */
+    //   return acc.concat({
+    //     "id": asset.agreement_no,
+    //     /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
+    //     "customer": asset.contact,
+    //     "type": asset.type,
+    //     "start_date": asset.start_date,
+    //     "end_date": asset.end_date,
+    //     "agreement": asset.start_date,
+    //     "prolongationDueDate": asset.prolongationDueDate,
+    //     // "location":asset.status.toString(),
+    //     /*
+    //         "status":'<span>'+
+    //                  '<img src="../../assets/stat.svg">'+
+    //                  '</span>'
+    //     */
+    //     // "status":`<span><img src="../../assets/${asset.status}.png"></span>`,
 
-        // "agreementStatus": '<img src="../../assets/' + (!asset.status ? '09.png' : (asset.status === 1 ? '10.png' : '12.png')) + '" alt="' + (!asset.status ? 'Expired' : (asset.status === 1 ? 'Expiring Soon' : 'In Contract')) + '" class="ass-size">',
-        "agreementStatus": '<img src="../../assets/' + (!asset.status ? '15.png' : (asset.status === 1 ? '14.png' : '13.png')) + '" alt="' + (!asset.status ? 'Expired' : (asset.status === 1 ? 'Expiring Soon' : 'In Contract')) + '" class="ass-size">',
-      });
-    }, []);
+    //     // "agreementStatus": '<img src="../../assets/' + (!asset.status ? '09.png' : (asset.status === 1 ? '10.png' : '12.png')) + '" alt="' + (!asset.status ? 'Expired' : (asset.status === 1 ? 'Expiring Soon' : 'In Contract')) + '" class="ass-size">',
+    //     "agreementStatus": '<img src="../../assets/' + (!asset.status ? '15.png' : (asset.status === 1 ? '14.png' : '13.png')) + '" alt="' + (!asset.status ? 'Expired' : (asset.status === 1 ? 'Expiring Soon' : 'In Contract')) + '" class="ass-size">',
+    //   });
+    // }, []);
 
     this.assetConfig = {
       paging: true,
@@ -324,15 +497,15 @@ export class TableWrapperComponent implements OnInit, OnChanges {
       className: ['third-t', 's-table', 'table-striped', 'table-bordered']
     };
     this.serviceRequestColumns = [
-      {title: 'Request Id', name: 'id', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
-      {title: 'Request Details', name: 'name', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
-      {title: 'Customer', className: ['text-warning'], name: 'customer', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
-      {title: 'Asset Name', name: 'type', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
-      {title: 'Requested On', className: ['text-warning'], name: 'requestedOn', filter: 'text'},
-      {title: 'Due By', name: 'dueBy', sort: '', filter: 'text'},
-      {title: 'Status', name: 'status', sort: false, filter: 'text'},
+      { title: 'Request Id', name: 'id', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
+      { title: 'Request Details', name: 'name', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
+      { title: 'Customer', className: ['text-warning'], name: 'customer', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
+      { title: 'Asset Name', name: 'type', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
+      { title: 'Requested On', className: ['text-warning'], name: 'requestedOn', filter: 'text' },
+      { title: 'Due By', name: 'dueBy', sort: '', filter: 'text' },
+      { title: 'Status', name: 'status', sort: false, filter: 'text' },
     ];
-   
+
     this.serviceRequestConfig = {
       paging: true,
       sorting: { columns: this.serviceRequestColumns },
@@ -341,29 +514,29 @@ export class TableWrapperComponent implements OnInit, OnChanges {
     };
 
     this.productRequestColumns = [
-      {title: 'Request Id', name: 'id', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
-      {title: 'Product', name: 'name', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
-      {title: 'Asset Type', name: 'assetType', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
-      {title: 'Customer', className: ['text-warning'], name: 'customer', filtering: {filterString: '', placeholder: 'Search'}, filter: 'text'},
-      {title: 'Quantity', className: ['text-warning'], name: 'quantity', filter: 'text'},
-      {title: 'Requested On', className: ['text-warning'], name: 'requestedOn', filter: 'text'},
-      {title: 'Due By', name: 'dueBy', sort: '', filter: 'text'},
-      {title: 'Status', name: 'status', sort: false, filter: 'text'},
+      { title: 'Request Id', name: 'id', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
+      { title: 'Product', name: 'name', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
+      { title: 'Asset Type', name: 'assetType', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
+      { title: 'Customer', className: ['text-warning'], name: 'customer', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
+      { title: 'Quantity', className: ['text-warning'], name: 'quantity', filter: 'text' },
+      { title: 'Requested On', className: ['text-warning'], name: 'requestedOn', filter: 'text' },
+      { title: 'Due By', name: 'dueBy', sort: '', filter: 'text' },
+      { title: 'Status', name: 'status', sort: false, filter: 'text' },
     ];
-    this.productRequestData = this.assetDetail.reduce((acc, asset: Asset) => {
-      return acc.concat({
-        "id": asset.id,
-        /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
-        // "detail": asset.detail,
-        "name": asset.prodName,
-        "customer": asset.customer,
-        "assetType": asset.category,
-        "quantity":asset.quantity,
-        "requestedOn": asset.requestedOn,
-        "dueBy": asset.dueBy,
-        "status": asset.requestStatus
-      });
-    }, []);
+    // this.productRequestData = this.assetDetail.reduce((acc, asset: Asset) => {
+    //   return acc.concat({
+    //     "id": asset.id,
+    //     /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
+    //     // "detail": asset.detail,
+    //     "name": asset.prodName,
+    //     "customer": asset.customer,
+    //     "assetType": asset.category,
+    //     "quantity": asset.quantity,
+    //     "requestedOn": asset.requestedOn,
+    //     "dueBy": asset.dueBy,
+    //     "status": asset.requestStatus
+    //   });
+    // }, []);
 
 
     this.productRequestConfig = {

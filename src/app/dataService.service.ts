@@ -24,6 +24,7 @@ export class dataService {
 
   // dataNumberSetting = this.dataNumber.asObservable();
   constructor(private http: HttpClient) {
+    // this.currentCustomer.next(null);
     // this.dataNumber=3
     // this.dataNumberSetting.subscribe((value) => {
     //   this.dataNumber = 0
@@ -39,7 +40,6 @@ export class dataService {
   detailType: string;
 
   detailTypes: Array<any> = ["Service Request", "Product Request", "Assets Details", "Agreement Details"];
-
 
   locationSearch = ''
 
@@ -273,7 +273,7 @@ export class dataService {
       "id": "AGR01",
       "agreement_no": "AGR984567854",
       "type": "Annual",
-      "contact": "James Bond",
+      "contact": "234",
       "start_date": "14th Dec 2014",
       "end_date": "16th June 2020",
       "termination_date": "14th June 2018",
@@ -288,7 +288,7 @@ export class dataService {
       "id": "AGR02",
       "agreement_no": "AGR984567888",
       "type": "Month",
-      "contact": "Tom Lee",
+      "contact": "123",
       "start_date": "15th Dec 2014",
       "end_date": "13th April 2022",
       "termination_date": "14th April 2018",
@@ -303,7 +303,7 @@ export class dataService {
       "id": "AGR03",
       "agreement_no": "AGR984567889",
       "type": "Month",
-      "contact": "Tom Lee",
+      "contact": "234",
       "start_date": "15th Dec 2014",
       "end_date": "13th April 2022",
       "termination_date": "14th April 2018",
