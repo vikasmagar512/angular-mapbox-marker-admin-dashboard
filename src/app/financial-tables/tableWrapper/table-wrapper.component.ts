@@ -146,7 +146,7 @@ export class TableWrapperComponent implements OnInit, OnChanges {
           // "detail": asset.detail,
           "name": asset.prodName,
           "customer": this.dataService.customers.find((item) => item['id'] == asset.customer)['name'],
-            "customerId":asset.customer,
+          "customerId":asset.customer,
           "assetType": asset.category,
           "quantity": asset.quantity,
           "requestedOn": asset.requestedOn,
@@ -249,7 +249,8 @@ export class TableWrapperComponent implements OnInit, OnChanges {
           "end_date": asset.end_date,
           "agreement": asset.start_date,
           "prolongationDueDate": asset.prolongationDueDate,
-          "agreementStatus": '<img src="../../assets/' + (!asset.status ? '15.png' : (asset.status === 1 ? '14.png' : '13.png')) + '" alt="' + (!asset.status ? 'Expired' : (asset.status === 1 ? 'Expiring Soon' : 'In Contract')) + '" class="ass-size">',
+          "agreementStatus": '<img src="../../assets/' + (!asset.status ? '15.png' : (asset.status === 1 ? '14.png' : '13.png')) + '" alt="' + (!asset.status ? 'Expiring Soon' : (asset.status === 1 ? 'Prolongation' : 'In Contract')) + '" class="ass-size">',
+          // "agreementStatus": '<img src="../../assets/' + (!asset.status ? '15.png' : (asset.status === 1 ? '14.png' : '13.png')) + '" alt="' + (!asset.status ? 'Expired' : (asset.status === 1 ? 'Expiring Soon' : 'In Contract')) + '" class="ass-size">',
         })
       }
     }, []);
@@ -282,35 +283,21 @@ export class TableWrapperComponent implements OnInit, OnChanges {
   }
 
   openCustomerModal(event) {
-    // this.customerId = "123"
-    // this.customerId = event
     debugger;
-    // alert(event)
     if(event.split('*')[0]==='customer'){
       debugger;
       this.customerId = event.split('*')[1]
       this.customerCurrentObj = this.dataService.customers.find((item) => item['id'] == this.customerId)
       this.openModal(this.CustomerTemplate)
     } else if(event.split('*')[0]==='product'){
-      // this.customerCurrentObj = this.dataService.customers.find((item) => item['id'] == this.customerId)
-      // this.openModal(this.CustomerTemplate)
       this.openProductModal(event.split('*')[1])
     } else if(event.split('*')[0]==='service'){
-      // alert('service')
-      // alert(event.split('*')[1])
-      // this.customerCurrentObj = this.dataService.customers.find((item) => item['id'] == this.customerId)
-      // this.openModal(this.CustomerTemplate)
       this.openServiceModal(event.split('*')[1])
     }
     else if(event.split('*')[0]==='agreement'){
-      // alert('agreement it oi')
-      // this.customerCurrentObj = this.dataService.customers.find((item) => item['id'] == this.customerId)
-      // this.openModal(this.CustomerTemplate)
       this.openAgreementModal(event.split('*')[1])
     }
     else if(event.split('*')[0]==='asset'){
-      // this.customerCurrentObj = this.dataService.customers.find((item) => item['id'] == this.customerId)
-      // this.openModal(this.CustomerTemplate)
       this.openAssetModal(event.split('*')[1])
     }
   }
