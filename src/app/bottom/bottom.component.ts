@@ -37,7 +37,7 @@ export class BottomComponent implements OnInit {
     // this.custId = this.dataService.currentSelectedCustomer;
 
     this.dataService.changeDataNumber(num)
-    this.dataService.detailType = this.dataService.detailTypes[num];
+    // this.dataService.detailType = this.dataService.detailTypes[num];
     // $(`.RequestType 2RequestTypeNum top cursPointer active`).removeClass('active');
     // $(`.${this.dataService.dataNumber}num`).addClass('active');
   }

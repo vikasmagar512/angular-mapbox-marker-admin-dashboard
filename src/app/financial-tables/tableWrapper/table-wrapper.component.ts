@@ -45,15 +45,20 @@ export class TableWrapperComponent implements OnInit, OnChanges {
   public filterTypesReceived: Array<filterGroup>;
 
   constructor(private dataService: dataService, private adService: AdService, private modalService: BsModalService) {
-    debugger
-    this.detailType = dataService.detailType;
+    
+    this.assetDetail = this.dataService.getAssets();
+    this.agreementDetail = this.dataService.getAgreement();
+    
+    this.detailType = dataService.detailTypes[this.dataNumber];
+
     this.dataNumber = 0;
     // this.loadTable(this.dataNumber);
     this._subscription = this.dataService.dataNumber.subscribe((value) => {
       this.dataNumber = value
+      this.detailType = dataService.detailTypes[this.dataNumber];    
       this.adService.disableFilter(this.dataNumber)
     })
-    debugger;
+    // debugger;
     this._subscription1 = this.dataService.currentCustomer.subscribe((value: Customer) => {
       this.currentCustomer = value;
       this.constructServiceTable();
@@ -63,23 +68,24 @@ export class TableWrapperComponent implements OnInit, OnChanges {
       this.constructAgreementTable();
 
       // alert(JSON.stringify(this.currentCustomer))
-      debugger
+      // debugger
     });
   }
   public modalRef: BsModalRef; // {1}
   constructServiceTable() {
-    debugger;
+    // debugger;
     this.serviceRequestData = this.assetDetail.reduce((acc, asset: Asset) => {
       if (this.currentCustomer !== null) {
         if (asset.customer === this.currentCustomer.id) {
-          alert('found');
-          debugger;
+          // alert('found');
+          // debugger;
           return acc.concat({
-            "id": asset.id,
+            "serviceRequestId": asset.id,
             /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
             // "detail": asset.detail,
             "name": asset.detail,
-            "customer": asset.customer,
+            "customer": this.dataService.customers.find((item) => item['id'] == asset.customer)['name'],
+            "customerId":asset.customer,            
             "type": asset.category,
             "requestedOn": asset.requestedOn,
             "dueBy": asset.dueBy,
@@ -89,13 +95,15 @@ export class TableWrapperComponent implements OnInit, OnChanges {
           return acc
         }
       } else {
-        alert('not found')
+        // alert('not found')
         return acc.concat({
-          "id": asset.id,
+          "serviceRequestId": asset.id,
           /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
           // "detail": asset.detail,
           "name": asset.detail,
-          "customer": asset.customer,
+          // "customer": asset.customer,
+          "customer": this.dataService.customers.find((item) => item['id'] == asset.customer)['name'],          
+          "customerId":asset.customer,
           "type": asset.category,
           "requestedOn": asset.requestedOn,
           "dueBy": asset.dueBy,
@@ -105,30 +113,33 @@ export class TableWrapperComponent implements OnInit, OnChanges {
     }, []);
     // this.dataService.changeDataNumber(0)
     // this.adService.disableFilter(0)
-    debugger;
-    this.loadTable(1);
+    // debugger;
+    // this.loadTable(1);
     // this.loadTable(0);
-    setTimeout(() => {
-      this.detailType = this.dataService.detailTypes[0];
-      this.dataService.changeDataNumber(0)
-      // debugger
-    }, 0);
+    // setTimeout(() => {
+    //   this.detailType = this.dataService.detailTypes[0];
+    //   this.dataService.changeDataNumber(0)
+    //   // debugger
+    // }, 0);
   }
 
   //try Nikhil
   constructProductTable() {
-    debugger;
+    
+    // debugger;
     this.productRequestData = this.assetDetail.reduce((acc, asset: Asset) => {
       if (this.currentCustomer !== null) {
         if (asset.customer === this.currentCustomer.id) {
           // alert('found');
-          debugger;
+          // debugger;
           return acc.concat({
-            "id": asset.id,
+            "productRequestId": asset.id,
+            // serviceRequestId
             /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
             // "detail": asset.detail,
             "name": asset.prodName,
-            "customer": asset.customer,
+            "customer": this.dataService.customers.find((item) => item['id'] == asset.customer)['name'],
+            "customerId":asset.customer,                       
             "assetType": asset.category,
             "quantity": asset.quantity,
             "requestedOn": asset.requestedOn,
@@ -141,11 +152,12 @@ export class TableWrapperComponent implements OnInit, OnChanges {
       } else {
         // alert('not found')
         return acc.concat({
-          "id": asset.id,
+          "productRequestId": asset.id,
           /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
           // "detail": asset.detail,
           "name": asset.prodName,
-          "customer": asset.customer,
+          "customer": this.dataService.customers.find((item) => item['id'] == asset.customer)['name'],
+            "customerId":asset.customer,                           
           "assetType": asset.category,
           "quantity": asset.quantity,
           "requestedOn": asset.requestedOn,
@@ -156,7 +168,7 @@ export class TableWrapperComponent implements OnInit, OnChanges {
     }, []);
     // this.dataService.changeDataNumber(0)
     // this.adService.disableFilter(0)
-    debugger;
+    // debugger;
     // this.loadTable(1);
     // // this.loadTable(0);
     // setTimeout(() => {
@@ -165,22 +177,22 @@ export class TableWrapperComponent implements OnInit, OnChanges {
     //   // debugger
     // }, 0);
 
-    if (!this.currentCustomer) {
-      this.productRequestData = this.assetDetail.reduce((acc, asset: Asset) => {
-        return acc.concat({
-          "id": asset.id,
-          /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
-          // "detail": asset.detail,
-          "name": asset.prodName,
-          "customer": asset.customer,
-          "assetType": asset.category,
-          "quantity": asset.quantity,
-          "requestedOn": asset.requestedOn,
-          "dueBy": asset.dueBy,
-          "status": asset.requestStatus
-        });
-      }, []);
-    }
+    // if (!this.currentCustomer) {
+    //   this.productRequestData = this.assetDetail.reduce((acc, asset: Asset) => {
+    //     return acc.concat({
+    //       "productRequestId": asset.id,
+    //       /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
+    //       // "detail": asset.detail,
+    //       "name": asset.prodName,
+    //       "customer": asset.customer,
+    //       "assetType": asset.category,
+    //       "quantity": asset.quantity,
+    //       "requestedOn": asset.requestedOn,
+    //       "dueBy": asset.dueBy,
+    //       "status": asset.requestStatus
+    //     });
+    //   }, []);
+    // }
   }
 
 
@@ -188,12 +200,13 @@ export class TableWrapperComponent implements OnInit, OnChanges {
     this.assetData = this.assetDetail.reduce((acc, asset: Asset) => {
       if (this.currentCustomer !== null) {
         if (asset.customer === this.currentCustomer.id) {
-          debugger;
+          // debugger;
           return acc.concat({
-            "id": asset.id,
-            "name": asset.name,
+            "assetId": asset.id,
+            "assetName": asset.name,
             "assetType": asset.category,
-            "customer": asset.customer,
+            "customer": this.dataService.customers.find((item) => item['id'] == asset.customer)['name'],
+            "customerId":asset.customer,            
             "agreement": asset.agreement_no,
             "location": asset.location,
             "assetStatus": '<img src="../../assets/' + (!asset.status ? '09.png' : (asset.status === 1 ? '10.png' : '12.png')) + '" class="ass-size" alt="' + (!asset.status ? 'Not Working' : (asset.status === 1 ? 'Service Required' : 'Working')) + '">',
@@ -203,10 +216,11 @@ export class TableWrapperComponent implements OnInit, OnChanges {
         }
       } else {
         return acc.concat({
-          "id": asset.id,
-          "name": asset.name,
+          "assetId": asset.id,
+          "assetName": asset.name,
           "assetType": asset.category,
-          "customer": asset.customer,
+          "customer": this.dataService.customers.find((item) => item['id'] == asset.customer)['name'],
+            "customerId":asset.customer,            
           "agreement": asset.agreement_no,
           "location": asset.location,
           "assetStatus": '<img src="../../assets/' + (!asset.status ? '09.png' : (asset.status === 1 ? '10.png' : '12.png')) + '" class="ass-size" alt="' + (!asset.status ? 'Not Working' : (asset.status === 1 ? 'Service Required' : 'Working')) + '">',
@@ -217,30 +231,14 @@ export class TableWrapperComponent implements OnInit, OnChanges {
 
   constructAgreementTable() {
 
-    // this.agreementData = this.agreementDetail.reduce((acc, asset: Agreement) => {
-    //   /* let stat:'asset.status';
-    //   console.log("stat"); */
-    //   return acc.concat({
-    //     "id": asset.agreement_no,
-    //     /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
-    //     "customer": asset.contact,
-    //     "type": asset.type,
-    //     "start_date": asset.start_date,
-    //     "end_date": asset.end_date,
-    //     "agreement": asset.start_date,
-    //     "prolongationDueDate": asset.prolongationDueDate,
-    //     "agreementStatus": '<img src="../../assets/' + (!asset.status ? '15.png' : (asset.status === 1 ? '14.png' : '13.png')) + '" alt="' + (!asset.status ? 'Expired' : (asset.status === 1 ? 'Expiring Soon' : 'In Contract')) + '" class="ass-size">',
-    //   });
-    // }, []);
-    this.agreementDetail = this.dataService.getAgreement();
-
     this.agreementData = this.agreementDetail.reduce((acc, asset: Agreement) => {
       if (this.currentCustomer !== null) {
         if (asset.contact === this.currentCustomer.id) {
-          debugger;
+          // debugger;
           return acc.concat({
-            "id": asset.agreement_no,
-            "customer": asset.contact,
+            "agreement_no": asset.agreement_no,
+            "customer": this.dataService.customers.find((item) => item['id'] == asset.contact)['name'],
+            "customerId":asset.contact,            
             "type": asset.type,
             "start_date": asset.start_date,
             "end_date": asset.end_date,
@@ -253,8 +251,9 @@ export class TableWrapperComponent implements OnInit, OnChanges {
         }
       } else {
         return acc.concat({
-          "id": asset.agreement_no,
-          "customer": asset.contact,
+          "agreement_no": asset.agreement_no,
+          "customer": this.dataService.customers.find((item) => item['id'] == asset.contact)['name'],
+          "customerId":asset.contact,    
           "type": asset.type,
           "start_date": asset.start_date,
           "end_date": asset.end_date,
@@ -269,39 +268,72 @@ export class TableWrapperComponent implements OnInit, OnChanges {
   public openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' }); // {3}
   }
-  openAssetModal(event) {
-    this.assetIdSelected = event;
-    this.assetCurrentObj = this.assetData.find((item) => item['id'] === this.assetIdSelected)
+  openAssetModal(id) {
+    debugger;
+    this.assetIdSelected = id;
+    this.assetCurrentObj = this.assetData.find((item) => item['assetId'] === this.assetIdSelected)
     this.openModal(this.AssetTemplate)
   }
 
-  openAgreementModal(event) {
-    this.agreementIdSelected = event;
-    this.agreementCurrentObj = this.agreementData.find((item) => item['id'] === this.agreementIdSelected)
+  openAgreementModal(id) {
+    // alert('openAgreementModal')
+    debugger;
+    this.agreementIdSelected = id;
+    this.agreementCurrentObj = this.agreementData.find((item) => item['agreement_no'] === this.agreementIdSelected)
     this.openModal(this.AgreementTemplate)
   }
 
-  openServiceModal(event) {
-    this.serviceIdSelected = event;
-    this.serviceCurrentObj = this.serviceRequestData.find((item) => item['id'] === this.serviceIdSelected)
+  openServiceModal(id) {
+    this.serviceIdSelected = id;
+    // alert('openServiceModal')
+    debugger;
+    this.serviceCurrentObj = this.serviceRequestData.find((item) => item['serviceRequestId'] === this.serviceIdSelected)
     this.openModal(this.ServiceTemplate)
   }
 
   openCustomerModal(event) {
-    this.customerId = "123"
-    this.customerCurrentObj = this.dataService.customers.find((item) => item['id'] == this.customerId)
-    this.openModal(this.CustomerTemplate)
+    // this.customerId = "123"
+    // this.customerId = event
+    debugger;
+    // alert(event)
+    if(event.split('*')[0]==='customer'){
+      debugger;
+      this.customerId = event.split('*')[1]
+      this.customerCurrentObj = this.dataService.customers.find((item) => item['id'] == this.customerId)
+      this.openModal(this.CustomerTemplate)
+    } else if(event.split('*')[0]==='product'){
+      // this.customerCurrentObj = this.dataService.customers.find((item) => item['id'] == this.customerId)
+      // this.openModal(this.CustomerTemplate)
+      this.openProductModal(event.split('*')[1])
+    } else if(event.split('*')[0]==='service'){
+      // alert('service')      
+      // alert(event.split('*')[1])
+      // this.customerCurrentObj = this.dataService.customers.find((item) => item['id'] == this.customerId)
+      // this.openModal(this.CustomerTemplate)
+      this.openServiceModal(event.split('*')[1])
+    }
+    else if(event.split('*')[0]==='agreement'){
+      // alert('agreement it oi')
+      // this.customerCurrentObj = this.dataService.customers.find((item) => item['id'] == this.customerId)
+      // this.openModal(this.CustomerTemplate)
+      this.openAgreementModal(event.split('*')[1])
+    }
+    else if(event.split('*')[0]==='asset'){
+      // this.customerCurrentObj = this.dataService.customers.find((item) => item['id'] == this.customerId)
+      // this.openModal(this.CustomerTemplate)
+      this.openAssetModal(event.split('*')[1])
+    }
   }
 
   openProductModal(event) {
-    // debugger;
+    debugger;
     this.productIdSelected = event
-    this.productCurrentObj = this.productRequestData.find((item) => item['id'] == this.productIdSelected)
+    this.productCurrentObj = this.productRequestData.find((item) => item['productRequestId'] == this.productIdSelected)
     this.openModal(this.ProductTemplate)
   }
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
     let log: string[] = [];
-    alert('changes')
+    // alert('changes')
     // debugger
     // if(changes.activeComponent){
     //   this.currentAdIndex = changes.activeComponent.currentValue
@@ -321,7 +353,7 @@ export class TableWrapperComponent implements OnInit, OnChanges {
     // this.dataService.dataNumber = num;
     this.dataService.changeDataNumber(num)
     // this.adService.flushFilters()
-    debugger
+    // debugger
     this.adService.disableFilter(num)
     // this.adService.disableFilter(this.dataNumber)
 
@@ -350,8 +382,8 @@ export class TableWrapperComponent implements OnInit, OnChanges {
   // detailType: string;
 
   public assetColumns: Array<any> = [
-    { title: 'Asset Id', name: 'id', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
-    { title: 'Asset Name', name: 'name', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
+    { title: 'Asset Id', name: 'assetId', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
+    { title: 'Asset Name', name: 'assetName', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
     { title: 'Asset Type', name: 'assetType', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
     { title: 'Customer', className: ['text-warning'], name: 'customer', filter: 'text' },
     { title: 'Agreement', className: ['text-warning'], name: 'agreement', filter: 'text' },
@@ -360,7 +392,7 @@ export class TableWrapperComponent implements OnInit, OnChanges {
     { title: 'Location', name: 'location', sort: '', filtering: { filterString: '', placeholder: 'Filter by extn.' }, filter: 'text' },
   ];
   public agreementColumns: Array<any> = [
-    { title: 'Agreement Number', name: 'id', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
+    { title: 'Agreement Number', name: 'agreement_no', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
     { title: 'Customer', name: 'customer', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
     { title: 'Start Date', name: 'start_date', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
     { title: 'End Date', className: ['text-warning'], name: 'end_date', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
@@ -375,7 +407,7 @@ export class TableWrapperComponent implements OnInit, OnChanges {
   newColumnSearchTable(reflect: object) {
     // debugger
     // let reflect = {'type':'printer','assetStatus':'Not working'}
-    debugger
+    // debugger
     if (this.dataNumber === 2) {
       let newAssetColumns = this.addFilterString(this.assetColumns, reflect)
       // debugger
@@ -497,9 +529,11 @@ export class TableWrapperComponent implements OnInit, OnChanges {
       className: ['third-t', 's-table', 'table-striped', 'table-bordered']
     };
     this.serviceRequestColumns = [
-      { title: 'Request Id', name: 'id', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
+      { title: 'Request Id', name: 'serviceRequestId', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
       { title: 'Request Details', name: 'name', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
       { title: 'Customer', className: ['text-warning'], name: 'customer', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
+      // { title: 'Customer', className: ['text-warning'], name: 'customer', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
+      // "customerId":asset.customer,
       { title: 'Asset Name', name: 'type', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
       { title: 'Requested On', className: ['text-warning'], name: 'requestedOn', filter: 'text' },
       { title: 'Due By', name: 'dueBy', sort: '', filter: 'text' },
@@ -514,7 +548,7 @@ export class TableWrapperComponent implements OnInit, OnChanges {
     };
 
     this.productRequestColumns = [
-      { title: 'Request Id', name: 'id', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
+      { title: 'Request Id', name: 'productRequestId', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
       { title: 'Product', name: 'name', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
       { title: 'Asset Type', name: 'assetType', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
       { title: 'Customer', className: ['text-warning'], name: 'customer', filtering: { filterString: '', placeholder: 'Search' }, filter: 'text' },
