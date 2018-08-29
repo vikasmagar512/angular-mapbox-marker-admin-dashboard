@@ -29,7 +29,7 @@ export class CapacitySettingComponent implements OnInit {
 
   assetSelected(asset) {
     // debugger;
-    
+
     switch (asset) {
       case "Coffee Machine":
         this.types = this.dataService.coffee["types"];
@@ -39,9 +39,9 @@ export class CapacitySettingComponent implements OnInit {
         this.types = this.dataService.printer["types"];
         this.units = this.dataService.printer["unit"];
         break;
-      case "Vaccum":
-        this.types = this.dataService.vaccume["types"];
-        this.units = this.dataService.vaccume["unit"];
+      case "Vacuum":
+        this.types = this.dataService.Vaccum["types"];
+        this.units = this.dataService.Vaccum["unit"];
         break;
     }
   }

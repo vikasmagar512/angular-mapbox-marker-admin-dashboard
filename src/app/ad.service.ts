@@ -106,7 +106,7 @@ export class AdService {
           displayText:"Vacuum",
           type:"assetType",
           value:false,
-          image:'../../../assets/12.png'
+          image:'../../../assets/07.png'
         },
       ]}
     this.contractFilter = {
@@ -118,7 +118,7 @@ export class AdService {
         {
           id:"2",
           name:"expired",
-          displayText:"Expired",
+          displayText:"Expiring Soon",
           type:"agreementStatus",
           value:false,
           image:'../../../assets/15.png'
@@ -126,7 +126,7 @@ export class AdService {
         {
           id:"3",
           name:"expiringSoon",
-          displayText:"Expiring Soon",
+          displayText:"Prolongation",
           type:"agreementStatus",
           value:false,
           image:'../../../assets/14.png'

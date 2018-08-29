@@ -261,7 +261,7 @@ export class TableWrapperComponent implements OnInit, OnChanges {
         // "status":`<span><img src="../../assets/${asset.status}.png"></span>`,
 
         // "agreementStatus": '<img src="../../assets/' + (!asset.status ? '09.png' : (asset.status === 1 ? '10.png' : '12.png')) + '" alt="' + (!asset.status ? 'Expired' : (asset.status === 1 ? 'Expiring Soon' : 'In Contract')) + '" class="ass-size">',
-        "agreementStatus": '<img src="../../assets/' + (!asset.status ? '15.png' : (asset.status === 1 ? '14.png' : '13.png')) + '" alt="' + (!asset.status ? 'Expired' : (asset.status === 1 ? 'Expiring Soon' : 'In Contract')) + '" class="ass-size">',
+        "agreementStatus": '<img src="../../assets/' + (!asset.status ? '15.png' : (asset.status === 1 ? '14.png' : '13.png')) + '" alt="' + (!asset.status ? 'Expiring Soon' : (asset.status === 1 ? 'Prolongation' : 'In Contract')) + '" class="ass-size">',
       });
     }, []);
 

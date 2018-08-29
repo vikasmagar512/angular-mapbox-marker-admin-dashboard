@@ -65,7 +65,7 @@ export class dataService {
     "unit": "Kg"
   }
 
-  vaccume = {
+  Vaccum = {
     "types": ["Water/Day", "Steam/Day"],
     "unit": "#"
   }
