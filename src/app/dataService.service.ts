@@ -248,7 +248,7 @@ export class dataService {
       "serialno": "VC12190",
       "customer": "PQR",
       "quantity":"2",
-      "prodName": "Motor",
+      "prodName": "Moto",
       "unit": "#",
       "requestedOn":"19-09-2018",
       "dueBy":"15-10-2018",
