@@ -18,7 +18,7 @@ export class AppComponent implements OnInit{
               private route: ActivatedRoute,
               private router: Router){}
   doSignOut() {
-    alert('df')
+    // alert('df')
     this.auth.doSignOut();
     this.router.navigate(['/sign-in']);
   }

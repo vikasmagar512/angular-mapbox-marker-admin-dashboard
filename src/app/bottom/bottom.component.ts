@@ -16,9 +16,7 @@ export class BottomComponent implements OnInit {
   subscription:Subscription;
 
   custId;
-  constructor(
-    private dataService: dataService,
-  ) {
+  constructor(private dataService: dataService) {
     this._subscription = this.dataService.dataNumber.subscribe((value) => {
       this.dataNumber = value
     })
@@ -37,7 +35,7 @@ export class BottomComponent implements OnInit {
     // this.custId = this.dataService.currentSelectedCustomer;
 
     this.dataService.changeDataNumber(num)
-    this.dataService.detailType = this.dataService.detailTypes[num];
+    // this.dataService.detailType = this.dataService.detailTypes[num];
     // $(`.RequestType 2RequestTypeNum top cursPointer active`).removeClass('active');
     // $(`.${this.dataService.dataNumber}num`).addClass('active');
   }

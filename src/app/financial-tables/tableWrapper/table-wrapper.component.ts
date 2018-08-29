@@ -38,31 +38,32 @@ export class TableWrapperComponent implements OnInit, OnChanges {
   _subscription: any;
   _subscription1: any;
   currentCustomer:Customer;
-  
+
 
   public filterTypesReceived: Array<filterGroup>;
 
   constructor(private dataService: dataService, private adService: AdService, private modalService: BsModalService) {
-    this.detailType = dataService.detailType;
+    // this.detailType = dataService.detailType;
     this.dataNumber = 0;
     // this.loadTable(this.dataNumber);
     this._subscription = this.dataService.dataNumber.subscribe((value) => {
       this.dataNumber = value
+      this.detailType = this.dataService.detailTypes[this.dataNumber];
       this.adService.disableFilter(this.dataNumber)
     })
     this._subscription1 = this.dataService.currentCustomer.subscribe((value:Customer) => {
       this.currentCustomer = value;
-      this.constructServiceTable()
-      alert(this.currentCustomer)
+      // this.constructServiceTable()
+      // alert(this.currentCustomer)
       debugger
     });
   }
   public modalRef: BsModalRef; // {1}
   constructServiceTable(){
     this.serviceRequestData = this.assetDetail.reduce((acc, asset: Asset) => {
-      if(this.currentCustomer !== null){
-        if(asset.customer === this.currentCustomer.id){
-          alert('found')
+      // if(this.currentCustomer !== null){
+      //   if(asset.customer === this.currentCustomer.id){
+      //     alert('found')
           return acc.concat({
             "id": asset.id,
             /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
@@ -74,24 +75,24 @@ export class TableWrapperComponent implements OnInit, OnChanges {
             "dueBy": asset.dueBy,
             "status": asset.requestStatus
           })
-        } else{
-          return acc
-        }
-      }else {
-        alert('not found')
-        return acc.concat({
-          "id": asset.id,
-          /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
-          // "detail": asset.detail,
-          "name": asset.detail,
-          "customer": asset.customer,
-          "type": asset.category,
-          "requestedOn": asset.requestedOn,
-          "dueBy": asset.dueBy,
-          "status": asset.requestStatus
-        })
-      }
-    },[]); 
+      //   } else{
+      //     return acc
+      //   }
+      // }else {
+      //   alert('not found')
+      //   return acc.concat({
+      //     "id": asset.id,
+      //     /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
+      //     // "detail": asset.detail,
+      //     "name": asset.detail,
+      //     "customer": asset.customer,
+      //     "type": asset.category,
+      //     "requestedOn": asset.requestedOn,
+      //     "dueBy": asset.dueBy,
+      //     "status": asset.requestStatus
+      //   })
+      // }
+    },[]);
   }
   public openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' }); // {3}
@@ -128,7 +129,7 @@ export class TableWrapperComponent implements OnInit, OnChanges {
   }
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
     let log: string[] = [];
-    alert('changes')
+    // alert('changes')
     // debugger
     // if(changes.activeComponent){
     //   this.currentAdIndex = changes.activeComponent.currentValue
@@ -332,7 +333,40 @@ export class TableWrapperComponent implements OnInit, OnChanges {
       {title: 'Due By', name: 'dueBy', sort: '', filter: 'text'},
       {title: 'Status', name: 'status', sort: false, filter: 'text'},
     ];
-   
+    this.serviceRequestData = this.assetDetail.reduce((acc, asset: Asset) => {
+      // if(this.currentCustomer !== null){
+      //   if(asset.customer === this.currentCustomer.id){
+      //     alert('found')
+      return acc.concat({
+        "id": asset.id,
+        /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
+        // "detail": asset.detail,
+        "name": asset.detail,
+        "customer": asset.customer,
+        "type": asset.category,
+        "requestedOn": asset.requestedOn,
+        "dueBy": asset.dueBy,
+        "status": asset.requestStatus
+      })
+      //   } else{
+      //     return acc
+      //   }
+      // }else {
+      //   alert('not found')
+      //   return acc.concat({
+      //     "id": asset.id,
+      //     /* "name":  '<a routerLink="main/asset/'+asset.id+'" routerLinkActive="active">'+asset.name+'</a>', */
+      //     // "detail": asset.detail,
+      //     "name": asset.detail,
+      //     "customer": asset.customer,
+      //     "type": asset.category,
+      //     "requestedOn": asset.requestedOn,
+      //     "dueBy": asset.dueBy,
+      //     "status": asset.requestStatus
+      //   })
+      // }
+    },[]);
+
     this.serviceRequestConfig = {
       paging: true,
       sorting: { columns: this.serviceRequestColumns },
