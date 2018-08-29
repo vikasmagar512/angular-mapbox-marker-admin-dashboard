@@ -2,6 +2,7 @@ import {Component, Input, OnInit, Output,EventEmitter} from '@angular/core';
 import {TableData} from '../../tableData';
 import {Router} from '@angular/router';
 import {Format} from '../../Format';
+import { debug } from 'util';
 // import any = jasmine.any;
 
 @Component({
@@ -190,13 +191,34 @@ export class TableDemoComponent implements OnInit {
   }
 
   public onCellClick(data: any): any {
+    debugger;
     console.log(data)
     // If Button View
-    if (data.column == "name") {
+    // if (data.column === "assetName" || data.column === "assetId" ) {
+    if (data.column === "assetId" ) {
       // this.router.navigate(['/main/asset/',data.row['id'] ]);
       this.change.emit(data.row['id']);
+      this.change.emit(`asset*${data.row['assetId']}`)
     }
-    if (data.column == "agreement_no") {
+    if (data.column === "serviceRequestId") {
+      // this.router.navigate(['/main/asset/',data.row['id'] ]);
+      // this.change.emit(data.row['serviceRequestId']);
+      this.change.emit(`service*${data.row['serviceRequestId']}`)
+    }
+    if (data.column === "productRequestId") {
+      // this.router.navigate(['/main/asset/',data.row['id'] ]);
+      // this.change.emit(data.row['productRequestId']);
+      this.change.emit(`product*${data.row['productRequestId']}`)
+    }
+    if (data.column === "customer") {
+      // alert('customer')
+      // alert(data.row['customerId'])
+      // this.router.navigate(['/main/asset/',data.row['id'] ]);
+      this.change.emit(`customer*${data.row['customerId']}`)
+    }
+    if (data.column === "agreement_no") {
+      this.change.emit(`agreement*${data.row['agreement_no']}`)      
+      
       // this.router.navigate(['/main/agreementNo/',data.row['id'] ]);
     }
     // if (data.column == "actionAsset") {
@@ -205,14 +227,17 @@ export class TableDemoComponent implements OnInit {
     //       this.change.emit(data.row['id']);
     //     }
 
-    if (data.column == "assetStatus") {
-      // alert('assetStatus')
-      // this.router.navigate(['/main/agreementNo/',data.row['id'] ]);
-    }
-    if (data.column == "agreementStatus") {
-      // alert('agreementStatus')
-      // this.router.navigate(['/main/agreementNo/',data.row['id'] ]);
-    }
+    // if (data.column == "assetStatus") {
+    //   this.change.emit(`asset*${data.row['customerId']}`)
+      
+    //   // alert('assetStatus')
+    //   // this.router.navigate(['/main/agreementNo/',data.row['id'] ]);
+    // }
+    // if (data.column == "agreementStatus") {
+    //   this.change.emit(`agreement*${data.row['customerId']}`)      
+    //   // alert('agreementStatus')
+    //   // this.router.navigate(['/main/agreementNo/',data.row['id'] ]);
+    // }
 
     // If Button View
     // if (data.column == "action") {

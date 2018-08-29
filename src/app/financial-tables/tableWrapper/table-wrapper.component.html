@@ -27,20 +27,18 @@
     </div>
   </div>
   <div *ngIf="dataNumber===0">
-    <app-table-demo #serviceRequestTable (change)="openServiceModal($event)" [data]="serviceRequestData"
-      [config]="serviceRequestConfig" [columns]="serviceRequestColumns"></app-table-demo>
+    <app-table-demo #serviceRequestTable (change)="openCustomerModal($event)" [data]="serviceRequestData" [config]="serviceRequestConfig"
+      [columns]="serviceRequestColumns"></app-table-demo>
   </div>
   <div *ngIf="dataNumber===1">
-    <app-table-demo #productRequestTable (change)="openProductModal($event)" [data]="productRequestData" [config]="productRequestConfig"
+    <app-table-demo #productRequestTable (change)="openCustomerModal($event)" [data]="productRequestData" [config]="productRequestConfig"
       [columns]="productRequestColumns"></app-table-demo>
   </div>
   <div *ngIf="dataNumber===2">
-    <app-table-demo #assetTable (change)="openAssetModal($event)" [data]="assetData" [config]="assetConfig" [columns]="assetColumns"
-      ></app-table-demo>
+    <app-table-demo #assetTable (change)="openCustomerModal($event)" [data]="assetData" [config]="assetConfig" [columns]="assetColumns"></app-table-demo>
   </div>
-<div *ngIf="dataNumber===3">
-    <app-table-demo #agreementTable (change)="openAgreementModal($event)" [data]="agreementData" [config]="agreementConfig" [columns]="agreementColumns"
-      ></app-table-demo>
+  <div *ngIf="dataNumber===3">
+    <app-table-demo #agreementTable (change)="openCustomerModal($event)" [data]="agreementData" [config]="agreementConfig" [columns]="agreementColumns"></app-table-demo>
   </div>
   <!-- &lt;!&ndash;</div>&ndash;&gt; -->
   <!--  <div *ngIf="dataService.dataNumber===0">
@@ -71,7 +69,7 @@
 
 <ng-template #AssetTemplate>
   <div class="modal-header">
-    <span>Asset Id: {{assetCurrentObj['id']}}</span>
+    <span>Asset Id: {{assetCurrentObj['assetId']}}</span>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">
         <img src="../assets/cross.svg" class="log">
@@ -81,8 +79,8 @@
   <div class="modal-body" style="background-color: #f6f3f3;">
     <div class="row">
       <div class="col-md-12">
-        <p>Asset Name: {{assetCurrentObj['name']}}</p>
-        <p>Asset Type: {{assetCurrentObj['type']}}</p>
+        <p>Asset Name: {{assetCurrentObj['assetName']}}</p>
+        <p>Asset Type: {{assetCurrentObj['assetType']}}</p>
         <p>Customer: {{assetCurrentObj['customer']}}</p>
         <p>Agreement: {{assetCurrentObj['agreement']}}</p>
         <p>Location: {{assetCurrentObj['location']}}</p>
@@ -98,7 +96,7 @@
 
 <ng-template #AgreementTemplate>
   <div class="modal-header">
-    <span>Agreement Id:{{agreementCurrentObj['id']}}</span>
+    <span>Agreement Id:{{agreementCurrentObj['agreement_no']}}</span>
     <!-- <span>Agreement Id:{{agreementCurrentObj.type}}</span> -->
 
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -110,7 +108,6 @@
   <div class="modal-body" style="background-color: #f6f3f3;">
     <div class="row">
       <div class="col-md-12">
-        <p>Name: {{agreementCurrentObj['name']}}</p>
         <p>Type: {{agreementCurrentObj['type']}}</p>
         <p>Start Date: {{agreementCurrentObj['start_date']}}</p>
         <p>End Date: {{agreementCurrentObj['end_date']}}</p>
@@ -127,7 +124,7 @@
 
 <ng-template #ServiceTemplate>
   <div class="modal-header">
-    <span>Agreement Id:{{serviceCurrentObj['id']}}</span>
+    <span>Request Id:{{serviceCurrentObj['serviceRequestId']}}</span>
     <!-- <span>Agreement Id:{{agreementCurrentObj.type}}</span> -->
 
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -139,11 +136,17 @@
   <div class="modal-body" style="background-color: #f6f3f3;">
     <div class="row">
       <div class="col-md-12">
-        <p>Name: {{serviceCurrentObj['name']}}</p>
-        <p>Type: {{serviceCurrentObj['type']}}</p>
-        <p>Agreement: {{serviceCurrentObj['agreement']}}</p>
+        <p>Request Details:{{serviceCurrentObj['name']}}</p>
+        <p>Customer: {{serviceCurrentObj['customer']}}</p>
+        <p>Asset Name: {{serviceCurrentObj['type']}}</p>
+        <p>Error Code: 1234(static)</p>
+        <p>Type: Autometic(static)</p>
+        <p>Requested On: {{serviceCurrentObj['requestedOn']}}</p>
+        <p>Due By: {{serviceCurrentObj['dueBy']}}</p>
+        <p>Status: {{serviceCurrentObj['status']}} </p>
+        <!-- <p>Agreement: {{serviceCurrentObj['agreement']}}</p> -->
         <!-- <p>End Date: {{serviceCurrentObj.end_date}}</p> -->
-        <p>Location: {{serviceCurrentObj['location']}}</p>
+        <!-- <p>Location: {{serviceCurrentObj['location']}}</p> -->
         <!-- <p>Status: <span >{{agreementCurrentObj.assetStatus}}</span></p>  -->
       </div>
     </div>
@@ -155,7 +158,7 @@
 
 <ng-template #ProductTemplate>
   <div class="modal-header">
-    <span>Agreement Id:{{productCurrentObj['id']}}</span>
+    <span>Request Id:{{productCurrentObj['productRequestId']}}</span>
 
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">
@@ -166,10 +169,19 @@
   <div class="modal-body" style="background-color: #f6f3f3;">
     <div class="row">
       <div class="col-md-12">
-        <p>Name: {{productCurrentObj['name']}}</p>
+        <!-- <p>Name: {{productCurrentObj['name']}}</p>
         <p>Type: {{productCurrentObj['type']}}</p>
         <p>Agreement: {{productCurrentObj['agreement']}}</p>
+        <p>Customer: {{productCurrentObj['customer']}}</p> -->
+        <p>product:{{productCurrentObj['name']}}</p>
+        <p>Asset Type: {{productCurrentObj['type']}}</p>
         <p>Customer: {{productCurrentObj['customer']}}</p>
+        <p>Unit: #(static)</p>
+        <p>Type: Autometic(static)</p>
+        <p>Quantity: {{productCurrentObj['quantity']}}</p>
+        <p>Requested On: {{productCurrentObj['requestedOn']}}</p>
+        <p>Due By: {{productCurrentObj['dueBy']}}</p>
+        <p>Status: {{productCurrentObj['status']}} </p>
       </div>
     </div>
   </div>
