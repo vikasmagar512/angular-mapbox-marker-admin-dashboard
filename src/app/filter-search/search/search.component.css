@@ -217,4 +217,25 @@
 #cust-name{
   padding: 0;
   margin: 0;
+  margin-left: 0px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.btn{
+  background-color: rgb(56, 55, 55);
+  padding: 3px 17px;
+  color: #fff;
+}
+.btn:hover {
+  background-color: #3cd5af !important;
+  color: white !important;
+}
+.cust-btn{
+  background-color: rgb(243, 236, 236);
+  padding: 3px 13px;
+  color: #000;
+  font-weight: 600px;
+  outline: none;
+  border: none;
 }

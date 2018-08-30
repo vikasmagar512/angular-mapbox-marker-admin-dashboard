@@ -33,6 +33,10 @@ export class SignInComponent implements OnInit {
   public myMoment; active
   public returnUrl: string;
   mobnumPattern = "^((\\+91-?)|0)?[0-9]{6}$";
+  password="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&].{8,}";
+  emailPattern = "^([a-z0-9._%+-]{1})+@[a-z0-9.-]+\\.[a-z]{2,4}$";
+
+
 
   constructor(
     private api: ApiService,
@@ -45,7 +49,7 @@ export class SignInComponent implements OnInit {
   ) {
     // this.cookiePopupShow = false;
     this.frm = fb.group({
-      username: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required,Validators.pattern(this.emailPattern)]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
     this.frm1 = fb.group({

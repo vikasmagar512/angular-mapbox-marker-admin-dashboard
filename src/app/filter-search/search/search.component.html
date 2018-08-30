@@ -90,9 +90,9 @@
       </p>
     </div> -->
 
-    <div class="col-md-3 cust-name" id="cust-name">
+    <div class="col-md-3 cust-name pull-right" id="cust-name">
       <span dropdown>
-        <button class="btn " dropdownToggle (click)="false" aria-controls="basic-link-dropdown" style="margin: 9px 0;">
+        <button class="cust-btn" dropdownToggle (click)="false" aria-controls="basic-link-dropdown" style="margin: 9px 0;">
           <span *ngIf="!currentCustomer">Select Customer</span>
           <span *ngIf="currentCustomer">{{currentCustomer.name}}</span>
           <span class="caret"></span>
@@ -108,7 +108,9 @@
 
       </span>
       <div class="customer-remove">
-        <button class="btn" (click)="resetCustomer()" *ngIf="currentCustomer" style="margin:9px 0; ">Clear</button>
+        <!--<button class="btn" (click)="resetCustomer()" *ngIf="currentCustomer" style="margin:9px 0; ">Clear</button>-->
+        <button class="cust-btn" (click)="resetCustomer()" *ngIf="currentCustomer" style="margin:9px 0; "><span class="glyphicon glyphicon-remove"></span></button>
+
       </div>
     </div>
 
