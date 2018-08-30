@@ -15,22 +15,19 @@ import { CustomValidators } from '../CustomValidators';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
+
+  // public cookiePopupShow: boolean = true;
+  // public cookiesEnable: boolean;
+
   public defaultSignInMethod: number;
   public frm: FormGroup;
   public frm1: FormGroup;
+  public forgetPassFrm: FormGroup;
   public isBusy = false;
   public hasFailed = false;
   public showInputErrors = false;
-
-  config = {
-    animated: true,
-    keyboard: true,
-    backdrop: true,
-    ignoreBackdropClick: false,
-    class: "my-modal"
-  };
   // public now: Date = new Date();
-  public myMoment; active
+  public myMoment;
   public returnUrl: string;
   mobnumPattern = "^((\\+91-?)|0)?[0-9]{6}$";
   password="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&].{8,}";
@@ -47,10 +44,13 @@ export class SignInComponent implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthService
   ) {
-    // this.cookiePopupShow = false;
+    // this.cookiesEnable = false;
     this.frm = fb.group({
       username: ['', [Validators.required,Validators.pattern(this.emailPattern)]],
       password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+    this.forgetPassFrm = fb.group({
+      username: ['', [Validators.required,Validators.pattern(this.emailPattern)]],
     });
     this.frm1 = fb.group({
       personalNumber: ['', [
@@ -67,12 +67,11 @@ export class SignInComponent implements OnInit {
 
   // convenience getter for easy access to form fields
   get emailPasswordFieldGetter() { return this.frm.controls; }
+  get emailForgetFieldGetter() { return this.forgetPassFrm.controls; }
   get bankIDFieldGetter() { return this.frm1.controls; }
 
   public openModal(template: TemplateRef<any>) {
-    // this.modalRef = this.modalService.show(template, {class: 'modal-ver'}); // {3}
-    this.modalRef = this.modalService.show(template, this.config); // {3}
-
+    this.modalRef = this.modalService.show(template); // {3}
   }
   ngOnInit() {
     this.defaultSignInMethod = 0;
@@ -81,11 +80,8 @@ export class SignInComponent implements OnInit {
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
-    // let cookie = document.cookie;
-    // debugger
     // let consent = this.getCookie("consent")
     // this.cookiePopupShow = consent !== "yes"
-    // debugger;
   }
   openCity(type) {
     console.log(type)
@@ -103,49 +99,80 @@ export class SignInComponent implements OnInit {
       // // Grab values from form
       const username = this.frm.get('username').value;
       const password = this.frm.get('password').value;
-
       const personalNumber = this.frm1.get('personalNumber').value;
       // // Submit request to API
       this.router.navigate(['main', 'home']);
-      /*let payload = this.defaultSignInMethod
+      let payload = this.defaultSignInMethod
         ?
         {
           username, password
-        }:
+        } :
         {
-          // pno:personalNumber
-          personalNo:personalNumber
+          pno: personalNumber
+          // personalNo:personalNumber
         }
       this.api.signIn(payload).subscribe(
-          (response:any) => {
-            console.log('response is ',response)
-           /!*this.auth.doSignIn(
-              response.token,
-              response.name
-            );*!/
-            if(!this.returnUrl){
-              this.router.navigate(['main']);
-            }else{
-            // get return url from route parameters or default to '/'
-              this.router.navigateByUrl(this.returnUrl);
-            }
-          },
-          (error) => {
-            if (error.status === 401) {
-              this.authService.doSignOut()
-              //logout users, redirect to login page
-              //redirect to the signin page or show login modal here
-              this.router.navigate(['/sign-in']);
-              //remember to import router class and declare it in the class
-            }
-            Observable.throw(error);
-            this.isBusy = false;
-            this.hasFailed = true;
+        (response: any) => {
+          console.log('response is ', response)
+          this.auth.doSignIn(
+            response.token,
+            response.name
+          );
+          debugger
+          if(!this.returnUrl){
+            this.router.navigate(['main','home']);
+          }else{
+            debugger
+          // get return url from route parameters or default to '/'
+            this.router.navigateByUrl(this.returnUrl);
           }
-        );*/
+        },
+        (error) => {
+          if (error.status === 401) {
+            this.authService.doSignOut()
+            //logout users, redirect to login page
+            //redirect to the signin page or show login modal here
+            this.router.navigate(['/sign-in']);
+            //remember to import router class and declare it in the class
+          }
+          Observable.throw(error);
+          this.isBusy = false;
+          this.hasFailed = true;
+        }
+      );
     } else {
       alert('Please enter correct credentials')
       return
     }
   }
+  // useCookies(cookiesEnable: boolean) {
+  //   debugger;
+  //   this.cookiesEnable = cookiesEnable;
+  //   this.cookiePopupShow = false;
+  //   // this.cookiePopupShow = true;
+  //   if (cookiesEnable) {
+  //     document.cookie = "consent = yes";
+  //     // this.cookiePopupShow= true;
+  //   }
+  //   else {
+  //     document.cookie = "consent = no";
+  //     // this.cookiePopupShow= true;
+  //   }
+  // }
+
+  // getCookie(cname) {
+  //   let name = cname + "=";
+  //   let decodedCookie = decodeURIComponent(document.cookie);
+  //   let ca = decodedCookie.split(';');
+  //   for (let i = 0; i < ca.length; i++) {
+  //     let c = ca[i];
+  //     while (c.charAt(0) == ' ') {
+  //       c = c.substring(1);
+  //     }
+  //     if (c.indexOf(name) == 0) {
+  //       return c.substring(name.length, c.length);
+  //     }
+  //   }
+  //   return "";
+  // }
 }

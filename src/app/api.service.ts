@@ -6,7 +6,7 @@ import 'rxjs-compat/add/operator/catch';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs-compat/add/operator/map';
 
-const API_URL = environment['apiUrl'];
+const API_URL = environment.apiUrl;
 
 @Injectable(/*{
   providedIn: 'root'
@@ -14,9 +14,23 @@ const API_URL = environment['apiUrl'];
 export class ApiService {
 
   constructor(private http: HttpClient,
-    private session: SessionService) { }
-  public signIn(username: string, password: string) {
-    const url = API_URL+'/users/signin'
+              private session: SessionService) { }
+  // personalNumber= '198112289874') {
+  public signIn(payload) {
+    // http://192.168.10.224:8081/bankidauth
+    // const url ='http://192.168.10.224:8081/'+'bankidauth'
+    let url = API_URL+'/users/signin'
+    // let url = '/backend/users/signin'
+    payload = {
+      username:'demo@demo.com', password:'demo'
+    }
+    if(payload['pno']){
+      // if(payload['personalNo']){
+      //   url ='http://localhost:8081/api/authenticate'
+      //   url =API_URL+'/backend/authenticate'
+      url ='/backend/authenticate'
+      // url ='http://192.168.10.224:8081/'+'bankidauth'
+    }
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -24,21 +38,20 @@ export class ApiService {
     };
     console.log(url)
     return this.http
-      .post(url, {
-        "username": username,
-        "password": password
-      })
+      .post(url, payload)
       //.map(response => {
       // console.log(response)
       //return response})
       .catch(this.handleError);
+    /*return this.http
+      // .get('/backend/helloSfs',httpOptions)
+      .get('/backend/getAllAssetDetails',httpOptions)
+      //.map(response => {
+      // console.log(response)
+      //return response})
+      .catch(this.handleError);*/
   }
 
-  // public getAllTodos(): Observable<Todo[]> {
-  //   // const options = this.getRequestOptions();
-  //   // console.log('options is ',options)
-  //   return this.http.get<Todo[]>(API_URL + '/todos')
-  // }
   public getLoggedInUserData() {
     // const options = this.getRequestOptions();
     // console.log('options is ',options)
