@@ -29,11 +29,10 @@ export class SignInComponent implements OnInit {
   // public now: Date = new Date();
   public myMoment;
   public returnUrl: string;
-  mobnumPattern = "^((\\+91-?)|0)?[0-9]{6}$";
-  password="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&].{8,}";
+  // mobnumPattern = "^((\\+91-?)|0)?[0-9]{6}$";
   emailPattern = "^([a-z0-9._%+-]{1})+@[a-z0-9.-]+\\.[a-z]{2,4}$";
-
-
+  // emailPattern="/^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$/"
+  password="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&].{8,}";
 
   constructor(
     private api: ApiService,
@@ -48,6 +47,8 @@ export class SignInComponent implements OnInit {
     this.frm = fb.group({
       username: ['', [Validators.required,Validators.pattern(this.emailPattern)]],
       password: ['', [Validators.required, Validators.minLength(6)]]
+      // password: ['', [Validators.required, Validators.pattern(this.password)]]
+
     });
     this.forgetPassFrm = fb.group({
       username: ['', [Validators.required,Validators.pattern(this.emailPattern)]],
@@ -118,12 +119,10 @@ export class SignInComponent implements OnInit {
             response.token,
             response.name
           );
-          debugger
-          if(!this.returnUrl){
-            this.router.navigate(['main','home']);
-          }else{
-            debugger
-          // get return url from route parameters or default to '/'
+          if (!this.returnUrl) {
+            this.router.navigate(['main']);
+          } else {
+            // get return url from route parameters or default to '/'
             this.router.navigateByUrl(this.returnUrl);
           }
         },

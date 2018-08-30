@@ -70,7 +70,6 @@
 
 .dataInp{
   background-color:#44e7a0;
-  /*background: linear-gradient(to bottom, #44e7a0 56%, #26CAD0 100%);*/
   position: relative;
   height: 484px;
   width: 57%;
@@ -410,7 +409,7 @@ input:focus, button:focus{
 /* .modal-dialog {
   vertical-align:middle;
   margin: 150px auto !important;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.5); 
 } */
 
 .modal-dialog.modal-ver{
