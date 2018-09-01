@@ -22,7 +22,6 @@ export class BottomComponent implements OnInit {
     })
     this.subscription = this.dataService.currentCustomer.subscribe((value:Customer) => {
       this.currentCustomer = value;
-      debugger
     });
   }
 

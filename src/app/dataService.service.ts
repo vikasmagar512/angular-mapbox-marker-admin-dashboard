@@ -21,7 +21,6 @@ export class dataService {
   dataNumber: Subject<number> = new BehaviorSubject<number>(0);
   currentCustomer:Subject<Customer> = new BehaviorSubject<Customer>(null);
 
-
   // dataNumberSetting = this.dataNumber.asObservable();
   constructor(private http: HttpClient) {
     // this.currentCustomer.next(null);

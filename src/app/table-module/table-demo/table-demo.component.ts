@@ -116,7 +116,10 @@ export class TableDemoComponent implements OnInit {
     this.columns = columns;
     this.onChangeTable(this.config);
   }
-
+  public changeTable(){
+    debugger
+    this.onChangeTable(this.config);
+  }
   public changeFilter(data:any, config:any):any {
     console.log(this.config)
     let filteredData:Array<any> = data;
@@ -178,6 +181,7 @@ export class TableDemoComponent implements OnInit {
   }
 
   public onChangeTable(config:any, page:any = {page: this.page, itemsPerPage: this.itemsPerPage}):any {
+    debugger
     if (config.filtering) {
       Object.assign(this.config['filtering'], config.filtering);
     }
@@ -217,8 +221,8 @@ export class TableDemoComponent implements OnInit {
       this.change.emit(`customer*${data.row['customerId']}`)
     }
     if (data.column === "agreement_no") {
-      this.change.emit(`agreement*${data.row['agreement_no']}`)      
-      
+      this.change.emit(`agreement*${data.row['agreement_no']}`)
+
       // this.router.navigate(['/main/agreementNo/',data.row['id'] ]);
     }
     // if (data.column == "actionAsset") {
@@ -229,12 +233,12 @@ export class TableDemoComponent implements OnInit {
 
     // if (data.column == "assetStatus") {
     //   this.change.emit(`asset*${data.row['customerId']}`)
-      
+
     //   // alert('assetStatus')
     //   // this.router.navigate(['/main/agreementNo/',data.row['id'] ]);
     // }
     // if (data.column == "agreementStatus") {
-    //   this.change.emit(`agreement*${data.row['customerId']}`)      
+    //   this.change.emit(`agreement*${data.row['customerId']}`)
     //   // alert('agreementStatus')
     //   // this.router.navigate(['/main/agreementNo/',data.row['id'] ]);
     // }

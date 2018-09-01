@@ -119,16 +119,13 @@ export class SearchComponent implements OnInit {
   }
 
   customnerSelected(customer: any) {
-    debugger;
     this.showDropdown = false;
     this.customersList = this.dataService.getCustomers();
     this.dataService.changeCurrentCustomer(this.customersList.find((item) => item.id == customer.id))
-    debugger;
     $('.search input').val("");
   }
 
   locationSelected(location: string) {
-    debugger
     let locationSearchBox = location.toLowerCase();
     this.filterService.changeLocation(locationSearchBox);
     this.showDropdown = false;
@@ -136,7 +133,6 @@ export class SearchComponent implements OnInit {
   }
 
   onSearchBoxBlur() {
-    debugger;
     let that = this;
     $(document).click(function (e) {
       if (!$(e.target).is("#cust-dropdown-menu")) {
@@ -148,7 +144,6 @@ export class SearchComponent implements OnInit {
 
   onKey(value: string) {
     this.showDropdown = true;
-    debugger;
     // this.locationSearchBox = value.toLowerCase();
 
     // this.filterService.changeLocation(this.locationSearchBox)

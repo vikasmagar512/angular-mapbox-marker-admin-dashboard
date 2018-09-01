@@ -36,7 +36,6 @@ export class DashboardSettingComponent implements OnInit {
     });
     this.getUserList();
     this.getCustomersList();
-
   }
 
 
